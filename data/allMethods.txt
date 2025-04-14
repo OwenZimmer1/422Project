@@ -1,0 +1,2881 @@
+public Ball(Point loc, Vector vector, Color col){
+location = loc;
+radius = DEFAULT_RADIUS;
+move = vector;
+color = col;
+active = false;
+}
+
+/**
+* Gets the location.
+*
+* @return the current location
+*/
+public Point getLoc(){return location;}
+
+/**
+* Gets the radius.
+*
+* @return the radius
+*/
+public int getRadius(){return radius;}
+
+/**
+* Return the current movement of the ball.
+*
+* @return the current movement
+*/
+public Vector getMove(){return move;}
+
+/**
+* Set the radius of this ball.
+* @param r new radius, must be positive.
+*/
+public void setRadius(int r) {
+if (r <= 0) throw new IllegalArgumentException("radius must be positive, not " + r);
+radius = r;
+}
+
+/**
+* Launches the ball by setting active to true.
+*/
+public void launch(){active=true;}
+
+
+/**
+* If ball is active: moves location by the current movement.
+* If ball is not active: rotates vector by Math.PI/24.
+*/
+public void step(){
+if(active == true) {
+double x = this.getLoc().x() + this.getMove().dx();
+double y = this.getLoc().y() + this.getMove().dy();
+this.location = new Point(x, y);
+}
+else
+this.move = this.getMove().rotate(Math.PI/24);
+}
+
+
+/**
+* Checks if ball is at or outside BOUNDS dimension and moving further out,
+* and reflects movement if so.  If the ball isn't moving further out, the
+* movement isn't reflected.
+* @param bounds dimension of area to check (all four walls), must not be null
+*/
+public void bounceWalls(Dimension bounds) {
+if((this.getLoc().x() + this.getRadius() >= bounds.getWidth()) && this.getMove().dx() > 0)
+this.move = new Vector(-1*this.getMove().dx(), this.getMove().dy());
+if((this.getLoc().y() + this.getRadius() >= bounds.getHeight()) && this.getMove().dy() > 0)
+this.move = new Vector(this.getMove().dx(), -1*this.getMove().dy());
+if((this.getLoc().x() - this.getRadius() <= 0) && this.getMove().dx() < 0)
+this.move = new Vector(-1*this.getMove().dx(), this.getMove().dy());
+if((this.getLoc().y() - this.getRadius() <= 0) && this.getMove().dy() < 0)
+this.move = new Vector(this.getMove().dx(), -1*this.getMove().dy());
+
+}
+
+/**
+* Checks if colliding with the parameter ball.
+*
+* @param other the other ball
+* @return true if colliding
+*/
+public boolean isColliding(Ball other){
+return this.getLoc().distance(other.getLoc()) <= this.getRadius() + other.getRadius();
+}
+
+/**
+* Calculates new vectors for this and the parameter ball using normal and
+* tangent vectors, then calls step() on both until no longer colliding.
+*
+* @param other the other ball
+*/
+public void bounce(Ball other){
+Vector my_unit_normal = new Vector(location, other.getLoc()).normalize();
+Vector other_unit_normal = new Vector(other.getLoc(), location).normalize();
+Vector my_normal = my_unit_normal.scale(move.dot(my_unit_normal));
+Vector other_normal = other_unit_normal.scale(other.move.dot(other_unit_normal));
+Vector my_tangent = move.add(my_normal.scale(-1));
+Vector other_tangent = other.move.add(other_normal.scale(-1));
+
+move = my_tangent.add(other_normal);
+other.move = other_tangent.add(my_normal);
+
+while (isColliding(other)){
+step();
+other.step();}
+}
+
+/**
+* Draws the ball, and if non-active also draws its vector.
+*
+* @param g the Graphics context on which to draw
+*/
+public void draw(Graphics g){
+g.setColor(color);
+g.fillOval(location.intX() - radius, location.intY() - radius, radius * 2, radius * 2);
+if (!active){
+Vector standard_vec = move.normalize().scale(radius * 2);
+g.setColor(Color.RED);
+g.drawLine(location.intX(), location.intY(), standard_vec.move(location).intX(), standard_vec.move(location).intY());
+}
+}
+
+/* Make a Ball with the same features as this ball.
+* @see java.lang.Object#clone()
+*/
+@Override
+public Ball clone() {
+try {
+return (Ball)super.clone();
+}catch (CloneNotSupportedException cnse) {
+throw new RuntimeException
+("This class does not Implament Cloneable");
+}
+
+}
+
+/**
+* gets x value
+*
+* @return current x value
+*/
+public double x() {
+return this.x;
+}
+
+/**
+* gets y value
+*
+* @return current y value
+*/
+public double y() {
+return this.y;
+}
+
+/**
+* gets x value to nearest integer
+*
+* @return x value to nearest integer
+*/
+public int intX() {
+return (int)Math.round(this.x());
+}
+
+/**
+* gets y value to nearest integer
+*
+* @return y value to nearest integer
+*/
+public int intY() {
+return (int)Math.round(this.y());
+}
+
+/**
+* finds the distance between 2 points
+*
+* @param point the point that will be found the distance from
+* @return the distance between two points
+*/
+public double distance(Point point) {
+Vector temp = new Vector(this, point);
+return temp.magnitude();
+}
+
+/**
+* Instantiates a new vector with specified delta values.
+*
+* @param dx the initial deltax value
+* @param dy the initial deltay value
+*/
+public Vector(double dx, double dy){
+this.deltax = dx;
+this.deltay = dy;
+}
+
+/**
+* Instantiates a new unit vector with specified angle.
+*
+* @param theta the angle to construct, in radians
+*/
+public Vector(double theta){
+this.deltax = Math.cos(theta);
+this.deltay = Math.sin(theta);
+}
+
+/**
+* Instantiates a new vector between two points.
+* If applied to the first point, the result is the second point.
+*
+* @param p the first point
+* @param q the second point
+*/
+public Vector(Point p, Point q){
+this.deltax = q.x() - p.x();
+this.deltay = q.y() - p.y();
+}
+
+/**
+* Getter for deltax field.
+*
+* @return the current deltax value
+*/
+public double dx(){
+return this.deltax;
+}
+
+/**
+* Getter for deltay field.
+*
+* @return the current deltay value
+*/
+public double dy(){
+return this.deltay;
+}
+
+/**
+* Translates the parameter point by this vector.
+*
+* @param p the point to translate
+* @return the  translated point
+*/
+public Point move(Point p){
+return new Point(p.x() + this.dx(), p.y() + this.dy());
+}
+
+/**
+* Adds the parameter vector with this vector.
+*
+* @param v the vector to add
+* @return the vector sum
+*/
+public Vector add(Vector v){
+return new Vector(this.dx() + v.dx(), this.dy() + v.dy());
+}
+
+/**
+* Takes the dot product of this vector and the parameter vector.
+*
+* @param v the other vector
+* @return the dot product
+*/
+public double dot(Vector v){
+return this.dx() * v.dx() + this.dy() * v.dy();
+}
+
+/**
+* Scales this vector by the parameter.
+*
+* @param s the constant to scale by
+* @return the scaled vector
+*/
+public Vector scale(double s){
+return new Vector(s * this.dx(), s * this.dy());
+}
+
+/**
+* Finds the magnitude of this vector.
+*
+* @return how long this vector is (never negative).
+*/
+public double magnitude(){
+double temp = this.dx() * this.dx() + this.dy() * this.dy();
+return Math.sqrt(temp);
+}
+
+/**
+* Normalizes this vector.
+*
+* @return a vector with the same angle but magnitude of one.
+*/
+public Vector normalize(){
+double magnitude = this.magnitude();
+return new Vector(this.dx() / magnitude, this.dy() / magnitude);
+}
+
+/**
+* gets angle theta
+*
+* @return angle of vector off x axis
+*/
+public double theta() {
+
+if(this.dx() == 0 && this.dy() > 0)
+return Math.PI/2;
+else if(this.dx() == 0)
+return Math.PI * 3 / 2;
+
+double theta = Math.atan(this.dy() / this.dx());
+if(this.dx() < 0)
+theta += Math.PI;
+return theta;
+}
+
+/**
+* Rotates this vector clockwise by the parameter angle (in radians).
+*
+* @param theta the angle to rotate (in radians)
+* @return the rotated vector
+*/
+public Vector rotate(double theta){
+double angle = this.theta() + theta;
+Vector v = new Vector(angle);
+return v.scale(this.magnitude());
+}
+
+/**
+* Compute the angle of this vector, in radians,
+* clockwise from the x-axis.
+*
+* @return the angle in range [0,2Pi)
+*/
+public double angle() {
+double magn = magnitude();
+if (magn == 0.0) return 0;
+double alpha = Math.acos(dx()/magn);
+if(dy() < 0) alpha = 2*Math.PI-alpha;
+return alpha;
+}
+
+/**
+* Initialize an empty sequence with an initial capacity of INITIAL_CAPACITY.
+* The append method works
+* efficiently (without needing more memory) until this capacity is reached.
+* @param - none
+* @postcondition
+*   This sequence is empty and has an initial capacity of INITIAL_CAPACITY
+* @exception OutOfMemoryError
+*   Indicates insufficient memory for initial array.
+**/
+public BallSeq( )
+{
+this(INITIAL_CAPACITY);
+assert wellFormed() : "Invariant false at end of constructor";
+}
+
+/**
+* Initialize an empty sequence with a specified initial capacity. Note that
+* the append method works
+* efficiently (without needing more memory) until this capacity is reached.
+* @param initialCapacity
+*   the initial capacity of this sequence
+* @precondition
+*   initialCapacity is non-negative.
+* @postcondition
+*   This sequence is empty and has the given initial capacity.
+* @exception IllegalArgumentException
+*   Indicates that initialCapacity is negative.
+* @exception OutOfMemoryError
+*   Indicates insufficient memory for an array with this many elements.
+*   new Ball[initialCapacity].
+**/
+public BallSeq(int initialCapacity)
+{
+if(initialCapacity < 0) throw new IllegalArgumentException("Inital Capacity must be non-negative");
+
+data = new Ball[initialCapacity];
+manyItems = 0;
+currentIndex = 0;
+assert wellFormed() : "Invariant false at end of constructor";
+}
+
+/**
+* Determine the number of elements in this sequence.
+* @param - none
+* @return
+*   the number of elements in this sequence
+**/
+public int size( )
+{
+assert wellFormed() : "invariant failed at start of size";
+
+return manyItems;
+}
+
+/**
+* The first element (if any) of this sequence is now current.
+* @param - none
+* @postcondition
+*   The front element of this sequence (if any) is now the current element (but
+*   if this sequence has no elements at all, then there is no current
+*   element).
+**/
+public void start( )
+{
+assert wellFormed() : "invariant failed at start of start";
+
+currentIndex = 0;
+assert wellFormed() : "invariant failed at end of start";
+}
+
+/**
+* Accessor method to determine whether this sequence has a specified
+* current element (a Ball or null) that can be retrieved with the
+* getCurrent method. This depends on the status of the cursor.
+* @param - none
+* @return
+*   true (there is a current element) or false (there is no current element at the moment)
+**/
+public boolean isCurrent( )
+{
+assert wellFormed() : "invariant failed at start of isCurrent";
+
+return currentIndex < manyItems;
+}
+
+/**
+* Accessor method to get the current element of this sequence.
+* @param - none
+* @precondition
+*   isCurrent() returns true.
+* @return
+*   the current element of this sequence, possibly null
+* @exception IllegalStateException
+*   Indicates that there is no current element, so
+*   getCurrent may not be called.
+**/
+public Ball getCurrent( )
+{
+assert wellFormed() : "invariant failed at start of getCurrent";
+
+if(!isCurrent()) throw new IllegalStateException("No current element found");
+
+return data[currentIndex];
+
+}
+
+/**
+* Move forward, so that the next element is now the current element in
+* this sequence.
+* @param - none
+* @precondition
+*   isCurrent() returns true.
+* @postcondition
+*   If the current element was already the end element of this sequence
+*   (with nothing after it), then there is no longer any current element.
+*   Otherwise, the new current element is the element immediately after the
+*   original current element.
+* @exception IllegalStateException
+*   If there was no current element, so
+*   advance may not be called (the precondition was false).
+**/
+public void advance( )
+{
+assert wellFormed() : "invariant failed at start of advance";
+
+if(!isCurrent()) throw new IllegalStateException("Can not advance");
+if(data.length > currentIndex)
+currentIndex++;
+
+assert wellFormed() : "invariant failed at end of advance";
+}
+
+/**
+* Remove the current element from this sequence.
+* @param - none
+* @precondition
+*   isCurrent() returns true.
+* @postcondition
+*   The current element has been removed from this sequence, and the
+*   following element (if there is one) is now the new current element.
+*   If there was no following element, then there is now no current
+*   element.
+* @exception IllegalStateException
+*   Indicates that there is no current element, so
+*   removeCurrent may not be called.
+**/
+public void removeCurrent( )
+{
+assert wellFormed() : "invariant failed at start of removeCurrent";
+
+if(!isCurrent()) throw new IllegalStateException("No current element");
+
+
+for(int i = currentIndex; i < manyItems-1; i++) {
+data[i] = data[i+1];
+}
+data[manyItems-1] = null;
+manyItems--;
+assert wellFormed() : "invariant failed at end of removeCurrent";
+}
+
+/**
+* Change the current capacity of this sequence if needed.
+* @param minimumCapacity
+*   the new capacity for this sequence
+* @postcondition
+*   This sequence's capacity has been changed to at least minimumCapacity.
+*   If the capacity was already at or greater than minimumCapacity,
+*   then the capacity is left unchanged.
+*   If the capacity is changed, it must be at least twice as big as before.
+* @exception OutOfMemoryError
+*   Indicates insufficient memory for: new array of minimumCapacity elements.
+**/
+private void ensureCapacity(int minimumCapacity)
+{
+if(data.length >= minimumCapacity) return;
+
+int newSize = data.length * 2;
+if (newSize < minimumCapacity) newSize = minimumCapacity;
+
+Ball[] newArray = new Ball[newSize];
+for(int i = 0; i < data.length; i++) {
+newArray[i] = data[i];
+}
+data = newArray;
+}
+
+/**
+* Add a new element to this sequence, before the current element (if any).
+* If the new element would take this sequence beyond its current capacity,
+* then the capacity is increased before adding the new element.
+* @param element
+*   the new element that is being added
+* @postcondition
+*   A new copy of the element has been added to this sequence. If there was
+*   a current element, then the new element is placed before the current
+*   element. If there was no current element, then the new element is placed
+*   at the end of the sequence. In all cases, the new element becomes the
+*   new current element of this sequence.
+* @exception OutOfMemoryError
+*   Indicates insufficient memory for increasing the sequence's capacity.
+**/
+public void insert(Ball element)
+{
+assert wellFormed() : "invariant failed at start of insert";
+
+ensureCapacity(manyItems + 1);
+
+for(int i = manyItems; i > currentIndex; i--) {
+data[i] = data[i-1];
+}
+data[currentIndex] = element;
+
+manyItems++;
+
+assert wellFormed() : "invariant failed at end of insert";
+}
+
+/**
+* Place the contents of another sequence (which may be the
+* same one as this!) into this sequence before the current element (if any).
+* @param addend
+*   a sequence whose contents will be placed into this sequence
+* @precondition
+*   The parameter, addend, is not null.
+* @postcondition
+*   The elements from addend have been placed into
+*   this sequence. The current element of this sequence (if any)
+*   is unchanged.  The addend is unchanged.
+* @exception NullPointerException
+*   Indicates that addend is null.
+* @exception OutOfMemoryError
+*   Indicates insufficient memory to increase the size of this sequence.
+**/
+public void insertAll(BallSeq addend) {
+assert wellFormed() : "invariant failed at start of addAll";
+
+if(addend == null) throw new NullPointerException("Sequence is null");
+
+BallSeq clone = addend.clone();
+ensureCapacity(manyItems + clone.manyItems);
+int indexInc = clone.manyItems;
+for(int i = clone.manyItems - 1; i >= 0; i--) {
+insert(clone.data[i]);
+}
+
+currentIndex += indexInc;
+
+
+assert wellFormed() : "invariant failed at end of addAll";
+}
+
+/**
+* Generate a copy of this sequence.
+* @param - none
+* @return
+*   The return value is a copy of this sequence. Subsequent changes to the
+*   copy will not affect the original, nor vice versa.
+* @exception OutOfMemoryError
+*   Indicates insufficient memory for creating the clone.
+**/
+public BallSeq clone( )
+{  // Clone a BallSeq object.
+assert wellFormed() : "invariant failed at start of clone";
+BallSeq answer = new BallSeq(manyItems);
+
+answer.currentIndex = currentIndex;
+answer.manyItems = manyItems;
+
+for(int i = 0; i < manyItems; i++) {
+answer.data[i] = data[i];
+}
+
+assert wellFormed() : "invariant failed at end of clone";
+assert answer.wellFormed() : "invariant failed for clone";
+
+return answer;
+}
+
+/**
+* default constructor for default capacity of zero
+*/
+public BallCollection() {
+this(INITIAL_CAPACITY);
+}
+
+/**
+* constructor
+* @param manyItems: number of items
+*/
+public BallCollection(int manyItems) {
+data = new Ball[manyItems];
+this.manyItems = manyItems;
+version = 0;
+
+assert wellFormed() : "invariant failed at end of constructor";
+}
+
+/**
+* Instantiates a new player.
+*
+* @param loc the initial location
+*/
+public Player(Point loc){location=loc;radius = DodgeBall.PLAYER_RADIUS;}
+
+/**
+* Sets the current image.
+*
+* @param img the new player image
+*/
+public void setImg(BufferedImage img){playerImg = img;}
+
+/**
+* Increases the player's radius.
+*
+* @see DodgeBall.makeHarder()
+*/
+public void grow(){radius += 2;}
+
+/**
+* Checks if colliding with parameter ball.
+*
+* @param b the ball
+* @return true if colliding
+*/
+public boolean isColliding(Ball b){
+return DodgeBall.MORTAL && location.distance(b.getLoc()) <= (radius + b.getRadius());}
+
+/**
+* Update the player's location.
+*
+* @param mouseLoc the current [adjusted] mouse location
+*/
+public void update(Point mouseLoc){
+int new_x = Math.max(radius, mouseLoc.intX());
+int new_y = Math.max(radius, mouseLoc.intY());
+new_x = Math.min(new_x, DodgeBall.BOUNDS.width -radius);
+new_y = Math.min(new_y, DodgeBall.BOUNDS.height - radius);
+location = new Point(new_x, new_y);
+}
+
+/**
+* Draws the player.
+*
+* @param g the Graphics context on which to draw
+*/
+public void draw(Graphics g){
+g.drawImage(playerImg,
+location.intX() - radius, location.intY() - radius,
+radius*2, radius*2, null);
+}
+
+/**
+* Create an empty sequence
+* @param - none
+* @postcondition
+*   This sequence is empty
+**/
+public BallSeq( )
+{
+manyNodes = 0;
+head = null;
+tail = null;
+cursor = null;
+precursor = null;
+
+assert wellFormed() : "invariant failed in constructor";
+}
+
+/**
+* Determine the number of elements in this sequence.
+* @param - none
+* @return
+*   the number of elements in this sequence
+**/
+public int size( )
+{
+assert wellFormed() : "invariant wrong at start of size()";
+
+return manyNodes;
+}
+
+/**
+* Set the current element at the front of this sequence.
+* @param - none
+* @postcondition
+*   The front element of this sequence is now the current element (but
+*   if this sequence has no elements at all, then there is no current
+*   element).
+**/
+public void start( )
+{
+assert wellFormed() : "invariant wrong at start of start()";
+
+cursor = head;
+precursor = null;
+
+assert wellFormed() : "invariant wrong at end of start()";
+}
+
+/**
+* Accessor method to determine whether this sequence has a specified
+* current element that can be retrieved with the
+* getCurrent method.
+* @param - none
+* @return
+*   true (there is a current element) or false (there is no current element at the moment)
+**/
+public boolean isCurrent( )
+{
+assert wellFormed() : "invariant wrong at start of getCurrent()";
+// TODO: Implemented by student.
+// This method shouldn't modify any fields, hence no assertion at end
+return cursor != null;
+}
+
+/**
+* Accessor method to get the current element of this sequence.
+* @param - none
+* @precondition
+*   isCurrent() returns true.
+* @return
+*   the current element of this sequence
+* @exception IllegalStateException
+*   Indicates that there is no current element, so
+*   getCurrent may not be called.
+**/
+public Ball getCurrent( )
+{
+assert wellFormed() : "invariant wrong at start of getCurrent()";
+if(!isCurrent()) throw new IllegalStateException("no current element");
+
+return cursor.data;
+}
+
+/**
+* Move forward, so that the current element is now the next element in
+* this sequence.
+* @param - none
+* @precondition
+*   isCurrent() returns true.
+* @postcondition
+*   If the current element was already the end element of this sequence
+*   (with nothing after it), then there is no longer any current element.
+*   Otherwise, the new element is the element immediately after the
+*   original current element.
+* @exception IllegalStateException
+*   Indicates that there is no current element, so
+*   advance may not be called.
+**/
+public void advance( )
+{
+assert wellFormed() : "invariant wrong at start of advance()";
+if(!isCurrent()) throw new IllegalStateException("no current element");
+
+if(cursor.next != null) {
+precursor = cursor;
+cursor = cursor.next;
+}
+else {
+cursor = null;
+precursor = null;
+}
+assert wellFormed() : "invariant wrong at end of advance()";
+}
+
+/**
+* Remove the current element from this sequence.
+* @param - none
+* @precondition
+*   isCurrent() returns true.
+* @postcondition
+*   The current element has been removed from this sequence, and the
+*   following element (if there is one) is now the new current element.
+*   If there was no following element, then there is now no current
+*   element.
+* @exception IllegalStateException
+*   Indicates that there is no current element, so
+*   removeCurrent may not be called.
+**/
+public void removeCurrent( )
+{
+assert wellFormed() : "invariant wrong at start of removeCurrent()";
+if(!isCurrent()) throw new IllegalStateException("no element to remove");
+// TODO: Implemented by student.
+// See textbook pp.176-78, 181-184
+if(manyNodes == 1) {
+head = null;
+tail = null;
+precursor = null;
+cursor = null;
+}
+else if(cursor == tail) {
+tail = precursor;
+tail.next = null;
+precursor = null;
+cursor = null;
+}
+else if(cursor == head) {
+head = head.next;
+cursor = head;
+}
+else {
+cursor = cursor.next;
+precursor.next = cursor;
+}
+manyNodes--;
+
+assert wellFormed() : "invariant wrong at end of removeCurrent()";
+}
+
+/**
+* Add a new element to this sequence, before the current element (if any).
+* If the new element would take this sequence beyond its current capacity,
+* then the capacity is increased before adding the new element.
+* @param element
+*   the new element that is being added
+* @postcondition
+*   A new copy of the element has been added to this sequence. If there was
+*   a current element, then the new element is placed before the current
+*   element. If there was no current element, then the new element is placed
+*   at the end of the sequence. In all cases, the new element becomes the
+*   new current element of this sequence.
+* @exception OutOfMemoryError
+*   Indicates insufficient memory for increasing the sequence.
+**/
+public void insert(Ball element)
+{
+assert wellFormed() : "invariant failed at start of insert";
+
+if(manyNodes == 0) {
+cursor = new Node(element, cursor);
+tail = cursor;
+head = cursor;
+}
+else if(cursor == head){
+cursor = new Node(element, cursor);
+head = cursor;
+}
+else if(cursor == null) {
+tail.next = new Node(element, null);
+precursor = tail;
+tail = tail.next;
+cursor = tail;
+}else {
+cursor = new Node(element, cursor);
+precursor.next = cursor;
+}
+
+manyNodes++;
+
+assert wellFormed() : "invariant failed at end of insert";
+}
+
+/**
+* Place the contents of another sequence (which may be the
+* same one as this!) into this sequence before the current element (if any).
+* @param addend
+*   a sequence whose contents will be placed into this sequence
+* @precondition
+*   The parameter, addend, is not null.
+* @postcondition
+*   The elements from addend have been placed into
+*   this sequence. The current element of this sequence (if any)
+*   is unchanged.  The addend is unchanged.
+* @exception NullPointerException
+*   Indicates that addend is null.
+* @exception OutOfMemoryError
+*   Indicates insufficient memory to increase the size of this sequence.
+**/
+public void insertAll(BallSeq addend) {
+assert wellFormed() : "invariant failed at start of addAll";
+if(addend == null) throw new NullPointerException("addend is null");
+
+if(addend.head == null) return;
+BallSeq clone = addend.clone();
+
+if(manyNodes == 0) {
+head = clone.head;
+tail = clone.tail;
+}
+else if (cursor == head){
+head = clone.head;
+clone.tail.next = cursor;
+precursor = clone.tail;
+}
+else if (cursor == null) {
+tail.next = clone.head;
+tail = clone.tail;
+}
+else {
+precursor.next = clone.head;
+precursor = clone.tail;
+clone.tail.next = cursor;
+}
+manyNodes += clone.manyNodes;
+
+assert wellFormed() : "invariant failed at end of addAll";
+}
+
+/**
+* Generate a copy of this sequence.
+* @param - none
+* @return
+*   The return value is a copy of this sequence. Subsequent changes to the
+*   copy will not affect the original, nor vice versa.
+*   Whatever was current in the original object is now current in the clone.
+* @exception OutOfMemoryError
+*   Indicates insufficient memory for creating the clone.
+**/
+public BallSeq clone( )
+{
+assert wellFormed() : "invariant wrong at start of clone()";
+
+BallSeq result;
+
+try
+{
+result = (BallSeq) super.clone( );
+}
+catch (CloneNotSupportedException e)
+{
+// This exception should not occur. But if it does, it would probably
+// indicate a programming error that made super.clone unavailable.
+// The most common error would be forgetting the "Implements Cloneable"
+// clause at the start of this class.
+throw new RuntimeException
+("This class does not implement Cloneable");
+}
+// This is inspired by the textbook for this class, page 203
+if(result.head == null) return result;
+
+Node source = result.head;
+Node copyHead = new Node(source.data, null);
+Node copyTail = copyHead;
+
+while(source.next != null) {
+if(source == cursor) result.cursor = copyTail;
+if(source == precursor) result.precursor = copyTail;
+if(source == tail) result.tail = source;
+source = source.next;
+copyTail.next = new Node(source.data, null);
+copyTail = copyTail.next;
+}
+result.head = copyHead;
+if(source == cursor) result.cursor = copyTail;
+if(source == precursor) result.precursor = copyTail;
+if(source == tail) result.tail = copyTail;
+
+// TODO: Implemented by student.
+// Now do the hard work of cloning the list.
+// See pp 200-204, 235 (3rd ed. pp. 193-197, 228)
+// Setting precursor, cursor and tail correctly is tricky.
+
+
+assert wellFormed() : "invariant wrong at end of clone() for this";
+assert result.wellFormed() : "invariant wrong for result of clone() for copy";
+return result;
+}
+
+/**
+* Gets a single instance of the comparator.
+* @return a single instance of the comparator
+*/
+public static Comparator<Player> getInstance() { return instance; }
+
+/**
+* Gets a single instance of Nondiscrimination comparator.
+* @return a single instance of Nondiscrimination comparator
+*/
+public static Comparator<Player> getInstance() { return instance; }
+
+/**
+* Instantiates a new Player.
+* @param name the name of the player, must not be null
+* @param score how many points this player has scored
+* @param position the position of the player, where null means can play ANY position
+*/
+public Player(String name, int score, Position position) {
+if (name == null) throw new NullPointerException("name cannot be null");
+this.name = name;
+this.position = position;
+checkParameter("score",score);
+this.score = score;
+}
+
+/** Gets the name.
+* @return the name */
+public String getName() {return name;}
+
+/** Gets this player's score.
+* @return the score */
+public int getScore() {return score;}
+
+/** Sets the score.
+* @param the score */
+public void setScore(int score) {this.score = score;}
+
+/** Gets this player's position.
+* @return the position */
+public Position getPosition() {return position;}
+
+/** Gets the previous player.
+* @return the previous player */
+public Player getPrevious() {return prev;}
+
+/** Gets the next player.
+* @return the next player */
+public Player getNext() {return next;}
+
+/**
+* Add another player into this player's team by priority order.
+* <ul>
+* <li> If the other player has higher priority, place it somewhere before this player.
+* <li> If the other player has equal priority, it should be placed immediately after this player.
+* <li> If the other player has lower priority, place it somewhere after this player.
+* </ul>
+* It may be necessary to move multiple times forward or multiple times backward (but not both!)
+* <p>
+* Also, the code must use recursion to traverse the list - no loops are allowed!
+* @param p the player to add to our list, must not be null
+* @param priority comparator of players in the list, must not be null
+*/
+public void addInPriority(Player p, Comparator<Player> priority) {
+// TODO: Implement this method.  No loops, only recursion
+//
+// NB: While Team happens to call this method only on the head of the list,
+//	   we can't assume all classes that utilize Player will do so. That is why
+//	   we must consider all scenarios, including those where this method is
+//	   called on a player in the middle or end of the list.
+
+if(priority.compare(p, this) < 0) {
+if(next == null) {
+p.prev = this;
+next = p;
+}else if(priority.compare(p, next) > 0) {
+p.prev = this;
+p.next = next;
+next.prev = p;
+next = p;
+}else {
+next.addInPriority(p, priority);
+}
+}else if(priority.compare(p, this) > 0) {
+if(prev == null) {
+p.next = this;
+prev = p;
+}else if(priority.compare(p, prev) < 0) {
+p.next = this;
+p.prev = prev;
+prev.next = p;
+prev = p;
+}else {
+prev.addInPriority(p, priority);
+}
+}else {//(priority.compare(p, this) == 0)
+if(next == null) {
+p.prev = this;
+next = p;
+}else {
+p.prev = this;
+p.next = next;
+next.prev = p;
+next = p;
+}
+}
+}
+
+/**
+* Assuming all the players before this one are sorted correctly
+* according to the priority and come before this one,
+* ensure that the ones coming after are also sorted correctly.
+* @param c comparator to use, must not be null
+*/
+public void sortByPriority(Comparator<Player> c) {
+// TODO: Implement this method.  Use a loop here and then recursion
+// when everything OK up to the next one.
+
+if(next == null) return;
+
+Player unsorted = next;
+next.remove();
+addInPriority(unsorted, c);
+if(next == unsorted) next.sortByPriority(c);
+else sortByPriority(c);
+
+}
+
+/**
+* Remove this item from its list.
+* This player will be completely disconnected from any other players.
+*/
+public void remove() {
+// TODO: Implement this method.  No loops or recursion required.
+if(prev != null && next != null) {
+prev.next = next;
+next.prev = prev;
+}else if(prev != null && next == null) {
+prev.next = null;
+}else if(prev == null && next != null) {
+next.prev = null;
+}
+next = null;
+prev = null;
+}
+
+/**
+* Instantiates a new Team with the given priority comparator.
+* @param c the priority comparator this Team will use
+* @param n the name of the team.
+*/
+public Team(Comparator<Player> c, String n) {
+priority = c;
+dummy = new Player("", Integer.MAX_VALUE, null);
+teamName = n;
+
+assert wellFormed() : "invariant fails at end of constructor";}
+
+/**
+* Adds a Player to this Team.
+* It should be added according to the priority of the team.
+* @param t the Player to add, must not be null and must not be in another team.
+* @throws IllegalArgumentException if the player is already in a team or if the added player would come before the
+* the dummy player (a player with an empty name, highest score possible and null position).
+*/
+public void add(Player t) {
+assert wellFormed() : "invariant fails at beginning of add";
+if(t.getNext() != null || t.getPrevious() != null) throw new IllegalArgumentException("Player already in team");
+
+dummy.addInPriority(t, priority);
+
+assert wellFormed() : "invariant fails at end of add";
+}
+
+/**
+* Change the priority for this list of players,
+* and then make sure the order reflects the new priority.
+* @param p priority to use, must not be null.
+*/
+public void setPriority(Comparator<Player> p) {
+assert wellFormed() : "invariant broken before set priority";
+if (p == null) throw new NullPointerException("need a priority!");
+priority = p;
+refreshPriority();
+assert wellFormed() : "invariant failed during set priority";
+}
+
+/**
+* Some elements of the players may have changed the
+* way the players are ordered.  This method
+* reorders the list to fix things up.
+* This will use insertion sort for efficiency.
+* In particular if only a constant number of players
+* are in the wrong position, this method will take linear time.
+* If the priority ends up as "perverse" (something shows up
+* before the dummy) we discard all team members.
+* (This is not actually ideal for an ADT.)
+*/
+public void refreshPriority() {
+assert wellFormed() : "invariant broken before refresh priority";
+dummy.sortByPriority(priority);
+if (dummy.getPrevious() != null) {
+// Suddenly the priority shows up as perverse.
+dummy.remove(); // actually removes everyone else.
+}
+assert wellFormed() : "invariant failed during refresh priority";
+}
+
+/**
+* Compute the number of players.
+* @return number of players
+*/
+public int size() {
+assert wellFormed() : "invariant fails at beginning of size";
+
+int count = 0;
+for(Player source = dummy.getNext(); source != null; source = source.getNext()) {
+count++;
+}
+return count;
+}
+
+/**
+* Return the n'th player (0-based).
+* @param index index of the element to return
+* @return the player at the specified position in this list
+* @throws IndexOutOfBoundsException if the index is out of range.
+*/
+public Player get(int index) {
+assert wellFormed() : "invariant fails at beginning of get";
+
+if(index < 0 || index >= size()) throw new IndexOutOfBoundsException("index is out of bounds");
+
+int count = 0;
+for(Player source = dummy.getNext(); source != null; source = source.getNext()) {
+if(count == index) return source;
+count++;
+}
+return null; // TODO
+}
+
+/**
+* Returns team's total score
+* @return the sum of all player's scores on this team
+*/
+public int totalScore() {
+assert wellFormed() : "invariant fails at beginning of totalScore";
+int score = 0;
+//TODO implement totalScore (don't use the dummy player!)
+for(Player source = dummy.getNext(); source != null; source = source.getNext()) {
+score += source.getScore();
+}
+return score;
+}
+
+/**
+* prints this team's players
+*/
+public void printPlayers() {
+for(Player i = dummy.getNext(); i != null; i = i.getNext()) {
+System.out.println(i);
+}
+}
+
+/**
+* Used to report an error found when checking the invariant.
+* By providing a string, this will help debugging the class if the invariant should fail.
+* @param error string to print to report the exact error found
+* @return false always
+*/
+private boolean report(String error) {
+reporter.accept(error);
+return false;
+}
+
+/** Return the head node from the data structure since we do not have a head field. */
+private Node<E> getHead() {
+return tail.next.next;
+}
+
+/** Return the dummy node from the data structure since we do not have a dummy field. */
+private Node<E> getDummy() {
+return tail.next; // TODO
+}
+
+/** Return the cursor from the data structure since we do not have a cursor field. */
+private Node<E> getCursor() {
+return precursor.next; // TODO
+}
+
+/**
+* Create an empty sequence.
+* @param - none
+* @postcondition
+*   This sequence is empty
+**/
+public LinkedSequence( )
+{
+tail = precursor = new Node<E>();
+size = 0;
+assert wellFormed() : "invariant failed in constructor";
+}
+
+/**
+* Determine the number of elements in this sequence.
+* @param - none
+* @return
+*   the number of elements in this sequence
+**/
+public int size( )
+{
+assert wellFormed() : "invariant wrong at start of size()";
+// TODO: Implemented by student.
+// This method shouldn't modify any fields, hence no assertion at end
+return size;
+}
+
+/**
+* Set the current element at the front of this sequence.
+* @param - none
+* @postcondition
+*   The front element of this sequence is now the current element (but
+*   if this sequence has no elements at all, then there is no current
+*   element).
+**/
+public void start( )
+{
+assert wellFormed() : "invariant wrong at start of start()";
+
+precursor = getDummy();
+
+assert wellFormed() : "invariant wrong at end of start()";
+}
+
+/**
+* Accessor method to determine whether this sequence has a specified
+* current element that can be retrieved with the
+* getCurrent method.
+* @param - none
+* @return
+*   true (there is a current element) or false (there is no current element at the moment)
+**/
+public boolean isCurrent( )
+{
+assert wellFormed() : "invariant wrong at start of getCurrent()";
+// TODO: Implemented by student.
+// This method shouldn't modify any fields, hence no assertion at end
+return precursor != tail;
+}
+
+/**
+* Accessor method to get the current element of this sequence.
+* @param - none
+* @precondition
+*   isCurrent() returns true.
+* @return
+*   the current element of this sequence
+* @exception IllegalStateException
+*   Indicates that there is no current element, so
+*   getCurrent may not be called.
+**/
+public E getCurrent( )
+{
+assert wellFormed() : "invariant wrong at start of getCurrent()";
+if(!isCurrent()) throw new IllegalStateException("no current element");
+
+return precursor.next.data;
+}
+
+/**
+* Move forward, so that the current element is now the next element in
+* this sequence.
+* @param - none
+* @precondition
+*   isCurrent() returns true.
+* @postcondition
+*   If the current element was already the end element of this sequence
+*   (with nothing after it), then there is no longer any current element.
+*   Otherwise, the new element is the element immediately after the
+*   original current element.
+* @exception IllegalStateException
+*   Indicates that there is no current element, so
+*   advance may not be called.
+**/
+public void advance( )
+{
+assert wellFormed() : "invariant wrong at start of advance()";
+if(!isCurrent()) throw new IllegalStateException("no current element");
+precursor = precursor.next;
+assert wellFormed() : "invariant wrong at end of advance()";
+}
+
+/**
+* Remove the current element from this sequence.
+* @param - none
+* @precondition
+*   isCurrent() returns true.
+* @postcondition
+*   The current element has been removed from this sequence, and the
+*   following element (if there is one) is now the new current element.
+*   If there was no following element, then there is now no current
+*   element.
+* @exception IllegalStateException
+*   Indicates that there is no current element, so
+*   removeCurrent may not be called.
+**/
+public void removeCurrent( )
+{
+assert wellFormed() : "invariant wrong at start of removeCurrent()";
+if(!isCurrent()) throw new IllegalStateException("no element to remove");
+
+if(size == 1) {
+tail = tail.next;
+tail.next = tail;
+precursor = tail;
+}else if(precursor.next == tail){
+precursor.next = precursor.next.next;
+tail = precursor;
+}else {
+precursor.next = precursor.next.next;
+}
+
+size--;
+// TODO: Implemented by student.
+// See textbook pp.176-78, 181-184
+assert wellFormed() : "invariant wrong at end of removeCurrent()";
+}
+
+/**
+* Add a new element to this sequence, before the current element (if any).
+* @param element
+*   the new element that is being added
+* @postcondition
+*   A new copy of the element has been added to this sequence. If there was
+*   a current element, then the new element is placed before the current
+*   element. If there was no current element, then the new element is placed
+*   at the end of the sequence. In all cases, the new element becomes the
+*   new current element of this sequence.
+* @exception OutOfMemoryError
+*   Indicates insufficient memory for increasing the sequence.
+**/
+public void insert(E element)
+{
+
+assert wellFormed() : "invariant failed at start of insert";
+if(size == 0) {
+tail = new Node<>(element, tail.next);
+precursor = tail.next;
+tail.next.next = tail;
+}else if(precursor == tail) {
+tail = new Node<>(element, precursor.next);
+precursor.next = tail;
+}else {
+Node<E> node = new Node<>(element, precursor.next);
+precursor.next = node;
+}
+size++;
+assert wellFormed() : "invariant failed at end of insert";
+}
+
+/**
+* Place the contents of another sequence (which may be the
+* same one as this!) into this sequence before the current element (if any).
+* @param addend
+*   a sequence whose contents will be placed into this sequence
+* @precondition
+*   The parameter, addend, is not null.
+* @postcondition
+*   The elements from addend have been placed into
+*   this sequence. The current element of this sequence (if any)
+*   is unchanged.  The addend is unchanged.
+* @exception NullPointerException
+*   Indicates that addend is null.
+* @exception OutOfMemoryError
+*   Indicates insufficient memory to increase the size of this sequence.
+**/
+public void insertAll(LinkedSequence<E> addend) {
+
+assert wellFormed() : "invariant failed at start of addAll";
+if(addend == null) throw new NullPointerException("addend is null");
+if(addend.size == 0) return;
+
+LinkedSequence<E> clone = addend.clone();
+if(size == 0) {
+Node<E> cloneHead = clone.getHead();
+clone.tail.next = precursor.next;
+precursor.next = cloneHead;
+precursor = clone.tail;
+tail = clone.tail;
+}else if(precursor == tail) {
+Node<E> cloneHead = clone.getHead();
+clone.tail.next = precursor.next;
+precursor.next = cloneHead;
+precursor = clone.tail;
+tail = clone.tail;
+}else {
+Node<E> cloneHead = clone.getHead();
+clone.tail.next = precursor.next;
+precursor.next = cloneHead;
+precursor = clone.tail;
+
+}
+
+
+size += clone.size;
+
+assert wellFormed() : "invariant failed at end of addAll";
+}
+
+/**
+* Generate a copy of this sequence.
+* @param - none
+* @return
+*   The return value is a copy of this sequence. Subsequent changes to the
+*   copy will not affect the original, nor vice versa.
+*   Whatever was current in the original object is now current in the clone.
+* @exception OutOfMemoryError
+*   Indicates insufficient memory for creating the clone.
+**/
+@SuppressWarnings("unchecked")
+public LinkedSequence<E> clone( )
+{
+assert wellFormed() : "invariant wrong at start of clone()";
+
+LinkedSequence<E> result;
+
+try
+{
+result = (LinkedSequence<E>) super.clone( );
+}
+catch (CloneNotSupportedException e)
+{
+// This exception should not occur. But if it does, it would probably
+// indicate a programming error that made super.clone unavailable.
+// The most common error would be forgetting the "Implements Cloneable"
+// clause at the start of this class.
+throw new RuntimeException
+("This class does not implement Cloneable");
+}
+
+Node<E> cursor = new Node<>(tail.data, tail.next);
+result.tail = cursor;
+Node<E> source = tail.next;
+while(source != tail) {
+cursor.next = new Node<E>(source.data, source.next);
+if(source == precursor) result.precursor = cursor.next;
+cursor = cursor.next;
+source = source.next;
+}
+cursor.next = result.tail;
+result.tail.next.data = (E)result.tail.next;
+if(source == precursor) result.precursor = cursor.next;
+
+
+// TODO: Implemented by student.
+// Now do the hard work of cloning the list.
+// Similar to Homework #4, setting result.precursor requires an "if"
+// It's possible to handle the dummy without a second if or an unsafe cast.
+// but it's OK to have a second if and/or a cast to handle this.
+assert wellFormed() : "invariant wrong at end of clone()";
+assert result.wellFormed() : "invariant wrong for result of clone()";
+return result;
+}
+
+/**
+* Instantiates a new process.
+*
+* @param name the name of the process, must not be null
+* @param totalIns the total instructions of the process
+*/
+public Process(String name, int totalIns) {
+if (name == null) throw new NullPointerException("name must not be null");
+this.name = name;
+this.totalInstructions = totalIns;
+}
+
+/**
+* Create an internal process to be used as a dummy node.
+*/
+private Process() {
+name = null;
+totalInstructions = 0;
+}
+
+/** Gets the name.
+* @return the name */
+public String getName(){return name;}
+
+/** Gets the progress bar.
+* Creates and initializes it if necessary.
+* @return the progress bar */
+public JProgressBar getBar(){
+if (bar == null) createProgressBar();
+return bar;
+}
+
+/** Gets the total amount of instructions in the process.
+* @return the total instructions */
+public int getTotal(){return totalInstructions;}
+
+/**
+* Gets the amount of finished instructions.
+* @return the finished instructions */
+public int getFinished(){return finishedInstructions;}
+
+/**
+* Checks if the process is completed.
+* @return true, if is done */
+public boolean isDone(){
+return finishedInstructions == totalInstructions;}
+
+/** Perform a single instruction of the process. */
+public void performInstruction(){
+if (!isDone())
+finishedInstructions++;
+}
+
+/**
+*  Returns a clone of this process that is identical in every way
+*  except that it has null links.
+*
+* @return the process
+* @see java.lang.Object#clone()
+*/
+@Override
+public Process clone(){
+Process copy = null;
+try{
+copy = (Process) super.clone();
+copy.next = copy.prev = null;
+copy.bar = null;
+}
+catch (CloneNotSupportedException e){
+throw new RuntimeException("forgot to make Cloneable?");
+}
+return copy;
+}
+
+/**
+*  Checks for equality of this process with the parameter process.
+*  It will check everything except for the links.
+*
+* @param other the object against which to test for equality
+* @return true, if successful
+* @see java.lang.Object#equals(java.lang.Object)
+*/
+@Override
+public boolean equals(Object other){
+if (!(other instanceof Process) || other == null) return false;
+Process p = (Process) other;
+
+return p.totalInstructions == totalInstructions &&
+p.finishedInstructions == finishedInstructions &&
+p.name.equals(name);
+}
+
+/** Instantiates a new queue object.
+*  It will only contain a dummy process with null name and 0 instructions,
+*  linked circularly to itself. This dummy process should never be
+*  passed outside of this class.
+*  @postcondition queue is empty except for dummy process
+*/
+public Queue(){
+dummy = new Process();
+dummy.next = dummy;
+dummy.prev = dummy;
+version = 0;
+manyItems = 0;
+assert wellFormed() : "invariant failed in constructor";
+}
+
+/** Adds a new process to the end of the queue.
+*
+* @param p process to add to the end of this queue
+* @throws NullPointerException if the process to add is null
+* @throws IllegalArgumentException if the process is already in another queue
+*
+* @return true always
+* @see java.util.Queue#offer(java.lang.Object)
+*/
+@Override
+public boolean offer(Process p) {
+assert wellFormed() : "invariant failed at start of offer";
+if(p == null) throw new NullPointerException("Can't put null in list");
+if(p.next != null || p.prev != null) throw new IllegalArgumentException("Item already in queue");
+
+p.next = dummy;
+p.prev = dummy.prev;
+dummy.prev = p;
+p.prev.next = p;
+version++;
+manyItems++;
+assert wellFormed() : "invariant failed at end of offer";
+return true;
+}
+
+/** Add all processes from parameter queue into the back of this queue.
+*  The parameter queue should be empty after this method,
+* except if the parameter is the same as this, in which case, nothing happens.
+* @param pq the queue from which to take all processes, must not be null
+*/
+public void takeAll(Queue pq) {
+assert wellFormed() : "invariant failed at start of takeAll";
+if(pq == null) throw new NullPointerException("Queue is empty");
+if(pq.manyItems == 0) return;
+if(this == pq) return;
+
+pq.dummy.prev.next = dummy;
+pq.dummy.next.prev = dummy.prev;
+dummy.prev.next = pq.dummy.next;
+dummy.prev = pq.dummy.prev;
+pq.dummy.prev = pq.dummy.next= pq.dummy;
+
+manyItems += pq.manyItems;
+pq.manyItems = 0;
+
+version++;
+pq.version++;
+
+assert wellFormed() : "invariant failed at end of takeAll";
+assert pq.wellFormed() : "parameter queue invariant failed at end of takeAll";
+}
+
+/** Returns the next process to be polled from this queue.
+*
+* @return the next process to be polled by this queue, or null if empty
+* @see java.util.Queue#peek()
+*/
+@Override
+public Process peek(){
+assert wellFormed() : "invariant failed at start of peek";
+if(manyItems == 0) return null;
+return dummy.next;
+}
+
+/** Removes and returns the process at the start of this queue, null if empty.
+*  This method should never return the dummy process!
+*
+* @returns the process at the start of this queue, or null if empty
+* @see java.util.Queue#poll()
+*/
+@Override
+public Process poll() {
+assert wellFormed() : "invariant failed at start of poll";
+if(manyItems == 0) return null;
+Process result = dummy.next;
+dummy.next = result.next;
+result.next.prev = dummy;
+result.next = null;
+result.prev = null;
+version++;
+manyItems--;
+assert wellFormed() : "invariant failed at end of poll";
+return result;
+}
+
+/** Returns the number of non-dummy processes in this queue.
+*
+* @return the number of non-dummy processes
+* @see java.util.AbstractCollection#size()
+*/
+@Override
+public int size() {
+assert wellFormed() : "invariant of result failed at start of size()";
+return manyItems;
+}
+
+/** Returns a new copy of this queue. The copy should be unaffected
+*  by subsequent changes made to this queue, and vice versa. The
+*  processes added to the copy should be clones.
+*
+* @return a clone of this queue
+* @see java.lang.Object#clone()
+*/
+@Override
+public Queue clone(){
+assert wellFormed() : "invariant failed at start of clone()";
+
+Queue copy = new Queue();
+
+try{ copy = (Queue) super.clone();}
+catch(CloneNotSupportedException e){
+// should not happen
+}
+
+Process source = dummy;
+Process copier = source.clone();
+copy.dummy = copier;
+source = source.next;
+while(source != dummy) {
+copier.next = source.clone();
+copier.next.prev = copier;
+copier = copier.next;
+source = source.next;
+}
+copier.next = copy.dummy;
+copier.next.prev = copier;
+
+assert wellFormed() : "invariant failed at end of clone()";
+assert copy.wellFormed() : "invariant of result failed at end of clone()";
+return copy;
+}
+
+public boolean hasNext() {
+assert wellFormed() : "invariant failed at start of hasNext()";
+if(version != myVersion) throw new ConcurrentModificationException("versions don't match");
+return cursor.next != dummy;
+}
+
+/** Returns the next process in this queue. This method should
+*  *not* call poll, or change the state of the queue in any way.
+*
+*  @throws ConcurrentModificationException if versions don't match
+*  @throws NoSuchElementException if no element is next
+*  @return the next process in the queue
+*/
+public Process next() {
+assert wellFormed() : "invariant failed at start of next()";
+if(version != myVersion) throw new ConcurrentModificationException("versions don't match");
+if(!hasNext()) throw new NoSuchElementException("no element found");
+cursor = cursor.next;
+assert wellFormed() : "invariant failed at end of next()";
+return cursor;
+}
+
+/** The main method.
+* @param args the arguments */
+public static void main(String[] args) {
+if (args.length != 1) {
+System.out.println("Usage: Main <lexicon file>");
+System.exit(1);
+}
+new Driver(args[0]).run();
+}
+
+/** Instantiates a new driver, loading lexicon from file.
+* @param name the name of the file */
+public Driver(String name) {
+lexicon = new Lexicon();
+filename = name;
+in = new Scanner(System.in);
+}
+
+/**
+* Used to report an error found when checking the invariant.
+* By providing a string, this will help debugging the class if the invariant should fail.
+* @param error string to print to report the exact error found
+* @return false always
+*/
+private boolean report(String error) {
+reporter.accept(error);
+return false;
+}
+
+/**
+* Count all the nodes in this subtree,
+* while checking that all the keys are all in the range (lo,hi),
+* and that the keys are arranged in BST form.
+* If a problem is found, -1 is returned and exactly one problem is reported.
+* <p>
+* @param n the root of the subtree to check
+* @param lo if non-null then all strings in the subtree rooted
+* 				at n must be [lexicographically] greater than this parameter
+* @param hi if non-null then all strings in the subtree rooted
+* 				at n must be [lexicographically] less than this parameter
+* @return number of nodes in the subtree, or -1 is there is a problem.
+*/
+private int checkInRange(Node n, String lo, String hi)
+{
+if(n == null) return 0;
+if(n.string == null) return reportNeg("n.string is null");
+if(lo != null && n.string.compareTo(lo) <= 0) return reportNeg("not greater than lo");
+if(hi != null && n.string.compareTo(hi) >= 0) return reportNeg("not less than hi");
+int leftCount = checkInRange(n.left, lo, n.string);
+if(leftCount == -1) return -1;
+int rightCount = checkInRange(n.right, n.string, hi);
+if(rightCount == -1) return -1;
+return 1 + leftCount + rightCount;
+/* Check that all strings in the subtree are in the parameter range,
+* and none of them are null.
+* Report any errors.  If there is an error return a negative number.
+* (Write "return reportNeg(...);" when detecting a problem.)
+* Otherwise return the number of nodes in the subtree.
+* Note that the bounds in recursive calls may be different.
+*/
+}
+
+/**
+* Check the invariant.
+* Returns false if any problem is found.
+* @return whether invariant is currently true.
+* If false is returned then exactly one problem has been reported.
+*/
+private boolean wellFormed() {
+int sizeGuess = checkInRange(root, null, null);
+if(sizeGuess == -1) return false;
+if(sizeGuess != manyNodes) return report("manyNodes is wrong");
+return true;
+}
+
+/** Gets the size of this lexicon.
+* @return the count of strings in this lexicon
+*/
+public int size() {
+assert wellFormed() : "invariant false at start of size()";
+return manyNodes;
+}
+
+/**
+* Gets the [lexicographically] least string in the lexicon.
+* @return the least string or null if empty
+*/
+public String getMin() {
+assert wellFormed() : "invariant false at start of getMin()";
+if(root == null) return null;
+Node source = root;
+while(source.left != null) {
+source = source.left;
+}
+return source.string;
+}
+
+/**
+* Checks if the given string is in the lexicon.
+* @param str the string to search for (maybe null)
+* @return true if str is in the lexicon, false otherwise
+*/
+public boolean contains(String str) {
+assert wellFormed() : "invariant false at start of contains()";
+if(str == null) return false;
+Node source = root;
+while(source != null) {
+if(source.string.compareTo(str) > 0) source = source.left;
+else if(source.string.compareTo(str) < 0) source = source.right;
+else return true;
+}
+return false;
+}
+
+/**
+* Gets the next [lexicographically] greater string than the given string.
+* @param str the string of which to find the next greatest
+* @return the next string greater than str
+* @throws NullPointerException if str is null
+*/
+public String getNext(String str) {
+assert wellFormed() : "invariant false at start of getNext()";
+if(str == null) throw new NullPointerException("str is null");
+Node source = root;
+Node before = null;
+while(source != null) {
+if(str.compareTo(source.string) < 0) {
+before = source;
+source = source.left;
+}else if(str.compareTo(source.string) >= 0) {
+source = source.right;
+}
+}
+if(before == null) return null;
+return before.string;
+}
+
+/**
+* Accept into the consumer all strings in this lexicon.
+* @param consumer the consumer to accept the strings
+* @throws NullPointerException if consumer is null
+*/
+public void consumeAll(Consumer<String> consumer) {
+// We don't assert the invariant, because we do nothing other than
+// call another public method.
+consumeAllWithPrefix(consumer,"");
+}
+
+/**
+* Accept into the consumer all strings that start with the given prefix.
+* @param consumer the consumer to accept the strings
+* @param prefix the prefix to find all strings starting with
+* @throws NullPointerException if consumer or prefix is null
+*/
+public void consumeAllWithPrefix(Consumer<String> consumer, String prefix) {
+// TODO: Implement this to call the helper after preliminary checks (if any)
+if(prefix == null) throw new NullPointerException("prefix is null");
+if(consumer == null) throw new NullPointerException("consumer is null");
+consumeAllHelper(consumer, prefix, root);
+}
+
+/**
+* Add a new string to the lexicon. If it already exists, do nothing and return false.
+* @param str the string to add (must not be null)
+* @return true if str was added, false otherwise
+* @throws NullPointerException if str is null
+*/
+public boolean add(String str) {
+assert wellFormed() : "invariant false at start of add()";
+if(str == null) throw new NullPointerException("str is null");
+int manyNodesBefore = manyNodes;
+root = addHelper(root, str);
+assert wellFormed() : "invariant false at end of add()";
+return manyNodesBefore != manyNodes;
+}
+
+/**
+* Add all strings in the array into this lexicon from the range [lo,hi).
+* The elements are added recursively from the middle, so that
+* if the array was sorted, the tree will be balanced.
+* All the tree mutations are done by add.
+* Return number of strings actually added; some might not be added
+* if they are duplicates.
+* @param array source
+* @param lo index lower bound
+* @param hi index upper bound
+* @return number of strings added
+* @throws NullPointerException if array is null
+*/
+public int addAll(String[] array, int lo, int hi) {
+assert wellFormed() : "invariant false at start of addAll()";
+// TODO: Implement this method (be efficient!)
+if(lo == hi) return 0;
+int count = 0;
+int mid = (hi - lo) / 2 + lo;
+if(add(array[mid])) count++;
+count += addAll(array, lo, mid);
+count += addAll(array, mid + 1, hi);
+
+// NB: As long as you never touch any fields directly (or call private methods)
+// you shouldn't *need* to check the invariant. We will anyway.
+assert wellFormed() : "invariant false at end of addAll()";
+return count++;
+}
+
+/**
+* Copy all the strings from lexicon (in sorted order) into the array starting
+* at the given index.  Return the next index for (later) elements.
+* This is a helper method for {@link #toArray(String[])}.
+* @param array destination of copy
+* @param root the subtree whose elements should be copied
+* @param index the index to place the next element
+* @return the next spot in the array to use after this subtree is done
+*/
+private int copyInto(String[] array, Node root, int index) {
+if(root == null) return index;
+index = copyInto(array, root.left, index);
+array[index] = root.string;
+index++;
+index = copyInto(array, root.right, index);
+return index;
+}
+
+/**
+* Return an array of all the strings in this lexicon (in order).
+* @param array to use unless null or too small
+* @return array copied into
+*/
+public String[] toArray(String[] array) {
+assert wellFormed() : "invariant false at the start of toArray()";
+if(array == null || array.length < manyNodes) {
+String[] array2 = new String[manyNodes];
+copyInto(array2, root, 0);
+return array2;
+}else {
+copyInto(array, root, 0);
+return array;
+}
+
+}
+
+/**
+* Used to report an error found when checking the invariant.
+* By providing a string, this will help debugging the class if the invariant should fail.
+* @param error string to print to report the exact error found
+* @return false always
+*/
+private boolean report(String error) {
+reporter.accept(error);
+return false;
+}
+
+/**
+* Count all the nodes in this subtree,
+* while checking that all the keys are all in the range (lo,hi),
+* and that the keys are arranged in BST form.
+* If a problem is found, -1 is returned and exactly one problem is reported.
+* <p>
+* @param n the root of the subtree to check
+* @param lo if non-null then all strings in the subtree rooted
+* 				at n must be [lexicographically] greater than this parameter
+* @param hi if non-null then all strings in the subtree rooted
+* 				at n must be [lexicographically] less than this parameter
+* @return number of nodes in the subtree, or -1 is there is a problem.
+*/
+private int checkInRange(Node n, String lo, String hi)
+{
+//must account for checking an empty list or leaf's links
+if (n == null) return 0;
+if (n.string == null) return reportNeg("null word found");
+
+//first check node r
+if (lo != null && (n.string.equals(lo) || n.string.compareTo(lo) < 0))
+return reportNeg("Detected node outside of low bound: "+n.string);
+if (hi != null && (n.string.equals(hi) || n.string.compareTo(hi) > 0))
+return reportNeg("Detected node outside of high bound: "+n.string);
+
+//check subtrees
+int leftSubtree =  checkInRange(n.left, lo, n.string);
+if (leftSubtree < 0) return -1;
+
+int rightSubtree = checkInRange(n.right, n.string, hi);
+if (rightSubtree < 0) return -1;
+
+//otherwise return 1 + nodes in subtrees
+return 1 + leftSubtree + rightSubtree;
+}
+
+/**
+* Check the invariant.
+* Returns false if any problem is found.
+* @return whether invariant is currently true.
+* If false is returned then exactly one problem has been reported.
+*/
+private boolean wellFormed() {
+int n = checkInRange(root, null, null);
+if (n < 0) return false; // problem already reported
+if (n != numNodes) return report("numNodes is " + numNodes + " but should be " + n);
+return true;
+}
+
+/**
+* Gets the [lexicographically] least string in the lexicon.
+* @return the least string or null if empty
+*/
+public String getMin() {
+assert wellFormed() : "invariant false at start of getMin()";
+Iterator<String> it = iterator();
+if(it.hasNext()) return it.next();
+return null;
+}
+
+/**
+* Gets the next [lexicographically] greater string than the given string.
+* @param str the string of which to find the next greatest
+* @return the next string greater than str, or null if no other
+* @throws NullPointerException if str is null
+*/
+public String getNext(String str) {
+assert wellFormed() : "invariant false at start of getNext()";
+// TODO: Implement this method using the special iterator constructor.
+// HINT: If you add "\0" to the string and look for it with the iterator,
+// you are most of the way there.
+if(str == null) throw new NullPointerException("str is null");
+str.concat("\0");
+Iterator<String> it = iterator(str);
+String next = null;
+if(it.hasNext()) next = it.next();
+if(str.equals(next)) {
+if(it.hasNext()) next = it.next();
+else next = null;
+}
+return next;
+}
+
+/**
+* Accept into the consumer all strings in this lexicon.
+* @param consumer the consumer to accept the strings
+* @throws NullPointerException if consumer is null
+*/
+public void consumeAll(Consumer<String> consumer) {
+consumeAllWithPrefix(consumer,"");
+}
+
+/**
+* Accept into the consumer all strings that start with the given prefix.
+* @param consumer the consumer to accept the strings
+* @param prefix the prefix to find all strings starting with
+* @throws NullPointerException if consumer or prefix is null
+*/
+public void consumeAllWithPrefix(Consumer<String> consumer, String prefix) {
+assert wellFormed() : "invariant false at start of consumeAllWithPrefix()";
+if (consumer == null) throw new NullPointerException("Can't accept into null consumer");
+if (prefix == null) throw new NullPointerException("Prefix can't be null");
+// TODO: Implement this method with the special iterator, not with recursion.
+Iterator<String> it = iterator(prefix);
+boolean done = false;
+while(it.hasNext() && !done) {
+String next = it.next();
+if(next.startsWith(prefix)) consumer.accept(next);
+else done = true;
+}
+}
+
+/**
+* Add a new string to the lexicon. If it already exists, do nothing and return false.
+* @param str the string to add (must not be null)
+* @return true if str was added, false otherwise
+* @throws NullPointerException if str is null
+*/
+@Override // implementation
+public boolean add(String str) {
+assert wellFormed() : "invariant false at start of add()";
+boolean result = false;
+if (str == null) throw new NullPointerException("Cannot add null.");
+Node n = root;
+Node lag = null;
+while (n != null) {
+if (n.string.equals(str)) break;
+lag = n;
+if (str.compareTo(n.string) > 0) n = n.right;
+else n = n.left;
+}
+if (n == null) {
+n = new Node(str);
+if (lag == null)
+root = n;
+else if (str.compareTo(lag.string) > 0)
+lag.right = n;
+else
+lag.left = n;
+++numNodes;
+result = true;
+version++;
+}
+// XXX: Something is missing from this code that is needed for Homework #9
+assert wellFormed() : "invariant false at end of add()";
+return result;
+}
+
+/**
+* Return an iterator that starts at the given element, or the next
+* available element from the set.
+* @param start starting element (or element before starting element,
+* if the start isn't in the set), must not be null
+* @return iterator starting "in the middle" (never null)
+*/
+public Iterator<String> iterator(String start) {
+return new MyIterator(start);
+}
+
+/**
+* Start the iterator at this element, or at the first element after it
+* (if any).
+* @param initial string to start at, must not be null
+*/
+public MyIterator(String initial) {
+// TODO Set up an iterator starting with given (non-null) string.
+// NB: Do not attempt to use {@link #getNext} or any other method
+// of the main class to help.  All the work needs to be done here
+// so that the pending stack is set up correctly.
+if(initial == null) throw new NullPointerException("initial must not be null");
+Node source = root;
+while (source != null) {
+if(initial.compareTo(source.string) < 0) {
+pending.push(source);
+source = source.left;
+}else if(initial.compareTo(source.string) > 0) {
+source = source.right;
+}else {
+pending.add(source);
+break;
+}
+}
+current = null;
+colVersion = version;
+
+assert wellFormed() : "Iterator messed up after special constructor";
+}
+
+/**
+* Used to report an error found when checking the invariant.
+* By providing a string, this will help debugging the class if the invariant should fail.
+* @param error string to print to report the exact error found
+* @return false always
+*/
+private static boolean report(String error) {
+reporter.accept(error);
+return false;
+}
+
+/**
+* Count all the nodes in this subtree,
+* while checking that all the keys are all in the range (lo,hi),
+* and that the keys are arranged in BST form,
+* and that the node are linked in-order.
+* If a problem is found, -1 is returned and exactly one problem is reported.
+* <p>
+* @param n the root of the subtree to check
+* @param lo if non-null then all strings in the subtree rooted
+* 				at n must be [lexicographically] greater than this parameter
+* @param hi if non-null then all strings in the subtree rooted
+* 				at n must be [lexicographically] less than this parameter
+* @param first the node that should be first in this tree, or if the tree
+*        is empty, then this should be the next node
+* @param next the node that should be linked next after this subtree.
+* @return number of nodes in the subtree, or -1 is there is a problem.
+*/
+private int checkInRange(Node n, String lo, String hi, Node first, Node next)
+{
+if(n == null) {
+if(first != next) return reportNeg("tree out of order");
+return 0;
+}
+if (n.string == null) return reportNeg("null word found");
+if (n.count <= 0) return reportNeg("Count is 0");
+//first check node r
+if (lo != null && (n.string.equals(lo) || n.string.compareTo(lo) < 0))
+return reportNeg("Detected node outside of low bound: "+n.string);
+if (hi != null && (n.string.equals(hi) || n.string.compareTo(hi) > 0))
+return reportNeg("Detected node outside of high bound: "+n.string);
+
+//if(first != null && first.string != null && lo != null && first.string.compareTo(lo) < 0) return reportNeg("lo and first are wrong");
+
+//check subtrees
+int leftSubtree = checkInRange(n.left, lo, n.string, first, n);
+if (leftSubtree < 0) return -1;
+
+int rightSubtree = checkInRange(n.right, n.string, hi, n.next, next);
+if (rightSubtree < 0) return -1;
+
+//otherwise return 1 + nodes in subtrees
+return 1 + leftSubtree + rightSubtree;
+}
+
+/**
+* Check the invariant.
+* Returns false if any problem is found.
+* @return whether invariant is currently true.
+* If false is returned then exactly one problem has been reported.
+*/
+private boolean wellFormed() {
+if(dummy == null) return report("dummy is null");
+if(dummy.count != 0) return report("dummy.count isn't 0");
+if(dummy.left != null) return report("dummy.left isn't null");
+if(dummy.string != null) return report("dummy.string isn't null");
+Node min = dummy.right;
+while(min != null && min.left != null) min = min.left;
+if(dummy.next != min)return report("dummy.next isn't the min");
+int n = checkInRange(dummy.right, null, null, min, null);
+if (n < 0) return false; // problem already reported
+if (n != numEntries) return report("manyNodes is " + numEntries + " but should be " + n);
+return true;
+}
+
+/**
+* Look for the node for a particular key, creating it if requested
+* if it doesn't exist.
+* @param r subtree to look for the key, may be null
+* @param key key to look for for, must not be null
+* @param create whether to create a node with count 0 if not in tree
+* @param before the node before the first node in this subtree, must not be null
+* @return node with this key, or null if it is not present and create is false
+*/
+private Node getNode(Node r, String key, boolean create, Node before) {
+if(r == null) {
+if(!create) return null;
+Node n = new Node(key);
+n.count--;
+n.next = before.next;
+if(before.right == null) before.right = n;
+else {
+Node source = before.right;
+while (source.left != null) source = source.left;
+source.left = n;
+}
+before.next = n;
+
+return n;
+}
+int c = key.compareTo(r.string);
+if(c < 0) {
+return getNode(r.left, key, create, before);
+}
+else if (c > 0) {
+return getNode(r.right, key, create, r);
+}else return r;
+
+}
+
+/**
+* Find the node with the given key, creating it if necessary
+* (but only if "create" is true).  If create is true, then
+* the data structure invariant will be temporarily false
+* due to the node with a zero count.  The caller must address
+* the issue immediately.
+* @param key word to look for, must not be null
+* @param create whether to create a node with count=0 if not present.
+* @return node, or null if not present (and create is false)
+*/
+private Node getNode(String key, boolean create) {
+return getNode(dummy.right, key, create, dummy);
+}
+
+/**
+* Add a new string to the multiset. If it already exists,
+* increase the count for the string and return false.
+* Otherwise, set the count to one and return true.
+* @param str the string to add (must not be null)
+* @return true if str was added, false otherwise
+* @throws NullPointerException if str is null
+*/
+public boolean add(String str) {
+assert wellFormed() : "invariant false at start of add";
+if(str == null) throw new NullPointerException("String is null");
+boolean result = false;
+Node n = getNode(str, true);
+if(n.count == 0) {
+numEntries++;
+version++;
+result = true;
+}
+n.count++;
+assert wellFormed() : "invariant false at end of add";
+return result;
+}
+
+/**
+* Remove one copy of a word from the multiset.
+* If there are multiple copies, then we just adjust the count,
+* and the map is unaffected (iterators don't go stale).
+* @param str string to remove one of, may be null (but ignored if so)
+* @return true if the word was in the multiset.
+*/
+public boolean removeOne(String str) {
+assert wellFormed() : "invariant false at start of removeOne";
+if(str == null) return false;
+dummy.right = doRemove(dummy.right, str, dummy, true, null);
+assert wellFormed() : "invariant false at end of removeOne";
+return lastRemoved != null;
+}
+
+/** A method to compare two objects.
+* This method is superseded by Objects.equals
+* @param o1 one object, may be null
+* @param o2 another object, may be null
+* @return whether they are equal (both null, or usign equals).
+*/
+private static boolean eq(Object o1, Object o2) {
+return (o1 == null ? o2 == null : o1.equals(o2));
+}
+
+/**
+* Hash the key to a table index, following double hashing,
+* returning the first index that
+* (1) includes an entry with the key, or
+* (2) has null, or
+* (3) has a placeholder (if phOK is true *and* the key cannot be found).
+* This code assumes that double hashing
+* will find a valid index.  It may run forever otherwise.
+* @param key string to look for, must not be null
+* @param phOK whether we return a slot with a placeholder in preference to an empty slot
+* @return first index meeting the requirements using double hashing.
+*/
+private int hash(String key, boolean phOK) {
+if(key == null) throw new NullPointerException("String is null");
+int phIndex = -1;
+
+int hash1 = key.hashCode() % data.length;
+if(hash1 < 0) hash1 += data.length;
+
+int hash2 = key.hashCode() % (data.length - 2);
+if(hash2 < 0) hash2 += data.length - 2;
+hash2 += 1;
+
+if(phOK && data[hash1] == PLACE_HOLDER && phIndex < 0) phIndex = hash1;
+while(!(data[hash1] == null || (data[hash1].getKey() != null && data[hash1].getKey().equals(key)))) {
+hash1 += hash2;
+if(hash1 >= data.length) hash1 -= data.length;
+
+if(phOK && data[hash1] == PLACE_HOLDER && phIndex < 0) phIndex = hash1;
+}
+if(data[hash1] != null && (data[hash1].getKey() != null && data[hash1].getKey().equals(key))) return hash1;
+if(phOK && phIndex >= 0) return phIndex;
+return hash1;
+}
+
+/**
+* Used to report an error found when checking the invariant.
+* By providing a string, this will help debugging the class if the invariant should fail.
+* @param error string to print to report the exact error found
+* @return false always
+*/
+private static boolean report(String error) {
+reporter.accept(error);
+return false;
+}
+
+/**
+* Add a new string to the multiset. If it already exists,
+* increase the count for the string and return false.
+* Otherwise, set the count to one and return true.
+* @param str the string to add (must not be null)
+* @return true if str was added, false otherwise
+* @throws NullPointerException if str is null
+*/
+public boolean add(String str) {
+assert wellFormed() : "invariant false at start of add";
+boolean result = false;
+
+int i = hash(str, false);
+if(isOpen(i)) {
+if(data[i] == null) numUsed++;
+result = true;
+data[i] = new MyEntry(str);
+numEntries++;
+if(numUsed > data.length / 2) rehash();
+version++;
+}else {
+data[i].count++;
+}
+
+assert wellFormed() : "invariant false at end of add";
+return result;
+}
+
+/**
+* Remove one copy of a word from the multiset.
+* If there are multiple copies, then we just adjust the count,
+* and the map is unaffected (iterators don't go stale).
+* @param str string to remove one of, may be null (but ignored if so)
+* @return true if the word was in the multiset.
+*/
+public boolean removeOne(String str) {
+assert wellFormed() : "invariant false at start of removeOne";
+boolean result = false;
+if(str == null) return false;
+
+int i = hash(str, false);
+if(isOpen(i)) {
+return false;
+}else {
+if(data[i].count == 1) remove(data[i].string);
+else data[i].count--;
+result = true;
+}
+
+assert wellFormed() : "invariant false at end of removeOne";
+return result;
+}
+
+/**
+* Return the shortest path between two vertices in the graph
+* @param v1 starting vertex
+* @param v2 ending vertex
+* @return path from the first to the second as a list of vertices, or null
+* is no path exists.
+* @throws IllegalArgumentException if v1 or v2 is not in the graph
+*/
+@SuppressWarnings("unchecked")
+public List<T> shortestPath(T v1, T v2) {
+
+if(!(graph.containsVertex(v1) && graph.containsVertex(v2))) throw new IllegalArgumentException("Must be in graph");
+
+ArrayDeque<ArrayList<T>> queue = new ArrayDeque<>();
+HashSet<T> visited = new HashSet<>();
+ArrayList<T> list = new ArrayList<>();
+
+list.add(v1);
+queue.push(list);
+while(!queue.isEmpty()) {
+list = queue.poll();
+T current = list.get(list.size() - 1);
+if(!visited.contains(current)) {
+visited.add(current);
+if(current.equals(v2)) {
+return list;
+}else {
+Set<T> connected = graph.getConnected(current);
+for(T vert : connected) {
+    list.add(vert);
+    queue.addLast((ArrayList<T>) list.clone());
+    list.remove(list.size() - 1);
+}
+}
+}
+}
+
+return null; // no path found
+}
+
+/**
+* Read in a graph from the given reader.
+* Each line (once trimmed of whitespace) names a vertex (a string),
+* but before we trim, we check to see if the line begins with whitespace,
+* in which case this vertex is the second vertex of an edge that
+* begins with the last vertex that was on a line not starting with whitespace.
+* <p> For example, the following text:
+* <pre>
+* A
+* B
+*   A
+*   C
+* </pre>
+* is a graph with three vertices (A, B and C) and two
+* edges, A-B and B-C.
+* @param r
+* @return graph represented by text of reader.
+* @throws IOException if error reading or if the first line is indented.
+*/
+public static Graph<String> read(Reader r) throws IOException {
+Graph<String> result = new HashGraph<>();
+// TODO: Read in the graph from the reader.
+// Our solution is 15 lines long, and it uses the following library classes:
+// * BufferedReader
+
+BufferedReader reader = new BufferedReader(r);
+String before = null;
+for(String s = reader.readLine(); s != null; s = reader.readLine()) {
+if(s.startsWith(" ") || s.startsWith("\t")) {
+if(before == null) throw new IOException("can't lead with white space");
+s = s.strip();
+if(!result.containsVertex(s)) result.addVertex(s);
+if(!result.containsEdge(s, before)) result.addEdge(s, before);
+}else {
+s = s.strip();
+if(!result.containsVertex(s)) result.addVertex(s);
+before = s;
+}
+}
+
+return result;
+}
+
+/**
+* Return an empty stack.
+* @return empty stack, never null
+*/
+@SuppressWarnings("unchecked")
+public static <T> ImmutableStack<T> empty() {
+return (ImmutableStack<T>) empty;
+}
+
+/**
+* Return the top of the stack.
+* @throws NoSuchELementException if the stack is empty
+* @return top of the stack
+*/
+public T top() {
+if (this == empty) throw new NoSuchElementException("stack is empty");
+return top;
+}
+
+/**
+* Return the stack that results from popping off the top element.
+* @throws NoSuchElementException if the stack is empty
+* @return stack after popping element
+*/
+public ImmutableStack<T> pop() {
+if (this == empty) throw new NoSuchElementException("empty stack");
+return shorter;
+}
+
+/**
+* Return the stack that results from pushing another element on top.
+* @param val element to push
+* @return new stack resulting from pushing element
+*/
+public ImmutableStack<T> push(T val) {
+return new ImmutableStack<>(val,this);
+}
+
+/**
+* Create a CLL from the elements in the given collection in the same order.
+* @param dummy dummy node to use, if null, a new dummy will be created
+* @param coll collection to use, must not be null, but may be empty
+* @return CLL of elements in same order
+*/
+private Node<E> toCLL(Node<E> dummy, Collection<? extends E> coll) {
+if (dummy == null) dummy = new Node<E>(null,null);
+dummy.next = dummy;
+Node<E> t = dummy;
+for (E e : coll) {
+t = t.next = new Node<E>(e,dummy);
+}
+return t;
+}
+
+/**
+* Convert a CLL to a string.
+* A problem is signified by a string without a proper ending paren.
+* Use this for debugging.
+* @param tail CLL
+* @return string picture of a CLL
+*/
+private static <E> String CLLtoString(Node<E> tail) {
+if (tail == null) return "<NULL>";
+Node<E> dummy = tail.next;
+if (dummy == tail) return "()";
+if (dummy == null) return "<NO DUMMY>";
+if (dummy.data != null) return "<DUMMY " + dummy.data + ">";
+Node<E> head = dummy.next;
+StringBuilder sb = new StringBuilder();
+Node<E> fast = head.next;
+while (head != dummy) {
+if (head == null) return sb.toString(); // no closing paren
+if (head == fast) {
+System.out.println("...");
+return sb.toString();
+}
+if (sb.length() == 0) sb.append("(");
+else sb.append(",");
+sb.append(head.data);
+head = head.next;
+if (fast != dummy && fast != null) fast = fast.next;
+if (fast != dummy && fast != null) fast = fast.next;
+}
+sb.append(")"); // clean close
+return sb.toString();
+}
+
+/**
+* Merge two sorted CLLs, or rather, merge the elements
+* of the second list into the first list.
+* This method should not create any new nodes!
+* The lists may have duplicates (according to the comparator)
+* but will be in non-decreasing order w.r.t. the comparator.
+* The result should include the dummy from the first CLL
+* and the second CLL should be left empty (dummy points to itself).
+* @note This method does not efficiently handle when the second list
+* contains a single element that belongs at the end of the first list.
+* In other words, this method does not do the work of insertion sort.
+* @param t1 tail of first CLL
+* @param t2 tail of second CLL
+* @return tail of merged list (first CLL with nodes of second CLL merged in)
+*/
+private Node<E> merge(Node<E> t1, Node<E> t2) {
+if(t2.next == t2) return t1;
+if(t1.next == t1) {
+Node<E> dummy = t2.next;
+t1.next = t2.next.next;
+t2.next = t1;
+t1 = t2;
+t2 = dummy;
+t2.next = t2;
+return t1;
+}
+Node<E> n1 = t1.next.next;
+Node<E> n2 = t2.next.next;
+
+Node<E> cur;
+if(comparator.compare(n1.data, n2.data) < 0) {
+cur = n1;
+n1 = n1.next;
+}else {
+cur = n2;
+n2 = n2.next;
+}
+Node<E> first = cur;
+Node<E> dum1 = t1.next;
+Node<E> dum2 = t2.next;
+
+while(n1.data != null && n2.data != null) {
+if(comparator.compare(n1.data, n2.data) < 0) {
+cur.next = n1;
+cur = cur.next;
+n1 = n1.next;
+}
+else {
+cur.next = n2;
+cur = cur.next;
+n2 = n2.next;
+}
+}
+while(n1.data != null) {
+cur.next = n1;
+cur = cur.next;
+n1 = n1.next;
+}
+while(n2.data != null) {
+cur.next = n2;
+cur = cur.next;
+n2 = n2.next;
+}
+cur.next = dum1;
+t1 = cur;
+t1.next.next = first;
+t2 = dum2;
+t2.next = t2;
+
+return t1;
+}
+
+/**
+* Partition a CLL w.r.t. the first element in the list.
+* The list elements are rearranged so that those which
+* are less that the pivot are placed before it, and those
+* that are greater are placed after them.  Equal elements
+* will be placed in the "after" list right after the pivot.
+* The elements may be rearranged arbitrarily otherwise.
+* @param tail the last element of the CLL.
+* There must be at least one element in this list
+* @return new tail
+*/
+private Node<E> partition(Node<E> tail) {
+Node<E> cur = tail.next.next;
+Node<E> p = cur;
+E pivot = cur.data;
+Node<E> dum = tail.next;
+Node<E> prev = tail.next;
+
+while(cur.data != null) {
+if(comparator.compare(cur.data, pivot) < 0) {
+Node<E> next = cur.next;
+prev.next = cur.next;
+cur.next = dum.next;
+dum.next = cur;
+cur = next;
+}else if(comparator.compare(cur.data, pivot) == 0 && cur != p) {
+Node<E> next = cur.next;
+prev.next = cur.next;
+cur.next = p.next;
+p.next = cur;
+if(prev.next != next) prev = prev.next;
+cur = next;
+}else {
+prev = cur;
+cur = cur.next;
+}
+}
+
+tail = prev;
+
+return tail;
+}
+
+/**
+* Destructively sort a CLL using quicksort, and return it.
+* The pivot chose should always be the first element.
+* @param l CLL identified by its tail
+*/
+private Node<E> quicksort(Node<E> tail) {
+if(tail.next.next == tail) return tail;
+
+Node<E> pivot = tail.next.next;
+Node<E> dum = tail.next;
+tail = partition(tail);
+
+Node<E> tail2 = tail.next;
+while(tail2.next != pivot) tail2 = tail2.next;
+tail2.next = dum;
+tail2 = quicksort(tail2);
+Node<E> beforeHead = tail2.next.next;
+tail2.next = beforeHead;
+
+if(tail == pivot) tail = dum;
+tail.next = dum;
+dum.next = pivot.next;
+tail = quicksort(tail);
+Node<E> afterHead = tail.next.next;
+
+tail2.next = pivot;
+pivot.next = afterHead;
+if(tail.data == null) tail = pivot;
+tail.next = dum;
+if(beforeHead.data != null) dum.next = beforeHead;
+
+return tail;
+}
+
+/**
+* Create a sorted collection using the given comparator.
+* @param comp comparator to use, must not be null
+*/
+public SortedCollection(Comparator<E> comp) {
+if (comp == null) throw new IllegalArgumentException("comparator cannot be null");
+// TODO set up data structure for an empty list.
+comparator = comp;
+tail = new Node<>(null, null);
+tail.next = tail;
+size = 0;
+version = 0;
+assert wellFormed() : "invariant failed at end of constructor";
+}
+
+/**
+* Create a sorted collection with the natural comparator,
+* and with all the elements from the given collection
+* @param from collection to get elements from, must not be null
+*/
+public SortedCollection(Collection<? extends E> from) {
+this();
+addAll(from);
+assert wellFormed() : "invariant failed at end of constructor";
+}
