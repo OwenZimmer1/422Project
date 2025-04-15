@@ -1,12 +1,20 @@
-/**
-* Check the invariant.
-* Returns false if any problem is found.
-* @return whether invariant is currently true.
-* If false is returned then exactly one problem has been reported.
+/**Removes and returns the process at the start of this queue, null if empty.
+*  This method should never return the dummy process!
+*
+* @returns the process at the start of this queue, or null if empty
+* @see java.util.Queue#poll()
 */
-private boolean wellFormed() {
-int sizeGuess = checkInRange(root, null, null);
-if(sizeGuess == -1) return false;
-if(sizeGuess != manyNodes) return report("manyNodes is wrong");
-return true;
+@Override
+public Process poll() {
+assert wellFormed() : "invariant failed at start of poll";
+if(manyItems == 0) return null;
+Process result = dummy.next;
+dummy.next = result.next;
+result.next.prev = dummy;
+result.next = null;
+result.prev = null;
+version++;
+manyItems--;
+assert wellFormed() : "invariant failed at end of poll";
+return result;
 }

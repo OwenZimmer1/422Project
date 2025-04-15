@@ -1,5 +1,4 @@
-/**
-* Scales this vector by the parameter.
+/*** Scales this vector by the parameter.
 *
 * @param s the constant to scale by
 * @return the scaled vector

@@ -1,0 +1,8 @@
+/*** Return the top of the stack.
+* @throws NoSuchELementException if the stack is empty
+* @return top of the stack
+*/
+public T top() {
+if (this == empty) throw new NoSuchElementException("stack is empty");
+return top;
+}

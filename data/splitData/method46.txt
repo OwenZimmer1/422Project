@@ -1,5 +1,4 @@
-/**
-* Increases the player's radius.
+/*** Increases the player's radius.
 *
 * @see DodgeBall.makeHarder()
 */

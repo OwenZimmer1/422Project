@@ -1,5 +1,4 @@
-/**
-* Generate a copy of this sequence.
+/*** Generate a copy of this sequence.
 * @param - none
 * @return
 *   The return value is a copy of this sequence. Subsequent changes to the
@@ -17,4 +16,10 @@ answer.manyItems = manyItems;
 
 for(int i = 0; i < manyItems; i++) {
 answer.data[i] = data[i];
+}
+
+assert wellFormed() : "invariant failed at end of clone";
+assert answer.wellFormed() : "invariant failed for clone";
+
+return answer;
 }

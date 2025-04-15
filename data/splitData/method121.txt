@@ -1,12 +1,9 @@
-/**
-* Check the invariant.
-* Returns false if any problem is found.
-* @return whether invariant is currently true.
-* If false is returned then exactly one problem has been reported.
+/*** Accept into the consumer all strings in this lexicon.
+* @param consumer the consumer to accept the strings
+* @throws NullPointerException if consumer is null
 */
-private boolean wellFormed() {
-int n = checkInRange(root, null, null);
-if (n < 0) return false; // problem already reported
-if (n != numNodes) return report("numNodes is " + numNodes + " but should be " + n);
-return true;
+public void consumeAll(Consumer<String> consumer) {
+// We don't assert the invariant, because we do nothing other than
+// call another public method.
+consumeAllWithPrefix(consumer,"");
 }

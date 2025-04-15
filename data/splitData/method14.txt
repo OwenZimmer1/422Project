@@ -1,5 +1,4 @@
-/**
-* gets y value to nearest integer
+/*** gets y value to nearest integer
 *
 * @return y value to nearest integer
 */

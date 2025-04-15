@@ -1,12 +1,12 @@
-/**
-* Return an array of all the strings in this lexicon (in order).
-* @param array to use unless null or too small
-* @return array copied into
+/*** Gets the [lexicographically] least string in the lexicon.
+* @return the least string or null if empty
 */
-public String[] toArray(String[] array) {
-assert wellFormed() : "invariant false at the start of toArray()";
-if(array == null || array.length < manyNodes) {
-String[] array2 = new String[manyNodes];
-copyInto(array2, root, 0);
-return array2;
+public String getMin() {
+assert wellFormed() : "invariant false at start of getMin()";
+if(root == null) return null;
+Node source = root;
+while(source.left != null) {
+source = source.left;
+}
+return source.string;
 }

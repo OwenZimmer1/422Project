@@ -1,5 +1,4 @@
-/**
-* Return the current movement of the ball.
+/*** Return the current movement of the ball.
 *
 * @return the current movement
 */

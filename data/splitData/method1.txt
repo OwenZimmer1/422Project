@@ -1,5 +1,4 @@
-/**
-* Gets the location.
+/*** Gets the location.
 *
 * @return the current location
 */

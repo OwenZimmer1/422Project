@@ -1,5 +1,4 @@
-/**
-* Create an empty sequence
+/*** Create an empty sequence
 * @param - none
 * @postcondition
 *   This sequence is empty

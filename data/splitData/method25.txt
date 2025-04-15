@@ -1,5 +1,4 @@
-/**
-* Finds the magnitude of this vector.
+/*** Finds the magnitude of this vector.
 *
 * @return how long this vector is (never negative).
 */

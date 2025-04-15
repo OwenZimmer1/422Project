@@ -1,21 +1,42 @@
-/**
-* Add a new string to the multiset. If it already exists,
-* increase the count for the string and return false.
-* Otherwise, set the count to one and return true.
-* @param str the string to add (must not be null)
-* @return true if str was added, false otherwise
-* @throws NullPointerException if str is null
+/*** Count all the nodes in this subtree,
+* while checking that all the keys are all in the range (lo,hi),
+* and that the keys are arranged in BST form,
+* and that the node are linked in-order.
+* If a problem is found, -1 is returned and exactly one problem is reported.
+* <p>
+* @param n the root of the subtree to check
+* @param lo if non-null then all strings in the subtree rooted
+* 				at n must be [lexicographically] greater than this parameter
+* @param hi if non-null then all strings in the subtree rooted
+* 				at n must be [lexicographically] less than this parameter
+* @param first the node that should be first in this tree, or if the tree
+*        is empty, then this should be the next node
+* @param next the node that should be linked next after this subtree.
+* @return number of nodes in the subtree, or -1 is there is a problem.
 */
-public boolean add(String str) {
-assert wellFormed() : "invariant false at start of add";
-boolean result = false;
+private int checkInRange(Node n, String lo, String hi, Node first, Node next)
+{
+if(n == null) {
+if(first != next) return reportNeg("tree out of order");
+return 0;
+}
+if (n.string == null) return reportNeg("null word found");
+if (n.count <= 0) return reportNeg("Count is 0");
+//first check node r
+if (lo != null && (n.string.equals(lo) || n.string.compareTo(lo) < 0))
+return reportNeg("Detected node outside of low bound: "+n.string);
+if (hi != null && (n.string.equals(hi) || n.string.compareTo(hi) > 0))
+return reportNeg("Detected node outside of high bound: "+n.string);
 
-int i = hash(str, false);
-if(isOpen(i)) {
-if(data[i] == null) numUsed++;
-result = true;
-data[i] = new MyEntry(str);
-numEntries++;
-if(numUsed > data.length / 2) rehash();
-version++;
+//if(first != null && first.string != null && lo != null && first.string.compareTo(lo) < 0) return reportNeg("lo and first are wrong");
+
+//check subtrees
+int leftSubtree = checkInRange(n.left, lo, n.string, first, n);
+if (leftSubtree < 0) return -1;
+
+int rightSubtree = checkInRange(n.right, n.string, hi, n.next, next);
+if (rightSubtree < 0) return -1;
+
+//otherwise return 1 + nodes in subtrees
+return 1 + leftSubtree + rightSubtree;
 }

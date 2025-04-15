@@ -1,0 +1,14 @@
+/*** Create a CLL from the elements in the given collection in the same order.
+* @param dummy dummy node to use, if null, a new dummy will be created
+* @param coll collection to use, must not be null, but may be empty
+* @return CLL of elements in same order
+*/
+private Node<E> toCLL(Node<E> dummy, Collection<? extends E> coll) {
+if (dummy == null) dummy = new Node<E>(null,null);
+dummy.next = dummy;
+Node<E> t = dummy;
+for (E e : coll) {
+t = t.next = new Node<E>(e,dummy);
+}
+return t;
+}

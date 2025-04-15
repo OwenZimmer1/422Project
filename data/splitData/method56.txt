@@ -1,5 +1,4 @@
-/**
-* Remove the current element from this sequence.
+/*** Remove the current element from this sequence.
 * @param - none
 * @precondition
 *   isCurrent() returns true.
@@ -23,4 +22,22 @@ head = null;
 tail = null;
 precursor = null;
 cursor = null;
+}
+else if(cursor == tail) {
+tail = precursor;
+tail.next = null;
+precursor = null;
+cursor = null;
+}
+else if(cursor == head) {
+head = head.next;
+cursor = head;
+}
+else {
+cursor = cursor.next;
+precursor.next = cursor;
+}
+manyNodes--;
+
+assert wellFormed() : "invariant wrong at end of removeCurrent()";
 }

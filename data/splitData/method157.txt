@@ -1,0 +1,70 @@
+/*** Merge two sorted CLLs, or rather, merge the elements
+* of the second list into the first list.
+* This method should not create any new nodes!
+* The lists may have duplicates (according to the comparator)
+* but will be in non-decreasing order w.r.t. the comparator.
+* The result should include the dummy from the first CLL
+* and the second CLL should be left empty (dummy points to itself).
+* @note This method does not efficiently handle when the second list
+* contains a single element that belongs at the end of the first list.
+* In other words, this method does not do the work of insertion sort.
+* @param t1 tail of first CLL
+* @param t2 tail of second CLL
+* @return tail of merged list (first CLL with nodes of second CLL merged in)
+*/
+private Node<E> merge(Node<E> t1, Node<E> t2) {
+if(t2.next == t2) return t1;
+if(t1.next == t1) {
+Node<E> dummy = t2.next;
+t1.next = t2.next.next;
+t2.next = t1;
+t1 = t2;
+t2 = dummy;
+t2.next = t2;
+return t1;
+}
+Node<E> n1 = t1.next.next;
+Node<E> n2 = t2.next.next;
+
+Node<E> cur;
+if(comparator.compare(n1.data, n2.data) < 0) {
+cur = n1;
+n1 = n1.next;
+}else {
+cur = n2;
+n2 = n2.next;
+}
+Node<E> first = cur;
+Node<E> dum1 = t1.next;
+Node<E> dum2 = t2.next;
+
+while(n1.data != null && n2.data != null) {
+if(comparator.compare(n1.data, n2.data) < 0) {
+cur.next = n1;
+cur = cur.next;
+n1 = n1.next;
+}
+else {
+cur.next = n2;
+cur = cur.next;
+n2 = n2.next;
+}
+}
+while(n1.data != null) {
+cur.next = n1;
+cur = cur.next;
+n1 = n1.next;
+}
+while(n2.data != null) {
+cur.next = n2;
+cur = cur.next;
+n2 = n2.next;
+}
+cur.next = dum1;
+t1 = cur;
+t1.next.next = first;
+t2 = dum2;
+t2.next = t2;
+
+return t1;
+}

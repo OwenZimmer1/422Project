@@ -1,20 +1,13 @@
-/**
-* Gets the next [lexicographically] greater string than the given string.
-* @param str the string of which to find the next greatest
-* @return the next string greater than str, or null if no other
+/*** Add a new string to the lexicon. If it already exists, do nothing and return false.
+* @param str the string to add (must not be null)
+* @return true if str was added, false otherwise
 * @throws NullPointerException if str is null
 */
-public String getNext(String str) {
-assert wellFormed() : "invariant false at start of getNext()";
-// TODO: Implement this method using the special iterator constructor.
-// HINT: If you add "\0" to the string and look for it with the iterator,
-// you are most of the way there.
+public boolean add(String str) {
+assert wellFormed() : "invariant false at start of add()";
 if(str == null) throw new NullPointerException("str is null");
-str.concat("\0");
-Iterator<String> it = iterator(str);
-String next = null;
-if(it.hasNext()) next = it.next();
-if(str.equals(next)) {
-if(it.hasNext()) next = it.next();
-else next = null;
+int manyNodesBefore = manyNodes;
+root = addHelper(root, str);
+assert wellFormed() : "invariant false at end of add()";
+return manyNodesBefore != manyNodes;
 }

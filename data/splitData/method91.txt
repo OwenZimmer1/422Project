@@ -1,5 +1,4 @@
-/**
-* Add a new element to this sequence, before the current element (if any).
+/*** Add a new element to this sequence, before the current element (if any).
 * @param element
 *   the new element that is being added
 * @postcondition
@@ -19,4 +18,13 @@ if(size == 0) {
 tail = new Node<>(element, tail.next);
 precursor = tail.next;
 tail.next.next = tail;
+}else if(precursor == tail) {
+tail = new Node<>(element, precursor.next);
+precursor.next = tail;
+}else {
+Node<E> node = new Node<>(element, precursor.next);
+precursor.next = node;
+}
+size++;
+assert wellFormed() : "invariant failed at end of insert";
 }

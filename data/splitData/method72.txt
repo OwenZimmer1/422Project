@@ -1,5 +1,4 @@
-/**
-* Instantiates a new Team with the given priority comparator.
+/*** Instantiates a new Team with the given priority comparator.
 * @param c the priority comparator this Team will use
 * @param n the name of the team.
 */

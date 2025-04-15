@@ -1,26 +1,33 @@
-/**
-* Merge two sorted CLLs, or rather, merge the elements
-* of the second list into the first list.
-* This method should not create any new nodes!
-* The lists may have duplicates (according to the comparator)
-* but will be in non-decreasing order w.r.t. the comparator.
-* The result should include the dummy from the first CLL
-* and the second CLL should be left empty (dummy points to itself).
-* @note This method does not efficiently handle when the second list
-* contains a single element that belongs at the end of the first list.
-* In other words, this method does not do the work of insertion sort.
-* @param t1 tail of first CLL
-* @param t2 tail of second CLL
-* @return tail of merged list (first CLL with nodes of second CLL merged in)
+/*** Hash the key to a table index, following double hashing,
+* returning the first index that
+* (1) includes an entry with the key, or
+* (2) has null, or
+* (3) has a placeholder (if phOK is true *and* the key cannot be found).
+* This code assumes that double hashing
+* will find a valid index.  It may run forever otherwise.
+* @param key string to look for, must not be null
+* @param phOK whether we return a slot with a placeholder in preference to an empty slot
+* @return first index meeting the requirements using double hashing.
 */
-private Node<E> merge(Node<E> t1, Node<E> t2) {
-if(t2.next == t2) return t1;
-if(t1.next == t1) {
-Node<E> dummy = t2.next;
-t1.next = t2.next.next;
-t2.next = t1;
-t1 = t2;
-t2 = dummy;
-t2.next = t2;
-return t1;
+private int hash(String key, boolean phOK) {
+if(key == null) throw new NullPointerException("String is null");
+int phIndex = -1;
+
+int hash1 = key.hashCode() % data.length;
+if(hash1 < 0) hash1 += data.length;
+
+int hash2 = key.hashCode() % (data.length - 2);
+if(hash2 < 0) hash2 += data.length - 2;
+hash2 += 1;
+
+if(phOK && data[hash1] == PLACE_HOLDER && phIndex < 0) phIndex = hash1;
+while(!(data[hash1] == null || (data[hash1].getKey() != null && data[hash1].getKey().equals(key)))) {
+hash1 += hash2;
+if(hash1 >= data.length) hash1 -= data.length;
+
+if(phOK && data[hash1] == PLACE_HOLDER && phIndex < 0) phIndex = hash1;
+}
+if(data[hash1] != null && (data[hash1].getKey() != null && data[hash1].getKey().equals(key))) return hash1;
+if(phOK && phIndex >= 0) return phIndex;
+return hash1;
 }

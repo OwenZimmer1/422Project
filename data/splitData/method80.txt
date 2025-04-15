@@ -1,5 +1,4 @@
-/**
-* Used to report an error found when checking the invariant.
+/*** Used to report an error found when checking the invariant.
 * By providing a string, this will help debugging the class if the invariant should fail.
 * @param error string to print to report the exact error found
 * @return false always

@@ -1,3 +1,7 @@
-/** Gets the total amount of instructions in the process.
-* @return the total instructions */
-public int getTotal(){return totalInstructions;}
+/**Gets the progress bar.
+* Creates and initializes it if necessary.
+* @return the progress bar */
+public JProgressBar getBar(){
+if (bar == null) createProgressBar();
+return bar;
+}

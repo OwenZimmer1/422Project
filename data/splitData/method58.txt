@@ -1,5 +1,4 @@
-/**
-* Place the contents of another sequence (which may be the
+/*** Place the contents of another sequence (which may be the
 * same one as this!) into this sequence before the current element (if any).
 * @param addend
 *   a sequence whose contents will be placed into this sequence
@@ -24,4 +23,22 @@ BallSeq clone = addend.clone();
 if(manyNodes == 0) {
 head = clone.head;
 tail = clone.tail;
+}
+else if (cursor == head){
+head = clone.head;
+clone.tail.next = cursor;
+precursor = clone.tail;
+}
+else if (cursor == null) {
+tail.next = clone.head;
+tail = clone.tail;
+}
+else {
+precursor.next = clone.head;
+precursor = clone.tail;
+clone.tail.next = cursor;
+}
+manyNodes += clone.manyNodes;
+
+assert wellFormed() : "invariant failed at end of addAll";
 }

@@ -1,5 +1,4 @@
-/**
-* Change the current capacity of this sequence if needed.
+/*** Change the current capacity of this sequence if needed.
 * @param minimumCapacity
 *   the new capacity for this sequence
 * @postcondition
@@ -20,4 +19,6 @@ if (newSize < minimumCapacity) newSize = minimumCapacity;
 Ball[] newArray = new Ball[newSize];
 for(int i = 0; i < data.length; i++) {
 newArray[i] = data[i];
+}
+data = newArray;
 }

@@ -1,5 +1,4 @@
-/**
-* Normalizes this vector.
+/*** Normalizes this vector.
 *
 * @return a vector with the same angle but magnitude of one.
 */

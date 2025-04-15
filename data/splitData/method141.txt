@@ -1,9 +1,12 @@
-/**
-* Return the stack that results from popping off the top element.
-* @throws NoSuchElementException if the stack is empty
-* @return stack after popping element
+/*** Find the node with the given key, creating it if necessary
+* (but only if "create" is true).  If create is true, then
+* the data structure invariant will be temporarily false
+* due to the node with a zero count.  The caller must address
+* the issue immediately.
+* @param key word to look for, must not be null
+* @param create whether to create a node with count=0 if not present.
+* @return node, or null if not present (and create is false)
 */
-public ImmutableStack<T> pop() {
-if (this == empty) throw new NoSuchElementException("empty stack");
-return shorter;
+private Node getNode(String key, boolean create) {
+return getNode(dummy.right, key, create, dummy);
 }

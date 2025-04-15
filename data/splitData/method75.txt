@@ -1,5 +1,4 @@
-/**
-* Some elements of the players may have changed the
+/*** Some elements of the players may have changed the
 * way the players are ordered.  This method
 * reorders the list to fix things up.
 * This will use insertion sort for efficiency.
@@ -15,4 +14,6 @@ dummy.sortByPriority(priority);
 if (dummy.getPrevious() != null) {
 // Suddenly the priority shows up as perverse.
 dummy.remove(); // actually removes everyone else.
+}
+assert wellFormed() : "invariant failed during refresh priority";
 }

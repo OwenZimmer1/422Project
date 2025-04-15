@@ -1,0 +1,41 @@
+/*** Read in a graph from the given reader.
+* Each line (once trimmed of whitespace) names a vertex (a string),
+* but before we trim, we check to see if the line begins with whitespace,
+* in which case this vertex is the second vertex of an edge that
+* begins with the last vertex that was on a line not starting with whitespace.
+* <p> For example, the following text:
+* <pre>
+* A
+* B
+*   A
+*   C
+* </pre>
+* is a graph with three vertices (A, B and C) and two
+* edges, A-B and B-C.
+* @param r
+* @return graph represented by text of reader.
+* @throws IOException if error reading or if the first line is indented.
+*/
+public static Graph<String> read(Reader r) throws IOException {
+Graph<String> result = new HashGraph<>();
+// TODO: Read in the graph from the reader.
+// Our solution is 15 lines long, and it uses the following library classes:
+// * BufferedReader
+
+BufferedReader reader = new BufferedReader(r);
+String before = null;
+for(String s = reader.readLine(); s != null; s = reader.readLine()) {
+if(s.startsWith(" ") || s.startsWith("\t")) {
+if(before == null) throw new IOException("can't lead with white space");
+s = s.strip();
+if(!result.containsVertex(s)) result.addVertex(s);
+if(!result.containsEdge(s, before)) result.addEdge(s, before);
+}else {
+s = s.strip();
+if(!result.containsVertex(s)) result.addVertex(s);
+before = s;
+}
+}
+
+return result;
+}

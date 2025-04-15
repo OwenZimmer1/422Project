@@ -1,5 +1,4 @@
-/**
-* Rotates this vector clockwise by the parameter angle (in radians).
+/*** Rotates this vector clockwise by the parameter angle (in radians).
 *
 * @param theta the angle to rotate (in radians)
 * @return the rotated vector

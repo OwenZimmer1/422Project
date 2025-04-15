@@ -1,5 +1,4 @@
-/**
-* Accessor method to get the current element of this sequence.
+/*** Accessor method to get the current element of this sequence.
 * @param - none
 * @precondition
 *   isCurrent() returns true.

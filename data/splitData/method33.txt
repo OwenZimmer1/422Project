@@ -1,5 +1,4 @@
-/**
-* The first element (if any) of this sequence is now current.
+/*** The first element (if any) of this sequence is now current.
 * @param - none
 * @postcondition
 *   The front element of this sequence (if any) is now the current element (but

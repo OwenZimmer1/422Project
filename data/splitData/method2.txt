@@ -1,5 +1,4 @@
-/**
-* Gets the radius.
+/*** Gets the radius.
 *
 * @return the radius
 */

@@ -1,7 +1,14 @@
-/** The main method.
-* @param args the arguments */
-public static void main(String[] args) {
-if (args.length != 1) {
-System.out.println("Usage: Main <lexicon file>");
-System.exit(1);
+/**Instantiates a new queue object.
+*  It will only contain a dummy process with null name and 0 instructions,
+*  linked circularly to itself. This dummy process should never be
+*  passed outside of this class.
+*  @postcondition queue is empty except for dummy process
+*/
+public Queue(){
+dummy = new Process();
+dummy.next = dummy;
+dummy.prev = dummy;
+version = 0;
+manyItems = 0;
+assert wellFormed() : "invariant failed in constructor";
 }

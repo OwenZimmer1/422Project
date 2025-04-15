@@ -1,5 +1,4 @@
-/**
-* Calculates new vectors for this and the parameter ball using normal and
+/*** Calculates new vectors for this and the parameter ball using normal and
 * tangent vectors, then calls step() on both until no longer colliding.
 *
 * @param other the other ball
@@ -18,3 +17,4 @@ other.move = other_tangent.add(my_normal);
 while (isColliding(other)){
 step();
 other.step();}
+}

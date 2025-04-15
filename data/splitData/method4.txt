@@ -1,5 +1,4 @@
-/**
-* Set the radius of this ball.
+/*** Set the radius of this ball.
 * @param r new radius, must be positive.
 */
 public void setRadius(int r) {

@@ -1,4 +1,3 @@
-/**
-* Gets the amount of finished instructions.
-* @return the finished instructions */
-public int getFinished(){return finishedInstructions;}
+/**Gets the total amount of instructions in the process.
+* @return the total instructions */
+public int getTotal(){return totalInstructions;}

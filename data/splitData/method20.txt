@@ -1,5 +1,4 @@
-/**
-* Getter for deltay field.
+/*** Getter for deltay field.
 *
 * @return the current deltay value
 */

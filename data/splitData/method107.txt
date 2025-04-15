@@ -1,32 +1,11 @@
-/**
-* Count all the nodes in this subtree,
-* while checking that all the keys are all in the range (lo,hi),
-* and that the keys are arranged in BST form.
-* If a problem is found, -1 is returned and exactly one problem is reported.
-* <p>
-* @param n the root of the subtree to check
-* @param lo if non-null then all strings in the subtree rooted
-* 				at n must be [lexicographically] greater than this parameter
-* @param hi if non-null then all strings in the subtree rooted
-* 				at n must be [lexicographically] less than this parameter
-* @return number of nodes in the subtree, or -1 is there is a problem.
+/**Returns the next process to be polled from this queue.
+*
+* @return the next process to be polled by this queue, or null if empty
+* @see java.util.Queue#peek()
 */
-private int checkInRange(Node n, String lo, String hi)
-{
-if(n == null) return 0;
-if(n.string == null) return reportNeg("n.string is null");
-if(lo != null && n.string.compareTo(lo) <= 0) return reportNeg("not greater than lo");
-if(hi != null && n.string.compareTo(hi) >= 0) return reportNeg("not less than hi");
-int leftCount = checkInRange(n.left, lo, n.string);
-if(leftCount == -1) return -1;
-int rightCount = checkInRange(n.right, n.string, hi);
-if(rightCount == -1) return -1;
-return 1 + leftCount + rightCount;
-/* Check that all strings in the subtree are in the parameter range,
-* and none of them are null.
-* Report any errors.  If there is an error return a negative number.
-* (Write "return reportNeg(...);" when detecting a problem.)
-* Otherwise return the number of nodes in the subtree.
-* Note that the bounds in recursive calls may be different.
-*/
+@Override
+public Process peek(){
+assert wellFormed() : "invariant failed at start of peek";
+if(manyItems == 0) return null;
+return dummy.next;
 }

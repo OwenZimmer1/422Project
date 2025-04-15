@@ -1,5 +1,4 @@
-/**
-* Generate a copy of this sequence.
+/*** Generate a copy of this sequence.
 * @param - none
 * @return
 *   The return value is a copy of this sequence. Subsequent changes to the
@@ -17,4 +16,43 @@ BallSeq result;
 try
 {
 result = (BallSeq) super.clone( );
+}
+catch (CloneNotSupportedException e)
+{
+// This exception should not occur. But if it does, it would probably
+// indicate a programming error that made super.clone unavailable.
+// The most common error would be forgetting the "Implements Cloneable"
+// clause at the start of this class.
+throw new RuntimeException
+("This class does not implement Cloneable");
+}
+// This is inspired by the textbook for this class, page 203
+if(result.head == null) return result;
+
+Node source = result.head;
+Node copyHead = new Node(source.data, null);
+Node copyTail = copyHead;
+
+while(source.next != null) {
+if(source == cursor) result.cursor = copyTail;
+if(source == precursor) result.precursor = copyTail;
+if(source == tail) result.tail = source;
+source = source.next;
+copyTail.next = new Node(source.data, null);
+copyTail = copyTail.next;
+}
+result.head = copyHead;
+if(source == cursor) result.cursor = copyTail;
+if(source == precursor) result.precursor = copyTail;
+if(source == tail) result.tail = copyTail;
+
+// TODO: Implemented by student.
+// Now do the hard work of cloning the list.
+// See pp 200-204, 235 (3rd ed. pp. 193-197, 228)
+// Setting precursor, cursor and tail correctly is tricky.
+
+
+assert wellFormed() : "invariant wrong at end of clone() for this";
+assert result.wellFormed() : "invariant wrong for result of clone() for copy";
+return result;
 }

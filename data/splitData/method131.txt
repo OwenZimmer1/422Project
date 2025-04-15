@@ -1,21 +1,21 @@
-/**
-* Look for the node for a particular key, creating it if requested
-* if it doesn't exist.
-* @param r subtree to look for the key, may be null
-* @param key key to look for for, must not be null
-* @param create whether to create a node with count 0 if not in tree
-* @param before the node before the first node in this subtree, must not be null
-* @return node with this key, or null if it is not present and create is false
+/*** Gets the next [lexicographically] greater string than the given string.
+* @param str the string of which to find the next greatest
+* @return the next string greater than str, or null if no other
+* @throws NullPointerException if str is null
 */
-private Node getNode(Node r, String key, boolean create, Node before) {
-if(r == null) {
-if(!create) return null;
-Node n = new Node(key);
-n.count--;
-n.next = before.next;
-if(before.right == null) before.right = n;
-else {
-Node source = before.right;
-while (source.left != null) source = source.left;
-source.left = n;
+public String getNext(String str) {
+assert wellFormed() : "invariant false at start of getNext()";
+// TODO: Implement this method using the special iterator constructor.
+// HINT: If you add "\0" to the string and look for it with the iterator,
+// you are most of the way there.
+if(str == null) throw new NullPointerException("str is null");
+str.concat("\0");
+Iterator<String> it = iterator(str);
+String next = null;
+if(it.hasNext()) next = it.next();
+if(str.equals(next)) {
+if(it.hasNext()) next = it.next();
+else next = null;
+}
+return next;
 }

@@ -1,5 +1,4 @@
-/**
-* Generate a copy of this sequence.
+/*** Generate a copy of this sequence.
 * @param - none
 * @return
 *   The return value is a copy of this sequence. Subsequent changes to the
@@ -51,16 +50,4 @@ if(source == precursor) result.precursor = cursor.next;
 assert wellFormed() : "invariant wrong at end of clone()";
 assert result.wellFormed() : "invariant wrong for result of clone()";
 return result;
-}
-
-/**
-* Instantiates a new process.
-*
-* @param name the name of the process, must not be null
-* @param totalIns the total instructions of the process
-*/
-public Process(String name, int totalIns) {
-if (name == null) throw new NullPointerException("name must not be null");
-this.name = name;
-this.totalInstructions = totalIns;
 }

@@ -1,5 +1,4 @@
-/**
-* Initialize an empty sequence with an initial capacity of INITIAL_CAPACITY.
+/*** Initialize an empty sequence with an initial capacity of INITIAL_CAPACITY.
 * The append method works
 * efficiently (without needing more memory) until this capacity is reached.
 * @param - none

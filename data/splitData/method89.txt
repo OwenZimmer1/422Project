@@ -1,5 +1,4 @@
-/**
-* Move forward, so that the current element is now the next element in
+/*** Move forward, so that the current element is now the next element in
 * this sequence.
 * @param - none
 * @precondition

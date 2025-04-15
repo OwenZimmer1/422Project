@@ -1,5 +1,4 @@
-/**
-* Remove this item from its list.
+/*** Remove this item from its list.
 * This player will be completely disconnected from any other players.
 */
 public void remove() {
@@ -7,4 +6,11 @@ public void remove() {
 if(prev != null && next != null) {
 prev.next = next;
 next.prev = prev;
+}else if(prev != null && next == null) {
+prev.next = null;
+}else if(prev == null && next != null) {
+next.prev = null;
+}
+next = null;
+prev = null;
 }

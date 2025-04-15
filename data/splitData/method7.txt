@@ -1,5 +1,4 @@
-/**
-* Checks if ball is at or outside BOUNDS dimension and moving further out,
+/*** Checks if ball is at or outside BOUNDS dimension and moving further out,
 * and reflects movement if so.  If the ball isn't moving further out, the
 * movement isn't reflected.
 * @param bounds dimension of area to check (all four walls), must not be null

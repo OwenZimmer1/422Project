@@ -1,5 +1,4 @@
-/**
-* gets angle theta
+/*** gets angle theta
 *
 * @return angle of vector off x axis
 */

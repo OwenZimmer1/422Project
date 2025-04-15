@@ -1,5 +1,4 @@
-/**
-* Instantiates a new unit vector with specified angle.
+/*** Instantiates a new unit vector with specified angle.
 *
 * @param theta the angle to construct, in radians
 */

@@ -1,5 +1,4 @@
-/**
-* Determine the number of elements in this sequence.
+/*** Determine the number of elements in this sequence.
 * @param - none
 * @return
 *   the number of elements in this sequence

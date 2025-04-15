@@ -1,18 +1,16 @@
-/**
-* Accept into the consumer all strings that start with the given prefix.
-* @param consumer the consumer to accept the strings
-* @param prefix the prefix to find all strings starting with
-* @throws NullPointerException if consumer or prefix is null
+/*** Copy all the strings from lexicon (in sorted order) into the array starting
+* at the given index.  Return the next index for (later) elements.
+* This is a helper method for {@link #toArray(String[])}.
+* @param array destination of copy
+* @param root the subtree whose elements should be copied
+* @param index the index to place the next element
+* @return the next spot in the array to use after this subtree is done
 */
-public void consumeAllWithPrefix(Consumer<String> consumer, String prefix) {
-assert wellFormed() : "invariant false at start of consumeAllWithPrefix()";
-if (consumer == null) throw new NullPointerException("Can't accept into null consumer");
-if (prefix == null) throw new NullPointerException("Prefix can't be null");
-// TODO: Implement this method with the special iterator, not with recursion.
-Iterator<String> it = iterator(prefix);
-boolean done = false;
-while(it.hasNext() && !done) {
-String next = it.next();
-if(next.startsWith(prefix)) consumer.accept(next);
-else done = true;
+private int copyInto(String[] array, Node root, int index) {
+if(root == null) return index;
+index = copyInto(array, root.left, index);
+array[index] = root.string;
+index++;
+index = copyInto(array, root.right, index);
+return index;
 }

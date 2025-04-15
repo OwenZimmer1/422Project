@@ -1,5 +1,4 @@
-/**
-* Instantiates a new vector between two points.
+/*** Instantiates a new vector between two points.
 * If applied to the first point, the result is the second point.
 *
 * @param p the first point

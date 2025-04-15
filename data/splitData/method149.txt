@@ -1,10 +1,38 @@
-/**
-* Create a sorted collection with the natural comparator,
-* and with all the elements from the given collection
-* @param from collection to get elements from, must not be null
+/*** Return the shortest path between two vertices in the graph
+* @param v1 starting vertex
+* @param v2 ending vertex
+* @return path from the first to the second as a list of vertices, or null
+* is no path exists.
+* @throws IllegalArgumentException if v1 or v2 is not in the graph
 */
-public SortedCollection(Collection<? extends E> from) {
-this();
-addAll(from);
-assert wellFormed() : "invariant failed at end of constructor";
+@SuppressWarnings("unchecked")
+public List<T> shortestPath(T v1, T v2) {
+
+if(!(graph.containsVertex(v1) && graph.containsVertex(v2))) throw new IllegalArgumentException("Must be in graph");
+
+ArrayDeque<ArrayList<T>> queue = new ArrayDeque<>();
+HashSet<T> visited = new HashSet<>();
+ArrayList<T> list = new ArrayList<>();
+
+list.add(v1);
+queue.push(list);
+while(!queue.isEmpty()) {
+list = queue.poll();
+T current = list.get(list.size() - 1);
+if(!visited.contains(current)) {
+visited.add(current);
+if(current.equals(v2)) {
+return list;
+}else {
+Set<T> connected = graph.getConnected(current);
+for(T vert : connected) {
+    list.add(vert);
+    queue.addLast((ArrayList<T>) list.clone());
+    list.remove(list.size() - 1);
+}
+}
+}
+}
+
+return null; // no path found
 }

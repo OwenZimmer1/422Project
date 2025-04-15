@@ -1,10 +1,7 @@
-/**
-* Accept into the consumer all strings in this lexicon.
-* @param consumer the consumer to accept the strings
-* @throws NullPointerException if consumer is null
-*/
-public void consumeAll(Consumer<String> consumer) {
-// We don't assert the invariant, because we do nothing other than
-// call another public method.
-consumeAllWithPrefix(consumer,"");
+/**Instantiates a new driver, loading lexicon from file.
+* @param name the name of the file */
+public Driver(String name) {
+lexicon = new Lexicon();
+filename = name;
+in = new Scanner(System.in);
 }

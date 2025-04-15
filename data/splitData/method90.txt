@@ -1,5 +1,4 @@
-/**
-* Remove the current element from this sequence.
+/*** Remove the current element from this sequence.
 * @param - none
 * @precondition
 *   isCurrent() returns true.
@@ -21,4 +20,15 @@ if(size == 1) {
 tail = tail.next;
 tail.next = tail;
 precursor = tail;
+}else if(precursor.next == tail){
+precursor.next = precursor.next.next;
+tail = precursor;
+}else {
+precursor.next = precursor.next.next;
+}
+
+size--;
+// TODO: Implemented by student.
+// See textbook pp.176-78, 181-184
+assert wellFormed() : "invariant wrong at end of removeCurrent()";
 }

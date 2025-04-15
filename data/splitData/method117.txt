@@ -1,17 +1,7 @@
-/**
-* Copy all the strings from lexicon (in sorted order) into the array starting
-* at the given index.  Return the next index for (later) elements.
-* This is a helper method for {@link #toArray(String[])}.
-* @param array destination of copy
-* @param root the subtree whose elements should be copied
-* @param index the index to place the next element
-* @return the next spot in the array to use after this subtree is done
+/**Gets the size of this lexicon.
+* @return the count of strings in this lexicon
 */
-private int copyInto(String[] array, Node root, int index) {
-if(root == null) return index;
-index = copyInto(array, root.left, index);
-array[index] = root.string;
-index++;
-index = copyInto(array, root.right, index);
-return index;
+public int size() {
+assert wellFormed() : "invariant false at start of size()";
+return manyNodes;
 }

@@ -1,0 +1,8 @@
+/*** Return the stack that results from popping off the top element.
+* @throws NoSuchElementException if the stack is empty
+* @return stack after popping element
+*/
+public ImmutableStack<T> pop() {
+if (this == empty) throw new NoSuchElementException("empty stack");
+return shorter;
+}

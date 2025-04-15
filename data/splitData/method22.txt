@@ -1,5 +1,4 @@
-/**
-* Adds the parameter vector with this vector.
+/*** Adds the parameter vector with this vector.
 *
 * @param v the vector to add
 * @return the vector sum

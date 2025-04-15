@@ -1,53 +1,5 @@
-/**
-*  Returns a clone of this process that is identical in every way
-*  except that it has null links.
-*
-* @return the process
-* @see java.lang.Object#clone()
-*/
-@Override
-public Process clone(){
-Process copy = null;
-try{
-copy = (Process) super.clone();
-copy.next = copy.prev = null;
-copy.bar = null;
-}
-catch (CloneNotSupportedException e){
-throw new RuntimeException("forgot to make Cloneable?");
-}
-return copy;
-}
-
-/**
-*  Checks for equality of this process with the parameter process.
-*  It will check everything except for the links.
-*
-* @param other the object against which to test for equality
-* @return true, if successful
-* @see java.lang.Object#equals(java.lang.Object)
-*/
-@Override
-public boolean equals(Object other){
-if (!(other instanceof Process) || other == null) return false;
-Process p = (Process) other;
-
-return p.totalInstructions == totalInstructions &&
-p.finishedInstructions == finishedInstructions &&
-p.name.equals(name);
-}
-
-/** Instantiates a new queue object.
-*  It will only contain a dummy process with null name and 0 instructions,
-*  linked circularly to itself. This dummy process should never be
-*  passed outside of this class.
-*  @postcondition queue is empty except for dummy process
-*/
-public Queue(){
-dummy = new Process();
-dummy.next = dummy;
-dummy.prev = dummy;
-version = 0;
-manyItems = 0;
-assert wellFormed() : "invariant failed in constructor";
+/**Perform a single instruction of the process. */
+public void performInstruction(){
+if (!isDone())
+finishedInstructions++;
 }

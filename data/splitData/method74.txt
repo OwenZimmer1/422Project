@@ -1,5 +1,4 @@
-/**
-* Change the priority for this list of players,
+/*** Change the priority for this list of players,
 * and then make sure the order reflects the new priority.
 * @param p priority to use, must not be null.
 */

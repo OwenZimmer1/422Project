@@ -1,5 +1,4 @@
-/**
-* Checks if colliding with the parameter ball.
+/*** Checks if colliding with the parameter ball.
 *
 * @param other the other ball
 * @return true if colliding

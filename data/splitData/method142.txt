@@ -1,8 +1,21 @@
-/**
-* Return the stack that results from pushing another element on top.
-* @param val element to push
-* @return new stack resulting from pushing element
+/*** Add a new string to the multiset. If it already exists,
+* increase the count for the string and return false.
+* Otherwise, set the count to one and return true.
+* @param str the string to add (must not be null)
+* @return true if str was added, false otherwise
+* @throws NullPointerException if str is null
 */
-public ImmutableStack<T> push(T val) {
-return new ImmutableStack<>(val,this);
+public boolean add(String str) {
+assert wellFormed() : "invariant false at start of add";
+if(str == null) throw new NullPointerException("String is null");
+boolean result = false;
+Node n = getNode(str, true);
+if(n.count == 0) {
+numEntries++;
+version++;
+result = true;
+}
+n.count++;
+assert wellFormed() : "invariant false at end of add";
+return result;
 }

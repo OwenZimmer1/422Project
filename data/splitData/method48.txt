@@ -1,5 +1,4 @@
-/**
-* Update the player's location.
+/*** Update the player's location.
 *
 * @param mouseLoc the current [adjusted] mouse location
 */

@@ -1,14 +1,15 @@
-/**
-* Checks if the given string is in the lexicon.
-* @param str the string to search for (maybe null)
-* @return true if str is in the lexicon, false otherwise
+/**Returns the next process in this queue. This method should
+*  *not* call poll, or change the state of the queue in any way.
+*
+*  @throws ConcurrentModificationException if versions don't match
+*  @throws NoSuchElementException if no element is next
+*  @return the next process in the queue
 */
-public boolean contains(String str) {
-assert wellFormed() : "invariant false at start of contains()";
-if(str == null) return false;
-Node source = root;
-while(source != null) {
-if(source.string.compareTo(str) > 0) source = source.left;
-else if(source.string.compareTo(str) < 0) source = source.right;
-else return true;
+public Process next() {
+assert wellFormed() : "invariant failed at start of next()";
+if(version != myVersion) throw new ConcurrentModificationException("versions don't match");
+if(!hasNext()) throw new NoSuchElementException("no element found");
+cursor = cursor.next;
+assert wellFormed() : "invariant failed at end of next()";
+return cursor;
 }

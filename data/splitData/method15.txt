@@ -1,5 +1,4 @@
-/**
-* finds the distance between 2 points
+/*** finds the distance between 2 points
 *
 * @param point the point that will be found the distance from
 * @return the distance between two points

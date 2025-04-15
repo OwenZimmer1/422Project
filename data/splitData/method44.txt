@@ -1,5 +1,4 @@
-/**
-* Instantiates a new player.
+/*** Instantiates a new player.
 *
 * @param loc the initial location
 */

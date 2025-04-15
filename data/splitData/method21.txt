@@ -1,5 +1,4 @@
-/**
-* Translates the parameter point by this vector.
+/*** Translates the parameter point by this vector.
 *
 * @param p the point to translate
 * @return the  translated point

@@ -1,5 +1,4 @@
-/**
-* Adds a Player to this Team.
+/*** Adds a Player to this Team.
 * It should be added according to the priority of the team.
 * @param t the Player to add, must not be null and must not be in another team.
 * @throws IllegalArgumentException if the player is already in a team or if the added player would come before the

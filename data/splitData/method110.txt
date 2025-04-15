@@ -1,11 +1,41 @@
-/**
-* Gets the [lexicographically] least string in the lexicon.
-* @return the least string or null if empty
+/**Returns a new copy of this queue. The copy should be unaffected
+*  by subsequent changes made to this queue, and vice versa. The
+*  processes added to the copy should be clones.
+*
+* @return a clone of this queue
+* @see java.lang.Object#clone()
 */
-public String getMin() {
-assert wellFormed() : "invariant false at start of getMin()";
-if(root == null) return null;
-Node source = root;
-while(source.left != null) {
-source = source.left;
+@Override
+public Queue clone(){
+assert wellFormed() : "invariant failed at start of clone()";
+
+Queue copy = new Queue();
+
+try{ copy = (Queue) super.clone();}
+catch(CloneNotSupportedException e){
+// should not happen
+}
+
+Process source = dummy;
+Process copier = source.clone();
+copy.dummy = copier;
+source = source.next;
+while(source != dummy) {
+copier.next = source.clone();
+copier.next.prev = copier;
+copier = copier.next;
+source = source.next;
+}
+copier.next = copy.dummy;
+copier.next.prev = copier;
+
+assert wellFormed() : "invariant failed at end of clone()";
+assert copy.wellFormed() : "invariant of result failed at end of clone()";
+return copy;
+}
+
+public boolean hasNext() {
+assert wellFormed() : "invariant failed at start of hasNext()";
+if(version != myVersion) throw new ConcurrentModificationException("versions don't match");
+return cursor.next != dummy;
 }

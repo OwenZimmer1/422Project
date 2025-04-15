@@ -1,14 +1,34 @@
-/**
-* Remove one copy of a word from the multiset.
-* If there are multiple copies, then we just adjust the count,
-* and the map is unaffected (iterators don't go stale).
-* @param str string to remove one of, may be null (but ignored if so)
-* @return true if the word was in the multiset.
+/*** Add a new string to the lexicon. If it already exists, do nothing and return false.
+* @param str the string to add (must not be null)
+* @return true if str was added, false otherwise
+* @throws NullPointerException if str is null
 */
-public boolean removeOne(String str) {
-assert wellFormed() : "invariant false at start of removeOne";
-if(str == null) return false;
-dummy.right = doRemove(dummy.right, str, dummy, true, null);
-assert wellFormed() : "invariant false at end of removeOne";
-return lastRemoved != null;
+@Override // implementation
+public boolean add(String str) {
+assert wellFormed() : "invariant false at start of add()";
+boolean result = false;
+if (str == null) throw new NullPointerException("Cannot add null.");
+Node n = root;
+Node lag = null;
+while (n != null) {
+if (n.string.equals(str)) break;
+lag = n;
+if (str.compareTo(n.string) > 0) n = n.right;
+else n = n.left;
+}
+if (n == null) {
+n = new Node(str);
+if (lag == null)
+root = n;
+else if (str.compareTo(lag.string) > 0)
+lag.right = n;
+else
+lag.left = n;
+++numNodes;
+result = true;
+version++;
+}
+// XXX: Something is missing from this code that is needed for Homework #9
+assert wellFormed() : "invariant false at end of add()";
+return result;
 }

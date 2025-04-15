@@ -1,5 +1,4 @@
-/**
-* gets x value
+/*** gets x value
 *
 * @return current x value
 */

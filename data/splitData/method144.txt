@@ -1,22 +1,9 @@
-/**
-* Convert a CLL to a string.
-* A problem is signified by a string without a proper ending paren.
-* Use this for debugging.
-* @param tail CLL
-* @return string picture of a CLL
+/**A method to compare two objects.
+* This method is superseded by Objects.equals
+* @param o1 one object, may be null
+* @param o2 another object, may be null
+* @return whether they are equal (both null, or usign equals).
 */
-private static <E> String CLLtoString(Node<E> tail) {
-if (tail == null) return "<NULL>";
-Node<E> dummy = tail.next;
-if (dummy == tail) return "()";
-if (dummy == null) return "<NO DUMMY>";
-if (dummy.data != null) return "<DUMMY " + dummy.data + ">";
-Node<E> head = dummy.next;
-StringBuilder sb = new StringBuilder();
-Node<E> fast = head.next;
-while (head != dummy) {
-if (head == null) return sb.toString(); // no closing paren
-if (head == fast) {
-System.out.println("...");
-return sb.toString();
+private static boolean eq(Object o1, Object o2) {
+return (o1 == null ? o2 == null : o1.equals(o2));
 }

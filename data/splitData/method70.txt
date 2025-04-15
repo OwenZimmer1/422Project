@@ -1,5 +1,4 @@
-/**
-* Assuming all the players before this one are sorted correctly
+/*** Assuming all the players before this one are sorted correctly
 * according to the priority and come before this one,
 * ensure that the ones coming after are also sorted correctly.
 * @param c comparator to use, must not be null

@@ -1,5 +1,4 @@
-/**
-* Takes the dot product of this vector and the parameter vector.
+/*** Takes the dot product of this vector and the parameter vector.
 *
 * @param v the other vector
 * @return the dot product

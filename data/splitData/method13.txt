@@ -1,5 +1,4 @@
-/**
-* gets x value to nearest integer
+/*** gets x value to nearest integer
 *
 * @return x value to nearest integer
 */

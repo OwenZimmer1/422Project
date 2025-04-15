@@ -1,5 +1,4 @@
-/** Perform a single instruction of the process. */
-public void performInstruction(){
-if (!isDone())
-finishedInstructions++;
-}
+/*** Checks if the process is completed.
+* @return true, if is done */
+public boolean isDone(){
+return finishedInstructions == totalInstructions;}

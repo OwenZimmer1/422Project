@@ -1,0 +1,7 @@
+/*** Return an empty stack.
+* @return empty stack, never null
+*/
+@SuppressWarnings("unchecked")
+public static <T> ImmutableStack<T> empty() {
+return (ImmutableStack<T>) empty;
+}

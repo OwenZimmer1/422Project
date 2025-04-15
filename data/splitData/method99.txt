@@ -1,5 +1,3 @@
-/**
-* Checks if the process is completed.
-* @return true, if is done */
-public boolean isDone(){
-return finishedInstructions == totalInstructions;}
+/*** Gets the amount of finished instructions.
+* @return the finished instructions */
+public int getFinished(){return finishedInstructions;}

@@ -1,5 +1,4 @@
-/**
-* Getter for deltax field.
+/*** Getter for deltax field.
 *
 * @return the current deltax value
 */

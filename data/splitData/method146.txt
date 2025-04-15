@@ -1,26 +1,9 @@
-/**
-* Partition a CLL w.r.t. the first element in the list.
-* The list elements are rearranged so that those which
-* are less that the pivot are placed before it, and those
-* that are greater are placed after them.  Equal elements
-* will be placed in the "after" list right after the pivot.
-* The elements may be rearranged arbitrarily otherwise.
-* @param tail the last element of the CLL.
-* There must be at least one element in this list
-* @return new tail
+/*** Used to report an error found when checking the invariant.
+* By providing a string, this will help debugging the class if the invariant should fail.
+* @param error string to print to report the exact error found
+* @return false always
 */
-private Node<E> partition(Node<E> tail) {
-Node<E> cur = tail.next.next;
-Node<E> p = cur;
-E pivot = cur.data;
-Node<E> dum = tail.next;
-Node<E> prev = tail.next;
-
-while(cur.data != null) {
-if(comparator.compare(cur.data, pivot) < 0) {
-Node<E> next = cur.next;
-prev.next = cur.next;
-cur.next = dum.next;
-dum.next = cur;
-cur = next;
+private static boolean report(String error) {
+reporter.accept(error);
+return false;
 }

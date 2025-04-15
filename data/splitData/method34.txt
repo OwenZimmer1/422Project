@@ -1,5 +1,4 @@
-/**
-* Accessor method to determine whether this sequence has a specified
+/*** Accessor method to determine whether this sequence has a specified
 * current element (a Ball or null) that can be retrieved with the
 * getCurrent method. This depends on the status of the cursor.
 * @param - none

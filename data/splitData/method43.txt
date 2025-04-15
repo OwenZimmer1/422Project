@@ -1,5 +1,4 @@
-/**
-* constructor
+/*** constructor
 * @param manyItems: number of items
 */
 public BallCollection(int manyItems) {

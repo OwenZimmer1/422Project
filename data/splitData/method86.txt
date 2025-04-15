@@ -1,5 +1,4 @@
-/**
-* Set the current element at the front of this sequence.
+/*** Set the current element at the front of this sequence.
 * @param - none
 * @postcondition
 *   The front element of this sequence is now the current element (but

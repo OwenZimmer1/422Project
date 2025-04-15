@@ -1,101 +1,33 @@
-/**
-* Return the shortest path between two vertices in the graph
-* @param v1 starting vertex
-* @param v2 ending vertex
-* @return path from the first to the second as a list of vertices, or null
-* is no path exists.
-* @throws IllegalArgumentException if v1 or v2 is not in the graph
+/*** Look for the node for a particular key, creating it if requested
+* if it doesn't exist.
+* @param r subtree to look for the key, may be null
+* @param key key to look for for, must not be null
+* @param create whether to create a node with count 0 if not in tree
+* @param before the node before the first node in this subtree, must not be null
+* @return node with this key, or null if it is not present and create is false
 */
-@SuppressWarnings("unchecked")
-public List<T> shortestPath(T v1, T v2) {
-
-if(!(graph.containsVertex(v1) && graph.containsVertex(v2))) throw new IllegalArgumentException("Must be in graph");
-
-ArrayDeque<ArrayList<T>> queue = new ArrayDeque<>();
-HashSet<T> visited = new HashSet<>();
-ArrayList<T> list = new ArrayList<>();
-
-list.add(v1);
-queue.push(list);
-while(!queue.isEmpty()) {
-list = queue.poll();
-T current = list.get(list.size() - 1);
-if(!visited.contains(current)) {
-visited.add(current);
-if(current.equals(v2)) {
-return list;
-}else {
-Set<T> connected = graph.getConnected(current);
-for(T vert : connected) {
-    list.add(vert);
-    queue.addLast((ArrayList<T>) list.clone());
-    list.remove(list.size() - 1);
+private Node getNode(Node r, String key, boolean create, Node before) {
+if(r == null) {
+if(!create) return null;
+Node n = new Node(key);
+n.count--;
+n.next = before.next;
+if(before.right == null) before.right = n;
+else {
+Node source = before.right;
+while (source.left != null) source = source.left;
+source.left = n;
 }
-}
-}
-}
+before.next = n;
 
-return null; // no path found
+return n;
 }
-
-/**
-* Read in a graph from the given reader.
-* Each line (once trimmed of whitespace) names a vertex (a string),
-* but before we trim, we check to see if the line begins with whitespace,
-* in which case this vertex is the second vertex of an edge that
-* begins with the last vertex that was on a line not starting with whitespace.
-* <p> For example, the following text:
-* <pre>
-* A
-* B
-*   A
-*   C
-* </pre>
-* is a graph with three vertices (A, B and C) and two
-* edges, A-B and B-C.
-* @param r
-* @return graph represented by text of reader.
-* @throws IOException if error reading or if the first line is indented.
-*/
-public static Graph<String> read(Reader r) throws IOException {
-Graph<String> result = new HashGraph<>();
-// TODO: Read in the graph from the reader.
-// Our solution is 15 lines long, and it uses the following library classes:
-// * BufferedReader
-
-BufferedReader reader = new BufferedReader(r);
-String before = null;
-for(String s = reader.readLine(); s != null; s = reader.readLine()) {
-if(s.startsWith(" ") || s.startsWith("\t")) {
-if(before == null) throw new IOException("can't lead with white space");
-s = s.strip();
-if(!result.containsVertex(s)) result.addVertex(s);
-if(!result.containsEdge(s, before)) result.addEdge(s, before);
-}else {
-s = s.strip();
-if(!result.containsVertex(s)) result.addVertex(s);
-before = s;
+int c = key.compareTo(r.string);
+if(c < 0) {
+return getNode(r.left, key, create, before);
 }
-}
+else if (c > 0) {
+return getNode(r.right, key, create, r);
+}else return r;
 
-return result;
-}
-
-/**
-* Return an empty stack.
-* @return empty stack, never null
-*/
-@SuppressWarnings("unchecked")
-public static <T> ImmutableStack<T> empty() {
-return (ImmutableStack<T>) empty;
-}
-
-/**
-* Return the top of the stack.
-* @throws NoSuchELementException if the stack is empty
-* @return top of the stack
-*/
-public T top() {
-if (this == empty) throw new NoSuchElementException("stack is empty");
-return top;
 }

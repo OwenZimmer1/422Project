@@ -1,5 +1,4 @@
-/**
-* Sets the current image.
+/*** Sets the current image.
 *
 * @param img the new player image
 */

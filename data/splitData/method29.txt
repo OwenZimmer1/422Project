@@ -1,5 +1,4 @@
-/**
-* Compute the angle of this vector, in radians,
+/*** Compute the angle of this vector, in radians,
 * clockwise from the x-axis.
 *
 * @return the angle in range [0,2Pi)

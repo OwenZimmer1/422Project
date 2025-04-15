@@ -1,5 +1,4 @@
-/**
-* Accessor method to determine whether this sequence has a specified
+/*** Accessor method to determine whether this sequence has a specified
 * current element that can be retrieved with the
 * getCurrent method.
 * @param - none

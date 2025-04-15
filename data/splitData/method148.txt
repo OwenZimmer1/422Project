@@ -1,14 +1,23 @@
-/**
-* Create a sorted collection using the given comparator.
-* @param comp comparator to use, must not be null
+/*** Remove one copy of a word from the multiset.
+* If there are multiple copies, then we just adjust the count,
+* and the map is unaffected (iterators don't go stale).
+* @param str string to remove one of, may be null (but ignored if so)
+* @return true if the word was in the multiset.
 */
-public SortedCollection(Comparator<E> comp) {
-if (comp == null) throw new IllegalArgumentException("comparator cannot be null");
-// TODO set up data structure for an empty list.
-comparator = comp;
-tail = new Node<>(null, null);
-tail.next = tail;
-size = 0;
-version = 0;
-assert wellFormed() : "invariant failed at end of constructor";
+public boolean removeOne(String str) {
+assert wellFormed() : "invariant false at start of removeOne";
+boolean result = false;
+if(str == null) return false;
+
+int i = hash(str, false);
+if(isOpen(i)) {
+return false;
+}else {
+if(data[i].count == 1) remove(data[i].string);
+else data[i].count--;
+result = true;
+}
+
+assert wellFormed() : "invariant false at end of removeOne";
+return result;
 }

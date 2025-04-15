@@ -1,5 +1,4 @@
-/**
-* Instantiates a new Player.
+/*** Instantiates a new Player.
 * @param name the name of the player, must not be null
 * @param score how many points this player has scored
 * @param position the position of the player, where null means can play ANY position

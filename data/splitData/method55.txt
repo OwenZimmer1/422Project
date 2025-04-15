@@ -1,5 +1,4 @@
-/**
-* Move forward, so that the current element is now the next element in
+/*** Move forward, so that the current element is now the next element in
 * this sequence.
 * @param - none
 * @precondition
@@ -21,4 +20,10 @@ if(!isCurrent()) throw new IllegalStateException("no current element");
 if(cursor.next != null) {
 precursor = cursor;
 cursor = cursor.next;
+}
+else {
+cursor = null;
+precursor = null;
+}
+assert wellFormed() : "invariant wrong at end of advance()";
 }

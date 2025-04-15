@@ -1,5 +1,4 @@
-/**
-* Draws the ball, and if non-active also draws its vector.
+/*** Draws the ball, and if non-active also draws its vector.
 *
 * @param g the Graphics context on which to draw
 */
@@ -10,4 +9,19 @@ if (!active){
 Vector standard_vec = move.normalize().scale(radius * 2);
 g.setColor(Color.RED);
 g.drawLine(location.intX(), location.intY(), standard_vec.move(location).intX(), standard_vec.move(location).intY());
+}
+}
+
+/* Make a Ball with the same features as this ball.
+* @see java.lang.Object#clone()
+*/
+@Override
+public Ball clone() {
+try {
+return (Ball)super.clone();
+}catch (CloneNotSupportedException cnse) {
+throw new RuntimeException
+("This class does not Implament Cloneable");
+}
+
 }

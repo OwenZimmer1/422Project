@@ -1,5 +1,4 @@
-/**
-* Add a new element to this sequence, before the current element (if any).
+/*** Add a new element to this sequence, before the current element (if any).
 * If the new element would take this sequence beyond its current capacity,
 * then the capacity is increased before adding the new element.
 * @param element
@@ -21,4 +20,10 @@ ensureCapacity(manyItems + 1);
 
 for(int i = manyItems; i > currentIndex; i--) {
 data[i] = data[i-1];
+}
+data[currentIndex] = element;
+
+manyItems++;
+
+assert wellFormed() : "invariant failed at end of insert";
 }

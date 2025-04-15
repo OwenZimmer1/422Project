@@ -1,9 +1,9 @@
-/** A method to compare two objects.
-* This method is superseded by Objects.equals
-* @param o1 one object, may be null
-* @param o2 another object, may be null
-* @return whether they are equal (both null, or usign equals).
+/*** Return an iterator that starts at the given element, or the next
+* available element from the set.
+* @param start starting element (or element before starting element,
+* if the start isn't in the set), must not be null
+* @return iterator starting "in the middle" (never null)
 */
-private static boolean eq(Object o1, Object o2) {
-return (o1 == null ? o2 == null : o1.equals(o2));
+public Iterator<String> iterator(String start) {
+return new MyIterator(start);
 }

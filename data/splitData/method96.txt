@@ -1,7 +1,3 @@
-/** Gets the progress bar.
-* Creates and initializes it if necessary.
-* @return the progress bar */
-public JProgressBar getBar(){
-if (bar == null) createProgressBar();
-return bar;
-}
+/**Gets the name.
+* @return the name */
+public String getName(){return name;}

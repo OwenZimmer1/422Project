@@ -1,10 +1,11 @@
-/**
-* Gets the [lexicographically] least string in the lexicon.
-* @return the least string or null if empty
+/*** Accept into the consumer all strings that start with the given prefix.
+* @param consumer the consumer to accept the strings
+* @param prefix the prefix to find all strings starting with
+* @throws NullPointerException if consumer or prefix is null
 */
-public String getMin() {
-assert wellFormed() : "invariant false at start of getMin()";
-Iterator<String> it = iterator();
-if(it.hasNext()) return it.next();
-return null;
+public void consumeAllWithPrefix(Consumer<String> consumer, String prefix) {
+// TODO: Implement this to call the helper after preliminary checks (if any)
+if(prefix == null) throw new NullPointerException("prefix is null");
+if(consumer == null) throw new NullPointerException("consumer is null");
+consumeAllHelper(consumer, prefix, root);
 }

@@ -1,5 +1,4 @@
-/**
-* If ball is active: moves location by the current movement.
+/*** If ball is active: moves location by the current movement.
 * If ball is not active: rotates vector by Math.PI/24.
 */
 public void step(){
@@ -7,4 +6,7 @@ if(active == true) {
 double x = this.getLoc().x() + this.getMove().dx();
 double y = this.getLoc().y() + this.getMove().dy();
 this.location = new Point(x, y);
+}
+else
+this.move = this.getMove().rotate(Math.PI/24);
 }

@@ -1,10 +1,15 @@
-/**
-* Used to report an error found when checking the invariant.
-* By providing a string, this will help debugging the class if the invariant should fail.
-* @param error string to print to report the exact error found
-* @return false always
+/*** Checks if the given string is in the lexicon.
+* @param str the string to search for (maybe null)
+* @return true if str is in the lexicon, false otherwise
 */
-private boolean report(String error) {
-reporter.accept(error);
+public boolean contains(String str) {
+assert wellFormed() : "invariant false at start of contains()";
+if(str == null) return false;
+Node source = root;
+while(source != null) {
+if(source.string.compareTo(str) > 0) source = source.left;
+else if(source.string.compareTo(str) < 0) source = source.right;
+else return true;
+}
 return false;
 }

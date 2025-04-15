@@ -1,5 +1,4 @@
-/**
-* Remove the current element from this sequence.
+/*** Remove the current element from this sequence.
 * @param - none
 * @precondition
 *   isCurrent() returns true.
@@ -21,4 +20,8 @@ if(!isCurrent()) throw new IllegalStateException("No current element");
 
 for(int i = currentIndex; i < manyItems-1; i++) {
 data[i] = data[i+1];
+}
+data[manyItems-1] = null;
+manyItems--;
+assert wellFormed() : "invariant failed at end of removeCurrent";
 }

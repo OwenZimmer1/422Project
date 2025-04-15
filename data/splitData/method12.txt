@@ -1,5 +1,4 @@
-/**
-* gets y value
+/*** gets y value
 *
 * @return current y value
 */
