@@ -1,0 +1,51 @@
+/** Adds a new process to the end of the queue.
+*
+* @param p process to add to the end of this queue
+* @throws NullPointerException if the process to add is null
+* @throws IllegalArgumentException if the process is already in another queue
+*
+* @return true always
+* @see java.util.Queue#offer(java.lang.Object)
+*/
+@Override
+public boolean offer(Process p) {
+assert wellFormed() : "invariant failed at start of offer";
+if(p == null) throw new NullPointerException("Can't put null in list");
+if(p.next != null || p.prev != null) throw new IllegalArgumentException("Item already in queue");
+
+p.next = dummy;
+p.prev = dummy.prev;
+dummy.prev = p;
+p.prev.next = p;
+version++;
+manyItems++;
+assert wellFormed() : "invariant failed at end of offer";
+return true;
+}
+
+/** Add all processes from parameter queue into the back of this queue.
+*  The parameter queue should be empty after this method,
+* except if the parameter is the same as this, in which case, nothing happens.
+* @param pq the queue from which to take all processes, must not be null
+*/
+public void takeAll(Queue pq) {
+assert wellFormed() : "invariant failed at start of takeAll";
+if(pq == null) throw new NullPointerException("Queue is empty");
+if(pq.manyItems == 0) return;
+if(this == pq) return;
+
+pq.dummy.prev.next = dummy;
+pq.dummy.next.prev = dummy.prev;
+dummy.prev.next = pq.dummy.next;
+dummy.prev = pq.dummy.prev;
+pq.dummy.prev = pq.dummy.next= pq.dummy;
+
+manyItems += pq.manyItems;
+pq.manyItems = 0;
+
+version++;
+pq.version++;
+
+assert wellFormed() : "invariant failed at end of takeAll";
+assert pq.wellFormed() : "parameter queue invariant failed at end of takeAll";
+}

@@ -1,0 +1,10 @@
+/**
+* Remove this item from its list.
+* This player will be completely disconnected from any other players.
+*/
+public void remove() {
+// TODO: Implement this method.  No loops or recursion required.
+if(prev != null && next != null) {
+prev.next = next;
+next.prev = prev;
+}

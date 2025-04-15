@@ -1,0 +1,10 @@
+/**
+* finds the distance between 2 points
+*
+* @param point the point that will be found the distance from
+* @return the distance between two points
+*/
+public double distance(Point point) {
+Vector temp = new Vector(this, point);
+return temp.magnitude();
+}

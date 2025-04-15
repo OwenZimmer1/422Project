@@ -1,0 +1,3 @@
+/** Gets this player's score.
+* @return the score */
+public int getScore() {return score;}

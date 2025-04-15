@@ -1,0 +1,19 @@
+/**
+* Assuming all the players before this one are sorted correctly
+* according to the priority and come before this one,
+* ensure that the ones coming after are also sorted correctly.
+* @param c comparator to use, must not be null
+*/
+public void sortByPriority(Comparator<Player> c) {
+// TODO: Implement this method.  Use a loop here and then recursion
+// when everything OK up to the next one.
+
+if(next == null) return;
+
+Player unsorted = next;
+next.remove();
+addInPriority(unsorted, c);
+if(next == unsorted) next.sortByPriority(c);
+else sortByPriority(c);
+
+}

@@ -1,0 +1,17 @@
+/**
+* Checks if ball is at or outside BOUNDS dimension and moving further out,
+* and reflects movement if so.  If the ball isn't moving further out, the
+* movement isn't reflected.
+* @param bounds dimension of area to check (all four walls), must not be null
+*/
+public void bounceWalls(Dimension bounds) {
+if((this.getLoc().x() + this.getRadius() >= bounds.getWidth()) && this.getMove().dx() > 0)
+this.move = new Vector(-1*this.getMove().dx(), this.getMove().dy());
+if((this.getLoc().y() + this.getRadius() >= bounds.getHeight()) && this.getMove().dy() > 0)
+this.move = new Vector(this.getMove().dx(), -1*this.getMove().dy());
+if((this.getLoc().x() - this.getRadius() <= 0) && this.getMove().dx() < 0)
+this.move = new Vector(-1*this.getMove().dx(), this.getMove().dy());
+if((this.getLoc().y() - this.getRadius() <= 0) && this.getMove().dy() < 0)
+this.move = new Vector(this.getMove().dx(), -1*this.getMove().dy());
+
+}

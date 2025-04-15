@@ -1,0 +1,9 @@
+/**
+* Finds the magnitude of this vector.
+*
+* @return how long this vector is (never negative).
+*/
+public double magnitude(){
+double temp = this.dx() * this.dx() + this.dy() * this.dy();
+return Math.sqrt(temp);
+}

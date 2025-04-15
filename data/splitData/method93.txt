@@ -1,0 +1,66 @@
+/**
+* Generate a copy of this sequence.
+* @param - none
+* @return
+*   The return value is a copy of this sequence. Subsequent changes to the
+*   copy will not affect the original, nor vice versa.
+*   Whatever was current in the original object is now current in the clone.
+* @exception OutOfMemoryError
+*   Indicates insufficient memory for creating the clone.
+**/
+@SuppressWarnings("unchecked")
+public LinkedSequence<E> clone( )
+{
+assert wellFormed() : "invariant wrong at start of clone()";
+
+LinkedSequence<E> result;
+
+try
+{
+result = (LinkedSequence<E>) super.clone( );
+}
+catch (CloneNotSupportedException e)
+{
+// This exception should not occur. But if it does, it would probably
+// indicate a programming error that made super.clone unavailable.
+// The most common error would be forgetting the "Implements Cloneable"
+// clause at the start of this class.
+throw new RuntimeException
+("This class does not implement Cloneable");
+}
+
+Node<E> cursor = new Node<>(tail.data, tail.next);
+result.tail = cursor;
+Node<E> source = tail.next;
+while(source != tail) {
+cursor.next = new Node<E>(source.data, source.next);
+if(source == precursor) result.precursor = cursor.next;
+cursor = cursor.next;
+source = source.next;
+}
+cursor.next = result.tail;
+result.tail.next.data = (E)result.tail.next;
+if(source == precursor) result.precursor = cursor.next;
+
+
+// TODO: Implemented by student.
+// Now do the hard work of cloning the list.
+// Similar to Homework #4, setting result.precursor requires an "if"
+// It's possible to handle the dummy without a second if or an unsafe cast.
+// but it's OK to have a second if and/or a cast to handle this.
+assert wellFormed() : "invariant wrong at end of clone()";
+assert result.wellFormed() : "invariant wrong for result of clone()";
+return result;
+}
+
+/**
+* Instantiates a new process.
+*
+* @param name the name of the process, must not be null
+* @param totalIns the total instructions of the process
+*/
+public Process(String name, int totalIns) {
+if (name == null) throw new NullPointerException("name must not be null");
+this.name = name;
+this.totalInstructions = totalIns;
+}

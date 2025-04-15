@@ -1,0 +1,8 @@
+/**
+* Getter for deltax field.
+*
+* @return the current deltax value
+*/
+public double dx(){
+return this.deltax;
+}

@@ -1,0 +1,7 @@
+/** Instantiates a new driver, loading lexicon from file.
+* @param name the name of the file */
+public Driver(String name) {
+lexicon = new Lexicon();
+filename = name;
+in = new Scanner(System.in);
+}

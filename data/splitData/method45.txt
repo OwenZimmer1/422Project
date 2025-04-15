@@ -1,0 +1,6 @@
+/**
+* Sets the current image.
+*
+* @param img the new player image
+*/
+public void setImg(BufferedImage img){playerImg = img;}

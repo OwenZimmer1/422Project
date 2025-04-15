@@ -1,0 +1,9 @@
+/**
+* Instantiates a new unit vector with specified angle.
+*
+* @param theta the angle to construct, in radians
+*/
+public Vector(double theta){
+this.deltax = Math.cos(theta);
+this.deltay = Math.sin(theta);
+}

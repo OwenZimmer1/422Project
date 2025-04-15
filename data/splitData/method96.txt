@@ -1,0 +1,7 @@
+/** Gets the progress bar.
+* Creates and initializes it if necessary.
+* @return the progress bar */
+public JProgressBar getBar(){
+if (bar == null) createProgressBar();
+return bar;
+}

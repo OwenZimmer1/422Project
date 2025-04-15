@@ -1,0 +1,13 @@
+/**
+* Instantiates a new Player.
+* @param name the name of the player, must not be null
+* @param score how many points this player has scored
+* @param position the position of the player, where null means can play ANY position
+*/
+public Player(String name, int score, Position position) {
+if (name == null) throw new NullPointerException("name cannot be null");
+this.name = name;
+this.position = position;
+checkParameter("score",score);
+this.score = score;
+}

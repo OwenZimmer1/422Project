@@ -1,0 +1,12 @@
+/**
+* Create an empty sequence.
+* @param - none
+* @postcondition
+*   This sequence is empty
+**/
+public LinkedSequence( )
+{
+tail = precursor = new Node<E>();
+size = 0;
+assert wellFormed() : "invariant failed in constructor";
+}

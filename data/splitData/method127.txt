@@ -1,0 +1,8 @@
+/**
+* Start the iterator at this element, or at the first element after it
+* (if any).
+* @param initial string to start at, must not be null
+*/
+public MyIterator(String initial) {
+// TODO Set up an iterator starting with given (non-null) string.
+// NB: Do not attempt to use {@link #getNext}

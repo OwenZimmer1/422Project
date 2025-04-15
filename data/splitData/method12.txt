@@ -1,0 +1,8 @@
+/**
+* gets y value
+*
+* @return current y value
+*/
+public double y() {
+return this.y;
+}

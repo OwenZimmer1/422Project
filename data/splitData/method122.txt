@@ -1,0 +1,10 @@
+/**
+* Gets the [lexicographically] least string in the lexicon.
+* @return the least string or null if empty
+*/
+public String getMin() {
+assert wellFormed() : "invariant false at start of getMin()";
+Iterator<String> it = iterator();
+if(it.hasNext()) return it.next();
+return null;
+}

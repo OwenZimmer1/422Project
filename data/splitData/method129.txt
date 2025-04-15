@@ -1,0 +1,23 @@
+/**
+* Count all the nodes in this subtree,
+* while checking that all the keys are all in the range (lo,hi),
+* and that the keys are arranged in BST form,
+* and that the node are linked in-order.
+* If a problem is found, -1 is returned and exactly one problem is reported.
+* <p>
+* @param n the root of the subtree to check
+* @param lo if non-null then all strings in the subtree rooted
+* 				at n must be [lexicographically] greater than this parameter
+* @param hi if non-null then all strings in the subtree rooted
+* 				at n must be [lexicographically] less than this parameter
+* @param first the node that should be first in this tree, or if the tree
+*        is empty, then this should be the next node
+* @param next the node that should be linked next after this subtree.
+* @return number of nodes in the subtree, or -1 is there is a problem.
+*/
+private int checkInRange(Node n, String lo, String hi, Node first, Node next)
+{
+if(n == null) {
+if(first != next) return reportNeg("tree out of order");
+return 0;
+}

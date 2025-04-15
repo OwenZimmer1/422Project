@@ -1,0 +1,18 @@
+/**
+* Some elements of the players may have changed the
+* way the players are ordered.  This method
+* reorders the list to fix things up.
+* This will use insertion sort for efficiency.
+* In particular if only a constant number of players
+* are in the wrong position, this method will take linear time.
+* If the priority ends up as "perverse" (something shows up
+* before the dummy) we discard all team members.
+* (This is not actually ideal for an ADT.)
+*/
+public void refreshPriority() {
+assert wellFormed() : "invariant broken before refresh priority";
+dummy.sortByPriority(priority);
+if (dummy.getPrevious() != null) {
+// Suddenly the priority shows up as perverse.
+dummy.remove(); // actually removes everyone else.
+}

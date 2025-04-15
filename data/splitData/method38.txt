@@ -1,0 +1,23 @@
+/**
+* Change the current capacity of this sequence if needed.
+* @param minimumCapacity
+*   the new capacity for this sequence
+* @postcondition
+*   This sequence's capacity has been changed to at least minimumCapacity.
+*   If the capacity was already at or greater than minimumCapacity,
+*   then the capacity is left unchanged.
+*   If the capacity is changed, it must be at least twice as big as before.
+* @exception OutOfMemoryError
+*   Indicates insufficient memory for: new array of minimumCapacity elements.
+**/
+private void ensureCapacity(int minimumCapacity)
+{
+if(data.length >= minimumCapacity) return;
+
+int newSize = data.length * 2;
+if (newSize < minimumCapacity) newSize = minimumCapacity;
+
+Ball[] newArray = new Ball[newSize];
+for(int i = 0; i < data.length; i++) {
+newArray[i] = data[i];
+}

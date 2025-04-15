@@ -1,0 +1,12 @@
+/**
+* Determine the number of elements in this sequence.
+* @param - none
+* @return
+*   the number of elements in this sequence
+**/
+public int size( )
+{
+assert wellFormed() : "invariant failed at start of size";
+
+return manyItems;
+}

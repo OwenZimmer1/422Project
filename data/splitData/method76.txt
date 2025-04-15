@@ -1,0 +1,11 @@
+/**
+* Compute the number of players.
+* @return number of players
+*/
+public int size() {
+assert wellFormed() : "invariant fails at beginning of size";
+
+int count = 0;
+for(Player source = dummy.getNext(); source != null; source = source.getNext()) {
+count++;
+}

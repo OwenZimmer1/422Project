@@ -1,0 +1,10 @@
+/**
+* Used to report an error found when checking the invariant.
+* By providing a string, this will help debugging the class if the invariant should fail.
+* @param error string to print to report the exact error found
+* @return false always
+*/
+private static boolean report(String error) {
+reporter.accept(error);
+return false;
+}

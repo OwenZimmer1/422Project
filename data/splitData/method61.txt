@@ -1,0 +1,5 @@
+/**
+* Gets a single instance of Nondiscrimination comparator.
+* @return a single instance of Nondiscrimination comparator
+*/
+public static Comparator<Player> getInstance() { return instance; }

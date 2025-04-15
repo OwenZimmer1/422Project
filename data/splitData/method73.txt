@@ -1,0 +1,15 @@
+/**
+* Adds a Player to this Team.
+* It should be added according to the priority of the team.
+* @param t the Player to add, must not be null and must not be in another team.
+* @throws IllegalArgumentException if the player is already in a team or if the added player would come before the
+* the dummy player (a player with an empty name, highest score possible and null position).
+*/
+public void add(Player t) {
+assert wellFormed() : "invariant fails at beginning of add";
+if(t.getNext() != null || t.getPrevious() != null) throw new IllegalArgumentException("Player already in team");
+
+dummy.addInPriority(t, priority);
+
+assert wellFormed() : "invariant fails at end of add";
+}

@@ -1,0 +1,6 @@
+/**
+* Increases the player's radius.
+*
+* @see DodgeBall.makeHarder()
+*/
+public void grow(){radius += 2;}

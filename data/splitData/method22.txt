@@ -1,0 +1,9 @@
+/**
+* Adds the parameter vector with this vector.
+*
+* @param v the vector to add
+* @return the vector sum
+*/
+public Vector add(Vector v){
+return new Vector(this.dx() + v.dx(), this.dy() + v.dy());
+}

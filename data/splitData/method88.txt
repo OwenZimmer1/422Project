@@ -1,0 +1,18 @@
+/**
+* Accessor method to get the current element of this sequence.
+* @param - none
+* @precondition
+*   isCurrent() returns true.
+* @return
+*   the current element of this sequence
+* @exception IllegalStateException
+*   Indicates that there is no current element, so
+*   getCurrent may not be called.
+**/
+public E getCurrent( )
+{
+assert wellFormed() : "invariant wrong at start of getCurrent()";
+if(!isCurrent()) throw new IllegalStateException("no current element");
+
+return precursor.next.data;
+}

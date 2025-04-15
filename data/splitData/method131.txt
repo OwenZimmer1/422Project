@@ -1,0 +1,21 @@
+/**
+* Look for the node for a particular key, creating it if requested
+* if it doesn't exist.
+* @param r subtree to look for the key, may be null
+* @param key key to look for for, must not be null
+* @param create whether to create a node with count 0 if not in tree
+* @param before the node before the first node in this subtree, must not be null
+* @return node with this key, or null if it is not present and create is false
+*/
+private Node getNode(Node r, String key, boolean create, Node before) {
+if(r == null) {
+if(!create) return null;
+Node n = new Node(key);
+n.count--;
+n.next = before.next;
+if(before.right == null) before.right = n;
+else {
+Node source = before.right;
+while (source.left != null) source = source.left;
+source.left = n;
+}

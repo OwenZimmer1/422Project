@@ -1,0 +1,13 @@
+/**
+* Find the node with the given key, creating it if necessary
+* (but only if "create" is true).  If create is true, then
+* the data structure invariant will be temporarily false
+* due to the node with a zero count.  The caller must address
+* the issue immediately.
+* @param key word to look for, must not be null
+* @param create whether to create a node with count=0 if not present.
+* @return node, or null if not present (and create is false)
+*/
+private Node getNode(String key, boolean create) {
+return getNode(dummy.right, key, create, dummy);
+}

@@ -1,0 +1,11 @@
+/**
+* Returns team's total score
+* @return the sum of all player's scores on this team
+*/
+public int totalScore() {
+assert wellFormed() : "invariant fails at beginning of totalScore";
+int score = 0;
+//TODO implement totalScore (don't use the dummy player!)
+for(Player source = dummy.getNext(); source != null; source = source.getNext()) {
+score += source.getScore();
+}

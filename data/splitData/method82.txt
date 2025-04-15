@@ -1,0 +1,4 @@
+/** Return the dummy node from the data structure since we do not have a dummy field. */
+private Node<E> getDummy() {
+return tail.next; // TODO
+}

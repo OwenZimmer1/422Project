@@ -1,0 +1,11 @@
+/**
+* constructor
+* @param manyItems: number of items
+*/
+public BallCollection(int manyItems) {
+data = new Ball[manyItems];
+this.manyItems = manyItems;
+version = 0;
+
+assert wellFormed() : "invariant failed at end of constructor";
+}

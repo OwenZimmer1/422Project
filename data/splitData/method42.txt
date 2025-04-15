@@ -1,0 +1,6 @@
+/**
+* default constructor for default capacity of zero
+*/
+public BallCollection() {
+this(INITIAL_CAPACITY);
+}

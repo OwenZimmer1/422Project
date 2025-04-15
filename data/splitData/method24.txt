@@ -1,0 +1,9 @@
+/**
+* Scales this vector by the parameter.
+*
+* @param s the constant to scale by
+* @return the scaled vector
+*/
+public Vector scale(double s){
+return new Vector(s * this.dx(), s * this.dy());
+}

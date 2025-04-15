@@ -1,0 +1,22 @@
+/**
+* Convert a CLL to a string.
+* A problem is signified by a string without a proper ending paren.
+* Use this for debugging.
+* @param tail CLL
+* @return string picture of a CLL
+*/
+private static <E> String CLLtoString(Node<E> tail) {
+if (tail == null) return "<NULL>";
+Node<E> dummy = tail.next;
+if (dummy == tail) return "()";
+if (dummy == null) return "<NO DUMMY>";
+if (dummy.data != null) return "<DUMMY " + dummy.data + ">";
+Node<E> head = dummy.next;
+StringBuilder sb = new StringBuilder();
+Node<E> fast = head.next;
+while (head != dummy) {
+if (head == null) return sb.toString(); // no closing paren
+if (head == fast) {
+System.out.println("...");
+return sb.toString();
+}

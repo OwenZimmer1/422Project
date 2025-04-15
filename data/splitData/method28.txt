@@ -1,0 +1,11 @@
+/**
+* Rotates this vector clockwise by the parameter angle (in radians).
+*
+* @param theta the angle to rotate (in radians)
+* @return the rotated vector
+*/
+public Vector rotate(double theta){
+double angle = this.theta() + theta;
+Vector v = new Vector(angle);
+return v.scale(this.magnitude());
+}

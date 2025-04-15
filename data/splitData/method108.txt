@@ -1,0 +1,12 @@
+/**
+* Check the invariant.
+* Returns false if any problem is found.
+* @return whether invariant is currently true.
+* If false is returned then exactly one problem has been reported.
+*/
+private boolean wellFormed() {
+int sizeGuess = checkInRange(root, null, null);
+if(sizeGuess == -1) return false;
+if(sizeGuess != manyNodes) return report("manyNodes is wrong");
+return true;
+}

@@ -1,0 +1,35 @@
+/**
+* Count all the nodes in this subtree,
+* while checking that all the keys are all in the range (lo,hi),
+* and that the keys are arranged in BST form.
+* If a problem is found, -1 is returned and exactly one problem is reported.
+* <p>
+* @param n the root of the subtree to check
+* @param lo if non-null then all strings in the subtree rooted
+* 				at n must be [lexicographically] greater than this parameter
+* @param hi if non-null then all strings in the subtree rooted
+* 				at n must be [lexicographically] less than this parameter
+* @return number of nodes in the subtree, or -1 is there is a problem.
+*/
+private int checkInRange(Node n, String lo, String hi)
+{
+//must account for checking an empty list or leaf's links
+if (n == null) return 0;
+if (n.string == null) return reportNeg("null word found");
+
+//first check node r
+if (lo != null && (n.string.equals(lo) || n.string.compareTo(lo) < 0))
+return reportNeg("Detected node outside of low bound: "+n.string);
+if (hi != null && (n.string.equals(hi) || n.string.compareTo(hi) > 0))
+return reportNeg("Detected node outside of high bound: "+n.string);
+
+//check subtrees
+int leftSubtree =  checkInRange(n.left, lo, n.string);
+if (leftSubtree < 0) return -1;
+
+int rightSubtree = checkInRange(n.right, n.string, hi);
+if (rightSubtree < 0) return -1;
+
+//otherwise return 1 + nodes in subtrees
+return 1 + leftSubtree + rightSubtree;
+}

@@ -1,0 +1,9 @@
+/**
+* Translates the parameter point by this vector.
+*
+* @param p the point to translate
+* @return the  translated point
+*/
+public Point move(Point p){
+return new Point(p.x() + this.dx(), p.y() + this.dy());
+}

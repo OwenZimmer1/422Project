@@ -1,0 +1,12 @@
+/**
+* Change the priority for this list of players,
+* and then make sure the order reflects the new priority.
+* @param p priority to use, must not be null.
+*/
+public void setPriority(Comparator<Player> p) {
+assert wellFormed() : "invariant broken before set priority";
+if (p == null) throw new NullPointerException("need a priority!");
+priority = p;
+refreshPriority();
+assert wellFormed() : "invariant failed during set priority";
+}

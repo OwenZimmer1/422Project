@@ -1,0 +1,12 @@
+/**
+* Update the player's location.
+*
+* @param mouseLoc the current [adjusted] mouse location
+*/
+public void update(Point mouseLoc){
+int new_x = Math.max(radius, mouseLoc.intX());
+int new_y = Math.max(radius, mouseLoc.intY());
+new_x = Math.min(new_x, DodgeBall.BOUNDS.width -radius);
+new_y = Math.min(new_y, DodgeBall.BOUNDS.height - radius);
+location = new Point(new_x, new_y);
+}

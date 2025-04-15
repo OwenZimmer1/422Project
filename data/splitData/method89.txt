@@ -1,0 +1,22 @@
+/**
+* Move forward, so that the current element is now the next element in
+* this sequence.
+* @param - none
+* @precondition
+*   isCurrent() returns true.
+* @postcondition
+*   If the current element was already the end element of this sequence
+*   (with nothing after it), then there is no longer any current element.
+*   Otherwise, the new element is the element immediately after the
+*   original current element.
+* @exception IllegalStateException
+*   Indicates that there is no current element, so
+*   advance may not be called.
+**/
+public void advance( )
+{
+assert wellFormed() : "invariant wrong at start of advance()";
+if(!isCurrent()) throw new IllegalStateException("no current element");
+precursor = precursor.next;
+assert wellFormed() : "invariant wrong at end of advance()";
+}

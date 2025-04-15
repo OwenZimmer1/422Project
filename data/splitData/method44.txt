@@ -1,0 +1,6 @@
+/**
+* Instantiates a new player.
+*
+* @param loc the initial location
+*/
+public Player(Point loc){location=loc;radius = DodgeBall.PLAYER_RADIUS;}

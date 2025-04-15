@@ -1,0 +1,30 @@
+/**
+* Place the contents of another sequence (which may be the
+* same one as this!) into this sequence before the current element (if any).
+* @param addend
+*   a sequence whose contents will be placed into this sequence
+* @precondition
+*   The parameter, addend, is not null.
+* @postcondition
+*   The elements from addend have been placed into
+*   this sequence. The current element of this sequence (if any)
+*   is unchanged.  The addend is unchanged.
+* @exception NullPointerException
+*   Indicates that addend is null.
+* @exception OutOfMemoryError
+*   Indicates insufficient memory to increase the size of this sequence.
+**/
+public void insertAll(LinkedSequence<E> addend) {
+
+assert wellFormed() : "invariant failed at start of addAll";
+if(addend == null) throw new NullPointerException("addend is null");
+if(addend.size == 0) return;
+
+LinkedSequence<E> clone = addend.clone();
+if(size == 0) {
+Node<E> cloneHead = clone.getHead();
+clone.tail.next = precursor.next;
+precursor.next = cloneHead;
+precursor = clone.tail;
+tail = clone.tail;
+}

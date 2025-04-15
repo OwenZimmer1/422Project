@@ -1,0 +1,16 @@
+/**
+* Remove one copy of a word from the multiset.
+* If there are multiple copies, then we just adjust the count,
+* and the map is unaffected (iterators don't go stale).
+* @param str string to remove one of, may be null (but ignored if so)
+* @return true if the word was in the multiset.
+*/
+public boolean removeOne(String str) {
+assert wellFormed() : "invariant false at start of removeOne";
+boolean result = false;
+if(str == null) return false;
+
+int i = hash(str, false);
+if(isOpen(i)) {
+return false;
+}

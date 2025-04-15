@@ -1,0 +1,10 @@
+/**
+* Create a sorted collection with the natural comparator,
+* and with all the elements from the given collection
+* @param from collection to get elements from, must not be null
+*/
+public SortedCollection(Collection<? extends E> from) {
+this();
+addAll(from);
+assert wellFormed() : "invariant failed at end of constructor";
+}

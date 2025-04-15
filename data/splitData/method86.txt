@@ -1,0 +1,16 @@
+/**
+* Set the current element at the front of this sequence.
+* @param - none
+* @postcondition
+*   The front element of this sequence is now the current element (but
+*   if this sequence has no elements at all, then there is no current
+*   element).
+**/
+public void start( )
+{
+assert wellFormed() : "invariant wrong at start of start()";
+
+precursor = getDummy();
+
+assert wellFormed() : "invariant wrong at end of start()";
+}

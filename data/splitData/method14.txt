@@ -1,0 +1,8 @@
+/**
+* gets y value to nearest integer
+*
+* @return y value to nearest integer
+*/
+public int intY() {
+return (int)Math.round(this.y());
+}

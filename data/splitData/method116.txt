@@ -1,0 +1,28 @@
+/**
+* Add all strings in the array into this lexicon from the range [lo,hi).
+* The elements are added recursively from the middle, so that
+* if the array was sorted, the tree will be balanced.
+* All the tree mutations are done by add.
+* Return number of strings actually added; some might not be added
+* if they are duplicates.
+* @param array source
+* @param lo index lower bound
+* @param hi index upper bound
+* @return number of strings added
+* @throws NullPointerException if array is null
+*/
+public int addAll(String[] array, int lo, int hi) {
+assert wellFormed() : "invariant false at start of addAll()";
+// TODO: Implement this method (be efficient!)
+if(lo == hi) return 0;
+int count = 0;
+int mid = (hi - lo) / 2 + lo;
+if(add(array[mid])) count++;
+count += addAll(array, lo, mid);
+count += addAll(array, mid + 1, hi);
+
+// NB: As long as you never touch any fields directly (or call private methods)
+// you shouldn't *need* to check the invariant. We will anyway.
+assert wellFormed() : "invariant false at end of addAll()";
+return count++;
+}

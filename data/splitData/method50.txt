@@ -1,0 +1,16 @@
+/**
+* Create an empty sequence
+* @param - none
+* @postcondition
+*   This sequence is empty
+**/
+public BallSeq( )
+{
+manyNodes = 0;
+head = null;
+tail = null;
+cursor = null;
+precursor = null;
+
+assert wellFormed() : "invariant failed in constructor";
+}

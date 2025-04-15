@@ -1,11 +1,3 @@
-public Ball(Point loc, Vector vector, Color col){
-location = loc;
-radius = DEFAULT_RADIUS;
-move = vector;
-color = col;
-active = false;
-}
-
 /**
 * Gets the location.
 *
