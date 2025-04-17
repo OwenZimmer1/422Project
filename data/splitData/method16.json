@@ -1,0 +1,3 @@
+{
+  "method": "/*** Instantiates a new vector with specified delta values.\n*\n* @param dx the initial deltax value\n* @param dy the initial deltay value\n*/\npublic Vector(double dx, double dy){\nthis.deltax = dx;\nthis.deltay = dy;\n}"
+}

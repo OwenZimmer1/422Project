@@ -1,0 +1,3 @@
+{
+  "method": "/*** Gets a single instance of Nondiscrimination comparator.\n* @return a single instance of Nondiscrimination comparator\n*/\npublic static Comparator<Player> getInstance() { return instance; }"
+}

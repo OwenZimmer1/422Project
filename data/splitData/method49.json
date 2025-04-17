@@ -1,0 +1,3 @@
+{
+  "method": "/*** Draws the player.\n*\n* @param g the Graphics context on which to draw\n*/\npublic void draw(Graphics g){\ng.drawImage(playerImg,\nlocation.intX() - radius, location.intY() - radius,\nradius*2, radius*2, null);\n}"
+}

@@ -1,3 +1,0 @@
-/**Gets the next player.
-* @return the next player */
-public Player getNext() {return next;}

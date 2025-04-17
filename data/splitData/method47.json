@@ -1,0 +1,3 @@
+{
+  "method": "/*** Checks if colliding with parameter ball.\n*\n* @param b the ball\n* @return true if colliding\n*/\npublic boolean isColliding(Ball b){\nreturn DodgeBall.MORTAL && location.distance(b.getLoc()) <= (radius + b.getRadius());}"
+}

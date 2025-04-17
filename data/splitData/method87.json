@@ -1,0 +1,3 @@
+{
+  "method": "/*** Accessor method to determine whether this sequence has a specified\n* current element that can be retrieved with the\n* getCurrent method.\n* @param - none\n* @return\n*   true (there is a current element) or false (there is no current element at the moment)\n**/\npublic boolean isCurrent( )\n{\nassert wellFormed() : \"invariant wrong at start of getCurrent()\";\n// TODO: Implemented by student.\n// This method shouldn't modify any fields, hence no assertion at end\nreturn precursor != tail;\n}"
+}

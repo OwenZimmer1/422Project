@@ -1,0 +1,3 @@
+{
+  "method": "/**Perform a single instruction of the process. */\npublic void performInstruction(){\nif (!isDone())\nfinishedInstructions++;\n}"
+}

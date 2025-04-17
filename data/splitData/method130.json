@@ -1,0 +1,3 @@
+{
+  "method": "/*** Gets the [lexicographically] least string in the lexicon.\n* @return the least string or null if empty\n*/\npublic String getMin() {\nassert wellFormed() : \"invariant false at start of getMin()\";\nIterator<String> it = iterator();\nif(it.hasNext()) return it.next();\nreturn null;\n}"
+}

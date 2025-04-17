@@ -1,0 +1,3 @@
+{
+  "method": "/**Instantiates a new driver, loading lexicon from file.\n* @param name the name of the file */\npublic Driver(String name) {\nlexicon = new Lexicon();\nfilename = name;\nin = new Scanner(System.in);\n}"
+}

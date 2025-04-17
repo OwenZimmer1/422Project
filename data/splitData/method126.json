@@ -1,0 +1,3 @@
+{
+  "method": "/*** Return an array of all the strings in this lexicon (in order).\n* @param array to use unless null or too small\n* @return array copied into\n*/\npublic String[] toArray(String[] array) {\nassert wellFormed() : \"invariant false at the start of toArray()\";\nif(array == null || array.length < manyNodes) {\nString[] array2 = new String[manyNodes];\ncopyInto(array2, root, 0);\nreturn array2;\n}else {\ncopyInto(array, root, 0);\nreturn array;\n}\n\n}"
+}

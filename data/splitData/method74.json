@@ -1,0 +1,3 @@
+{
+  "method": "/*** Change the priority for this list of players,\n* and then make sure the order reflects the new priority.\n* @param p priority to use, must not be null.\n*/\npublic void setPriority(Comparator<Player> p) {\nassert wellFormed() : \"invariant broken before set priority\";\nif (p == null) throw new NullPointerException(\"need a priority!\");\npriority = p;\nrefreshPriority();\nassert wellFormed() : \"invariant failed during set priority\";\n}"
+}

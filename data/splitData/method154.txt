@@ -1,7 +1,0 @@
-/*** Return the stack that results from pushing another element on top.
-* @param val element to push
-* @return new stack resulting from pushing element
-*/
-public ImmutableStack<T> push(T val) {
-return new ImmutableStack<>(val,this);
-}

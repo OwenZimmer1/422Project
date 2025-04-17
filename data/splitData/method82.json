@@ -1,0 +1,3 @@
+{
+  "method": "/**Return the dummy node from the data structure since we do not have a dummy field. */\nprivate Node<E> getDummy() {\nreturn tail.next; // TODO\n}"
+}

@@ -1,9 +1,0 @@
-/**The main method.
-* @param args the arguments */
-public static void main(String[] args) {
-if (args.length != 1) {
-System.out.println("Usage: Main <lexicon file>");
-System.exit(1);
-}
-new Driver(args[0]).run();
-}

@@ -1,0 +1,3 @@
+{
+  "method": "/*** Gets the location.\n*\n* @return the current location\n*/\npublic Point getLoc(){return location;}"
+}

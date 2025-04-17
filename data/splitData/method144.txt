@@ -1,9 +1,0 @@
-/**A method to compare two objects.
-* This method is superseded by Objects.equals
-* @param o1 one object, may be null
-* @param o2 another object, may be null
-* @return whether they are equal (both null, or usign equals).
-*/
-private static boolean eq(Object o1, Object o2) {
-return (o1 == null ? o2 == null : o1.equals(o2));
-}

@@ -1,9 +1,0 @@
-/*** Draws the player.
-*
-* @param g the Graphics context on which to draw
-*/
-public void draw(Graphics g){
-g.drawImage(playerImg,
-location.intX() - radius, location.intY() - radius,
-radius*2, radius*2, null);
-}

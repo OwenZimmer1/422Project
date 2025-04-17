@@ -1,0 +1,3 @@
+{
+  "method": "/*** Checks if the process is completed.\n* @return true, if is done */\npublic boolean isDone(){\nreturn finishedInstructions == totalInstructions;}"
+}

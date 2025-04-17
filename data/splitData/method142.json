@@ -1,0 +1,3 @@
+{
+  "method": "/*** Add a new string to the multiset. If it already exists,\n* increase the count for the string and return false.\n* Otherwise, set the count to one and return true.\n* @param str the string to add (must not be null)\n* @return true if str was added, false otherwise\n* @throws NullPointerException if str is null\n*/\npublic boolean add(String str) {\nassert wellFormed() : \"invariant false at start of add\";\nif(str == null) throw new NullPointerException(\"String is null\");\nboolean result = false;\nNode n = getNode(str, true);\nif(n.count == 0) {\nnumEntries++;\nversion++;\nresult = true;\n}\nn.count++;\nassert wellFormed() : \"invariant false at end of add\";\nreturn result;\n}"
+}

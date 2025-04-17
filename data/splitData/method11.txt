@@ -1,7 +1,0 @@
-/*** gets x value
-*
-* @return current x value
-*/
-public double x() {
-return this.x;
-}

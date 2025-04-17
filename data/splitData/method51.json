@@ -1,0 +1,3 @@
+{
+  "method": "/*** Determine the number of elements in this sequence.\n* @param - none\n* @return\n*   the number of elements in this sequence\n**/\npublic int size( )\n{\nassert wellFormed() : \"invariant wrong at start of size()\";\n\nreturn manyNodes;\n}"
+}

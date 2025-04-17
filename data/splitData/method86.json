@@ -1,0 +1,3 @@
+{
+  "method": "/*** Set the current element at the front of this sequence.\n* @param - none\n* @postcondition\n*   The front element of this sequence is now the current element (but\n*   if this sequence has no elements at all, then there is no current\n*   element).\n**/\npublic void start( )\n{\nassert wellFormed() : \"invariant wrong at start of start()\";\n\nprecursor = getDummy();\n\nassert wellFormed() : \"invariant wrong at end of start()\";\n}"
+}

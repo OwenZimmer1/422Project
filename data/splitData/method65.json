@@ -1,0 +1,3 @@
+{
+  "method": "/**Sets the score.\n* @param the score */\npublic void setScore(int score) {this.score = score;}"
+}

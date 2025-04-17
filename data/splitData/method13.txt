@@ -1,7 +1,0 @@
-/*** gets x value to nearest integer
-*
-* @return x value to nearest integer
-*/
-public int intX() {
-return (int)Math.round(this.x());
-}

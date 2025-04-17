@@ -1,0 +1,3 @@
+{
+  "method": "/**The main method.\n* @param args the arguments */\npublic static void main(String[] args) {\nif (args.length != 1) {\nSystem.out.println(\"Usage: Main <lexicon file>\");\nSystem.exit(1);\n}\nnew Driver(args[0]).run();\n}"
+}

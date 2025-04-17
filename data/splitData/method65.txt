@@ -1,3 +1,0 @@
-/**Sets the score.
-* @param the score */
-public void setScore(int score) {this.score = score;}

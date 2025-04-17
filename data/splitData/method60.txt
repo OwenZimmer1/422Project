@@ -1,4 +1,0 @@
-/*** Gets a single instance of the comparator.
-* @return a single instance of the comparator
-*/
-public static Comparator<Player> getInstance() { return instance; }

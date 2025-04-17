@@ -1,0 +1,3 @@
+{
+  "method": "/**Returns the next process to be polled from this queue.\n*\n* @return the next process to be polled by this queue, or null if empty\n* @see java.util.Queue#peek()\n*/\n@Override\npublic Process peek(){\nassert wellFormed() : \"invariant failed at start of peek\";\nif(manyItems == 0) return null;\nreturn dummy.next;\n}"
+}

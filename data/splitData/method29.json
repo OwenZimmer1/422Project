@@ -1,0 +1,3 @@
+{
+  "method": "/*** Compute the angle of this vector, in radians,\n* clockwise from the x-axis.\n*\n* @return the angle in range [0,2Pi)\n*/\npublic double angle() {\ndouble magn = magnitude();\nif (magn == 0.0) return 0;\ndouble alpha = Math.acos(dx()/magn);\nif(dy() < 0) alpha = 2*Math.PI-alpha;\nreturn alpha;\n}"
+}

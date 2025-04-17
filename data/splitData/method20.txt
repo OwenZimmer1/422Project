@@ -1,7 +1,0 @@
-/*** Getter for deltay field.
-*
-* @return the current deltay value
-*/
-public double dy(){
-return this.deltay;
-}

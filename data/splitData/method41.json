@@ -1,0 +1,3 @@
+{
+  "method": "/*** Generate a copy of this sequence.\n* @param - none\n* @return\n*   The return value is a copy of this sequence. Subsequent changes to the\n*   copy will not affect the original, nor vice versa.\n* @exception OutOfMemoryError\n*   Indicates insufficient memory for creating the clone.\n**/\npublic BallSeq clone( )\n{  // Clone a BallSeq object.\nassert wellFormed() : \"invariant failed at start of clone\";\nBallSeq answer = new BallSeq(manyItems);\n\nanswer.currentIndex = currentIndex;\nanswer.manyItems = manyItems;\n\nfor(int i = 0; i < manyItems; i++) {\nanswer.data[i] = data[i];\n}\n\nassert wellFormed() : \"invariant failed at end of clone\";\nassert answer.wellFormed() : \"invariant failed for clone\";\n\nreturn answer;\n}"
+}

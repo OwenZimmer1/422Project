@@ -1,5 +1,0 @@
-/**Perform a single instruction of the process. */
-public void performInstruction(){
-if (!isDone())
-finishedInstructions++;
-}

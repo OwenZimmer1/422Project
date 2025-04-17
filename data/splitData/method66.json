@@ -1,0 +1,3 @@
+{
+  "method": "/**Gets this player's position.\n* @return the position */\npublic Position getPosition() {return position;}"
+}

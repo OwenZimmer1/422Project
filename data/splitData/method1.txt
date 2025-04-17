@@ -1,5 +1,0 @@
-/*** Gets the location.
-*
-* @return the current location
-*/
-public Point getLoc(){return location;}

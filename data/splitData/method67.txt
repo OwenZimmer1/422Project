@@ -1,3 +1,0 @@
-/**Gets the previous player.
-* @return the previous player */
-public Player getPrevious() {return prev;}

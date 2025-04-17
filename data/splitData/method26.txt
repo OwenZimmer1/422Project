@@ -1,8 +1,0 @@
-/*** Normalizes this vector.
-*
-* @return a vector with the same angle but magnitude of one.
-*/
-public Vector normalize(){
-double magnitude = this.magnitude();
-return new Vector(this.dx() / magnitude, this.dy() / magnitude);
-}

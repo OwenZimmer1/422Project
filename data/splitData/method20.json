@@ -1,0 +1,3 @@
+{
+  "method": "/*** Getter for deltay field.\n*\n* @return the current deltay value\n*/\npublic double dy(){\nreturn this.deltay;\n}"
+}

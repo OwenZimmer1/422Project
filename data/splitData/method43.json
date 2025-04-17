@@ -1,0 +1,3 @@
+{
+  "method": "/*** constructor\n* @param manyItems: number of items\n*/\npublic BallCollection(int manyItems) {\ndata = new Ball[manyItems];\nthis.manyItems = manyItems;\nversion = 0;\n\nassert wellFormed() : \"invariant failed at end of constructor\";\n}"
+}

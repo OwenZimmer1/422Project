@@ -1,0 +1,3 @@
+{
+  "method": "/*** gets y value\n*\n* @return current y value\n*/\npublic double y() {\nreturn this.y;\n}"
+}

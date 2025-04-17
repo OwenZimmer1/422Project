@@ -1,0 +1,3 @@
+{
+  "method": "/*** Instantiates a new process.\n*\n* @param name the name of the process, must not be null\n* @param totalIns the total instructions of the process\n*/\npublic Process(String name, int totalIns) {\nif (name == null) throw new NullPointerException(\"name must not be null\");\nthis.name = name;\nthis.totalInstructions = totalIns;\n}"
+}

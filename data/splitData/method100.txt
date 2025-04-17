@@ -1,4 +1,0 @@
-/*** Checks if the process is completed.
-* @return true, if is done */
-public boolean isDone(){
-return finishedInstructions == totalInstructions;}

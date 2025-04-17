@@ -1,3 +1,0 @@
-/*** Gets the amount of finished instructions.
-* @return the finished instructions */
-public int getFinished(){return finishedInstructions;}

@@ -1,0 +1,3 @@
+{
+  "method": "/*** Return the stack that results from popping off the top element.\n* @throws NoSuchElementException if the stack is empty\n* @return stack after popping element\n*/\npublic ImmutableStack<T> pop() {\nif (this == empty) throw new NoSuchElementException(\"empty stack\");\nreturn shorter;\n}"
+}

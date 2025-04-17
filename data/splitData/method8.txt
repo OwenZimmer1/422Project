@@ -1,8 +1,0 @@
-/*** Checks if colliding with the parameter ball.
-*
-* @param other the other ball
-* @return true if colliding
-*/
-public boolean isColliding(Ball other){
-return this.getLoc().distance(other.getLoc()) <= this.getRadius() + other.getRadius();
-}

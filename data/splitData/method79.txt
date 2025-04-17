@@ -1,7 +1,0 @@
-/*** prints this team's players
-*/
-public void printPlayers() {
-for(Player i = dummy.getNext(); i != null; i = i.getNext()) {
-System.out.println(i);
-}
-}

@@ -1,4 +1,0 @@
-/**Return the cursor from the data structure since we do not have a cursor field. */
-private Node<E> getCursor() {
-return precursor.next; // TODO
-}

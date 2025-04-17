@@ -1,0 +1,3 @@
+{
+  "method": "/*** Create a CLL from the elements in the given collection in the same order.\n* @param dummy dummy node to use, if null, a new dummy will be created\n* @param coll collection to use, must not be null, but may be empty\n* @return CLL of elements in same order\n*/\nprivate Node<E> toCLL(Node<E> dummy, Collection<? extends E> coll) {\nif (dummy == null) dummy = new Node<E>(null,null);\ndummy.next = dummy;\nNode<E> t = dummy;\nfor (E e : coll) {\nt = t.next = new Node<E>(e,dummy);\n}\nreturn t;\n}"
+}

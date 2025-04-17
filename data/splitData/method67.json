@@ -1,0 +1,3 @@
+{
+  "method": "/**Gets the previous player.\n* @return the previous player */\npublic Player getPrevious() {return prev;}"
+}

@@ -1,0 +1,3 @@
+{
+  "method": "/*** gets angle theta\n*\n* @return angle of vector off x axis\n*/\npublic double theta() {\n\nif(this.dx() == 0 && this.dy() > 0)\nreturn Math.PI/2;\nelse if(this.dx() == 0)\nreturn Math.PI * 3 / 2;\n\ndouble theta = Math.atan(this.dy() / this.dx());\nif(this.dx() < 0)\ntheta += Math.PI;\nreturn theta;\n}"
+}

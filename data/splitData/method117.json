@@ -1,0 +1,3 @@
+{
+  "method": "/**Gets the size of this lexicon.\n* @return the count of strings in this lexicon\n*/\npublic int size() {\nassert wellFormed() : \"invariant false at start of size()\";\nreturn manyNodes;\n}"
+}

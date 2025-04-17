@@ -1,0 +1,3 @@
+{
+  "method": "/*** Launches the ball by setting active to true.\n*/\npublic void launch(){active=true;}"
+}

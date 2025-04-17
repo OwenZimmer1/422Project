@@ -1,0 +1,3 @@
+{
+  "method": "/*** Accept into the consumer all strings in this lexicon.\n* @param consumer the consumer to accept the strings\n* @throws NullPointerException if consumer is null\n*/\npublic void consumeAll(Consumer<String> consumer) {\n// We don't assert the invariant, because we do nothing other than\n// call another public method.\nconsumeAllWithPrefix(consumer,\"\");\n}"
+}

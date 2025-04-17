@@ -1,5 +1,0 @@
-/*** Gets the radius.
-*
-* @return the radius
-*/
-public int getRadius(){return radius;}

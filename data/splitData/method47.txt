@@ -1,7 +1,0 @@
-/*** Checks if colliding with parameter ball.
-*
-* @param b the ball
-* @return true if colliding
-*/
-public boolean isColliding(Ball b){
-return DodgeBall.MORTAL && location.distance(b.getLoc()) <= (radius + b.getRadius());}

@@ -1,0 +1,3 @@
+{
+  "method": "/**Gets the progress bar.\n* Creates and initializes it if necessary.\n* @return the progress bar */\npublic JProgressBar getBar(){\nif (bar == null) createProgressBar();\nreturn bar;\n}"
+}

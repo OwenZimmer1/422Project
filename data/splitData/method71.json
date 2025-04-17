@@ -1,0 +1,3 @@
+{
+  "method": "/*** Remove this item from its list.\n* This player will be completely disconnected from any other players.\n*/\npublic void remove() {\n// TODO: Implement this method.  No loops or recursion required.\nif(prev != null && next != null) {\nprev.next = next;\nnext.prev = prev;\n}else if(prev != null && next == null) {\nprev.next = null;\n}else if(prev == null && next != null) {\nnext.prev = null;\n}\nnext = null;\nprev = null;\n}"
+}

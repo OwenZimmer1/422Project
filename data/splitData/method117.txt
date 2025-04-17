@@ -1,7 +1,0 @@
-/**Gets the size of this lexicon.
-* @return the count of strings in this lexicon
-*/
-public int size() {
-assert wellFormed() : "invariant false at start of size()";
-return manyNodes;
-}

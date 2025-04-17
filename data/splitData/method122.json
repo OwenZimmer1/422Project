@@ -1,0 +1,3 @@
+{
+  "method": "/*** Accept into the consumer all strings that start with the given prefix.\n* @param consumer the consumer to accept the strings\n* @param prefix the prefix to find all strings starting with\n* @throws NullPointerException if consumer or prefix is null\n*/\npublic void consumeAllWithPrefix(Consumer<String> consumer, String prefix) {\n// TODO: Implement this to call the helper after preliminary checks (if any)\nif(prefix == null) throw new NullPointerException(\"prefix is null\");\nif(consumer == null) throw new NullPointerException(\"consumer is null\");\nconsumeAllHelper(consumer, prefix, root);\n}"
+}

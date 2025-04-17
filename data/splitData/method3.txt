@@ -1,5 +1,0 @@
-/*** Return the current movement of the ball.
-*
-* @return the current movement
-*/
-public Vector getMove(){return move;}

@@ -1,4 +1,5 @@
 import os
+import json
 
 # File paths
 input_path = "data/allMethods.txt"
@@ -11,20 +12,21 @@ os.makedirs(output_dir, exist_ok=True)
 with open(input_path, "r") as f:
     content = f.read()
 
-# Split the content by each Javadoc start, keeping splits clean
+# Split the content by each Javadoc start
 parts = content.split("/**")
 
-# The first split might be empty or contain junk before the first method
+# Write each method into a JSON file
 method_count = 0
 for part in parts:
     if part.strip() == "":
-        continue  # Skip empty or pre-method content
+        continue
 
-    method = "/**" + part.strip()  # Add back the removed Javadoc start
+    method = "/**" + part.strip()
     method_count += 1
-    filename = os.path.join(output_dir, f"method{method_count}.txt")
+    filename = os.path.join(output_dir, f"method{method_count}.json")
 
+    # Wrap in a JSON object
     with open(filename, "w") as f:
-        f.write(method)
+        json.dump({"method": method}, f, indent=2)
 
-print(f"{method_count} methods split and saved to {output_dir}")
+print(f"{method_count} methods split and saved to {output_dir} as JSON.")

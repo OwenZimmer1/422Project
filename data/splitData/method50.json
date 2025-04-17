@@ -1,0 +1,3 @@
+{
+  "method": "/*** Create an empty sequence\n* @param - none\n* @postcondition\n*   This sequence is empty\n**/\npublic BallSeq( )\n{\nmanyNodes = 0;\nhead = null;\ntail = null;\ncursor = null;\nprecursor = null;\n\nassert wellFormed() : \"invariant failed in constructor\";\n}"
+}

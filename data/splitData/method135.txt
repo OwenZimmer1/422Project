@@ -1,9 +1,0 @@
-/*** Return an iterator that starts at the given element, or the next
-* available element from the set.
-* @param start starting element (or element before starting element,
-* if the start isn't in the set), must not be null
-* @return iterator starting "in the middle" (never null)
-*/
-public Iterator<String> iterator(String start) {
-return new MyIterator(start);
-}

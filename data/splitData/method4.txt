@@ -1,7 +1,0 @@
-/*** Set the radius of this ball.
-* @param r new radius, must be positive.
-*/
-public void setRadius(int r) {
-if (r <= 0) throw new IllegalArgumentException("radius must be positive, not " + r);
-radius = r;
-}

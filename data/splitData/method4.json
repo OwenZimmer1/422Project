@@ -1,0 +1,3 @@
+{
+  "method": "/*** Set the radius of this ball.\n* @param r new radius, must be positive.\n*/\npublic void setRadius(int r) {\nif (r <= 0) throw new IllegalArgumentException(\"radius must be positive, not \" + r);\nradius = r;\n}"
+}

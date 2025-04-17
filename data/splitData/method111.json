@@ -1,0 +1,3 @@
+{
+  "method": "/**Returns the next process in this queue. This method should\n*  *not* call poll, or change the state of the queue in any way.\n*\n*  @throws ConcurrentModificationException if versions don't match\n*  @throws NoSuchElementException if no element is next\n*  @return the next process in the queue\n*/\npublic Process next() {\nassert wellFormed() : \"invariant failed at start of next()\";\nif(version != myVersion) throw new ConcurrentModificationException(\"versions don't match\");\nif(!hasNext()) throw new NoSuchElementException(\"no element found\");\ncursor = cursor.next;\nassert wellFormed() : \"invariant failed at end of next()\";\nreturn cursor;\n}"
+}

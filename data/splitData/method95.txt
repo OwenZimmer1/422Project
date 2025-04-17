@@ -1,6 +1,0 @@
-/*** Create an internal process to be used as a dummy node.
-*/
-private Process() {
-name = null;
-totalInstructions = 0;
-}

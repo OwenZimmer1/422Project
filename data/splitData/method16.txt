@@ -1,9 +1,0 @@
-/*** Instantiates a new vector with specified delta values.
-*
-* @param dx the initial deltax value
-* @param dy the initial deltay value
-*/
-public Vector(double dx, double dy){
-this.deltax = dx;
-this.deltay = dy;
-}

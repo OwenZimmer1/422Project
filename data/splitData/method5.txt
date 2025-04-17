@@ -1,3 +1,0 @@
-/*** Launches the ball by setting active to true.
-*/
-public void launch(){active=true;}

@@ -1,0 +1,3 @@
+{
+  "method": "/*** Gets the radius.\n*\n* @return the radius\n*/\npublic int getRadius(){return radius;}"
+}

@@ -1,0 +1,3 @@
+{
+  "method": "/*** Return the current movement of the ball.\n*\n* @return the current movement\n*/\npublic Vector getMove(){return move;}"
+}

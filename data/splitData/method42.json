@@ -1,0 +1,3 @@
+{
+  "method": "/*** default constructor for default capacity of zero\n*/\npublic BallCollection() {\nthis(INITIAL_CAPACITY);\n}"
+}

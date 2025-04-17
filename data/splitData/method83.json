@@ -1,0 +1,3 @@
+{
+  "method": "/**Return the cursor from the data structure since we do not have a cursor field. */\nprivate Node<E> getCursor() {\nreturn precursor.next; // TODO\n}"
+}

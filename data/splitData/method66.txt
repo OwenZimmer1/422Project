@@ -1,3 +1,0 @@
-/**Gets this player's position.
-* @return the position */
-public Position getPosition() {return position;}

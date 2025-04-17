@@ -1,0 +1,3 @@
+{
+  "method": "/*** gets y value to nearest integer\n*\n* @return y value to nearest integer\n*/\npublic int intY() {\nreturn (int)Math.round(this.y());\n}"
+}

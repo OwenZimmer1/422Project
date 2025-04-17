@@ -1,0 +1,3 @@
+{
+  "method": "/*** Gets the amount of finished instructions.\n* @return the finished instructions */\npublic int getFinished(){return finishedInstructions;}"
+}

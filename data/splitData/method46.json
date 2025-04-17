@@ -1,0 +1,3 @@
+{
+  "method": "/*** Increases the player's radius.\n*\n* @see DodgeBall.makeHarder()\n*/\npublic void grow(){radius += 2;}"
+}
