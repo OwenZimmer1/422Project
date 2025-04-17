@@ -1,3 +1,4 @@
 {
-  "method": "/*** Gets the radius.\n*\n* @return the radius\n*/\npublic int getRadius(){return radius;}"
+  "javadoc": "/*** Gets the radius.\n*\n* @return the radius\n*/",
+  "code": "public int getRadius(){return radius;}"
 }

@@ -1,3 +1,4 @@
 {
-  "method": "/*** Translates the parameter point by this vector.\n*\n* @param p the point to translate\n* @return the  translated point\n*/\npublic Point move(Point p){\nreturn new Point(p.x() + this.dx(), p.y() + this.dy());\n}"
+  "javadoc": "/*** Translates the parameter point by this vector.\n*\n* @param p the point to translate\n* @return the  translated point\n*/",
+  "code": "public Point move(Point p){\nreturn new Point(p.x() + this.dx(), p.y() + this.dy());\n}"
 }

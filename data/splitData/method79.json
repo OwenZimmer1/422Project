@@ -1,3 +1,4 @@
 {
-  "method": "/*** prints this team's players\n*/\npublic void printPlayers() {\nfor(Player i = dummy.getNext(); i != null; i = i.getNext()) {\nSystem.out.println(i);\n}\n}"
+  "javadoc": "/*** prints this team's players\n*/",
+  "code": "public void printPlayers() {\nfor(Player i = dummy.getNext(); i != null; i = i.getNext()) {\nSystem.out.println(i);\n}\n}"
 }

@@ -1,3 +1,4 @@
 {
-  "method": "/*** Instantiates a new unit vector with specified angle.\n*\n* @param theta the angle to construct, in radians\n*/\npublic Vector(double theta){\nthis.deltax = Math.cos(theta);\nthis.deltay = Math.sin(theta);\n}"
+  "javadoc": "/*** Instantiates a new unit vector with specified angle.\n*\n* @param theta the angle to construct, in radians\n*/",
+  "code": "public Vector(double theta){\nthis.deltax = Math.cos(theta);\nthis.deltay = Math.sin(theta);\n}"
 }

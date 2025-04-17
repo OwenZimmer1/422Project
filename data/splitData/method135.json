@@ -1,3 +1,4 @@
 {
-  "method": "/*** Return an iterator that starts at the given element, or the next\n* available element from the set.\n* @param start starting element (or element before starting element,\n* if the start isn't in the set), must not be null\n* @return iterator starting \"in the middle\" (never null)\n*/\npublic Iterator<String> iterator(String start) {\nreturn new MyIterator(start);\n}"
+  "javadoc": "/*** Return an iterator that starts at the given element, or the next\n* available element from the set.\n* @param start starting element (or element before starting element,\n* if the start isn't in the set), must not be null\n* @return iterator starting \"in the middle\" (never null)\n*/",
+  "code": "public Iterator<String> iterator(String start) {\nreturn new MyIterator(start);\n}"
 }

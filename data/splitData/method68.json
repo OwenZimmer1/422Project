@@ -1,3 +1,4 @@
 {
-  "method": "/**Gets the next player.\n* @return the next player */\npublic Player getNext() {return next;}"
+  "javadoc": "/**Gets the next player.\n* @return the next player */",
+  "code": "public Player getNext() {return next;}"
 }

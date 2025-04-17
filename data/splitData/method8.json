@@ -1,3 +1,4 @@
 {
-  "method": "/*** Checks if colliding with the parameter ball.\n*\n* @param other the other ball\n* @return true if colliding\n*/\npublic boolean isColliding(Ball other){\nreturn this.getLoc().distance(other.getLoc()) <= this.getRadius() + other.getRadius();\n}"
+  "javadoc": "/*** Checks if colliding with the parameter ball.\n*\n* @param other the other ball\n* @return true if colliding\n*/",
+  "code": "public boolean isColliding(Ball other){\nreturn this.getLoc().distance(other.getLoc()) <= this.getRadius() + other.getRadius();\n}"
 }

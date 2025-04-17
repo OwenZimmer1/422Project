@@ -1,3 +1,4 @@
 {
-  "method": "/*** Gets the amount of finished instructions.\n* @return the finished instructions */\npublic int getFinished(){return finishedInstructions;}"
+  "javadoc": "/*** Gets the amount of finished instructions.\n* @return the finished instructions */",
+  "code": "public int getFinished(){return finishedInstructions;}"
 }

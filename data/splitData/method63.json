@@ -1,3 +1,4 @@
 {
-  "method": "/**Gets the name.\n* @return the name */\npublic String getName() {return name;}"
+  "javadoc": "/**Gets the name.\n* @return the name */",
+  "code": "public String getName() {return name;}"
 }

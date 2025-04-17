@@ -1,3 +1,4 @@
 {
-  "method": "/**Return the head node from the data structure since we do not have a head field. */\nprivate Node<E> getHead() {\nreturn tail.next.next;\n}"
+  "javadoc": "/**Return the head node from the data structure since we do not have a head field. */",
+  "code": "private Node<E> getHead() {\nreturn tail.next.next;\n}"
 }

@@ -1,3 +1,4 @@
 {
-  "method": "/*** Update the player's location.\n*\n* @param mouseLoc the current [adjusted] mouse location\n*/\npublic void update(Point mouseLoc){\nint new_x = Math.max(radius, mouseLoc.intX());\nint new_y = Math.max(radius, mouseLoc.intY());\nnew_x = Math.min(new_x, DodgeBall.BOUNDS.width -radius);\nnew_y = Math.min(new_y, DodgeBall.BOUNDS.height - radius);\nlocation = new Point(new_x, new_y);\n}"
+  "javadoc": "/*** Update the player's location.\n*\n* @param mouseLoc the current [adjusted] mouse location\n*/",
+  "code": "public void update(Point mouseLoc){\nint new_x = Math.max(radius, mouseLoc.intX());\nint new_y = Math.max(radius, mouseLoc.intY());\nnew_x = Math.min(new_x, DodgeBall.BOUNDS.width -radius);\nnew_y = Math.min(new_y, DodgeBall.BOUNDS.height - radius);\nlocation = new Point(new_x, new_y);\n}"
 }

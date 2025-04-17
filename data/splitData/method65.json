@@ -1,3 +1,4 @@
 {
-  "method": "/**Sets the score.\n* @param the score */\npublic void setScore(int score) {this.score = score;}"
+  "javadoc": "/**Sets the score.\n* @param the score */",
+  "code": "public void setScore(int score) {this.score = score;}"
 }

@@ -1,3 +1,4 @@
 {
-  "method": "/*** Create a sorted collection using the given comparator.\n* @param comp comparator to use, must not be null\n*/\npublic SortedCollection(Comparator<E> comp) {\nif (comp == null) throw new IllegalArgumentException(\"comparator cannot be null\");\n// TODO set up data structure for an empty list.\ncomparator = comp;\ntail = new Node<>(null, null);\ntail.next = tail;\nsize = 0;\nversion = 0;\nassert wellFormed() : \"invariant failed at end of constructor\";\n}"
+  "javadoc": "/*** Create a sorted collection using the given comparator.\n* @param comp comparator to use, must not be null\n*/",
+  "code": "public SortedCollection(Comparator<E> comp) {\nif (comp == null) throw new IllegalArgumentException(\"comparator cannot be null\");\n// TODO set up data structure for an empty list.\ncomparator = comp;\ntail = new Node<>(null, null);\ntail.next = tail;\nsize = 0;\nversion = 0;\nassert wellFormed() : \"invariant failed at end of constructor\";\n}"
 }

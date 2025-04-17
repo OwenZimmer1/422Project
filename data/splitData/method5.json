@@ -1,3 +1,4 @@
 {
-  "method": "/*** Launches the ball by setting active to true.\n*/\npublic void launch(){active=true;}"
+  "javadoc": "/*** Launches the ball by setting active to true.\n*/",
+  "code": "public void launch(){active=true;}"
 }

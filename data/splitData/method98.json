@@ -1,3 +1,4 @@
 {
-  "method": "/**Gets the total amount of instructions in the process.\n* @return the total instructions */\npublic int getTotal(){return totalInstructions;}"
+  "javadoc": "/**Gets the total amount of instructions in the process.\n* @return the total instructions */",
+  "code": "public int getTotal(){return totalInstructions;}"
 }

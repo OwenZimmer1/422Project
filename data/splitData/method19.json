@@ -1,3 +1,4 @@
 {
-  "method": "/*** Getter for deltax field.\n*\n* @return the current deltax value\n*/\npublic double dx(){\nreturn this.deltax;\n}"
+  "javadoc": "/*** Getter for deltax field.\n*\n* @return the current deltax value\n*/",
+  "code": "public double dx(){\nreturn this.deltax;\n}"
 }

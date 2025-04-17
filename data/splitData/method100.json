@@ -1,3 +1,4 @@
 {
-  "method": "/*** Checks if the process is completed.\n* @return true, if is done */\npublic boolean isDone(){\nreturn finishedInstructions == totalInstructions;}"
+  "javadoc": "/*** Checks if the process is completed.\n* @return true, if is done */",
+  "code": "public boolean isDone(){\nreturn finishedInstructions == totalInstructions;}"
 }

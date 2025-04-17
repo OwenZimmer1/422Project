@@ -1,3 +1,4 @@
 {
-  "method": "/*** Determine the number of elements in this sequence.\n* @param - none\n* @return\n*   the number of elements in this sequence\n**/\npublic int size( )\n{\nassert wellFormed() : \"invariant wrong at start of size()\";\n// TODO: Implemented by student.\n// This method shouldn't modify any fields, hence no assertion at end\nreturn size;\n}"
+  "javadoc": "/*** Determine the number of elements in this sequence.\n* @param - none\n* @return\n*   the number of elements in this sequence\n**/",
+  "code": "public int size( )\n{\nassert wellFormed() : \"invariant wrong at start of size()\";\n// TODO: Implemented by student.\n// This method shouldn't modify any fields, hence no assertion at end\nreturn size;\n}"
 }

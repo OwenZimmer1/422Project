@@ -1,3 +1,4 @@
 {
-  "method": "/***  Checks for equality of this process with the parameter process.\n*  It will check everything except for the links.\n*\n* @param other the object against which to test for equality\n* @return true, if successful\n* @see java.lang.Object#equals(java.lang.Object)\n*/\n@Override\npublic boolean equals(Object other){\nif (!(other instanceof Process) || other == null) return false;\nProcess p = (Process) other;\n\nreturn p.totalInstructions == totalInstructions &&\np.finishedInstructions == finishedInstructions &&\np.name.equals(name);\n}"
+  "javadoc": "/***  Checks for equality of this process with the parameter process.\n*  It will check everything except for the links.\n*\n* @param other the object against which to test for equality\n* @return true, if successful\n* @see java.lang.Object#equals(java.lang.Object)\n*/",
+  "code": "@Override\npublic boolean equals(Object other){\nif (!(other instanceof Process) || other == null) return false;\nProcess p = (Process) other;\n\nreturn p.totalInstructions == totalInstructions &&\np.finishedInstructions == finishedInstructions &&\np.name.equals(name);\n}"
 }

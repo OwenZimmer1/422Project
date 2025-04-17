@@ -1,3 +1,4 @@
 {
-  "method": "/*** Instantiates a new player.\n*\n* @param loc the initial location\n*/\npublic Player(Point loc){location=loc;radius = DodgeBall.PLAYER_RADIUS;}"
+  "javadoc": "/*** Instantiates a new player.\n*\n* @param loc the initial location\n*/",
+  "code": "public Player(Point loc){location=loc;radius = DodgeBall.PLAYER_RADIUS;}"
 }

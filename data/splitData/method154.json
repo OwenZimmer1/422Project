@@ -1,3 +1,4 @@
 {
-  "method": "/*** Return the stack that results from pushing another element on top.\n* @param val element to push\n* @return new stack resulting from pushing element\n*/\npublic ImmutableStack<T> push(T val) {\nreturn new ImmutableStack<>(val,this);\n}"
+  "javadoc": "/*** Return the stack that results from pushing another element on top.\n* @param val element to push\n* @return new stack resulting from pushing element\n*/",
+  "code": "public ImmutableStack<T> push(T val) {\nreturn new ImmutableStack<>(val,this);\n}"
 }

@@ -1,3 +1,4 @@
 {
-  "method": "/***  Returns a clone of this process that is identical in every way\n*  except that it has null links.\n*\n* @return the process\n* @see java.lang.Object#clone()\n*/\n@Override\npublic Process clone(){\nProcess copy = null;\ntry{\ncopy = (Process) super.clone();\ncopy.next = copy.prev = null;\ncopy.bar = null;\n}\ncatch (CloneNotSupportedException e){\nthrow new RuntimeException(\"forgot to make Cloneable?\");\n}\nreturn copy;\n}"
+  "javadoc": "/***  Returns a clone of this process that is identical in every way\n*  except that it has null links.\n*\n* @return the process\n* @see java.lang.Object#clone()\n*/",
+  "code": "@Override\npublic Process clone(){\nProcess copy = null;\ntry{\ncopy = (Process) super.clone();\ncopy.next = copy.prev = null;\ncopy.bar = null;\n}\ncatch (CloneNotSupportedException e){\nthrow new RuntimeException(\"forgot to make Cloneable?\");\n}\nreturn copy;\n}"
 }

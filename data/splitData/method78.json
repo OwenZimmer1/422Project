@@ -1,3 +1,4 @@
 {
-  "method": "/*** Returns team's total score\n* @return the sum of all player's scores on this team\n*/\npublic int totalScore() {\nassert wellFormed() : \"invariant fails at beginning of totalScore\";\nint score = 0;\n//TODO implement totalScore (don't use the dummy player!)\nfor(Player source = dummy.getNext(); source != null; source = source.getNext()) {\nscore += source.getScore();\n}\nreturn score;\n}"
+  "javadoc": "/*** Returns team's total score\n* @return the sum of all player's scores on this team\n*/",
+  "code": "public int totalScore() {\nassert wellFormed() : \"invariant fails at beginning of totalScore\";\nint score = 0;\n//TODO implement totalScore (don't use the dummy player!)\nfor(Player source = dummy.getNext(); source != null; source = source.getNext()) {\nscore += source.getScore();\n}\nreturn score;\n}"
 }

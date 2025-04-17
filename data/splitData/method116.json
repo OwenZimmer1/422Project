@@ -1,3 +1,4 @@
 {
-  "method": "/*** Check the invariant.\n* Returns false if any problem is found.\n* @return whether invariant is currently true.\n* If false is returned then exactly one problem has been reported.\n*/\nprivate boolean wellFormed() {\nint sizeGuess = checkInRange(root, null, null);\nif(sizeGuess == -1) return false;\nif(sizeGuess != manyNodes) return report(\"manyNodes is wrong\");\nreturn true;\n}"
+  "javadoc": "/*** Check the invariant.\n* Returns false if any problem is found.\n* @return whether invariant is currently true.\n* If false is returned then exactly one problem has been reported.\n*/",
+  "code": "private boolean wellFormed() {\nint sizeGuess = checkInRange(root, null, null);\nif(sizeGuess == -1) return false;\nif(sizeGuess != manyNodes) return report(\"manyNodes is wrong\");\nreturn true;\n}"
 }

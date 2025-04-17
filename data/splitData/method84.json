@@ -1,3 +1,4 @@
 {
-  "method": "/*** Create an empty sequence.\n* @param - none\n* @postcondition\n*   This sequence is empty\n**/\npublic LinkedSequence( )\n{\ntail = precursor = new Node<E>();\nsize = 0;\nassert wellFormed() : \"invariant failed in constructor\";\n}"
+  "javadoc": "/*** Create an empty sequence.\n* @param - none\n* @postcondition\n*   This sequence is empty\n**/",
+  "code": "public LinkedSequence( )\n{\ntail = precursor = new Node<E>();\nsize = 0;\nassert wellFormed() : \"invariant failed in constructor\";\n}"
 }

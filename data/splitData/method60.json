@@ -1,3 +1,4 @@
 {
-  "method": "/*** Gets a single instance of the comparator.\n* @return a single instance of the comparator\n*/\npublic static Comparator<Player> getInstance() { return instance; }"
+  "javadoc": "/*** Gets a single instance of the comparator.\n* @return a single instance of the comparator\n*/",
+  "code": "public static Comparator<Player> getInstance() { return instance; }"
 }

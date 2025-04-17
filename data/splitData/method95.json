@@ -1,3 +1,4 @@
 {
-  "method": "/*** Create an internal process to be used as a dummy node.\n*/\nprivate Process() {\nname = null;\ntotalInstructions = 0;\n}"
+  "javadoc": "/*** Create an internal process to be used as a dummy node.\n*/",
+  "code": "private Process() {\nname = null;\ntotalInstructions = 0;\n}"
 }

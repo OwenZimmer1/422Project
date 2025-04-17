@@ -1,3 +1,4 @@
 {
-  "method": "/**Returns the number of non-dummy processes in this queue.\n*\n* @return the number of non-dummy processes\n* @see java.util.AbstractCollection#size()\n*/\n@Override\npublic int size() {\nassert wellFormed() : \"invariant of result failed at start of size()\";\nreturn manyItems;\n}"
+  "javadoc": "/**Returns the number of non-dummy processes in this queue.\n*\n* @return the number of non-dummy processes\n* @see java.util.AbstractCollection#size()\n*/",
+  "code": "@Override\npublic int size() {\nassert wellFormed() : \"invariant of result failed at start of size()\";\nreturn manyItems;\n}"
 }

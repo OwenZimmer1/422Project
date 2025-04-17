@@ -1,3 +1,4 @@
 {
-  "method": "/**Perform a single instruction of the process. */\npublic void performInstruction(){\nif (!isDone())\nfinishedInstructions++;\n}"
+  "javadoc": "/**Perform a single instruction of the process. */",
+  "code": "public void performInstruction(){\nif (!isDone())\nfinishedInstructions++;\n}"
 }

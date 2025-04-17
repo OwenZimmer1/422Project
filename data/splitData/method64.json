@@ -1,3 +1,4 @@
 {
-  "method": "/**Gets this player's score.\n* @return the score */\npublic int getScore() {return score;}"
+  "javadoc": "/**Gets this player's score.\n* @return the score */",
+  "code": "public int getScore() {return score;}"
 }
