@@ -1,4 +1,7 @@
 {
   "javadoc": "/**Sets the score.\n* @param the score */",
-  "code": "public void setScore(int score) {this.score = score;}"
+  "code": "public void setScore(int score) {this.score = score;}",
+  "accessModifier": "public",
+  "returnType": "void",
+  "methodName": "setScore"
 }

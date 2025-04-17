@@ -1,4 +1,7 @@
 {
   "javadoc": "/*** Gets a single instance of Nondiscrimination comparator.\n* @return a single instance of Nondiscrimination comparator\n*/",
-  "code": "public static Comparator<Player> getInstance() { return instance; }"
+  "code": "public static Comparator<Player> getInstance() { return instance; }",
+  "accessModifier": "public",
+  "returnType": "Comparator<Player>",
+  "methodName": "getInstance"
 }

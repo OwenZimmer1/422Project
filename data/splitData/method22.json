@@ -1,4 +1,7 @@
 {
   "javadoc": "/*** Adds the parameter vector with this vector.\n*\n* @param v the vector to add\n* @return the vector sum\n*/",
-  "code": "public Vector add(Vector v){\nreturn new Vector(this.dx() + v.dx(), this.dy() + v.dy());\n}"
+  "code": "public Vector add(Vector v){\nreturn new Vector(this.dx() + v.dx(), this.dy() + v.dy());\n}",
+  "accessModifier": "public",
+  "returnType": "Vector",
+  "methodName": "add"
 }

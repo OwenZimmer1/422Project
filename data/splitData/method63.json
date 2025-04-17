@@ -1,4 +1,7 @@
 {
   "javadoc": "/**Gets the name.\n* @return the name */",
-  "code": "public String getName() {return name;}"
+  "code": "public String getName() {return name;}",
+  "accessModifier": "public",
+  "returnType": "String",
+  "methodName": "getName"
 }

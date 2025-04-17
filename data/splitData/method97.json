@@ -1,4 +1,7 @@
 {
   "javadoc": "/**Gets the progress bar.\n* Creates and initializes it if necessary.\n* @return the progress bar */",
-  "code": "public JProgressBar getBar(){\nif (bar == null) createProgressBar();\nreturn bar;\n}"
+  "code": "public JProgressBar getBar(){\nif (bar == null) createProgressBar();\nreturn bar;\n}",
+  "accessModifier": "public",
+  "returnType": "JProgressBar",
+  "methodName": "getBar"
 }

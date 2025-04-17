@@ -1,4 +1,7 @@
 {
   "javadoc": "/*** gets y value\n*\n* @return current y value\n*/",
-  "code": "public double y() {\nreturn this.y;\n}"
+  "code": "public double y() {\nreturn this.y;\n}",
+  "accessModifier": "public",
+  "returnType": "double",
+  "methodName": "y"
 }

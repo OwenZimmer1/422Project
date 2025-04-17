@@ -1,4 +1,7 @@
 {
   "javadoc": "/*** Takes the dot product of this vector and the parameter vector.\n*\n* @param v the other vector\n* @return the dot product\n*/",
-  "code": "public double dot(Vector v){\nreturn this.dx() * v.dx() + this.dy() * v.dy();\n}"
+  "code": "public double dot(Vector v){\nreturn this.dx() * v.dx() + this.dy() * v.dy();\n}",
+  "accessModifier": "public",
+  "returnType": "double",
+  "methodName": "dot"
 }

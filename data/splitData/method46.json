@@ -1,4 +1,7 @@
 {
   "javadoc": "/*** Increases the player's radius.\n*\n* @see DodgeBall.makeHarder()\n*/",
-  "code": "public void grow(){radius += 2;}"
+  "code": "public void grow(){radius += 2;}",
+  "accessModifier": "public",
+  "returnType": "void",
+  "methodName": "grow"
 }

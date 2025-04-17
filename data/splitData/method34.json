@@ -1,4 +1,7 @@
 {
   "javadoc": "/*** Accessor method to determine whether this sequence has a specified\n* current element (a Ball or null) that can be retrieved with the\n* getCurrent method. This depends on the status of the cursor.\n* @param - none\n* @return\n*   true (there is a current element) or false (there is no current element at the moment)\n**/",
-  "code": "public boolean isCurrent( )\n{\nassert wellFormed() : \"invariant failed at start of isCurrent\";\n\nreturn currentIndex < manyItems;\n}"
+  "code": "public boolean isCurrent( )\n{\nassert wellFormed() : \"invariant failed at start of isCurrent\";\n\nreturn currentIndex < manyItems;\n}",
+  "accessModifier": "public",
+  "returnType": "boolean",
+  "methodName": "isCurrent"
 }

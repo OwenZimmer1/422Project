@@ -1,4 +1,7 @@
 {
   "javadoc": "/*** Determine the number of elements in this sequence.\n* @param - none\n* @return\n*   the number of elements in this sequence\n**/",
-  "code": "public int size( )\n{\nassert wellFormed() : \"invariant failed at start of size\";\n\nreturn manyItems;\n}"
+  "code": "public int size( )\n{\nassert wellFormed() : \"invariant failed at start of size\";\n\nreturn manyItems;\n}",
+  "accessModifier": "public",
+  "returnType": "int",
+  "methodName": "size"
 }

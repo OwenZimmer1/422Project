@@ -1,4 +1,7 @@
 {
   "javadoc": "/*** Instantiates a new vector with specified delta values.\n*\n* @param dx the initial deltax value\n* @param dy the initial deltay value\n*/",
-  "code": "public Vector(double dx, double dy){\nthis.deltax = dx;\nthis.deltay = dy;\n}"
+  "code": "public Vector(double dx, double dy){\nthis.deltax = dx;\nthis.deltay = dy;\n}",
+  "accessModifier": "default",
+  "returnType": "public",
+  "methodName": "Vector"
 }

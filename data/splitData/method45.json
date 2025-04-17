@@ -1,4 +1,7 @@
 {
   "javadoc": "/*** Sets the current image.\n*\n* @param img the new player image\n*/",
-  "code": "public void setImg(BufferedImage img){playerImg = img;}"
+  "code": "public void setImg(BufferedImage img){playerImg = img;}",
+  "accessModifier": "public",
+  "returnType": "void",
+  "methodName": "setImg"
 }

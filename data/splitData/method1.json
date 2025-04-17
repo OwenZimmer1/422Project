@@ -1,4 +1,7 @@
 {
   "javadoc": "/*** Gets the location.\n*\n* @return the current location\n*/",
-  "code": "public Point getLoc(){return location;}"
+  "code": "public Point getLoc(){return location;}",
+  "accessModifier": "public",
+  "returnType": "Point",
+  "methodName": "getLoc"
 }

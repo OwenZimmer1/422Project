@@ -1,4 +1,7 @@
 {
   "javadoc": "/*** Rotates this vector clockwise by the parameter angle (in radians).\n*\n* @param theta the angle to rotate (in radians)\n* @return the rotated vector\n*/",
-  "code": "public Vector rotate(double theta){\ndouble angle = this.theta() + theta;\nVector v = new Vector(angle);\nreturn v.scale(this.magnitude());\n}"
+  "code": "public Vector rotate(double theta){\ndouble angle = this.theta() + theta;\nVector v = new Vector(angle);\nreturn v.scale(this.magnitude());\n}",
+  "accessModifier": "public",
+  "returnType": "Vector",
+  "methodName": "rotate"
 }

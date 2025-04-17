@@ -1,18 +1,14 @@
 import os
 import json
+import re
 
-# File paths
 input_path = "data/allMethods.txt"
 output_dir = "data/splitData"
-
-# Ensure the output directory exists
 os.makedirs(output_dir, exist_ok=True)
 
-# Read input content
 with open(input_path, "r") as f:
     content = f.read()
 
-# Split the content by each Javadoc start
 parts = content.split("/**")
 
 method_count = 0
@@ -21,24 +17,31 @@ for part in parts:
         continue
 
     full_method = "/**" + part.strip()
-
-    # Separate Javadoc and the rest
-    if "*/" in full_method:
-        javadoc_end_index = full_method.index("*/") + 2
-        javadoc = full_method[:javadoc_end_index].strip()
-        code = full_method[javadoc_end_index:].strip()
-    else:
-        # Just in case something went wrong, skip this chunk
+    if "*/" not in full_method:
         continue
+
+    javadoc_end_index = full_method.index("*/") + 2
+    javadoc = full_method[:javadoc_end_index].strip()
+    code = full_method[javadoc_end_index:].strip()
+
+    # Match the method signature
+    signature_match = re.match(r"(public|private|protected)?\s*(static)?\s*([\w<>\[\]]+)\s+(\w+)\s*\(", code)
+    if signature_match:
+        access_modifier = signature_match.group(1) or "default"
+        return_type = signature_match.group(3)
+        method_name = signature_match.group(4)
+    else:
+        access_modifier = return_type = method_name = "unknown"
 
     method_count += 1
     filename = os.path.join(output_dir, f"method{method_count}.json")
-
-    # Write as structured JSON
     with open(filename, "w") as f:
         json.dump({
             "javadoc": javadoc,
-            "code": code
+            "code": code,
+            "accessModifier": access_modifier,
+            "returnType": return_type,
+            "methodName": method_name
         }, f, indent=2)
 
-print(f"{method_count} methods split with Javadoc/code and saved as JSON in {output_dir}.")
+print(f"{method_count} methods split and saved with extra metadata.")

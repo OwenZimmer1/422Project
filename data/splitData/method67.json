@@ -1,4 +1,7 @@
 {
   "javadoc": "/**Gets the previous player.\n* @return the previous player */",
-  "code": "public Player getPrevious() {return prev;}"
+  "code": "public Player getPrevious() {return prev;}",
+  "accessModifier": "public",
+  "returnType": "Player",
+  "methodName": "getPrevious"
 }

@@ -1,4 +1,7 @@
 {
   "javadoc": "/**Gets this player's position.\n* @return the position */",
-  "code": "public Position getPosition() {return position;}"
+  "code": "public Position getPosition() {return position;}",
+  "accessModifier": "public",
+  "returnType": "Position",
+  "methodName": "getPosition"
 }

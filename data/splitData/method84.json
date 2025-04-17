@@ -1,4 +1,7 @@
 {
   "javadoc": "/*** Create an empty sequence.\n* @param - none\n* @postcondition\n*   This sequence is empty\n**/",
-  "code": "public LinkedSequence( )\n{\ntail = precursor = new Node<E>();\nsize = 0;\nassert wellFormed() : \"invariant failed in constructor\";\n}"
+  "code": "public LinkedSequence( )\n{\ntail = precursor = new Node<E>();\nsize = 0;\nassert wellFormed() : \"invariant failed in constructor\";\n}",
+  "accessModifier": "default",
+  "returnType": "public",
+  "methodName": "LinkedSequence"
 }

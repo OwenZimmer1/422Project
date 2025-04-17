@@ -1,4 +1,7 @@
 {
   "javadoc": "/*** Instantiates a new Team with the given priority comparator.\n* @param c the priority comparator this Team will use\n* @param n the name of the team.\n*/",
-  "code": "public Team(Comparator<Player> c, String n) {\npriority = c;\ndummy = new Player(\"\", Integer.MAX_VALUE, null);\nteamName = n;\n\nassert wellFormed() : \"invariant fails at end of constructor\";}"
+  "code": "public Team(Comparator<Player> c, String n) {\npriority = c;\ndummy = new Player(\"\", Integer.MAX_VALUE, null);\nteamName = n;\n\nassert wellFormed() : \"invariant fails at end of constructor\";}",
+  "accessModifier": "default",
+  "returnType": "public",
+  "methodName": "Team"
 }

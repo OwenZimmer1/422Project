@@ -1,4 +1,7 @@
 {
   "javadoc": "/*** Return the top of the stack.\n* @throws NoSuchELementException if the stack is empty\n* @return top of the stack\n*/",
-  "code": "public T top() {\nif (this == empty) throw new NoSuchElementException(\"stack is empty\");\nreturn top;\n}"
+  "code": "public T top() {\nif (this == empty) throw new NoSuchElementException(\"stack is empty\");\nreturn top;\n}",
+  "accessModifier": "public",
+  "returnType": "T",
+  "methodName": "top"
 }

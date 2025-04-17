@@ -1,4 +1,7 @@
 {
   "javadoc": "/**Perform a single instruction of the process. */",
-  "code": "public void performInstruction(){\nif (!isDone())\nfinishedInstructions++;\n}"
+  "code": "public void performInstruction(){\nif (!isDone())\nfinishedInstructions++;\n}",
+  "accessModifier": "public",
+  "returnType": "void",
+  "methodName": "performInstruction"
 }

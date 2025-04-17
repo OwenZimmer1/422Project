@@ -1,4 +1,7 @@
 {
   "javadoc": "/*** Gets the radius.\n*\n* @return the radius\n*/",
-  "code": "public int getRadius(){return radius;}"
+  "code": "public int getRadius(){return radius;}",
+  "accessModifier": "public",
+  "returnType": "int",
+  "methodName": "getRadius"
 }

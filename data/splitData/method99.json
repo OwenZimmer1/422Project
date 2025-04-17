@@ -1,4 +1,7 @@
 {
   "javadoc": "/*** Gets the amount of finished instructions.\n* @return the finished instructions */",
-  "code": "public int getFinished(){return finishedInstructions;}"
+  "code": "public int getFinished(){return finishedInstructions;}",
+  "accessModifier": "public",
+  "returnType": "int",
+  "methodName": "getFinished"
 }

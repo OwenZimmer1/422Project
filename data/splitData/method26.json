@@ -1,4 +1,7 @@
 {
   "javadoc": "/*** Normalizes this vector.\n*\n* @return a vector with the same angle but magnitude of one.\n*/",
-  "code": "public Vector normalize(){\ndouble magnitude = this.magnitude();\nreturn new Vector(this.dx() / magnitude, this.dy() / magnitude);\n}"
+  "code": "public Vector normalize(){\ndouble magnitude = this.magnitude();\nreturn new Vector(this.dx() / magnitude, this.dy() / magnitude);\n}",
+  "accessModifier": "public",
+  "returnType": "Vector",
+  "methodName": "normalize"
 }

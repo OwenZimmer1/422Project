@@ -1,4 +1,7 @@
 {
   "javadoc": "/*** Start the iterator at this element, or at the first element after it\n* (if any).\n* @param initial string to start at, must not be null\n*/",
-  "code": "public MyIterator(String initial) {\n// TODO Set up an iterator starting with given (non-null) string.\n// NB: Do not attempt to use {@link #getNext} or any other method\n// of the main class to help.  All the work needs to be done here\n// so that the pending stack is set up correctly.\nif(initial == null) throw new NullPointerException(\"initial must not be null\");\nNode source = root;\nwhile (source != null) {\nif(initial.compareTo(source.string) < 0) {\npending.push(source);\nsource = source.left;\n}else if(initial.compareTo(source.string) > 0) {\nsource = source.right;\n}else {\npending.add(source);\nbreak;\n}\n}\ncurrent = null;\ncolVersion = version;\n\nassert wellFormed() : \"Iterator messed up after special constructor\";\n}"
+  "code": "public MyIterator(String initial) {\n// TODO Set up an iterator starting with given (non-null) string.\n// NB: Do not attempt to use {@link #getNext} or any other method\n// of the main class to help.  All the work needs to be done here\n// so that the pending stack is set up correctly.\nif(initial == null) throw new NullPointerException(\"initial must not be null\");\nNode source = root;\nwhile (source != null) {\nif(initial.compareTo(source.string) < 0) {\npending.push(source);\nsource = source.left;\n}else if(initial.compareTo(source.string) > 0) {\nsource = source.right;\n}else {\npending.add(source);\nbreak;\n}\n}\ncurrent = null;\ncolVersion = version;\n\nassert wellFormed() : \"Iterator messed up after special constructor\";\n}",
+  "accessModifier": "default",
+  "returnType": "public",
+  "methodName": "MyIterator"
 }

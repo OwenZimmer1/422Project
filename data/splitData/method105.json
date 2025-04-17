@@ -1,4 +1,7 @@
 {
   "javadoc": "/**Adds a new process to the end of the queue.\n*\n* @param p process to add to the end of this queue\n* @throws NullPointerException if the process to add is null\n* @throws IllegalArgumentException if the process is already in another queue\n*\n* @return true always\n* @see java.util.Queue#offer(java.lang.Object)\n*/",
-  "code": "@Override\npublic boolean offer(Process p) {\nassert wellFormed() : \"invariant failed at start of offer\";\nif(p == null) throw new NullPointerException(\"Can't put null in list\");\nif(p.next != null || p.prev != null) throw new IllegalArgumentException(\"Item already in queue\");\n\np.next = dummy;\np.prev = dummy.prev;\ndummy.prev = p;\np.prev.next = p;\nversion++;\nmanyItems++;\nassert wellFormed() : \"invariant failed at end of offer\";\nreturn true;\n}"
+  "code": "@Override\npublic boolean offer(Process p) {\nassert wellFormed() : \"invariant failed at start of offer\";\nif(p == null) throw new NullPointerException(\"Can't put null in list\");\nif(p.next != null || p.prev != null) throw new IllegalArgumentException(\"Item already in queue\");\n\np.next = dummy;\np.prev = dummy.prev;\ndummy.prev = p;\np.prev.next = p;\nversion++;\nmanyItems++;\nassert wellFormed() : \"invariant failed at end of offer\";\nreturn true;\n}",
+  "accessModifier": "unknown",
+  "returnType": "unknown",
+  "methodName": "unknown"
 }

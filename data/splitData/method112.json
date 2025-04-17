@@ -1,4 +1,7 @@
 {
   "javadoc": "/**The main method.\n* @param args the arguments */",
-  "code": "public static void main(String[] args) {\nif (args.length != 1) {\nSystem.out.println(\"Usage: Main <lexicon file>\");\nSystem.exit(1);\n}\nnew Driver(args[0]).run();\n}"
+  "code": "public static void main(String[] args) {\nif (args.length != 1) {\nSystem.out.println(\"Usage: Main <lexicon file>\");\nSystem.exit(1);\n}\nnew Driver(args[0]).run();\n}",
+  "accessModifier": "public",
+  "returnType": "void",
+  "methodName": "main"
 }

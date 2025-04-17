@@ -1,4 +1,7 @@
 {
   "javadoc": "/*** Add all strings in the array into this lexicon from the range [lo,hi).\n* The elements are added recursively from the middle, so that\n* if the array was sorted, the tree will be balanced.\n* All the tree mutations are done by add.\n* Return number of strings actually added; some might not be added\n* if they are duplicates.\n* @param array source\n* @param lo index lower bound\n* @param hi index upper bound\n* @return number of strings added\n* @throws NullPointerException if array is null\n*/",
-  "code": "public int addAll(String[] array, int lo, int hi) {\nassert wellFormed() : \"invariant false at start of addAll()\";\n// TODO: Implement this method (be efficient!)\nif(lo == hi) return 0;\nint count = 0;\nint mid = (hi - lo) / 2 + lo;\nif(add(array[mid])) count++;\ncount += addAll(array, lo, mid);\ncount += addAll(array, mid + 1, hi);\n\n// NB: As long as you never touch any fields directly (or call private methods)\n// you shouldn't *need* to check the invariant. We will anyway.\nassert wellFormed() : \"invariant false at end of addAll()\";\nreturn count++;\n}"
+  "code": "public int addAll(String[] array, int lo, int hi) {\nassert wellFormed() : \"invariant false at start of addAll()\";\n// TODO: Implement this method (be efficient!)\nif(lo == hi) return 0;\nint count = 0;\nint mid = (hi - lo) / 2 + lo;\nif(add(array[mid])) count++;\ncount += addAll(array, lo, mid);\ncount += addAll(array, mid + 1, hi);\n\n// NB: As long as you never touch any fields directly (or call private methods)\n// you shouldn't *need* to check the invariant. We will anyway.\nassert wellFormed() : \"invariant false at end of addAll()\";\nreturn count++;\n}",
+  "accessModifier": "public",
+  "returnType": "int",
+  "methodName": "addAll"
 }

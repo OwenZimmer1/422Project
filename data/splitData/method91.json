@@ -1,4 +1,7 @@
 {
   "javadoc": "/*** Add a new element to this sequence, before the current element (if any).\n* @param element\n*   the new element that is being added\n* @postcondition\n*   A new copy of the element has been added to this sequence. If there was\n*   a current element, then the new element is placed before the current\n*   element. If there was no current element, then the new element is placed\n*   at the end of the sequence. In all cases, the new element becomes the\n*   new current element of this sequence.\n* @exception OutOfMemoryError\n*   Indicates insufficient memory for increasing the sequence.\n**/",
-  "code": "public void insert(E element)\n{\n\nassert wellFormed() : \"invariant failed at start of insert\";\nif(size == 0) {\ntail = new Node<>(element, tail.next);\nprecursor = tail.next;\ntail.next.next = tail;\n}else if(precursor == tail) {\ntail = new Node<>(element, precursor.next);\nprecursor.next = tail;\n}else {\nNode<E> node = new Node<>(element, precursor.next);\nprecursor.next = node;\n}\nsize++;\nassert wellFormed() : \"invariant failed at end of insert\";\n}"
+  "code": "public void insert(E element)\n{\n\nassert wellFormed() : \"invariant failed at start of insert\";\nif(size == 0) {\ntail = new Node<>(element, tail.next);\nprecursor = tail.next;\ntail.next.next = tail;\n}else if(precursor == tail) {\ntail = new Node<>(element, precursor.next);\nprecursor.next = tail;\n}else {\nNode<E> node = new Node<>(element, precursor.next);\nprecursor.next = node;\n}\nsize++;\nassert wellFormed() : \"invariant failed at end of insert\";\n}",
+  "accessModifier": "public",
+  "returnType": "void",
+  "methodName": "insert"
 }

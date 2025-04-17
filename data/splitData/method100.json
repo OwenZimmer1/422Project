@@ -1,4 +1,7 @@
 {
   "javadoc": "/*** Checks if the process is completed.\n* @return true, if is done */",
-  "code": "public boolean isDone(){\nreturn finishedInstructions == totalInstructions;}"
+  "code": "public boolean isDone(){\nreturn finishedInstructions == totalInstructions;}",
+  "accessModifier": "public",
+  "returnType": "boolean",
+  "methodName": "isDone"
 }

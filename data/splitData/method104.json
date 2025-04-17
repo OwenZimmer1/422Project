@@ -1,4 +1,7 @@
 {
   "javadoc": "/**Instantiates a new queue object.\n*  It will only contain a dummy process with null name and 0 instructions,\n*  linked circularly to itself. This dummy process should never be\n*  passed outside of this class.\n*  @postcondition queue is empty except for dummy process\n*/",
-  "code": "public Queue(){\ndummy = new Process();\ndummy.next = dummy;\ndummy.prev = dummy;\nversion = 0;\nmanyItems = 0;\nassert wellFormed() : \"invariant failed in constructor\";\n}"
+  "code": "public Queue(){\ndummy = new Process();\ndummy.next = dummy;\ndummy.prev = dummy;\nversion = 0;\nmanyItems = 0;\nassert wellFormed() : \"invariant failed in constructor\";\n}",
+  "accessModifier": "default",
+  "returnType": "public",
+  "methodName": "Queue"
 }

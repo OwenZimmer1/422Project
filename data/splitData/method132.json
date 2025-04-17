@@ -1,4 +1,7 @@
 {
   "javadoc": "/*** Accept into the consumer all strings in this lexicon.\n* @param consumer the consumer to accept the strings\n* @throws NullPointerException if consumer is null\n*/",
-  "code": "public void consumeAll(Consumer<String> consumer) {\nconsumeAllWithPrefix(consumer,\"\");\n}"
+  "code": "public void consumeAll(Consumer<String> consumer) {\nconsumeAllWithPrefix(consumer,\"\");\n}",
+  "accessModifier": "public",
+  "returnType": "void",
+  "methodName": "consumeAll"
 }

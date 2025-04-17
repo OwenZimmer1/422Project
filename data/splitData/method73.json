@@ -1,4 +1,7 @@
 {
   "javadoc": "/*** Adds a Player to this Team.\n* It should be added according to the priority of the team.\n* @param t the Player to add, must not be null and must not be in another team.\n* @throws IllegalArgumentException if the player is already in a team or if the added player would come before the\n* the dummy player (a player with an empty name, highest score possible and null position).\n*/",
-  "code": "public void add(Player t) {\nassert wellFormed() : \"invariant fails at beginning of add\";\nif(t.getNext() != null || t.getPrevious() != null) throw new IllegalArgumentException(\"Player already in team\");\n\ndummy.addInPriority(t, priority);\n\nassert wellFormed() : \"invariant fails at end of add\";\n}"
+  "code": "public void add(Player t) {\nassert wellFormed() : \"invariant fails at beginning of add\";\nif(t.getNext() != null || t.getPrevious() != null) throw new IllegalArgumentException(\"Player already in team\");\n\ndummy.addInPriority(t, priority);\n\nassert wellFormed() : \"invariant fails at end of add\";\n}",
+  "accessModifier": "public",
+  "returnType": "void",
+  "methodName": "add"
 }

@@ -1,4 +1,7 @@
 {
   "javadoc": "/*** Getter for deltay field.\n*\n* @return the current deltay value\n*/",
-  "code": "public double dy(){\nreturn this.deltay;\n}"
+  "code": "public double dy(){\nreturn this.deltay;\n}",
+  "accessModifier": "public",
+  "returnType": "double",
+  "methodName": "dy"
 }

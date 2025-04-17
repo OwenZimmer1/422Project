@@ -1,4 +1,7 @@
 {
   "javadoc": "/*** finds the distance between 2 points\n*\n* @param point the point that will be found the distance from\n* @return the distance between two points\n*/",
-  "code": "public double distance(Point point) {\nVector temp = new Vector(this, point);\nreturn temp.magnitude();\n}"
+  "code": "public double distance(Point point) {\nVector temp = new Vector(this, point);\nreturn temp.magnitude();\n}",
+  "accessModifier": "public",
+  "returnType": "double",
+  "methodName": "distance"
 }

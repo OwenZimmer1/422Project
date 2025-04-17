@@ -1,4 +1,7 @@
 {
   "javadoc": "/*** Compute the number of players.\n* @return number of players\n*/",
-  "code": "public int size() {\nassert wellFormed() : \"invariant fails at beginning of size\";\n\nint count = 0;\nfor(Player source = dummy.getNext(); source != null; source = source.getNext()) {\ncount++;\n}\nreturn count;\n}"
+  "code": "public int size() {\nassert wellFormed() : \"invariant fails at beginning of size\";\n\nint count = 0;\nfor(Player source = dummy.getNext(); source != null; source = source.getNext()) {\ncount++;\n}\nreturn count;\n}",
+  "accessModifier": "public",
+  "returnType": "int",
+  "methodName": "size"
 }
