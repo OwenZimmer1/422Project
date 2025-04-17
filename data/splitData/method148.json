@@ -1,4 +1,22 @@
 {
   "javadoc": "/*** Remove one copy of a word from the multiset.\n* If there are multiple copies, then we just adjust the count,\n* and the map is unaffected (iterators don't go stale).\n* @param str string to remove one of, may be null (but ignored if so)\n* @return true if the word was in the multiset.\n*/",
-  "code": "public boolean removeOne(String str) {\nassert wellFormed() : \"invariant false at start of removeOne\";\nboolean result = false;\nif(str == null) return false;\n\nint i = hash(str, false);\nif(isOpen(i)) {\nreturn false;\n}else {\nif(data[i].count == 1) remove(data[i].string);\nelse data[i].count--;\nresult = true;\n}\n\nassert wellFormed() : \"invariant false at end of removeOne\";\nreturn result;\n}"
+  "code": "public boolean removeOne(String str) {\nassert wellFormed() : \"invariant false at start of removeOne\";\nboolean result = false;\nif(str == null) return false;\n\nint i = hash(str, false);\nif(isOpen(i)) {\nreturn false;\n}else {\nif(data[i].count == 1) remove(data[i].string);\nelse data[i].count--;\nresult = true;\n}\n\nassert wellFormed() : \"invariant false at end of removeOne\";\nreturn result;\n}",
+  "method_name": "removeOne",
+  "parameters": "String str",
+  "return_type": "boolean",
+  "return_variable": "false",
+  "called_methods": [
+    "wellFormed",
+    "hash",
+    "isOpen",
+    "remove"
+  ],
+  "local_variables": [
+    "result",
+    "false",
+    "i",
+    "false",
+    "result"
+  ],
+  "thrown_exceptions": []
 }

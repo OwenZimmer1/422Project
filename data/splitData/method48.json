@@ -1,4 +1,20 @@
 {
   "javadoc": "/*** Update the player's location.\n*\n* @param mouseLoc the current [adjusted] mouse location\n*/",
-  "code": "public void update(Point mouseLoc){\nint new_x = Math.max(radius, mouseLoc.intX());\nint new_y = Math.max(radius, mouseLoc.intY());\nnew_x = Math.min(new_x, DodgeBall.BOUNDS.width -radius);\nnew_y = Math.min(new_y, DodgeBall.BOUNDS.height - radius);\nlocation = new Point(new_x, new_y);\n}"
+  "code": "public void update(Point mouseLoc){\nint new_x = Math.max(radius, mouseLoc.intX());\nint new_y = Math.max(radius, mouseLoc.intY());\nnew_x = Math.min(new_x, DodgeBall.BOUNDS.width -radius);\nnew_y = Math.min(new_y, DodgeBall.BOUNDS.height - radius);\nlocation = new Point(new_x, new_y);\n}",
+  "method_name": "update",
+  "parameters": "Point mouseLoc",
+  "return_type": "void",
+  "return_variable": "",
+  "called_methods": [
+    "max",
+    "intX",
+    "intY",
+    "min",
+    "Point"
+  ],
+  "local_variables": [
+    "new_x",
+    "new_y"
+  ],
+  "thrown_exceptions": []
 }

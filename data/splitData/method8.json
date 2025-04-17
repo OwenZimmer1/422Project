@@ -1,4 +1,15 @@
 {
   "javadoc": "/*** Checks if colliding with the parameter ball.\n*\n* @param other the other ball\n* @return true if colliding\n*/",
-  "code": "public boolean isColliding(Ball other){\nreturn this.getLoc().distance(other.getLoc()) <= this.getRadius() + other.getRadius();\n}"
+  "code": "public boolean isColliding(Ball other){\nreturn this.getLoc().distance(other.getLoc()) <= this.getRadius() + other.getRadius();\n}",
+  "method_name": "isColliding",
+  "parameters": "Ball other",
+  "return_type": "boolean",
+  "return_variable": "this.getLoc().distance(other.getLoc()) <= this.getRadius() + other.getRadius()",
+  "called_methods": [
+    "getLoc",
+    "distance",
+    "getRadius"
+  ],
+  "local_variables": [],
+  "thrown_exceptions": []
 }

@@ -1,4 +1,14 @@
 {
   "javadoc": "/*** gets y value to nearest integer\n*\n* @return y value to nearest integer\n*/",
-  "code": "public int intY() {\nreturn (int)Math.round(this.y());\n}"
+  "code": "public int intY() {\nreturn (int)Math.round(this.y());\n}",
+  "method_name": "intY",
+  "parameters": "",
+  "return_type": "int",
+  "return_variable": "(int)Math.round(this.y())",
+  "called_methods": [
+    "round",
+    "y"
+  ],
+  "local_variables": [],
+  "thrown_exceptions": []
 }

@@ -1,4 +1,13 @@
 {
   "javadoc": "/*** constructor\n* @param manyItems: number of items\n*/",
-  "code": "public BallCollection(int manyItems) {\ndata = new Ball[manyItems];\nthis.manyItems = manyItems;\nversion = 0;\n\nassert wellFormed() : \"invariant failed at end of constructor\";\n}"
+  "code": "public BallCollection(int manyItems) {\ndata = new Ball[manyItems];\nthis.manyItems = manyItems;\nversion = 0;\n\nassert wellFormed() : \"invariant failed at end of constructor\";\n}",
+  "method_name": "BallCollection",
+  "parameters": "int manyItems",
+  "return_type": "public",
+  "return_variable": "",
+  "called_methods": [
+    "wellFormed"
+  ],
+  "local_variables": [],
+  "thrown_exceptions": []
 }

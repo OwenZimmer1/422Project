@@ -1,4 +1,17 @@
 {
   "javadoc": "/*** Remove the current element from this sequence.\n* @param - none\n* @precondition\n*   isCurrent() returns true.\n* @postcondition\n*   The current element has been removed from this sequence, and the\n*   following element (if there is one) is now the new current element.\n*   If there was no following element, then there is now no current\n*   element.\n* @exception IllegalStateException\n*   Indicates that there is no current element, so\n*   removeCurrent may not be called.\n**/",
-  "code": "public void removeCurrent( )\n{\nassert wellFormed() : \"invariant wrong at start of removeCurrent()\";\nif(!isCurrent()) throw new IllegalStateException(\"no element to remove\");\n// TODO: Implemented by student.\n// See textbook pp.176-78, 181-184\nif(manyNodes == 1) {\nhead = null;\ntail = null;\nprecursor = null;\ncursor = null;\n}\nelse if(cursor == tail) {\ntail = precursor;\ntail.next = null;\nprecursor = null;\ncursor = null;\n}\nelse if(cursor == head) {\nhead = head.next;\ncursor = head;\n}\nelse {\ncursor = cursor.next;\nprecursor.next = cursor;\n}\nmanyNodes--;\n\nassert wellFormed() : \"invariant wrong at end of removeCurrent()\";\n}"
+  "code": "public void removeCurrent( )\n{\nassert wellFormed() : \"invariant wrong at start of removeCurrent()\";\nif(!isCurrent()) throw new IllegalStateException(\"no element to remove\");\n// TODO: Implemented by student.\n// See textbook pp.176-78, 181-184\nif(manyNodes == 1) {\nhead = null;\ntail = null;\nprecursor = null;\ncursor = null;\n}\nelse if(cursor == tail) {\ntail = precursor;\ntail.next = null;\nprecursor = null;\ncursor = null;\n}\nelse if(cursor == head) {\nhead = head.next;\ncursor = head;\n}\nelse {\ncursor = cursor.next;\nprecursor.next = cursor;\n}\nmanyNodes--;\n\nassert wellFormed() : \"invariant wrong at end of removeCurrent()\";\n}",
+  "method_name": "removeCurrent",
+  "parameters": "",
+  "return_type": "void",
+  "return_variable": "",
+  "called_methods": [
+    "wellFormed",
+    "isCurrent",
+    "IllegalStateException"
+  ],
+  "local_variables": [],
+  "thrown_exceptions": [
+    "IllegalStateException"
+  ]
 }

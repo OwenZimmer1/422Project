@@ -1,4 +1,13 @@
 {
   "javadoc": "/*** Gets the radius.\n*\n* @return the radius\n*/",
-  "code": "public int getRadius(){return radius;}"
+  "code": "public int getRadius(){return radius;}",
+  "method_name": "getRadius",
+  "parameters": "",
+  "return_type": "int",
+  "return_variable": "radius",
+  "called_methods": [],
+  "local_variables": [
+    "radius"
+  ],
+  "thrown_exceptions": []
 }

@@ -1,4 +1,15 @@
 {
   "javadoc": "/*** Draws the player.\n*\n* @param g the Graphics context on which to draw\n*/",
-  "code": "public void draw(Graphics g){\ng.drawImage(playerImg,\nlocation.intX() - radius, location.intY() - radius,\nradius*2, radius*2, null);\n}"
+  "code": "public void draw(Graphics g){\ng.drawImage(playerImg,\nlocation.intX() - radius, location.intY() - radius,\nradius*2, radius*2, null);\n}",
+  "method_name": "draw",
+  "parameters": "Graphics g",
+  "return_type": "void",
+  "return_variable": "",
+  "called_methods": [
+    "drawImage",
+    "intX",
+    "intY"
+  ],
+  "local_variables": [],
+  "thrown_exceptions": []
 }

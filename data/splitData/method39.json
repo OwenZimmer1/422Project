@@ -1,4 +1,16 @@
 {
   "javadoc": "/*** Add a new element to this sequence, before the current element (if any).\n* If the new element would take this sequence beyond its current capacity,\n* then the capacity is increased before adding the new element.\n* @param element\n*   the new element that is being added\n* @postcondition\n*   A new copy of the element has been added to this sequence. If there was\n*   a current element, then the new element is placed before the current\n*   element. If there was no current element, then the new element is placed\n*   at the end of the sequence. In all cases, the new element becomes the\n*   new current element of this sequence.\n* @exception OutOfMemoryError\n*   Indicates insufficient memory for increasing the sequence's capacity.\n**/",
-  "code": "public void insert(Ball element)\n{\nassert wellFormed() : \"invariant failed at start of insert\";\n\nensureCapacity(manyItems + 1);\n\nfor(int i = manyItems; i > currentIndex; i--) {\ndata[i] = data[i-1];\n}\ndata[currentIndex] = element;\n\nmanyItems++;\n\nassert wellFormed() : \"invariant failed at end of insert\";\n}"
+  "code": "public void insert(Ball element)\n{\nassert wellFormed() : \"invariant failed at start of insert\";\n\nensureCapacity(manyItems + 1);\n\nfor(int i = manyItems; i > currentIndex; i--) {\ndata[i] = data[i-1];\n}\ndata[currentIndex] = element;\n\nmanyItems++;\n\nassert wellFormed() : \"invariant failed at end of insert\";\n}",
+  "method_name": "insert",
+  "parameters": "Ball element",
+  "return_type": "void",
+  "return_variable": "",
+  "called_methods": [
+    "wellFormed",
+    "ensureCapacity"
+  ],
+  "local_variables": [
+    "i"
+  ],
+  "thrown_exceptions": []
 }

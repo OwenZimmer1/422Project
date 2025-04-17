@@ -1,4 +1,26 @@
 {
   "javadoc": "/*** Accept into the consumer all strings that start with the given prefix.\n* @param consumer the consumer to accept the strings\n* @param prefix the prefix to find all strings starting with\n* @throws NullPointerException if consumer or prefix is null\n*/",
-  "code": "public void consumeAllWithPrefix(Consumer<String> consumer, String prefix) {\nassert wellFormed() : \"invariant false at start of consumeAllWithPrefix()\";\nif (consumer == null) throw new NullPointerException(\"Can't accept into null consumer\");\nif (prefix == null) throw new NullPointerException(\"Prefix can't be null\");\n// TODO: Implement this method with the special iterator, not with recursion.\nIterator<String> it = iterator(prefix);\nboolean done = false;\nwhile(it.hasNext() && !done) {\nString next = it.next();\nif(next.startsWith(prefix)) consumer.accept(next);\nelse done = true;\n}\n}"
+  "code": "public void consumeAllWithPrefix(Consumer<String> consumer, String prefix) {\nassert wellFormed() : \"invariant false at start of consumeAllWithPrefix()\";\nif (consumer == null) throw new NullPointerException(\"Can't accept into null consumer\");\nif (prefix == null) throw new NullPointerException(\"Prefix can't be null\");\n// TODO: Implement this method with the special iterator, not with recursion.\nIterator<String> it = iterator(prefix);\nboolean done = false;\nwhile(it.hasNext() && !done) {\nString next = it.next();\nif(next.startsWith(prefix)) consumer.accept(next);\nelse done = true;\n}\n}",
+  "method_name": "consumeAllWithPrefix",
+  "parameters": "Consumer<String> consumer, String prefix",
+  "return_type": "void",
+  "return_variable": "",
+  "called_methods": [
+    "wellFormed",
+    "NullPointerException",
+    "iterator",
+    "hasNext",
+    "next",
+    "startsWith",
+    "accept"
+  ],
+  "local_variables": [
+    "it",
+    "done",
+    "next",
+    "done"
+  ],
+  "thrown_exceptions": [
+    "NullPointerException"
+  ]
 }

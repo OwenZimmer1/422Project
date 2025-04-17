@@ -1,4 +1,16 @@
 {
   "javadoc": "/**Add all processes from parameter queue into the back of this queue.\n*  The parameter queue should be empty after this method,\n* except if the parameter is the same as this, in which case, nothing happens.\n* @param pq the queue from which to take all processes, must not be null\n*/",
-  "code": "public void takeAll(Queue pq) {\nassert wellFormed() : \"invariant failed at start of takeAll\";\nif(pq == null) throw new NullPointerException(\"Queue is empty\");\nif(pq.manyItems == 0) return;\nif(this == pq) return;\n\npq.dummy.prev.next = dummy;\npq.dummy.next.prev = dummy.prev;\ndummy.prev.next = pq.dummy.next;\ndummy.prev = pq.dummy.prev;\npq.dummy.prev = pq.dummy.next= pq.dummy;\n\nmanyItems += pq.manyItems;\npq.manyItems = 0;\n\nversion++;\npq.version++;\n\nassert wellFormed() : \"invariant failed at end of takeAll\";\nassert pq.wellFormed() : \"parameter queue invariant failed at end of takeAll\";\n}"
+  "code": "public void takeAll(Queue pq) {\nassert wellFormed() : \"invariant failed at start of takeAll\";\nif(pq == null) throw new NullPointerException(\"Queue is empty\");\nif(pq.manyItems == 0) return;\nif(this == pq) return;\n\npq.dummy.prev.next = dummy;\npq.dummy.next.prev = dummy.prev;\ndummy.prev.next = pq.dummy.next;\ndummy.prev = pq.dummy.prev;\npq.dummy.prev = pq.dummy.next= pq.dummy;\n\nmanyItems += pq.manyItems;\npq.manyItems = 0;\n\nversion++;\npq.version++;\n\nassert wellFormed() : \"invariant failed at end of takeAll\";\nassert pq.wellFormed() : \"parameter queue invariant failed at end of takeAll\";\n}",
+  "method_name": "takeAll",
+  "parameters": "Queue pq",
+  "return_type": "void",
+  "return_variable": "",
+  "called_methods": [
+    "wellFormed",
+    "NullPointerException"
+  ],
+  "local_variables": [],
+  "thrown_exceptions": [
+    "NullPointerException"
+  ]
 }

@@ -1,4 +1,13 @@
 {
   "javadoc": "/*** Checks if the process is completed.\n* @return true, if is done */",
-  "code": "public boolean isDone(){\nreturn finishedInstructions == totalInstructions;}"
+  "code": "public boolean isDone(){\nreturn finishedInstructions == totalInstructions;}",
+  "method_name": "isDone",
+  "parameters": "",
+  "return_type": "boolean",
+  "return_variable": "finishedInstructions == totalInstructions",
+  "called_methods": [],
+  "local_variables": [
+    "finishedInstructions"
+  ],
+  "thrown_exceptions": []
 }

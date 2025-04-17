@@ -1,4 +1,13 @@
 {
   "javadoc": "/**Gets the next player.\n* @return the next player */",
-  "code": "public Player getNext() {return next;}"
+  "code": "public Player getNext() {return next;}",
+  "method_name": "getNext",
+  "parameters": "",
+  "return_type": "Player",
+  "return_variable": "next",
+  "called_methods": [],
+  "local_variables": [
+    "next"
+  ],
+  "thrown_exceptions": []
 }

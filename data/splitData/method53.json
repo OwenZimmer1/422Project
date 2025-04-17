@@ -1,4 +1,14 @@
 {
   "javadoc": "/*** Accessor method to determine whether this sequence has a specified\n* current element that can be retrieved with the\n* getCurrent method.\n* @param - none\n* @return\n*   true (there is a current element) or false (there is no current element at the moment)\n**/",
-  "code": "public boolean isCurrent( )\n{\nassert wellFormed() : \"invariant wrong at start of getCurrent()\";\n// TODO: Implemented by student.\n// This method shouldn't modify any fields, hence no assertion at end\nreturn cursor != null;\n}"
+  "code": "public boolean isCurrent( )\n{\nassert wellFormed() : \"invariant wrong at start of getCurrent()\";\n// TODO: Implemented by student.\n// This method shouldn't modify any fields, hence no assertion at end\nreturn cursor != null;\n}",
+  "method_name": "isCurrent",
+  "parameters": "",
+  "return_type": "boolean",
+  "return_variable": "cursor != null",
+  "called_methods": [
+    "wellFormed",
+    "getCurrent"
+  ],
+  "local_variables": [],
+  "thrown_exceptions": []
 }

@@ -1,4 +1,13 @@
 {
   "javadoc": "/**Gets the total amount of instructions in the process.\n* @return the total instructions */",
-  "code": "public int getTotal(){return totalInstructions;}"
+  "code": "public int getTotal(){return totalInstructions;}",
+  "method_name": "getTotal",
+  "parameters": "",
+  "return_type": "int",
+  "return_variable": "totalInstructions",
+  "called_methods": [],
+  "local_variables": [
+    "totalInstructions"
+  ],
+  "thrown_exceptions": []
 }

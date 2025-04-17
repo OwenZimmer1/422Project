@@ -1,4 +1,15 @@
 {
   "javadoc": "/*** Instantiates a new process.\n*\n* @param name the name of the process, must not be null\n* @param totalIns the total instructions of the process\n*/",
-  "code": "public Process(String name, int totalIns) {\nif (name == null) throw new NullPointerException(\"name must not be null\");\nthis.name = name;\nthis.totalInstructions = totalIns;\n}"
+  "code": "public Process(String name, int totalIns) {\nif (name == null) throw new NullPointerException(\"name must not be null\");\nthis.name = name;\nthis.totalInstructions = totalIns;\n}",
+  "method_name": "Process",
+  "parameters": "String name, int totalIns",
+  "return_type": "public",
+  "return_variable": "",
+  "called_methods": [
+    "NullPointerException"
+  ],
+  "local_variables": [],
+  "thrown_exceptions": [
+    "NullPointerException"
+  ]
 }

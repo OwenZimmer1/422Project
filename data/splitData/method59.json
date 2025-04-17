@@ -1,4 +1,24 @@
 {
   "javadoc": "/*** Generate a copy of this sequence.\n* @param - none\n* @return\n*   The return value is a copy of this sequence. Subsequent changes to the\n*   copy will not affect the original, nor vice versa.\n*   Whatever was current in the original object is now current in the clone.\n* @exception OutOfMemoryError\n*   Indicates insufficient memory for creating the clone.\n**/",
-  "code": "public BallSeq clone( )\n{\nassert wellFormed() : \"invariant wrong at start of clone()\";\n\nBallSeq result;\n\ntry\n{\nresult = (BallSeq) super.clone( );\n}\ncatch (CloneNotSupportedException e)\n{\n// This exception should not occur. But if it does, it would probably\n// indicate a programming error that made super.clone unavailable.\n// The most common error would be forgetting the \"Implements Cloneable\"\n// clause at the start of this class.\nthrow new RuntimeException\n(\"This class does not implement Cloneable\");\n}\n// This is inspired by the textbook for this class, page 203\nif(result.head == null) return result;\n\nNode source = result.head;\nNode copyHead = new Node(source.data, null);\nNode copyTail = copyHead;\n\nwhile(source.next != null) {\nif(source == cursor) result.cursor = copyTail;\nif(source == precursor) result.precursor = copyTail;\nif(source == tail) result.tail = source;\nsource = source.next;\ncopyTail.next = new Node(source.data, null);\ncopyTail = copyTail.next;\n}\nresult.head = copyHead;\nif(source == cursor) result.cursor = copyTail;\nif(source == precursor) result.precursor = copyTail;\nif(source == tail) result.tail = copyTail;\n\n// TODO: Implemented by student.\n// Now do the hard work of cloning the list.\n// See pp 200-204, 235 (3rd ed. pp. 193-197, 228)\n// Setting precursor, cursor and tail correctly is tricky.\n\n\nassert wellFormed() : \"invariant wrong at end of clone() for this\";\nassert result.wellFormed() : \"invariant wrong for result of clone() for copy\";\nreturn result;\n}"
+  "code": "public BallSeq clone( )\n{\nassert wellFormed() : \"invariant wrong at start of clone()\";\n\nBallSeq result;\n\ntry\n{\nresult = (BallSeq) super.clone( );\n}\ncatch (CloneNotSupportedException e)\n{\n// This exception should not occur. But if it does, it would probably\n// indicate a programming error that made super.clone unavailable.\n// The most common error would be forgetting the \"Implements Cloneable\"\n// clause at the start of this class.\nthrow new RuntimeException\n(\"This class does not implement Cloneable\");\n}\n// This is inspired by the textbook for this class, page 203\nif(result.head == null) return result;\n\nNode source = result.head;\nNode copyHead = new Node(source.data, null);\nNode copyTail = copyHead;\n\nwhile(source.next != null) {\nif(source == cursor) result.cursor = copyTail;\nif(source == precursor) result.precursor = copyTail;\nif(source == tail) result.tail = source;\nsource = source.next;\ncopyTail.next = new Node(source.data, null);\ncopyTail = copyTail.next;\n}\nresult.head = copyHead;\nif(source == cursor) result.cursor = copyTail;\nif(source == precursor) result.precursor = copyTail;\nif(source == tail) result.tail = copyTail;\n\n// TODO: Implemented by student.\n// Now do the hard work of cloning the list.\n// See pp 200-204, 235 (3rd ed. pp. 193-197, 228)\n// Setting precursor, cursor and tail correctly is tricky.\n\n\nassert wellFormed() : \"invariant wrong at end of clone() for this\";\nassert result.wellFormed() : \"invariant wrong for result of clone() for copy\";\nreturn result;\n}",
+  "method_name": "clone",
+  "parameters": "",
+  "return_type": "BallSeq",
+  "return_variable": "result",
+  "called_methods": [
+    "wellFormed",
+    "RuntimeException",
+    "Node"
+  ],
+  "local_variables": [
+    "result",
+    "result",
+    "source",
+    "copyHead",
+    "copyTail",
+    "result"
+  ],
+  "thrown_exceptions": [
+    "RuntimeException"
+  ]
 }

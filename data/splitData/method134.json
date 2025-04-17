@@ -1,4 +1,25 @@
 {
   "javadoc": "/*** Add a new string to the lexicon. If it already exists, do nothing and return false.\n* @param str the string to add (must not be null)\n* @return true if str was added, false otherwise\n* @throws NullPointerException if str is null\n*/",
-  "code": "@Override // implementation\npublic boolean add(String str) {\nassert wellFormed() : \"invariant false at start of add()\";\nboolean result = false;\nif (str == null) throw new NullPointerException(\"Cannot add null.\");\nNode n = root;\nNode lag = null;\nwhile (n != null) {\nif (n.string.equals(str)) break;\nlag = n;\nif (str.compareTo(n.string) > 0) n = n.right;\nelse n = n.left;\n}\nif (n == null) {\nn = new Node(str);\nif (lag == null)\nroot = n;\nelse if (str.compareTo(lag.string) > 0)\nlag.right = n;\nelse\nlag.left = n;\n++numNodes;\nresult = true;\nversion++;\n}\n// XXX: Something is missing from this code that is needed for Homework #9\nassert wellFormed() : \"invariant false at end of add()\";\nreturn result;\n}"
+  "code": "@Override // implementation\npublic boolean add(String str) {\nassert wellFormed() : \"invariant false at start of add()\";\nboolean result = false;\nif (str == null) throw new NullPointerException(\"Cannot add null.\");\nNode n = root;\nNode lag = null;\nwhile (n != null) {\nif (n.string.equals(str)) break;\nlag = n;\nif (str.compareTo(n.string) > 0) n = n.right;\nelse n = n.left;\n}\nif (n == null) {\nn = new Node(str);\nif (lag == null)\nroot = n;\nelse if (str.compareTo(lag.string) > 0)\nlag.right = n;\nelse\nlag.left = n;\n++numNodes;\nresult = true;\nversion++;\n}\n// XXX: Something is missing from this code that is needed for Homework #9\nassert wellFormed() : \"invariant false at end of add()\";\nreturn result;\n}",
+  "method_name": "add",
+  "parameters": "String str",
+  "return_type": "boolean",
+  "return_variable": "result",
+  "called_methods": [
+    "wellFormed",
+    "NullPointerException",
+    "equals",
+    "compareTo",
+    "Node"
+  ],
+  "local_variables": [
+    "result",
+    "n",
+    "lag",
+    "n",
+    "result"
+  ],
+  "thrown_exceptions": [
+    "NullPointerException"
+  ]
 }

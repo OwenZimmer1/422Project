@@ -1,4 +1,11 @@
 {
   "javadoc": "/*** Launches the ball by setting active to true.\n*/",
-  "code": "public void launch(){active=true;}"
+  "code": "public void launch(){active=true;}",
+  "method_name": "launch",
+  "parameters": "",
+  "return_type": "void",
+  "return_variable": "",
+  "called_methods": [],
+  "local_variables": [],
+  "thrown_exceptions": []
 }

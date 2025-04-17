@@ -1,4 +1,13 @@
 {
   "javadoc": "/*** Accept into the consumer all strings in this lexicon.\n* @param consumer the consumer to accept the strings\n* @throws NullPointerException if consumer is null\n*/",
-  "code": "public void consumeAll(Consumer<String> consumer) {\nconsumeAllWithPrefix(consumer,\"\");\n}"
+  "code": "public void consumeAll(Consumer<String> consumer) {\nconsumeAllWithPrefix(consumer,\"\");\n}",
+  "method_name": "consumeAll",
+  "parameters": "Consumer<String> consumer",
+  "return_type": "void",
+  "return_variable": "",
+  "called_methods": [
+    "consumeAllWithPrefix"
+  ],
+  "local_variables": [],
+  "thrown_exceptions": []
 }

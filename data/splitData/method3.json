@@ -1,4 +1,13 @@
 {
   "javadoc": "/*** Return the current movement of the ball.\n*\n* @return the current movement\n*/",
-  "code": "public Vector getMove(){return move;}"
+  "code": "public Vector getMove(){return move;}",
+  "method_name": "getMove",
+  "parameters": "",
+  "return_type": "Vector",
+  "return_variable": "move",
+  "called_methods": [],
+  "local_variables": [
+    "move"
+  ],
+  "thrown_exceptions": []
 }

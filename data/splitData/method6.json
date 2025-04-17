@@ -1,4 +1,23 @@
 {
   "javadoc": "/*** If ball is active: moves location by the current movement.\n* If ball is not active: rotates vector by Math.PI/24.\n*/",
-  "code": "public void step(){\nif(active == true) {\ndouble x = this.getLoc().x() + this.getMove().dx();\ndouble y = this.getLoc().y() + this.getMove().dy();\nthis.location = new Point(x, y);\n}\nelse\nthis.move = this.getMove().rotate(Math.PI/24);\n}"
+  "code": "public void step(){\nif(active == true) {\ndouble x = this.getLoc().x() + this.getMove().dx();\ndouble y = this.getLoc().y() + this.getMove().dy();\nthis.location = new Point(x, y);\n}\nelse\nthis.move = this.getMove().rotate(Math.PI/24);\n}",
+  "method_name": "step",
+  "parameters": "",
+  "return_type": "void",
+  "return_variable": "",
+  "called_methods": [
+    "getLoc",
+    "x",
+    "getMove",
+    "dx",
+    "y",
+    "dy",
+    "Point",
+    "rotate"
+  ],
+  "local_variables": [
+    "x",
+    "y"
+  ],
+  "thrown_exceptions": []
 }

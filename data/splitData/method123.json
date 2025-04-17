@@ -1,4 +1,19 @@
 {
   "javadoc": "/*** Add a new string to the lexicon. If it already exists, do nothing and return false.\n* @param str the string to add (must not be null)\n* @return true if str was added, false otherwise\n* @throws NullPointerException if str is null\n*/",
-  "code": "public boolean add(String str) {\nassert wellFormed() : \"invariant false at start of add()\";\nif(str == null) throw new NullPointerException(\"str is null\");\nint manyNodesBefore = manyNodes;\nroot = addHelper(root, str);\nassert wellFormed() : \"invariant false at end of add()\";\nreturn manyNodesBefore != manyNodes;\n}"
+  "code": "public boolean add(String str) {\nassert wellFormed() : \"invariant false at start of add()\";\nif(str == null) throw new NullPointerException(\"str is null\");\nint manyNodesBefore = manyNodes;\nroot = addHelper(root, str);\nassert wellFormed() : \"invariant false at end of add()\";\nreturn manyNodesBefore != manyNodes;\n}",
+  "method_name": "add",
+  "parameters": "String str",
+  "return_type": "boolean",
+  "return_variable": "manyNodesBefore != manyNodes",
+  "called_methods": [
+    "wellFormed",
+    "NullPointerException",
+    "addHelper"
+  ],
+  "local_variables": [
+    "manyNodesBefore"
+  ],
+  "thrown_exceptions": [
+    "NullPointerException"
+  ]
 }

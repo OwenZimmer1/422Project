@@ -1,4 +1,26 @@
 {
   "javadoc": "/*** Draws the ball, and if non-active also draws its vector.\n*\n* @param g the Graphics context on which to draw\n*/",
-  "code": "public void draw(Graphics g){\ng.setColor(color);\ng.fillOval(location.intX() - radius, location.intY() - radius, radius * 2, radius * 2);\nif (!active){\nVector standard_vec = move.normalize().scale(radius * 2);\ng.setColor(Color.RED);\ng.drawLine(location.intX(), location.intY(), standard_vec.move(location).intX(), standard_vec.move(location).intY());\n}\n}\n\n/* Make a Ball with the same features as this ball.\n* @see java.lang.Object#clone()\n*/\n@Override\npublic Ball clone() {\ntry {\nreturn (Ball)super.clone();\n}catch (CloneNotSupportedException cnse) {\nthrow new RuntimeException\n(\"This class does not Implament Cloneable\");\n}\n\n}"
+  "code": "public void draw(Graphics g){\ng.setColor(color);\ng.fillOval(location.intX() - radius, location.intY() - radius, radius * 2, radius * 2);\nif (!active){\nVector standard_vec = move.normalize().scale(radius * 2);\ng.setColor(Color.RED);\ng.drawLine(location.intX(), location.intY(), standard_vec.move(location).intX(), standard_vec.move(location).intY());\n}\n}\n\n/* Make a Ball with the same features as this ball.\n* @see java.lang.Object#clone()\n*/\n@Override\npublic Ball clone() {\ntry {\nreturn (Ball)super.clone();\n}catch (CloneNotSupportedException cnse) {\nthrow new RuntimeException\n(\"This class does not Implament Cloneable\");\n}\n\n}",
+  "method_name": "draw",
+  "parameters": "Graphics g",
+  "return_type": "void",
+  "return_variable": "(Ball)super.clone()",
+  "called_methods": [
+    "setColor",
+    "fillOval",
+    "intX",
+    "intY",
+    "normalize",
+    "scale",
+    "drawLine",
+    "move",
+    "clone",
+    "RuntimeException"
+  ],
+  "local_variables": [
+    "standard_vec"
+  ],
+  "thrown_exceptions": [
+    "RuntimeException"
+  ]
 }

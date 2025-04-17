@@ -1,4 +1,11 @@
 {
   "javadoc": "/*** gets x value\n*\n* @return current x value\n*/",
-  "code": "public double x() {\nreturn this.x;\n}"
+  "code": "public double x() {\nreturn this.x;\n}",
+  "method_name": "x",
+  "parameters": "",
+  "return_type": "double",
+  "return_variable": "this.x",
+  "called_methods": [],
+  "local_variables": [],
+  "thrown_exceptions": []
 }

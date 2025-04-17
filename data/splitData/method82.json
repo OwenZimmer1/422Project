@@ -1,4 +1,11 @@
 {
   "javadoc": "/**Return the dummy node from the data structure since we do not have a dummy field. */",
-  "code": "private Node<E> getDummy() {\nreturn tail.next; // TODO\n}"
+  "code": "private Node<E> getDummy() {\nreturn tail.next; // TODO\n}",
+  "method_name": "getDummy",
+  "parameters": "",
+  "return_type": "Node<E>",
+  "return_variable": "tail.next",
+  "called_methods": [],
+  "local_variables": [],
+  "thrown_exceptions": []
 }

@@ -1,4 +1,17 @@
 {
   "javadoc": "/*** Count all the nodes in this subtree,\n* while checking that all the keys are all in the range (lo,hi),\n* and that the keys are arranged in BST form.\n* If a problem is found, -1 is returned and exactly one problem is reported.\n* <p>\n* @param n the root of the subtree to check\n* @param lo if non-null then all strings in the subtree rooted\n* \t\t\t\tat n must be [lexicographically] greater than this parameter\n* @param hi if non-null then all strings in the subtree rooted\n* \t\t\t\tat n must be [lexicographically] less than this parameter\n* @return number of nodes in the subtree, or -1 is there is a problem.\n*/",
-  "code": "private int checkInRange(Node n, String lo, String hi)\n{\nif(n == null) return 0;\nif(n.string == null) return reportNeg(\"n.string is null\");\nif(lo != null && n.string.compareTo(lo) <= 0) return reportNeg(\"not greater than lo\");\nif(hi != null && n.string.compareTo(hi) >= 0) return reportNeg(\"not less than hi\");\nint leftCount = checkInRange(n.left, lo, n.string);\nif(leftCount == -1) return -1;\nint rightCount = checkInRange(n.right, n.string, hi);\nif(rightCount == -1) return -1;\nreturn 1 + leftCount + rightCount;\n/* Check that all strings in the subtree are in the parameter range,\n* and none of them are null.\n* Report any errors.  If there is an error return a negative number.\n* (Write \"return reportNeg(...);\" when detecting a problem.)\n* Otherwise return the number of nodes in the subtree.\n* Note that the bounds in recursive calls may be different.\n*/\n}"
+  "code": "private int checkInRange(Node n, String lo, String hi)\n{\nif(n == null) return 0;\nif(n.string == null) return reportNeg(\"n.string is null\");\nif(lo != null && n.string.compareTo(lo) <= 0) return reportNeg(\"not greater than lo\");\nif(hi != null && n.string.compareTo(hi) >= 0) return reportNeg(\"not less than hi\");\nint leftCount = checkInRange(n.left, lo, n.string);\nif(leftCount == -1) return -1;\nint rightCount = checkInRange(n.right, n.string, hi);\nif(rightCount == -1) return -1;\nreturn 1 + leftCount + rightCount;\n/* Check that all strings in the subtree are in the parameter range,\n* and none of them are null.\n* Report any errors.  If there is an error return a negative number.\n* (Write \"return reportNeg(...);\" when detecting a problem.)\n* Otherwise return the number of nodes in the subtree.\n* Note that the bounds in recursive calls may be different.\n*/\n}",
+  "method_name": "checkInRange",
+  "parameters": "Node n, String lo, String hi",
+  "return_type": "int",
+  "return_variable": "0",
+  "called_methods": [
+    "reportNeg",
+    "compareTo"
+  ],
+  "local_variables": [
+    "leftCount",
+    "rightCount"
+  ],
+  "thrown_exceptions": []
 }

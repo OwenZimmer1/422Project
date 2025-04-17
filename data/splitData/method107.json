@@ -1,4 +1,15 @@
 {
   "javadoc": "/**Returns the next process to be polled from this queue.\n*\n* @return the next process to be polled by this queue, or null if empty\n* @see java.util.Queue#peek()\n*/",
-  "code": "@Override\npublic Process peek(){\nassert wellFormed() : \"invariant failed at start of peek\";\nif(manyItems == 0) return null;\nreturn dummy.next;\n}"
+  "code": "@Override\npublic Process peek(){\nassert wellFormed() : \"invariant failed at start of peek\";\nif(manyItems == 0) return null;\nreturn dummy.next;\n}",
+  "method_name": "peek",
+  "parameters": "",
+  "return_type": "Process",
+  "return_variable": "null",
+  "called_methods": [
+    "wellFormed"
+  ],
+  "local_variables": [
+    "null"
+  ],
+  "thrown_exceptions": []
 }

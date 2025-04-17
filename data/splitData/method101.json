@@ -1,4 +1,13 @@
 {
   "javadoc": "/**Perform a single instruction of the process. */",
-  "code": "public void performInstruction(){\nif (!isDone())\nfinishedInstructions++;\n}"
+  "code": "public void performInstruction(){\nif (!isDone())\nfinishedInstructions++;\n}",
+  "method_name": "performInstruction",
+  "parameters": "",
+  "return_type": "void",
+  "return_variable": "",
+  "called_methods": [
+    "isDone"
+  ],
+  "local_variables": [],
+  "thrown_exceptions": []
 }

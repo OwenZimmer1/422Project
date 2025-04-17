@@ -1,4 +1,17 @@
 {
   "javadoc": "/*** Return the stack that results from popping off the top element.\n* @throws NoSuchElementException if the stack is empty\n* @return stack after popping element\n*/",
-  "code": "public ImmutableStack<T> pop() {\nif (this == empty) throw new NoSuchElementException(\"empty stack\");\nreturn shorter;\n}"
+  "code": "public ImmutableStack<T> pop() {\nif (this == empty) throw new NoSuchElementException(\"empty stack\");\nreturn shorter;\n}",
+  "method_name": "pop",
+  "parameters": "",
+  "return_type": "ImmutableStack<T>",
+  "return_variable": "shorter",
+  "called_methods": [
+    "NoSuchElementException"
+  ],
+  "local_variables": [
+    "shorter"
+  ],
+  "thrown_exceptions": [
+    "NoSuchElementException"
+  ]
 }

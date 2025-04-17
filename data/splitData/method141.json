@@ -1,4 +1,11 @@
 {
   "javadoc": "/*** Find the node with the given key, creating it if necessary\n* (but only if \"create\" is true).  If create is true, then\n* the data structure invariant will be temporarily false\n* due to the node with a zero count.  The caller must address\n* the issue immediately.\n* @param key word to look for, must not be null\n* @param create whether to create a node with count=0 if not present.\n* @return node, or null if not present (and create is false)\n*/",
-  "code": "private Node getNode(String key, boolean create) {\nreturn getNode(dummy.right, key, create, dummy);\n}"
+  "code": "private Node getNode(String key, boolean create) {\nreturn getNode(dummy.right, key, create, dummy);\n}",
+  "method_name": "getNode",
+  "parameters": "String key, boolean create",
+  "return_type": "Node",
+  "return_variable": "getNode(dummy.right, key, create, dummy)",
+  "called_methods": [],
+  "local_variables": [],
+  "thrown_exceptions": []
 }

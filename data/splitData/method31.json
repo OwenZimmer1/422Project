@@ -1,4 +1,16 @@
 {
   "javadoc": "/*** Initialize an empty sequence with a specified initial capacity. Note that\n* the append method works\n* efficiently (without needing more memory) until this capacity is reached.\n* @param initialCapacity\n*   the initial capacity of this sequence\n* @precondition\n*   initialCapacity is non-negative.\n* @postcondition\n*   This sequence is empty and has the given initial capacity.\n* @exception IllegalArgumentException\n*   Indicates that initialCapacity is negative.\n* @exception OutOfMemoryError\n*   Indicates insufficient memory for an array with this many elements.\n*   new Ball[initialCapacity].\n**/",
-  "code": "public BallSeq(int initialCapacity)\n{\nif(initialCapacity < 0) throw new IllegalArgumentException(\"Inital Capacity must be non-negative\");\n\ndata = new Ball[initialCapacity];\nmanyItems = 0;\ncurrentIndex = 0;\nassert wellFormed() : \"Invariant false at end of constructor\";\n}"
+  "code": "public BallSeq(int initialCapacity)\n{\nif(initialCapacity < 0) throw new IllegalArgumentException(\"Inital Capacity must be non-negative\");\n\ndata = new Ball[initialCapacity];\nmanyItems = 0;\ncurrentIndex = 0;\nassert wellFormed() : \"Invariant false at end of constructor\";\n}",
+  "method_name": "BallSeq",
+  "parameters": "int initialCapacity",
+  "return_type": "public",
+  "return_variable": "",
+  "called_methods": [
+    "IllegalArgumentException",
+    "wellFormed"
+  ],
+  "local_variables": [],
+  "thrown_exceptions": [
+    "IllegalArgumentException"
+  ]
 }

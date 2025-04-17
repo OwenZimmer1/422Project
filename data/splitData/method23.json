@@ -1,4 +1,14 @@
 {
   "javadoc": "/*** Takes the dot product of this vector and the parameter vector.\n*\n* @param v the other vector\n* @return the dot product\n*/",
-  "code": "public double dot(Vector v){\nreturn this.dx() * v.dx() + this.dy() * v.dy();\n}"
+  "code": "public double dot(Vector v){\nreturn this.dx() * v.dx() + this.dy() * v.dy();\n}",
+  "method_name": "dot",
+  "parameters": "Vector v",
+  "return_type": "double",
+  "return_variable": "this.dx() * v.dx() + this.dy() * v.dy()",
+  "called_methods": [
+    "dx",
+    "dy"
+  ],
+  "local_variables": [],
+  "thrown_exceptions": []
 }

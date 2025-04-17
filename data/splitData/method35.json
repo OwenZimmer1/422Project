@@ -1,4 +1,17 @@
 {
   "javadoc": "/*** Accessor method to get the current element of this sequence.\n* @param - none\n* @precondition\n*   isCurrent() returns true.\n* @return\n*   the current element of this sequence, possibly null\n* @exception IllegalStateException\n*   Indicates that there is no current element, so\n*   getCurrent may not be called.\n**/",
-  "code": "public Ball getCurrent( )\n{\nassert wellFormed() : \"invariant failed at start of getCurrent\";\n\nif(!isCurrent()) throw new IllegalStateException(\"No current element found\");\n\nreturn data[currentIndex];\n\n}"
+  "code": "public Ball getCurrent( )\n{\nassert wellFormed() : \"invariant failed at start of getCurrent\";\n\nif(!isCurrent()) throw new IllegalStateException(\"No current element found\");\n\nreturn data[currentIndex];\n\n}",
+  "method_name": "getCurrent",
+  "parameters": "",
+  "return_type": "Ball",
+  "return_variable": "data[currentIndex]",
+  "called_methods": [
+    "wellFormed",
+    "isCurrent",
+    "IllegalStateException"
+  ],
+  "local_variables": [],
+  "thrown_exceptions": [
+    "IllegalStateException"
+  ]
 }

@@ -1,4 +1,18 @@
 {
   "javadoc": "/*** Check the invariant.\n* Returns false if any problem is found.\n* @return whether invariant is currently true.\n* If false is returned then exactly one problem has been reported.\n*/",
-  "code": "private boolean wellFormed() {\nint n = checkInRange(root, null, null);\nif (n < 0) return false; // problem already reported\nif (n != numNodes) return report(\"numNodes is \" + numNodes + \" but should be \" + n);\nreturn true;\n}"
+  "code": "private boolean wellFormed() {\nint n = checkInRange(root, null, null);\nif (n < 0) return false; // problem already reported\nif (n != numNodes) return report(\"numNodes is \" + numNodes + \" but should be \" + n);\nreturn true;\n}",
+  "method_name": "wellFormed",
+  "parameters": "",
+  "return_type": "boolean",
+  "return_variable": "false",
+  "called_methods": [
+    "checkInRange",
+    "report"
+  ],
+  "local_variables": [
+    "n",
+    "false",
+    "true"
+  ],
+  "thrown_exceptions": []
 }

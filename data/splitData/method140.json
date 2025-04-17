@@ -1,4 +1,21 @@
 {
   "javadoc": "/*** Look for the node for a particular key, creating it if requested\n* if it doesn't exist.\n* @param r subtree to look for the key, may be null\n* @param key key to look for for, must not be null\n* @param create whether to create a node with count 0 if not in tree\n* @param before the node before the first node in this subtree, must not be null\n* @return node with this key, or null if it is not present and create is false\n*/",
-  "code": "private Node getNode(Node r, String key, boolean create, Node before) {\nif(r == null) {\nif(!create) return null;\nNode n = new Node(key);\nn.count--;\nn.next = before.next;\nif(before.right == null) before.right = n;\nelse {\nNode source = before.right;\nwhile (source.left != null) source = source.left;\nsource.left = n;\n}\nbefore.next = n;\n\nreturn n;\n}\nint c = key.compareTo(r.string);\nif(c < 0) {\nreturn getNode(r.left, key, create, before);\n}\nelse if (c > 0) {\nreturn getNode(r.right, key, create, r);\n}else return r;\n\n}"
+  "code": "private Node getNode(Node r, String key, boolean create, Node before) {\nif(r == null) {\nif(!create) return null;\nNode n = new Node(key);\nn.count--;\nn.next = before.next;\nif(before.right == null) before.right = n;\nelse {\nNode source = before.right;\nwhile (source.left != null) source = source.left;\nsource.left = n;\n}\nbefore.next = n;\n\nreturn n;\n}\nint c = key.compareTo(r.string);\nif(c < 0) {\nreturn getNode(r.left, key, create, before);\n}\nelse if (c > 0) {\nreturn getNode(r.right, key, create, r);\n}else return r;\n\n}",
+  "method_name": "getNode",
+  "parameters": "Node r, String key, boolean create, Node before",
+  "return_type": "Node",
+  "return_variable": "null",
+  "called_methods": [
+    "Node",
+    "compareTo"
+  ],
+  "local_variables": [
+    "null",
+    "n",
+    "source",
+    "n",
+    "c",
+    "r"
+  ],
+  "thrown_exceptions": []
 }

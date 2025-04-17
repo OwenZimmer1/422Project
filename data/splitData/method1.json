@@ -1,4 +1,13 @@
 {
   "javadoc": "/*** Gets the location.\n*\n* @return the current location\n*/",
-  "code": "public Point getLoc(){return location;}"
+  "code": "public Point getLoc(){return location;}",
+  "method_name": "getLoc",
+  "parameters": "",
+  "return_type": "Point",
+  "return_variable": "location",
+  "called_methods": [],
+  "local_variables": [
+    "location"
+  ],
+  "thrown_exceptions": []
 }
