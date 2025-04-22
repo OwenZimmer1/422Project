@@ -1,7 +1,13 @@
 {
   "javadoc": "/*** The first element (if any) of this sequence is now current.\n* @param - none\n* @postcondition\n*   The front element of this sequence (if any) is now the current element (but\n*   if this sequence has no elements at all, then there is no current\n*   element).\n**/",
   "code": "public void start( )\n{\nassert wellFormed() : \"invariant failed at start of start\";\n\ncurrentIndex = 0;\nassert wellFormed() : \"invariant failed at end of start\";\n}",
-  "accessModifier": "public",
-  "returnType": "void",
-  "methodName": "start"
+  "method_name": "start",
+  "parameters": "",
+  "return_type": "void",
+  "return_variable": "",
+  "called_methods": [
+    "wellFormed"
+  ],
+  "local_variables": [],
+  "thrown_exceptions": []
 }

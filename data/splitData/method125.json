@@ -1,7 +1,14 @@
 {
   "javadoc": "/*** Copy all the strings from lexicon (in sorted order) into the array starting\n* at the given index.  Return the next index for (later) elements.\n* This is a helper method for {@link #toArray(String[])}.\n* @param array destination of copy\n* @param root the subtree whose elements should be copied\n* @param index the index to place the next element\n* @return the next spot in the array to use after this subtree is done\n*/",
   "code": "private int copyInto(String[] array, Node root, int index) {\nif(root == null) return index;\nindex = copyInto(array, root.left, index);\narray[index] = root.string;\nindex++;\nindex = copyInto(array, root.right, index);\nreturn index;\n}",
-  "accessModifier": "private",
-  "returnType": "int",
-  "methodName": "copyInto"
+  "method_name": "copyInto",
+  "parameters": "String[] array, Node root, int index",
+  "return_type": "int",
+  "return_variable": "index",
+  "called_methods": [],
+  "local_variables": [
+    "index",
+    "index"
+  ],
+  "thrown_exceptions": []
 }

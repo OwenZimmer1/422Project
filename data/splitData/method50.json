@@ -1,7 +1,13 @@
 {
   "javadoc": "/*** Create an empty sequence\n* @param - none\n* @postcondition\n*   This sequence is empty\n**/",
   "code": "public BallSeq( )\n{\nmanyNodes = 0;\nhead = null;\ntail = null;\ncursor = null;\nprecursor = null;\n\nassert wellFormed() : \"invariant failed in constructor\";\n}",
-  "accessModifier": "default",
-  "returnType": "public",
-  "methodName": "BallSeq"
+  "method_name": "BallSeq",
+  "parameters": "",
+  "return_type": "public",
+  "return_variable": "",
+  "called_methods": [
+    "wellFormed"
+  ],
+  "local_variables": [],
+  "thrown_exceptions": []
 }

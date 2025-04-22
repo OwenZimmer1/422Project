@@ -1,7 +1,13 @@
 {
   "javadoc": "/**Gets this player's score.\n* @return the score */",
   "code": "public int getScore() {return score;}",
-  "accessModifier": "public",
-  "returnType": "int",
-  "methodName": "getScore"
+  "method_name": "getScore",
+  "parameters": "",
+  "return_type": "int",
+  "return_variable": "score",
+  "called_methods": [],
+  "local_variables": [
+    "score"
+  ],
+  "thrown_exceptions": []
 }

@@ -1,7 +1,21 @@
 {
   "javadoc": "/*** Gets the next [lexicographically] greater string than the given string.\n* @param str the string of which to find the next greatest\n* @return the next string greater than str\n* @throws NullPointerException if str is null\n*/",
   "code": "public String getNext(String str) {\nassert wellFormed() : \"invariant false at start of getNext()\";\nif(str == null) throw new NullPointerException(\"str is null\");\nNode source = root;\nNode before = null;\nwhile(source != null) {\nif(str.compareTo(source.string) < 0) {\nbefore = source;\nsource = source.left;\n}else if(str.compareTo(source.string) >= 0) {\nsource = source.right;\n}\n}\nif(before == null) return null;\nreturn before.string;\n}",
-  "accessModifier": "public",
-  "returnType": "String",
-  "methodName": "getNext"
+  "method_name": "getNext",
+  "parameters": "String str",
+  "return_type": "String",
+  "return_variable": "null",
+  "called_methods": [
+    "wellFormed",
+    "NullPointerException",
+    "compareTo"
+  ],
+  "local_variables": [
+    "source",
+    "before",
+    "null"
+  ],
+  "thrown_exceptions": [
+    "NullPointerException"
+  ]
 }

@@ -1,7 +1,18 @@
 {
   "javadoc": "/*** Normalizes this vector.\n*\n* @return a vector with the same angle but magnitude of one.\n*/",
   "code": "public Vector normalize(){\ndouble magnitude = this.magnitude();\nreturn new Vector(this.dx() / magnitude, this.dy() / magnitude);\n}",
-  "accessModifier": "public",
-  "returnType": "Vector",
-  "methodName": "normalize"
+  "method_name": "normalize",
+  "parameters": "",
+  "return_type": "Vector",
+  "return_variable": "new Vector(this.dx() / magnitude, this.dy() / magnitude)",
+  "called_methods": [
+    "magnitude",
+    "Vector",
+    "dx",
+    "dy"
+  ],
+  "local_variables": [
+    "magnitude"
+  ],
+  "thrown_exceptions": []
 }

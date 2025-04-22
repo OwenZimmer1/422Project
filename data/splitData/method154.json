@@ -1,7 +1,11 @@
 {
   "javadoc": "/*** Return the stack that results from pushing another element on top.\n* @param val element to push\n* @return new stack resulting from pushing element\n*/",
   "code": "public ImmutableStack<T> push(T val) {\nreturn new ImmutableStack<>(val,this);\n}",
-  "accessModifier": "public",
-  "returnType": "ImmutableStack<T>",
-  "methodName": "push"
+  "method_name": "push",
+  "parameters": "T val",
+  "return_type": "ImmutableStack<T>",
+  "return_variable": "new ImmutableStack<>(val,this)",
+  "called_methods": [],
+  "local_variables": [],
+  "thrown_exceptions": []
 }

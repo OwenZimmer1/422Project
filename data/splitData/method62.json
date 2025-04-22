@@ -1,7 +1,16 @@
 {
   "javadoc": "/*** Instantiates a new Player.\n* @param name the name of the player, must not be null\n* @param score how many points this player has scored\n* @param position the position of the player, where null means can play ANY position\n*/",
   "code": "public Player(String name, int score, Position position) {\nif (name == null) throw new NullPointerException(\"name cannot be null\");\nthis.name = name;\nthis.position = position;\ncheckParameter(\"score\",score);\nthis.score = score;\n}",
-  "accessModifier": "default",
-  "returnType": "public",
-  "methodName": "Player"
+  "method_name": "Player",
+  "parameters": "String name, int score, Position position",
+  "return_type": "public",
+  "return_variable": "",
+  "called_methods": [
+    "NullPointerException",
+    "checkParameter"
+  ],
+  "local_variables": [],
+  "thrown_exceptions": [
+    "NullPointerException"
+  ]
 }

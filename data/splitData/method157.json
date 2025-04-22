@@ -1,7 +1,24 @@
 {
   "javadoc": "/*** Merge two sorted CLLs, or rather, merge the elements\n* of the second list into the first list.\n* This method should not create any new nodes!\n* The lists may have duplicates (according to the comparator)\n* but will be in non-decreasing order w.r.t. the comparator.\n* The result should include the dummy from the first CLL\n* and the second CLL should be left empty (dummy points to itself).\n* @note This method does not efficiently handle when the second list\n* contains a single element that belongs at the end of the first list.\n* In other words, this method does not do the work of insertion sort.\n* @param t1 tail of first CLL\n* @param t2 tail of second CLL\n* @return tail of merged list (first CLL with nodes of second CLL merged in)\n*/",
   "code": "private Node<E> merge(Node<E> t1, Node<E> t2) {\nif(t2.next == t2) return t1;\nif(t1.next == t1) {\nNode<E> dummy = t2.next;\nt1.next = t2.next.next;\nt2.next = t1;\nt1 = t2;\nt2 = dummy;\nt2.next = t2;\nreturn t1;\n}\nNode<E> n1 = t1.next.next;\nNode<E> n2 = t2.next.next;\n\nNode<E> cur;\nif(comparator.compare(n1.data, n2.data) < 0) {\ncur = n1;\nn1 = n1.next;\n}else {\ncur = n2;\nn2 = n2.next;\n}\nNode<E> first = cur;\nNode<E> dum1 = t1.next;\nNode<E> dum2 = t2.next;\n\nwhile(n1.data != null && n2.data != null) {\nif(comparator.compare(n1.data, n2.data) < 0) {\ncur.next = n1;\ncur = cur.next;\nn1 = n1.next;\n}\nelse {\ncur.next = n2;\ncur = cur.next;\nn2 = n2.next;\n}\n}\nwhile(n1.data != null) {\ncur.next = n1;\ncur = cur.next;\nn1 = n1.next;\n}\nwhile(n2.data != null) {\ncur.next = n2;\ncur = cur.next;\nn2 = n2.next;\n}\ncur.next = dum1;\nt1 = cur;\nt1.next.next = first;\nt2 = dum2;\nt2.next = t2;\n\nreturn t1;\n}",
-  "accessModifier": "private",
-  "returnType": "Node<E>",
-  "methodName": "merge"
+  "method_name": "merge",
+  "parameters": "Node<E> t1, Node<E> t2",
+  "return_type": "Node<E>",
+  "return_variable": "t1",
+  "called_methods": [
+    "compare"
+  ],
+  "local_variables": [
+    "t1",
+    "dummy",
+    "t1",
+    "n1",
+    "n2",
+    "cur",
+    "first",
+    "dum1",
+    "dum2",
+    "t1"
+  ],
+  "thrown_exceptions": []
 }

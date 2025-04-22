@@ -2,1128 +2,2638 @@
   {
     "javadoc": "/*** Gets the location.\n*\n* @return the current location\n*/",
     "code": "public Point getLoc(){return location;}",
-    "accessModifier": "public",
-    "returnType": "Point",
-    "methodName": "getLoc"
+    "method_name": "getLoc",
+    "parameters": "",
+    "return_type": "Point",
+    "return_variable": "location",
+    "called_methods": [],
+    "local_variables": [
+      "location"
+    ],
+    "thrown_exceptions": []
   },
   {
     "javadoc": "/*** Draws the ball, and if non-active also draws its vector.\n*\n* @param g the Graphics context on which to draw\n*/",
     "code": "public void draw(Graphics g){\ng.setColor(color);\ng.fillOval(location.intX() - radius, location.intY() - radius, radius * 2, radius * 2);\nif (!active){\nVector standard_vec = move.normalize().scale(radius * 2);\ng.setColor(Color.RED);\ng.drawLine(location.intX(), location.intY(), standard_vec.move(location).intX(), standard_vec.move(location).intY());\n}\n}\n\n/* Make a Ball with the same features as this ball.\n* @see java.lang.Object#clone()\n*/\n@Override\npublic Ball clone() {\ntry {\nreturn (Ball)super.clone();\n}catch (CloneNotSupportedException cnse) {\nthrow new RuntimeException\n(\"This class does not Implament Cloneable\");\n}\n\n}",
-    "accessModifier": "public",
-    "returnType": "void",
-    "methodName": "draw"
+    "method_name": "draw",
+    "parameters": "Graphics g",
+    "return_type": "void",
+    "return_variable": "(Ball)super.clone()",
+    "called_methods": [
+      "setColor",
+      "fillOval",
+      "intX",
+      "intY",
+      "normalize",
+      "scale",
+      "drawLine",
+      "move",
+      "clone",
+      "RuntimeException"
+    ],
+    "local_variables": [
+      "standard_vec"
+    ],
+    "thrown_exceptions": [
+      "RuntimeException"
+    ]
   },
   {
     "javadoc": "/*** Checks if the process is completed.\n* @return true, if is done */",
     "code": "public boolean isDone(){\nreturn finishedInstructions == totalInstructions;}",
-    "accessModifier": "public",
-    "returnType": "boolean",
-    "methodName": "isDone"
+    "method_name": "isDone",
+    "parameters": "",
+    "return_type": "boolean",
+    "return_variable": "finishedInstructions == totalInstructions",
+    "called_methods": [],
+    "local_variables": [
+      "finishedInstructions"
+    ],
+    "thrown_exceptions": []
   },
   {
     "javadoc": "/**Perform a single instruction of the process. */",
     "code": "public void performInstruction(){\nif (!isDone())\nfinishedInstructions++;\n}",
-    "accessModifier": "public",
-    "returnType": "void",
-    "methodName": "performInstruction"
+    "method_name": "performInstruction",
+    "parameters": "",
+    "return_type": "void",
+    "return_variable": "",
+    "called_methods": [
+      "isDone"
+    ],
+    "local_variables": [],
+    "thrown_exceptions": []
   },
   {
     "javadoc": "/***  Returns a clone of this process that is identical in every way\n*  except that it has null links.\n*\n* @return the process\n* @see java.lang.Object#clone()\n*/",
     "code": "@Override\npublic Process clone(){\nProcess copy = null;\ntry{\ncopy = (Process) super.clone();\ncopy.next = copy.prev = null;\ncopy.bar = null;\n}\ncatch (CloneNotSupportedException e){\nthrow new RuntimeException(\"forgot to make Cloneable?\");\n}\nreturn copy;\n}",
-    "accessModifier": "unknown",
-    "returnType": "unknown",
-    "methodName": "unknown"
+    "method_name": "clone",
+    "parameters": "",
+    "return_type": "Process",
+    "return_variable": "copy",
+    "called_methods": [
+      "RuntimeException"
+    ],
+    "local_variables": [
+      "copy",
+      "copy"
+    ],
+    "thrown_exceptions": [
+      "RuntimeException"
+    ]
   },
   {
     "javadoc": "/***  Checks for equality of this process with the parameter process.\n*  It will check everything except for the links.\n*\n* @param other the object against which to test for equality\n* @return true, if successful\n* @see java.lang.Object#equals(java.lang.Object)\n*/",
     "code": "@Override\npublic boolean equals(Object other){\nif (!(other instanceof Process) || other == null) return false;\nProcess p = (Process) other;\n\nreturn p.totalInstructions == totalInstructions &&\np.finishedInstructions == finishedInstructions &&\np.name.equals(name);\n}",
-    "accessModifier": "unknown",
-    "returnType": "unknown",
-    "methodName": "unknown"
+    "method_name": "equals",
+    "parameters": "Object other",
+    "return_type": "boolean",
+    "return_variable": "false",
+    "called_methods": [],
+    "local_variables": [
+      "false",
+      "p"
+    ],
+    "thrown_exceptions": []
   },
   {
     "javadoc": "/**Instantiates a new queue object.\n*  It will only contain a dummy process with null name and 0 instructions,\n*  linked circularly to itself. This dummy process should never be\n*  passed outside of this class.\n*  @postcondition queue is empty except for dummy process\n*/",
     "code": "public Queue(){\ndummy = new Process();\ndummy.next = dummy;\ndummy.prev = dummy;\nversion = 0;\nmanyItems = 0;\nassert wellFormed() : \"invariant failed in constructor\";\n}",
-    "accessModifier": "default",
-    "returnType": "public",
-    "methodName": "Queue"
+    "method_name": "Queue",
+    "parameters": "",
+    "return_type": "public",
+    "return_variable": "",
+    "called_methods": [
+      "Process",
+      "wellFormed"
+    ],
+    "local_variables": [],
+    "thrown_exceptions": []
   },
   {
     "javadoc": "/**Adds a new process to the end of the queue.\n*\n* @param p process to add to the end of this queue\n* @throws NullPointerException if the process to add is null\n* @throws IllegalArgumentException if the process is already in another queue\n*\n* @return true always\n* @see java.util.Queue#offer(java.lang.Object)\n*/",
     "code": "@Override\npublic boolean offer(Process p) {\nassert wellFormed() : \"invariant failed at start of offer\";\nif(p == null) throw new NullPointerException(\"Can't put null in list\");\nif(p.next != null || p.prev != null) throw new IllegalArgumentException(\"Item already in queue\");\n\np.next = dummy;\np.prev = dummy.prev;\ndummy.prev = p;\np.prev.next = p;\nversion++;\nmanyItems++;\nassert wellFormed() : \"invariant failed at end of offer\";\nreturn true;\n}",
-    "accessModifier": "unknown",
-    "returnType": "unknown",
-    "methodName": "unknown"
+    "method_name": "offer",
+    "parameters": "Process p",
+    "return_type": "boolean",
+    "return_variable": "true",
+    "called_methods": [
+      "wellFormed",
+      "NullPointerException",
+      "IllegalArgumentException"
+    ],
+    "local_variables": [
+      "true"
+    ],
+    "thrown_exceptions": [
+      "NullPointerException",
+      "IllegalArgumentException"
+    ]
   },
   {
     "javadoc": "/**Add all processes from parameter queue into the back of this queue.\n*  The parameter queue should be empty after this method,\n* except if the parameter is the same as this, in which case, nothing happens.\n* @param pq the queue from which to take all processes, must not be null\n*/",
     "code": "public void takeAll(Queue pq) {\nassert wellFormed() : \"invariant failed at start of takeAll\";\nif(pq == null) throw new NullPointerException(\"Queue is empty\");\nif(pq.manyItems == 0) return;\nif(this == pq) return;\n\npq.dummy.prev.next = dummy;\npq.dummy.next.prev = dummy.prev;\ndummy.prev.next = pq.dummy.next;\ndummy.prev = pq.dummy.prev;\npq.dummy.prev = pq.dummy.next= pq.dummy;\n\nmanyItems += pq.manyItems;\npq.manyItems = 0;\n\nversion++;\npq.version++;\n\nassert wellFormed() : \"invariant failed at end of takeAll\";\nassert pq.wellFormed() : \"parameter queue invariant failed at end of takeAll\";\n}",
-    "accessModifier": "public",
-    "returnType": "void",
-    "methodName": "takeAll"
+    "method_name": "takeAll",
+    "parameters": "Queue pq",
+    "return_type": "void",
+    "return_variable": "",
+    "called_methods": [
+      "wellFormed",
+      "NullPointerException"
+    ],
+    "local_variables": [],
+    "thrown_exceptions": [
+      "NullPointerException"
+    ]
   },
   {
     "javadoc": "/**Returns the next process to be polled from this queue.\n*\n* @return the next process to be polled by this queue, or null if empty\n* @see java.util.Queue#peek()\n*/",
     "code": "@Override\npublic Process peek(){\nassert wellFormed() : \"invariant failed at start of peek\";\nif(manyItems == 0) return null;\nreturn dummy.next;\n}",
-    "accessModifier": "unknown",
-    "returnType": "unknown",
-    "methodName": "unknown"
+    "method_name": "peek",
+    "parameters": "",
+    "return_type": "Process",
+    "return_variable": "null",
+    "called_methods": [
+      "wellFormed"
+    ],
+    "local_variables": [
+      "null"
+    ],
+    "thrown_exceptions": []
   },
   {
     "javadoc": "/**Removes and returns the process at the start of this queue, null if empty.\n*  This method should never return the dummy process!\n*\n* @returns the process at the start of this queue, or null if empty\n* @see java.util.Queue#poll()\n*/",
     "code": "@Override\npublic Process poll() {\nassert wellFormed() : \"invariant failed at start of poll\";\nif(manyItems == 0) return null;\nProcess result = dummy.next;\ndummy.next = result.next;\nresult.next.prev = dummy;\nresult.next = null;\nresult.prev = null;\nversion++;\nmanyItems--;\nassert wellFormed() : \"invariant failed at end of poll\";\nreturn result;\n}",
-    "accessModifier": "unknown",
-    "returnType": "unknown",
-    "methodName": "unknown"
+    "method_name": "poll",
+    "parameters": "",
+    "return_type": "Process",
+    "return_variable": "null",
+    "called_methods": [
+      "wellFormed"
+    ],
+    "local_variables": [
+      "null",
+      "result",
+      "result"
+    ],
+    "thrown_exceptions": []
   },
   {
     "javadoc": "/**Returns the number of non-dummy processes in this queue.\n*\n* @return the number of non-dummy processes\n* @see java.util.AbstractCollection#size()\n*/",
     "code": "@Override\npublic int size() {\nassert wellFormed() : \"invariant of result failed at start of size()\";\nreturn manyItems;\n}",
-    "accessModifier": "unknown",
-    "returnType": "unknown",
-    "methodName": "unknown"
+    "method_name": "size",
+    "parameters": "",
+    "return_type": "int",
+    "return_variable": "manyItems",
+    "called_methods": [
+      "wellFormed"
+    ],
+    "local_variables": [
+      "manyItems"
+    ],
+    "thrown_exceptions": []
   },
   {
     "javadoc": "/*** gets x value\n*\n* @return current x value\n*/",
     "code": "public double x() {\nreturn this.x;\n}",
-    "accessModifier": "public",
-    "returnType": "double",
-    "methodName": "x"
+    "method_name": "x",
+    "parameters": "",
+    "return_type": "double",
+    "return_variable": "this.x",
+    "called_methods": [],
+    "local_variables": [],
+    "thrown_exceptions": []
   },
   {
     "javadoc": "/**Returns a new copy of this queue. The copy should be unaffected\n*  by subsequent changes made to this queue, and vice versa. The\n*  processes added to the copy should be clones.\n*\n* @return a clone of this queue\n* @see java.lang.Object#clone()\n*/",
     "code": "@Override\npublic Queue clone(){\nassert wellFormed() : \"invariant failed at start of clone()\";\n\nQueue copy = new Queue();\n\ntry{ copy = (Queue) super.clone();}\ncatch(CloneNotSupportedException e){\n// should not happen\n}\n\nProcess source = dummy;\nProcess copier = source.clone();\ncopy.dummy = copier;\nsource = source.next;\nwhile(source != dummy) {\ncopier.next = source.clone();\ncopier.next.prev = copier;\ncopier = copier.next;\nsource = source.next;\n}\ncopier.next = copy.dummy;\ncopier.next.prev = copier;\n\nassert wellFormed() : \"invariant failed at end of clone()\";\nassert copy.wellFormed() : \"invariant of result failed at end of clone()\";\nreturn copy;\n}\n\npublic boolean hasNext() {\nassert wellFormed() : \"invariant failed at start of hasNext()\";\nif(version != myVersion) throw new ConcurrentModificationException(\"versions don't match\");\nreturn cursor.next != dummy;\n}",
-    "accessModifier": "unknown",
-    "returnType": "unknown",
-    "methodName": "unknown"
+    "method_name": "clone",
+    "parameters": "",
+    "return_type": "Queue",
+    "return_variable": "copy",
+    "called_methods": [
+      "wellFormed",
+      "Queue",
+      "hasNext",
+      "ConcurrentModificationException"
+    ],
+    "local_variables": [
+      "copy",
+      "source",
+      "copier",
+      "copy"
+    ],
+    "thrown_exceptions": [
+      "ConcurrentModificationException"
+    ]
   },
   {
     "javadoc": "/**Returns the next process in this queue. This method should\n*  *not* call poll, or change the state of the queue in any way.\n*\n*  @throws ConcurrentModificationException if versions don't match\n*  @throws NoSuchElementException if no element is next\n*  @return the next process in the queue\n*/",
     "code": "public Process next() {\nassert wellFormed() : \"invariant failed at start of next()\";\nif(version != myVersion) throw new ConcurrentModificationException(\"versions don't match\");\nif(!hasNext()) throw new NoSuchElementException(\"no element found\");\ncursor = cursor.next;\nassert wellFormed() : \"invariant failed at end of next()\";\nreturn cursor;\n}",
-    "accessModifier": "public",
-    "returnType": "Process",
-    "methodName": "next"
+    "method_name": "next",
+    "parameters": "",
+    "return_type": "Process",
+    "return_variable": "cursor",
+    "called_methods": [
+      "wellFormed",
+      "ConcurrentModificationException",
+      "hasNext",
+      "NoSuchElementException"
+    ],
+    "local_variables": [
+      "cursor"
+    ],
+    "thrown_exceptions": [
+      "NoSuchElementException",
+      "ConcurrentModificationException"
+    ]
   },
   {
     "javadoc": "/**The main method.\n* @param args the arguments */",
     "code": "public static void main(String[] args) {\nif (args.length != 1) {\nSystem.out.println(\"Usage: Main <lexicon file>\");\nSystem.exit(1);\n}\nnew Driver(args[0]).run();\n}",
-    "accessModifier": "public",
-    "returnType": "void",
-    "methodName": "main"
+    "method_name": "main",
+    "parameters": "String[] args",
+    "return_type": "void",
+    "return_variable": "",
+    "called_methods": [
+      "println",
+      "exit",
+      "Driver",
+      "run"
+    ],
+    "local_variables": [],
+    "thrown_exceptions": []
   },
   {
     "javadoc": "/**Instantiates a new driver, loading lexicon from file.\n* @param name the name of the file */",
     "code": "public Driver(String name) {\nlexicon = new Lexicon();\nfilename = name;\nin = new Scanner(System.in);\n}",
-    "accessModifier": "default",
-    "returnType": "public",
-    "methodName": "Driver"
+    "method_name": "Driver",
+    "parameters": "String name",
+    "return_type": "public",
+    "return_variable": "",
+    "called_methods": [
+      "Lexicon",
+      "Scanner"
+    ],
+    "local_variables": [],
+    "thrown_exceptions": []
   },
   {
     "javadoc": "/*** Used to report an error found when checking the invariant.\n* By providing a string, this will help debugging the class if the invariant should fail.\n* @param error string to print to report the exact error found\n* @return false always\n*/",
     "code": "private boolean report(String error) {\nreporter.accept(error);\nreturn false;\n}",
-    "accessModifier": "private",
-    "returnType": "boolean",
-    "methodName": "report"
+    "method_name": "report",
+    "parameters": "String error",
+    "return_type": "boolean",
+    "return_variable": "false",
+    "called_methods": [
+      "accept"
+    ],
+    "local_variables": [
+      "false"
+    ],
+    "thrown_exceptions": []
   },
   {
     "javadoc": "/*** Count all the nodes in this subtree,\n* while checking that all the keys are all in the range (lo,hi),\n* and that the keys are arranged in BST form.\n* If a problem is found, -1 is returned and exactly one problem is reported.\n* <p>\n* @param n the root of the subtree to check\n* @param lo if non-null then all strings in the subtree rooted\n* \t\t\t\tat n must be [lexicographically] greater than this parameter\n* @param hi if non-null then all strings in the subtree rooted\n* \t\t\t\tat n must be [lexicographically] less than this parameter\n* @return number of nodes in the subtree, or -1 is there is a problem.\n*/",
     "code": "private int checkInRange(Node n, String lo, String hi)\n{\nif(n == null) return 0;\nif(n.string == null) return reportNeg(\"n.string is null\");\nif(lo != null && n.string.compareTo(lo) <= 0) return reportNeg(\"not greater than lo\");\nif(hi != null && n.string.compareTo(hi) >= 0) return reportNeg(\"not less than hi\");\nint leftCount = checkInRange(n.left, lo, n.string);\nif(leftCount == -1) return -1;\nint rightCount = checkInRange(n.right, n.string, hi);\nif(rightCount == -1) return -1;\nreturn 1 + leftCount + rightCount;\n/* Check that all strings in the subtree are in the parameter range,\n* and none of them are null.\n* Report any errors.  If there is an error return a negative number.\n* (Write \"return reportNeg(...);\" when detecting a problem.)\n* Otherwise return the number of nodes in the subtree.\n* Note that the bounds in recursive calls may be different.\n*/\n}",
-    "accessModifier": "private",
-    "returnType": "int",
-    "methodName": "checkInRange"
+    "method_name": "checkInRange",
+    "parameters": "Node n, String lo, String hi",
+    "return_type": "int",
+    "return_variable": "0",
+    "called_methods": [
+      "reportNeg",
+      "compareTo"
+    ],
+    "local_variables": [
+      "leftCount",
+      "rightCount"
+    ],
+    "thrown_exceptions": []
   },
   {
     "javadoc": "/*** Check the invariant.\n* Returns false if any problem is found.\n* @return whether invariant is currently true.\n* If false is returned then exactly one problem has been reported.\n*/",
     "code": "private boolean wellFormed() {\nint sizeGuess = checkInRange(root, null, null);\nif(sizeGuess == -1) return false;\nif(sizeGuess != manyNodes) return report(\"manyNodes is wrong\");\nreturn true;\n}",
-    "accessModifier": "private",
-    "returnType": "boolean",
-    "methodName": "wellFormed"
+    "method_name": "wellFormed",
+    "parameters": "",
+    "return_type": "boolean",
+    "return_variable": "false",
+    "called_methods": [
+      "checkInRange",
+      "report"
+    ],
+    "local_variables": [
+      "sizeGuess",
+      "false",
+      "true"
+    ],
+    "thrown_exceptions": []
   },
   {
     "javadoc": "/**Gets the size of this lexicon.\n* @return the count of strings in this lexicon\n*/",
     "code": "public int size() {\nassert wellFormed() : \"invariant false at start of size()\";\nreturn manyNodes;\n}",
-    "accessModifier": "public",
-    "returnType": "int",
-    "methodName": "size"
+    "method_name": "size",
+    "parameters": "",
+    "return_type": "int",
+    "return_variable": "manyNodes",
+    "called_methods": [
+      "wellFormed"
+    ],
+    "local_variables": [
+      "manyNodes"
+    ],
+    "thrown_exceptions": []
   },
   {
     "javadoc": "/*** Gets the [lexicographically] least string in the lexicon.\n* @return the least string or null if empty\n*/",
     "code": "public String getMin() {\nassert wellFormed() : \"invariant false at start of getMin()\";\nif(root == null) return null;\nNode source = root;\nwhile(source.left != null) {\nsource = source.left;\n}\nreturn source.string;\n}",
-    "accessModifier": "public",
-    "returnType": "String",
-    "methodName": "getMin"
+    "method_name": "getMin",
+    "parameters": "",
+    "return_type": "String",
+    "return_variable": "null",
+    "called_methods": [
+      "wellFormed"
+    ],
+    "local_variables": [
+      "null",
+      "source"
+    ],
+    "thrown_exceptions": []
   },
   {
     "javadoc": "/*** Checks if the given string is in the lexicon.\n* @param str the string to search for (maybe null)\n* @return true if str is in the lexicon, false otherwise\n*/",
     "code": "public boolean contains(String str) {\nassert wellFormed() : \"invariant false at start of contains()\";\nif(str == null) return false;\nNode source = root;\nwhile(source != null) {\nif(source.string.compareTo(str) > 0) source = source.left;\nelse if(source.string.compareTo(str) < 0) source = source.right;\nelse return true;\n}\nreturn false;\n}",
-    "accessModifier": "public",
-    "returnType": "boolean",
-    "methodName": "contains"
+    "method_name": "contains",
+    "parameters": "String str",
+    "return_type": "boolean",
+    "return_variable": "false",
+    "called_methods": [
+      "wellFormed",
+      "compareTo"
+    ],
+    "local_variables": [
+      "false",
+      "source",
+      "true",
+      "false"
+    ],
+    "thrown_exceptions": []
   },
   {
     "javadoc": "/*** gets y value\n*\n* @return current y value\n*/",
     "code": "public double y() {\nreturn this.y;\n}",
-    "accessModifier": "public",
-    "returnType": "double",
-    "methodName": "y"
+    "method_name": "y",
+    "parameters": "",
+    "return_type": "double",
+    "return_variable": "this.y",
+    "called_methods": [],
+    "local_variables": [],
+    "thrown_exceptions": []
   },
   {
     "javadoc": "/*** Gets the next [lexicographically] greater string than the given string.\n* @param str the string of which to find the next greatest\n* @return the next string greater than str\n* @throws NullPointerException if str is null\n*/",
     "code": "public String getNext(String str) {\nassert wellFormed() : \"invariant false at start of getNext()\";\nif(str == null) throw new NullPointerException(\"str is null\");\nNode source = root;\nNode before = null;\nwhile(source != null) {\nif(str.compareTo(source.string) < 0) {\nbefore = source;\nsource = source.left;\n}else if(str.compareTo(source.string) >= 0) {\nsource = source.right;\n}\n}\nif(before == null) return null;\nreturn before.string;\n}",
-    "accessModifier": "public",
-    "returnType": "String",
-    "methodName": "getNext"
+    "method_name": "getNext",
+    "parameters": "String str",
+    "return_type": "String",
+    "return_variable": "null",
+    "called_methods": [
+      "wellFormed",
+      "NullPointerException",
+      "compareTo"
+    ],
+    "local_variables": [
+      "source",
+      "before",
+      "null"
+    ],
+    "thrown_exceptions": [
+      "NullPointerException"
+    ]
   },
   {
     "javadoc": "/*** Accept into the consumer all strings in this lexicon.\n* @param consumer the consumer to accept the strings\n* @throws NullPointerException if consumer is null\n*/",
     "code": "public void consumeAll(Consumer<String> consumer) {\n// We don't assert the invariant, because we do nothing other than\n// call another public method.\nconsumeAllWithPrefix(consumer,\"\");\n}",
-    "accessModifier": "public",
-    "returnType": "void",
-    "methodName": "consumeAll"
+    "method_name": "consumeAll",
+    "parameters": "Consumer<String> consumer",
+    "return_type": "void",
+    "return_variable": "",
+    "called_methods": [
+      "consumeAllWithPrefix"
+    ],
+    "local_variables": [],
+    "thrown_exceptions": []
   },
   {
     "javadoc": "/*** Accept into the consumer all strings that start with the given prefix.\n* @param consumer the consumer to accept the strings\n* @param prefix the prefix to find all strings starting with\n* @throws NullPointerException if consumer or prefix is null\n*/",
     "code": "public void consumeAllWithPrefix(Consumer<String> consumer, String prefix) {\n// TODO: Implement this to call the helper after preliminary checks (if any)\nif(prefix == null) throw new NullPointerException(\"prefix is null\");\nif(consumer == null) throw new NullPointerException(\"consumer is null\");\nconsumeAllHelper(consumer, prefix, root);\n}",
-    "accessModifier": "public",
-    "returnType": "void",
-    "methodName": "consumeAllWithPrefix"
+    "method_name": "consumeAllWithPrefix",
+    "parameters": "Consumer<String> consumer, String prefix",
+    "return_type": "void",
+    "return_variable": "",
+    "called_methods": [
+      "checks",
+      "NullPointerException",
+      "consumeAllHelper"
+    ],
+    "local_variables": [],
+    "thrown_exceptions": [
+      "NullPointerException"
+    ]
   },
   {
     "javadoc": "/*** Add a new string to the lexicon. If it already exists, do nothing and return false.\n* @param str the string to add (must not be null)\n* @return true if str was added, false otherwise\n* @throws NullPointerException if str is null\n*/",
     "code": "public boolean add(String str) {\nassert wellFormed() : \"invariant false at start of add()\";\nif(str == null) throw new NullPointerException(\"str is null\");\nint manyNodesBefore = manyNodes;\nroot = addHelper(root, str);\nassert wellFormed() : \"invariant false at end of add()\";\nreturn manyNodesBefore != manyNodes;\n}",
-    "accessModifier": "public",
-    "returnType": "boolean",
-    "methodName": "add"
+    "method_name": "add",
+    "parameters": "String str",
+    "return_type": "boolean",
+    "return_variable": "manyNodesBefore != manyNodes",
+    "called_methods": [
+      "wellFormed",
+      "NullPointerException",
+      "addHelper"
+    ],
+    "local_variables": [
+      "manyNodesBefore"
+    ],
+    "thrown_exceptions": [
+      "NullPointerException"
+    ]
   },
   {
     "javadoc": "/*** Add all strings in the array into this lexicon from the range [lo,hi).\n* The elements are added recursively from the middle, so that\n* if the array was sorted, the tree will be balanced.\n* All the tree mutations are done by add.\n* Return number of strings actually added; some might not be added\n* if they are duplicates.\n* @param array source\n* @param lo index lower bound\n* @param hi index upper bound\n* @return number of strings added\n* @throws NullPointerException if array is null\n*/",
     "code": "public int addAll(String[] array, int lo, int hi) {\nassert wellFormed() : \"invariant false at start of addAll()\";\n// TODO: Implement this method (be efficient!)\nif(lo == hi) return 0;\nint count = 0;\nint mid = (hi - lo) / 2 + lo;\nif(add(array[mid])) count++;\ncount += addAll(array, lo, mid);\ncount += addAll(array, mid + 1, hi);\n\n// NB: As long as you never touch any fields directly (or call private methods)\n// you shouldn't *need* to check the invariant. We will anyway.\nassert wellFormed() : \"invariant false at end of addAll()\";\nreturn count++;\n}",
-    "accessModifier": "public",
-    "returnType": "int",
-    "methodName": "addAll"
+    "method_name": "addAll",
+    "parameters": "String[] array, int lo, int hi",
+    "return_type": "int",
+    "return_variable": "0",
+    "called_methods": [
+      "wellFormed",
+      "method",
+      "add",
+      "directly"
+    ],
+    "local_variables": [
+      "count",
+      "mid"
+    ],
+    "thrown_exceptions": []
   },
   {
     "javadoc": "/*** Copy all the strings from lexicon (in sorted order) into the array starting\n* at the given index.  Return the next index for (later) elements.\n* This is a helper method for {@link #toArray(String[])}.\n* @param array destination of copy\n* @param root the subtree whose elements should be copied\n* @param index the index to place the next element\n* @return the next spot in the array to use after this subtree is done\n*/",
     "code": "private int copyInto(String[] array, Node root, int index) {\nif(root == null) return index;\nindex = copyInto(array, root.left, index);\narray[index] = root.string;\nindex++;\nindex = copyInto(array, root.right, index);\nreturn index;\n}",
-    "accessModifier": "private",
-    "returnType": "int",
-    "methodName": "copyInto"
+    "method_name": "copyInto",
+    "parameters": "String[] array, Node root, int index",
+    "return_type": "int",
+    "return_variable": "index",
+    "called_methods": [],
+    "local_variables": [
+      "index",
+      "index"
+    ],
+    "thrown_exceptions": []
   },
   {
     "javadoc": "/*** Return an array of all the strings in this lexicon (in order).\n* @param array to use unless null or too small\n* @return array copied into\n*/",
     "code": "public String[] toArray(String[] array) {\nassert wellFormed() : \"invariant false at the start of toArray()\";\nif(array == null || array.length < manyNodes) {\nString[] array2 = new String[manyNodes];\ncopyInto(array2, root, 0);\nreturn array2;\n}else {\ncopyInto(array, root, 0);\nreturn array;\n}\n\n}",
-    "accessModifier": "public",
-    "returnType": "String[]",
-    "methodName": "toArray"
+    "method_name": "toArray",
+    "parameters": "String[] array",
+    "return_type": "String[]",
+    "return_variable": "array2",
+    "called_methods": [
+      "wellFormed",
+      "copyInto"
+    ],
+    "local_variables": [
+      "array2",
+      "array2",
+      "array"
+    ],
+    "thrown_exceptions": []
   },
   {
     "javadoc": "/*** Used to report an error found when checking the invariant.\n* By providing a string, this will help debugging the class if the invariant should fail.\n* @param error string to print to report the exact error found\n* @return false always\n*/",
     "code": "private boolean report(String error) {\nreporter.accept(error);\nreturn false;\n}",
-    "accessModifier": "private",
-    "returnType": "boolean",
-    "methodName": "report"
+    "method_name": "report",
+    "parameters": "String error",
+    "return_type": "boolean",
+    "return_variable": "false",
+    "called_methods": [
+      "accept"
+    ],
+    "local_variables": [
+      "false"
+    ],
+    "thrown_exceptions": []
   },
   {
     "javadoc": "/*** Count all the nodes in this subtree,\n* while checking that all the keys are all in the range (lo,hi),\n* and that the keys are arranged in BST form.\n* If a problem is found, -1 is returned and exactly one problem is reported.\n* <p>\n* @param n the root of the subtree to check\n* @param lo if non-null then all strings in the subtree rooted\n* \t\t\t\tat n must be [lexicographically] greater than this parameter\n* @param hi if non-null then all strings in the subtree rooted\n* \t\t\t\tat n must be [lexicographically] less than this parameter\n* @return number of nodes in the subtree, or -1 is there is a problem.\n*/",
     "code": "private int checkInRange(Node n, String lo, String hi)\n{\n//must account for checking an empty list or leaf's links\nif (n == null) return 0;\nif (n.string == null) return reportNeg(\"null word found\");\n\n//first check node r\nif (lo != null && (n.string.equals(lo) || n.string.compareTo(lo) < 0))\nreturn reportNeg(\"Detected node outside of low bound: \"+n.string);\nif (hi != null && (n.string.equals(hi) || n.string.compareTo(hi) > 0))\nreturn reportNeg(\"Detected node outside of high bound: \"+n.string);\n\n//check subtrees\nint leftSubtree =  checkInRange(n.left, lo, n.string);\nif (leftSubtree < 0) return -1;\n\nint rightSubtree = checkInRange(n.right, n.string, hi);\nif (rightSubtree < 0) return -1;\n\n//otherwise return 1 + nodes in subtrees\nreturn 1 + leftSubtree + rightSubtree;\n}",
-    "accessModifier": "private",
-    "returnType": "int",
-    "methodName": "checkInRange"
+    "method_name": "checkInRange",
+    "parameters": "Node n, String lo, String hi",
+    "return_type": "int",
+    "return_variable": "0",
+    "called_methods": [
+      "reportNeg",
+      "equals",
+      "compareTo"
+    ],
+    "local_variables": [
+      "leftSubtree",
+      "rightSubtree"
+    ],
+    "thrown_exceptions": []
   },
   {
     "javadoc": "/*** Check the invariant.\n* Returns false if any problem is found.\n* @return whether invariant is currently true.\n* If false is returned then exactly one problem has been reported.\n*/",
     "code": "private boolean wellFormed() {\nint n = checkInRange(root, null, null);\nif (n < 0) return false; // problem already reported\nif (n != numNodes) return report(\"numNodes is \" + numNodes + \" but should be \" + n);\nreturn true;\n}",
-    "accessModifier": "private",
-    "returnType": "boolean",
-    "methodName": "wellFormed"
+    "method_name": "wellFormed",
+    "parameters": "",
+    "return_type": "boolean",
+    "return_variable": "false",
+    "called_methods": [
+      "checkInRange",
+      "report"
+    ],
+    "local_variables": [
+      "n",
+      "false",
+      "true"
+    ],
+    "thrown_exceptions": []
   },
   {
     "javadoc": "/*** gets x value to nearest integer\n*\n* @return x value to nearest integer\n*/",
     "code": "public int intX() {\nreturn (int)Math.round(this.x());\n}",
-    "accessModifier": "public",
-    "returnType": "int",
-    "methodName": "intX"
+    "method_name": "intX",
+    "parameters": "",
+    "return_type": "int",
+    "return_variable": "(int)Math.round(this.x())",
+    "called_methods": [
+      "round",
+      "x"
+    ],
+    "local_variables": [],
+    "thrown_exceptions": []
   },
   {
     "javadoc": "/*** Gets the [lexicographically] least string in the lexicon.\n* @return the least string or null if empty\n*/",
     "code": "public String getMin() {\nassert wellFormed() : \"invariant false at start of getMin()\";\nIterator<String> it = iterator();\nif(it.hasNext()) return it.next();\nreturn null;\n}",
-    "accessModifier": "public",
-    "returnType": "String",
-    "methodName": "getMin"
+    "method_name": "getMin",
+    "parameters": "",
+    "return_type": "String",
+    "return_variable": "it.next()",
+    "called_methods": [
+      "wellFormed",
+      "iterator",
+      "hasNext",
+      "next"
+    ],
+    "local_variables": [
+      "it",
+      "null"
+    ],
+    "thrown_exceptions": []
   },
   {
     "javadoc": "/*** Gets the next [lexicographically] greater string than the given string.\n* @param str the string of which to find the next greatest\n* @return the next string greater than str, or null if no other\n* @throws NullPointerException if str is null\n*/",
     "code": "public String getNext(String str) {\nassert wellFormed() : \"invariant false at start of getNext()\";\n// TODO: Implement this method using the special iterator constructor.\n// HINT: If you add \"\\0\" to the string and look for it with the iterator,\n// you are most of the way there.\nif(str == null) throw new NullPointerException(\"str is null\");\nstr.concat(\"\\0\");\nIterator<String> it = iterator(str);\nString next = null;\nif(it.hasNext()) next = it.next();\nif(str.equals(next)) {\nif(it.hasNext()) next = it.next();\nelse next = null;\n}\nreturn next;\n}",
-    "accessModifier": "public",
-    "returnType": "String",
-    "methodName": "getNext"
+    "method_name": "getNext",
+    "parameters": "String str",
+    "return_type": "String",
+    "return_variable": "next",
+    "called_methods": [
+      "wellFormed",
+      "NullPointerException",
+      "concat",
+      "iterator",
+      "hasNext",
+      "next",
+      "equals"
+    ],
+    "local_variables": [
+      "it",
+      "next",
+      "next",
+      "next"
+    ],
+    "thrown_exceptions": [
+      "NullPointerException"
+    ]
   },
   {
     "javadoc": "/*** Accept into the consumer all strings in this lexicon.\n* @param consumer the consumer to accept the strings\n* @throws NullPointerException if consumer is null\n*/",
     "code": "public void consumeAll(Consumer<String> consumer) {\nconsumeAllWithPrefix(consumer,\"\");\n}",
-    "accessModifier": "public",
-    "returnType": "void",
-    "methodName": "consumeAll"
+    "method_name": "consumeAll",
+    "parameters": "Consumer<String> consumer",
+    "return_type": "void",
+    "return_variable": "",
+    "called_methods": [
+      "consumeAllWithPrefix"
+    ],
+    "local_variables": [],
+    "thrown_exceptions": []
   },
   {
     "javadoc": "/*** Accept into the consumer all strings that start with the given prefix.\n* @param consumer the consumer to accept the strings\n* @param prefix the prefix to find all strings starting with\n* @throws NullPointerException if consumer or prefix is null\n*/",
     "code": "public void consumeAllWithPrefix(Consumer<String> consumer, String prefix) {\nassert wellFormed() : \"invariant false at start of consumeAllWithPrefix()\";\nif (consumer == null) throw new NullPointerException(\"Can't accept into null consumer\");\nif (prefix == null) throw new NullPointerException(\"Prefix can't be null\");\n// TODO: Implement this method with the special iterator, not with recursion.\nIterator<String> it = iterator(prefix);\nboolean done = false;\nwhile(it.hasNext() && !done) {\nString next = it.next();\nif(next.startsWith(prefix)) consumer.accept(next);\nelse done = true;\n}\n}",
-    "accessModifier": "public",
-    "returnType": "void",
-    "methodName": "consumeAllWithPrefix"
+    "method_name": "consumeAllWithPrefix",
+    "parameters": "Consumer<String> consumer, String prefix",
+    "return_type": "void",
+    "return_variable": "",
+    "called_methods": [
+      "wellFormed",
+      "NullPointerException",
+      "iterator",
+      "hasNext",
+      "next",
+      "startsWith",
+      "accept"
+    ],
+    "local_variables": [
+      "it",
+      "done",
+      "next",
+      "done"
+    ],
+    "thrown_exceptions": [
+      "NullPointerException"
+    ]
   },
   {
     "javadoc": "/*** Add a new string to the lexicon. If it already exists, do nothing and return false.\n* @param str the string to add (must not be null)\n* @return true if str was added, false otherwise\n* @throws NullPointerException if str is null\n*/",
     "code": "@Override // implementation\npublic boolean add(String str) {\nassert wellFormed() : \"invariant false at start of add()\";\nboolean result = false;\nif (str == null) throw new NullPointerException(\"Cannot add null.\");\nNode n = root;\nNode lag = null;\nwhile (n != null) {\nif (n.string.equals(str)) break;\nlag = n;\nif (str.compareTo(n.string) > 0) n = n.right;\nelse n = n.left;\n}\nif (n == null) {\nn = new Node(str);\nif (lag == null)\nroot = n;\nelse if (str.compareTo(lag.string) > 0)\nlag.right = n;\nelse\nlag.left = n;\n++numNodes;\nresult = true;\nversion++;\n}\n// XXX: Something is missing from this code that is needed for Homework #9\nassert wellFormed() : \"invariant false at end of add()\";\nreturn result;\n}",
-    "accessModifier": "unknown",
-    "returnType": "unknown",
-    "methodName": "unknown"
+    "method_name": "add",
+    "parameters": "String str",
+    "return_type": "boolean",
+    "return_variable": "result",
+    "called_methods": [
+      "wellFormed",
+      "NullPointerException",
+      "equals",
+      "compareTo",
+      "Node"
+    ],
+    "local_variables": [
+      "result",
+      "n",
+      "lag",
+      "n",
+      "result"
+    ],
+    "thrown_exceptions": [
+      "NullPointerException"
+    ]
   },
   {
     "javadoc": "/*** Return an iterator that starts at the given element, or the next\n* available element from the set.\n* @param start starting element (or element before starting element,\n* if the start isn't in the set), must not be null\n* @return iterator starting \"in the middle\" (never null)\n*/",
     "code": "public Iterator<String> iterator(String start) {\nreturn new MyIterator(start);\n}",
-    "accessModifier": "public",
-    "returnType": "Iterator<String>",
-    "methodName": "iterator"
+    "method_name": "iterator",
+    "parameters": "String start",
+    "return_type": "Iterator<String>",
+    "return_variable": "new MyIterator(start)",
+    "called_methods": [
+      "MyIterator"
+    ],
+    "local_variables": [],
+    "thrown_exceptions": []
   },
   {
     "javadoc": "/*** Start the iterator at this element, or at the first element after it\n* (if any).\n* @param initial string to start at, must not be null\n*/",
     "code": "public MyIterator(String initial) {\n// TODO Set up an iterator starting with given (non-null) string.\n// NB: Do not attempt to use {@link #getNext} or any other method\n// of the main class to help.  All the work needs to be done here\n// so that the pending stack is set up correctly.\nif(initial == null) throw new NullPointerException(\"initial must not be null\");\nNode source = root;\nwhile (source != null) {\nif(initial.compareTo(source.string) < 0) {\npending.push(source);\nsource = source.left;\n}else if(initial.compareTo(source.string) > 0) {\nsource = source.right;\n}else {\npending.add(source);\nbreak;\n}\n}\ncurrent = null;\ncolVersion = version;\n\nassert wellFormed() : \"Iterator messed up after special constructor\";\n}",
-    "accessModifier": "default",
-    "returnType": "public",
-    "methodName": "MyIterator"
+    "method_name": "MyIterator",
+    "parameters": "String initial",
+    "return_type": "public",
+    "return_variable": "",
+    "called_methods": [
+      "given",
+      "NullPointerException",
+      "compareTo",
+      "push",
+      "add",
+      "wellFormed"
+    ],
+    "local_variables": [
+      "source"
+    ],
+    "thrown_exceptions": [
+      "NullPointerException"
+    ]
   },
   {
     "javadoc": "/*** Used to report an error found when checking the invariant.\n* By providing a string, this will help debugging the class if the invariant should fail.\n* @param error string to print to report the exact error found\n* @return false always\n*/",
     "code": "private static boolean report(String error) {\nreporter.accept(error);\nreturn false;\n}",
-    "accessModifier": "private",
-    "returnType": "boolean",
-    "methodName": "report"
+    "method_name": "report",
+    "parameters": "String error",
+    "return_type": "boolean",
+    "return_variable": "false",
+    "called_methods": [
+      "accept"
+    ],
+    "local_variables": [
+      "false"
+    ],
+    "thrown_exceptions": []
   },
   {
     "javadoc": "/*** Count all the nodes in this subtree,\n* while checking that all the keys are all in the range (lo,hi),\n* and that the keys are arranged in BST form,\n* and that the node are linked in-order.\n* If a problem is found, -1 is returned and exactly one problem is reported.\n* <p>\n* @param n the root of the subtree to check\n* @param lo if non-null then all strings in the subtree rooted\n* \t\t\t\tat n must be [lexicographically] greater than this parameter\n* @param hi if non-null then all strings in the subtree rooted\n* \t\t\t\tat n must be [lexicographically] less than this parameter\n* @param first the node that should be first in this tree, or if the tree\n*        is empty, then this should be the next node\n* @param next the node that should be linked next after this subtree.\n* @return number of nodes in the subtree, or -1 is there is a problem.\n*/",
     "code": "private int checkInRange(Node n, String lo, String hi, Node first, Node next)\n{\nif(n == null) {\nif(first != next) return reportNeg(\"tree out of order\");\nreturn 0;\n}\nif (n.string == null) return reportNeg(\"null word found\");\nif (n.count <= 0) return reportNeg(\"Count is 0\");\n//first check node r\nif (lo != null && (n.string.equals(lo) || n.string.compareTo(lo) < 0))\nreturn reportNeg(\"Detected node outside of low bound: \"+n.string);\nif (hi != null && (n.string.equals(hi) || n.string.compareTo(hi) > 0))\nreturn reportNeg(\"Detected node outside of high bound: \"+n.string);\n\n//if(first != null && first.string != null && lo != null && first.string.compareTo(lo) < 0) return reportNeg(\"lo and first are wrong\");\n\n//check subtrees\nint leftSubtree = checkInRange(n.left, lo, n.string, first, n);\nif (leftSubtree < 0) return -1;\n\nint rightSubtree = checkInRange(n.right, n.string, hi, n.next, next);\nif (rightSubtree < 0) return -1;\n\n//otherwise return 1 + nodes in subtrees\nreturn 1 + leftSubtree + rightSubtree;\n}",
-    "accessModifier": "private",
-    "returnType": "int",
-    "methodName": "checkInRange"
+    "method_name": "checkInRange",
+    "parameters": "Node n, String lo, String hi, Node first, Node next",
+    "return_type": "int",
+    "return_variable": "reportNeg(\"tree out of order\")",
+    "called_methods": [
+      "reportNeg",
+      "equals",
+      "compareTo"
+    ],
+    "local_variables": [
+      "leftSubtree",
+      "rightSubtree"
+    ],
+    "thrown_exceptions": []
   },
   {
     "javadoc": "/*** Check the invariant.\n* Returns false if any problem is found.\n* @return whether invariant is currently true.\n* If false is returned then exactly one problem has been reported.\n*/",
     "code": "private boolean wellFormed() {\nif(dummy == null) return report(\"dummy is null\");\nif(dummy.count != 0) return report(\"dummy.count isn't 0\");\nif(dummy.left != null) return report(\"dummy.left isn't null\");\nif(dummy.string != null) return report(\"dummy.string isn't null\");\nNode min = dummy.right;\nwhile(min != null && min.left != null) min = min.left;\nif(dummy.next != min)return report(\"dummy.next isn't the min\");\nint n = checkInRange(dummy.right, null, null, min, null);\nif (n < 0) return false; // problem already reported\nif (n != numEntries) return report(\"manyNodes is \" + numEntries + \" but should be \" + n);\nreturn true;\n}",
-    "accessModifier": "private",
-    "returnType": "boolean",
-    "methodName": "wellFormed"
+    "method_name": "wellFormed",
+    "parameters": "",
+    "return_type": "boolean",
+    "return_variable": "report(\"dummy is null\")",
+    "called_methods": [
+      "report",
+      "checkInRange"
+    ],
+    "local_variables": [
+      "min",
+      "n",
+      "false",
+      "true"
+    ],
+    "thrown_exceptions": []
   },
   {
     "javadoc": "/*** gets y value to nearest integer\n*\n* @return y value to nearest integer\n*/",
     "code": "public int intY() {\nreturn (int)Math.round(this.y());\n}",
-    "accessModifier": "public",
-    "returnType": "int",
-    "methodName": "intY"
+    "method_name": "intY",
+    "parameters": "",
+    "return_type": "int",
+    "return_variable": "(int)Math.round(this.y())",
+    "called_methods": [
+      "round",
+      "y"
+    ],
+    "local_variables": [],
+    "thrown_exceptions": []
   },
   {
     "javadoc": "/*** Look for the node for a particular key, creating it if requested\n* if it doesn't exist.\n* @param r subtree to look for the key, may be null\n* @param key key to look for for, must not be null\n* @param create whether to create a node with count 0 if not in tree\n* @param before the node before the first node in this subtree, must not be null\n* @return node with this key, or null if it is not present and create is false\n*/",
     "code": "private Node getNode(Node r, String key, boolean create, Node before) {\nif(r == null) {\nif(!create) return null;\nNode n = new Node(key);\nn.count--;\nn.next = before.next;\nif(before.right == null) before.right = n;\nelse {\nNode source = before.right;\nwhile (source.left != null) source = source.left;\nsource.left = n;\n}\nbefore.next = n;\n\nreturn n;\n}\nint c = key.compareTo(r.string);\nif(c < 0) {\nreturn getNode(r.left, key, create, before);\n}\nelse if (c > 0) {\nreturn getNode(r.right, key, create, r);\n}else return r;\n\n}",
-    "accessModifier": "private",
-    "returnType": "Node",
-    "methodName": "getNode"
+    "method_name": "getNode",
+    "parameters": "Node r, String key, boolean create, Node before",
+    "return_type": "Node",
+    "return_variable": "null",
+    "called_methods": [
+      "Node",
+      "compareTo"
+    ],
+    "local_variables": [
+      "null",
+      "n",
+      "source",
+      "n",
+      "c",
+      "r"
+    ],
+    "thrown_exceptions": []
   },
   {
     "javadoc": "/*** Find the node with the given key, creating it if necessary\n* (but only if \"create\" is true).  If create is true, then\n* the data structure invariant will be temporarily false\n* due to the node with a zero count.  The caller must address\n* the issue immediately.\n* @param key word to look for, must not be null\n* @param create whether to create a node with count=0 if not present.\n* @return node, or null if not present (and create is false)\n*/",
     "code": "private Node getNode(String key, boolean create) {\nreturn getNode(dummy.right, key, create, dummy);\n}",
-    "accessModifier": "private",
-    "returnType": "Node",
-    "methodName": "getNode"
+    "method_name": "getNode",
+    "parameters": "String key, boolean create",
+    "return_type": "Node",
+    "return_variable": "getNode(dummy.right, key, create, dummy)",
+    "called_methods": [],
+    "local_variables": [],
+    "thrown_exceptions": []
   },
   {
     "javadoc": "/*** Add a new string to the multiset. If it already exists,\n* increase the count for the string and return false.\n* Otherwise, set the count to one and return true.\n* @param str the string to add (must not be null)\n* @return true if str was added, false otherwise\n* @throws NullPointerException if str is null\n*/",
     "code": "public boolean add(String str) {\nassert wellFormed() : \"invariant false at start of add\";\nif(str == null) throw new NullPointerException(\"String is null\");\nboolean result = false;\nNode n = getNode(str, true);\nif(n.count == 0) {\nnumEntries++;\nversion++;\nresult = true;\n}\nn.count++;\nassert wellFormed() : \"invariant false at end of add\";\nreturn result;\n}",
-    "accessModifier": "public",
-    "returnType": "boolean",
-    "methodName": "add"
+    "method_name": "add",
+    "parameters": "String str",
+    "return_type": "boolean",
+    "return_variable": "result",
+    "called_methods": [
+      "wellFormed",
+      "NullPointerException",
+      "getNode"
+    ],
+    "local_variables": [
+      "result",
+      "n",
+      "result"
+    ],
+    "thrown_exceptions": [
+      "NullPointerException"
+    ]
   },
   {
     "javadoc": "/*** Remove one copy of a word from the multiset.\n* If there are multiple copies, then we just adjust the count,\n* and the map is unaffected (iterators don't go stale).\n* @param str string to remove one of, may be null (but ignored if so)\n* @return true if the word was in the multiset.\n*/",
     "code": "public boolean removeOne(String str) {\nassert wellFormed() : \"invariant false at start of removeOne\";\nif(str == null) return false;\ndummy.right = doRemove(dummy.right, str, dummy, true, null);\nassert wellFormed() : \"invariant false at end of removeOne\";\nreturn lastRemoved != null;\n}",
-    "accessModifier": "public",
-    "returnType": "boolean",
-    "methodName": "removeOne"
+    "method_name": "removeOne",
+    "parameters": "String str",
+    "return_type": "boolean",
+    "return_variable": "false",
+    "called_methods": [
+      "wellFormed",
+      "doRemove"
+    ],
+    "local_variables": [
+      "false"
+    ],
+    "thrown_exceptions": []
   },
   {
     "javadoc": "/**A method to compare two objects.\n* This method is superseded by Objects.equals\n* @param o1 one object, may be null\n* @param o2 another object, may be null\n* @return whether they are equal (both null, or usign equals).\n*/",
     "code": "private static boolean eq(Object o1, Object o2) {\nreturn (o1 == null ? o2 == null : o1.equals(o2));\n}",
-    "accessModifier": "private",
-    "returnType": "boolean",
-    "methodName": "eq"
+    "method_name": "eq",
+    "parameters": "Object o1, Object o2",
+    "return_type": "boolean",
+    "return_variable": "(o1 == null ? o2 == null : o1.equals(o2))",
+    "called_methods": [
+      "equals"
+    ],
+    "local_variables": [],
+    "thrown_exceptions": []
   },
   {
     "javadoc": "/*** Hash the key to a table index, following double hashing,\n* returning the first index that\n* (1) includes an entry with the key, or\n* (2) has null, or\n* (3) has a placeholder (if phOK is true *and* the key cannot be found).\n* This code assumes that double hashing\n* will find a valid index.  It may run forever otherwise.\n* @param key string to look for, must not be null\n* @param phOK whether we return a slot with a placeholder in preference to an empty slot\n* @return first index meeting the requirements using double hashing.\n*/",
     "code": "private int hash(String key, boolean phOK) {\nif(key == null) throw new NullPointerException(\"String is null\");\nint phIndex = -1;\n\nint hash1 = key.hashCode() % data.length;\nif(hash1 < 0) hash1 += data.length;\n\nint hash2 = key.hashCode() % (data.length - 2);\nif(hash2 < 0) hash2 += data.length - 2;\nhash2 += 1;\n\nif(phOK && data[hash1] == PLACE_HOLDER && phIndex < 0) phIndex = hash1;\nwhile(!(data[hash1] == null || (data[hash1].getKey() != null && data[hash1].getKey().equals(key)))) {\nhash1 += hash2;\nif(hash1 >= data.length) hash1 -= data.length;\n\nif(phOK && data[hash1] == PLACE_HOLDER && phIndex < 0) phIndex = hash1;\n}\nif(data[hash1] != null && (data[hash1].getKey() != null && data[hash1].getKey().equals(key))) return hash1;\nif(phOK && phIndex >= 0) return phIndex;\nreturn hash1;\n}",
-    "accessModifier": "private",
-    "returnType": "int",
-    "methodName": "hash"
+    "method_name": "hash",
+    "parameters": "String key, boolean phOK",
+    "return_type": "int",
+    "return_variable": "hash1",
+    "called_methods": [
+      "NullPointerException",
+      "hashCode",
+      "getKey",
+      "equals"
+    ],
+    "local_variables": [
+      "phIndex",
+      "hash1",
+      "hash2",
+      "hash1",
+      "phIndex",
+      "hash1"
+    ],
+    "thrown_exceptions": [
+      "NullPointerException"
+    ]
   },
   {
     "javadoc": "/*** Used to report an error found when checking the invariant.\n* By providing a string, this will help debugging the class if the invariant should fail.\n* @param error string to print to report the exact error found\n* @return false always\n*/",
     "code": "private static boolean report(String error) {\nreporter.accept(error);\nreturn false;\n}",
-    "accessModifier": "private",
-    "returnType": "boolean",
-    "methodName": "report"
+    "method_name": "report",
+    "parameters": "String error",
+    "return_type": "boolean",
+    "return_variable": "false",
+    "called_methods": [
+      "accept"
+    ],
+    "local_variables": [
+      "false"
+    ],
+    "thrown_exceptions": []
   },
   {
     "javadoc": "/*** Add a new string to the multiset. If it already exists,\n* increase the count for the string and return false.\n* Otherwise, set the count to one and return true.\n* @param str the string to add (must not be null)\n* @return true if str was added, false otherwise\n* @throws NullPointerException if str is null\n*/",
     "code": "public boolean add(String str) {\nassert wellFormed() : \"invariant false at start of add\";\nboolean result = false;\n\nint i = hash(str, false);\nif(isOpen(i)) {\nif(data[i] == null) numUsed++;\nresult = true;\ndata[i] = new MyEntry(str);\nnumEntries++;\nif(numUsed > data.length / 2) rehash();\nversion++;\n}else {\ndata[i].count++;\n}\n\nassert wellFormed() : \"invariant false at end of add\";\nreturn result;\n}",
-    "accessModifier": "public",
-    "returnType": "boolean",
-    "methodName": "add"
+    "method_name": "add",
+    "parameters": "String str",
+    "return_type": "boolean",
+    "return_variable": "result",
+    "called_methods": [
+      "wellFormed",
+      "hash",
+      "isOpen",
+      "MyEntry",
+      "rehash"
+    ],
+    "local_variables": [
+      "result",
+      "i",
+      "result"
+    ],
+    "thrown_exceptions": []
   },
   {
     "javadoc": "/*** Remove one copy of a word from the multiset.\n* If there are multiple copies, then we just adjust the count,\n* and the map is unaffected (iterators don't go stale).\n* @param str string to remove one of, may be null (but ignored if so)\n* @return true if the word was in the multiset.\n*/",
     "code": "public boolean removeOne(String str) {\nassert wellFormed() : \"invariant false at start of removeOne\";\nboolean result = false;\nif(str == null) return false;\n\nint i = hash(str, false);\nif(isOpen(i)) {\nreturn false;\n}else {\nif(data[i].count == 1) remove(data[i].string);\nelse data[i].count--;\nresult = true;\n}\n\nassert wellFormed() : \"invariant false at end of removeOne\";\nreturn result;\n}",
-    "accessModifier": "public",
-    "returnType": "boolean",
-    "methodName": "removeOne"
+    "method_name": "removeOne",
+    "parameters": "String str",
+    "return_type": "boolean",
+    "return_variable": "false",
+    "called_methods": [
+      "wellFormed",
+      "hash",
+      "isOpen",
+      "remove"
+    ],
+    "local_variables": [
+      "result",
+      "false",
+      "i",
+      "false",
+      "result"
+    ],
+    "thrown_exceptions": []
   },
   {
     "javadoc": "/*** Return the shortest path between two vertices in the graph\n* @param v1 starting vertex\n* @param v2 ending vertex\n* @return path from the first to the second as a list of vertices, or null\n* is no path exists.\n* @throws IllegalArgumentException if v1 or v2 is not in the graph\n*/",
     "code": "@SuppressWarnings(\"unchecked\")\npublic List<T> shortestPath(T v1, T v2) {\n\nif(!(graph.containsVertex(v1) && graph.containsVertex(v2))) throw new IllegalArgumentException(\"Must be in graph\");\n\nArrayDeque<ArrayList<T>> queue = new ArrayDeque<>();\nHashSet<T> visited = new HashSet<>();\nArrayList<T> list = new ArrayList<>();\n\nlist.add(v1);\nqueue.push(list);\nwhile(!queue.isEmpty()) {\nlist = queue.poll();\nT current = list.get(list.size() - 1);\nif(!visited.contains(current)) {\nvisited.add(current);\nif(current.equals(v2)) {\nreturn list;\n}else {\nSet<T> connected = graph.getConnected(current);\nfor(T vert : connected) {\n    list.add(vert);\n    queue.addLast((ArrayList<T>) list.clone());\n    list.remove(list.size() - 1);\n}\n}\n}\n}\n\nreturn null; // no path found\n}",
-    "accessModifier": "unknown",
-    "returnType": "unknown",
-    "methodName": "unknown"
+    "method_name": "shortestPath",
+    "parameters": "T v1, T v2",
+    "return_type": "List<T>",
+    "return_variable": "list",
+    "called_methods": [
+      "SuppressWarnings",
+      "containsVertex",
+      "IllegalArgumentException",
+      "add",
+      "push",
+      "isEmpty",
+      "poll",
+      "get",
+      "size",
+      "contains",
+      "equals",
+      "getConnected",
+      "addLast",
+      "clone",
+      "remove"
+    ],
+    "local_variables": [
+      "queue",
+      "visited",
+      "list",
+      "current",
+      "list",
+      "connected",
+      "null"
+    ],
+    "thrown_exceptions": [
+      "IllegalArgumentException"
+    ]
   },
   {
     "javadoc": "/*** finds the distance between 2 points\n*\n* @param point the point that will be found the distance from\n* @return the distance between two points\n*/",
     "code": "public double distance(Point point) {\nVector temp = new Vector(this, point);\nreturn temp.magnitude();\n}",
-    "accessModifier": "public",
-    "returnType": "double",
-    "methodName": "distance"
+    "method_name": "distance",
+    "parameters": "Point point",
+    "return_type": "double",
+    "return_variable": "temp.magnitude()",
+    "called_methods": [
+      "Vector",
+      "magnitude"
+    ],
+    "local_variables": [
+      "temp"
+    ],
+    "thrown_exceptions": []
   },
   {
     "javadoc": "/*** Read in a graph from the given reader.\n* Each line (once trimmed of whitespace) names a vertex (a string),\n* but before we trim, we check to see if the line begins with whitespace,\n* in which case this vertex is the second vertex of an edge that\n* begins with the last vertex that was on a line not starting with whitespace.\n* <p> For example, the following text:\n* <pre>\n* A\n* B\n*   A\n*   C\n* </pre>\n* is a graph with three vertices (A, B and C) and two\n* edges, A-B and B-C.\n* @param r\n* @return graph represented by text of reader.\n* @throws IOException if error reading or if the first line is indented.\n*/",
     "code": "public static Graph<String> read(Reader r) throws IOException {\nGraph<String> result = new HashGraph<>();\n// TODO: Read in the graph from the reader.\n// Our solution is 15 lines long, and it uses the following library classes:\n// * BufferedReader\n\nBufferedReader reader = new BufferedReader(r);\nString before = null;\nfor(String s = reader.readLine(); s != null; s = reader.readLine()) {\nif(s.startsWith(\" \") || s.startsWith(\"\\t\")) {\nif(before == null) throw new IOException(\"can't lead with white space\");\ns = s.strip();\nif(!result.containsVertex(s)) result.addVertex(s);\nif(!result.containsEdge(s, before)) result.addEdge(s, before);\n}else {\ns = s.strip();\nif(!result.containsVertex(s)) result.addVertex(s);\nbefore = s;\n}\n}\n\nreturn result;\n}",
-    "accessModifier": "public",
-    "returnType": "Graph<String>",
-    "methodName": "read"
+    "method_name": "read",
+    "parameters": "Reader r",
+    "return_type": "Graph<String>",
+    "return_variable": "result",
+    "called_methods": [
+      "BufferedReader",
+      "readLine",
+      "startsWith",
+      "IOException",
+      "strip",
+      "containsVertex",
+      "addVertex",
+      "containsEdge",
+      "addEdge"
+    ],
+    "local_variables": [
+      "result",
+      "reader",
+      "before",
+      "s",
+      "result"
+    ],
+    "thrown_exceptions": [
+      "IOException"
+    ]
   },
   {
     "javadoc": "/*** Return an empty stack.\n* @return empty stack, never null\n*/",
     "code": "@SuppressWarnings(\"unchecked\")\npublic static <T> ImmutableStack<T> empty() {\nreturn (ImmutableStack<T>) empty;\n}",
-    "accessModifier": "unknown",
-    "returnType": "unknown",
-    "methodName": "unknown"
+    "method_name": "empty",
+    "parameters": "",
+    "return_type": "ImmutableStack<T>",
+    "return_variable": "(ImmutableStack<T>) empty",
+    "called_methods": [
+      "SuppressWarnings"
+    ],
+    "local_variables": [],
+    "thrown_exceptions": []
   },
   {
     "javadoc": "/*** Return the top of the stack.\n* @throws NoSuchELementException if the stack is empty\n* @return top of the stack\n*/",
     "code": "public T top() {\nif (this == empty) throw new NoSuchElementException(\"stack is empty\");\nreturn top;\n}",
-    "accessModifier": "public",
-    "returnType": "T",
-    "methodName": "top"
+    "method_name": "top",
+    "parameters": "",
+    "return_type": "T",
+    "return_variable": "top",
+    "called_methods": [
+      "NoSuchElementException"
+    ],
+    "local_variables": [
+      "top"
+    ],
+    "thrown_exceptions": [
+      "NoSuchElementException"
+    ]
   },
   {
     "javadoc": "/*** Return the stack that results from popping off the top element.\n* @throws NoSuchElementException if the stack is empty\n* @return stack after popping element\n*/",
     "code": "public ImmutableStack<T> pop() {\nif (this == empty) throw new NoSuchElementException(\"empty stack\");\nreturn shorter;\n}",
-    "accessModifier": "public",
-    "returnType": "ImmutableStack<T>",
-    "methodName": "pop"
+    "method_name": "pop",
+    "parameters": "",
+    "return_type": "ImmutableStack<T>",
+    "return_variable": "shorter",
+    "called_methods": [
+      "NoSuchElementException"
+    ],
+    "local_variables": [
+      "shorter"
+    ],
+    "thrown_exceptions": [
+      "NoSuchElementException"
+    ]
   },
   {
     "javadoc": "/*** Return the stack that results from pushing another element on top.\n* @param val element to push\n* @return new stack resulting from pushing element\n*/",
     "code": "public ImmutableStack<T> push(T val) {\nreturn new ImmutableStack<>(val,this);\n}",
-    "accessModifier": "public",
-    "returnType": "ImmutableStack<T>",
-    "methodName": "push"
+    "method_name": "push",
+    "parameters": "T val",
+    "return_type": "ImmutableStack<T>",
+    "return_variable": "new ImmutableStack<>(val,this)",
+    "called_methods": [],
+    "local_variables": [],
+    "thrown_exceptions": []
   },
   {
     "javadoc": "/*** Create a CLL from the elements in the given collection in the same order.\n* @param dummy dummy node to use, if null, a new dummy will be created\n* @param coll collection to use, must not be null, but may be empty\n* @return CLL of elements in same order\n*/",
     "code": "private Node<E> toCLL(Node<E> dummy, Collection<? extends E> coll) {\nif (dummy == null) dummy = new Node<E>(null,null);\ndummy.next = dummy;\nNode<E> t = dummy;\nfor (E e : coll) {\nt = t.next = new Node<E>(e,dummy);\n}\nreturn t;\n}",
-    "accessModifier": "private",
-    "returnType": "Node<E>",
-    "methodName": "toCLL"
+    "method_name": "toCLL",
+    "parameters": "Node<E> dummy, Collection<? extends E> coll",
+    "return_type": "Node<E>",
+    "return_variable": "t",
+    "called_methods": [],
+    "local_variables": [
+      "t",
+      "t"
+    ],
+    "thrown_exceptions": []
   },
   {
     "javadoc": "/*** Convert a CLL to a string.\n* A problem is signified by a string without a proper ending paren.\n* Use this for debugging.\n* @param tail CLL\n* @return string picture of a CLL\n*/",
     "code": "private static <E> String CLLtoString(Node<E> tail) {\nif (tail == null) return \"<NULL>\";\nNode<E> dummy = tail.next;\nif (dummy == tail) return \"()\";\nif (dummy == null) return \"<NO DUMMY>\";\nif (dummy.data != null) return \"<DUMMY \" + dummy.data + \">\";\nNode<E> head = dummy.next;\nStringBuilder sb = new StringBuilder();\nNode<E> fast = head.next;\nwhile (head != dummy) {\nif (head == null) return sb.toString(); // no closing paren\nif (head == fast) {\nSystem.out.println(\"...\");\nreturn sb.toString();\n}\nif (sb.length() == 0) sb.append(\"(\");\nelse sb.append(\",\");\nsb.append(head.data);\nhead = head.next;\nif (fast != dummy && fast != null) fast = fast.next;\nif (fast != dummy && fast != null) fast = fast.next;\n}\nsb.append(\")\"); // clean close\nreturn sb.toString();\n}",
-    "accessModifier": "unknown",
-    "returnType": "unknown",
-    "methodName": "unknown"
+    "method_name": "CLLtoString",
+    "parameters": "Node<E> tail",
+    "return_type": "String",
+    "return_variable": "\"<NULL>\"",
+    "called_methods": [
+      "StringBuilder",
+      "toString",
+      "println",
+      "length",
+      "append"
+    ],
+    "local_variables": [
+      "dummy",
+      "head",
+      "sb",
+      "fast"
+    ],
+    "thrown_exceptions": []
   },
   {
     "javadoc": "/*** Merge two sorted CLLs, or rather, merge the elements\n* of the second list into the first list.\n* This method should not create any new nodes!\n* The lists may have duplicates (according to the comparator)\n* but will be in non-decreasing order w.r.t. the comparator.\n* The result should include the dummy from the first CLL\n* and the second CLL should be left empty (dummy points to itself).\n* @note This method does not efficiently handle when the second list\n* contains a single element that belongs at the end of the first list.\n* In other words, this method does not do the work of insertion sort.\n* @param t1 tail of first CLL\n* @param t2 tail of second CLL\n* @return tail of merged list (first CLL with nodes of second CLL merged in)\n*/",
     "code": "private Node<E> merge(Node<E> t1, Node<E> t2) {\nif(t2.next == t2) return t1;\nif(t1.next == t1) {\nNode<E> dummy = t2.next;\nt1.next = t2.next.next;\nt2.next = t1;\nt1 = t2;\nt2 = dummy;\nt2.next = t2;\nreturn t1;\n}\nNode<E> n1 = t1.next.next;\nNode<E> n2 = t2.next.next;\n\nNode<E> cur;\nif(comparator.compare(n1.data, n2.data) < 0) {\ncur = n1;\nn1 = n1.next;\n}else {\ncur = n2;\nn2 = n2.next;\n}\nNode<E> first = cur;\nNode<E> dum1 = t1.next;\nNode<E> dum2 = t2.next;\n\nwhile(n1.data != null && n2.data != null) {\nif(comparator.compare(n1.data, n2.data) < 0) {\ncur.next = n1;\ncur = cur.next;\nn1 = n1.next;\n}\nelse {\ncur.next = n2;\ncur = cur.next;\nn2 = n2.next;\n}\n}\nwhile(n1.data != null) {\ncur.next = n1;\ncur = cur.next;\nn1 = n1.next;\n}\nwhile(n2.data != null) {\ncur.next = n2;\ncur = cur.next;\nn2 = n2.next;\n}\ncur.next = dum1;\nt1 = cur;\nt1.next.next = first;\nt2 = dum2;\nt2.next = t2;\n\nreturn t1;\n}",
-    "accessModifier": "private",
-    "returnType": "Node<E>",
-    "methodName": "merge"
+    "method_name": "merge",
+    "parameters": "Node<E> t1, Node<E> t2",
+    "return_type": "Node<E>",
+    "return_variable": "t1",
+    "called_methods": [
+      "compare"
+    ],
+    "local_variables": [
+      "t1",
+      "dummy",
+      "t1",
+      "n1",
+      "n2",
+      "cur",
+      "first",
+      "dum1",
+      "dum2",
+      "t1"
+    ],
+    "thrown_exceptions": []
   },
   {
     "javadoc": "/*** Partition a CLL w.r.t. the first element in the list.\n* The list elements are rearranged so that those which\n* are less that the pivot are placed before it, and those\n* that are greater are placed after them.  Equal elements\n* will be placed in the \"after\" list right after the pivot.\n* The elements may be rearranged arbitrarily otherwise.\n* @param tail the last element of the CLL.\n* There must be at least one element in this list\n* @return new tail\n*/",
     "code": "private Node<E> partition(Node<E> tail) {\nNode<E> cur = tail.next.next;\nNode<E> p = cur;\nE pivot = cur.data;\nNode<E> dum = tail.next;\nNode<E> prev = tail.next;\n\nwhile(cur.data != null) {\nif(comparator.compare(cur.data, pivot) < 0) {\nNode<E> next = cur.next;\nprev.next = cur.next;\ncur.next = dum.next;\ndum.next = cur;\ncur = next;\n}else if(comparator.compare(cur.data, pivot) == 0 && cur != p) {\nNode<E> next = cur.next;\nprev.next = cur.next;\ncur.next = p.next;\np.next = cur;\nif(prev.next != next) prev = prev.next;\ncur = next;\n}else {\nprev = cur;\ncur = cur.next;\n}\n}\n\ntail = prev;\n\nreturn tail;\n}",
-    "accessModifier": "private",
-    "returnType": "Node<E>",
-    "methodName": "partition"
+    "method_name": "partition",
+    "parameters": "Node<E> tail",
+    "return_type": "Node<E>",
+    "return_variable": "tail",
+    "called_methods": [
+      "compare"
+    ],
+    "local_variables": [
+      "cur",
+      "p",
+      "pivot",
+      "dum",
+      "prev",
+      "next",
+      "next",
+      "tail"
+    ],
+    "thrown_exceptions": []
   },
   {
     "javadoc": "/*** Destructively sort a CLL using quicksort, and return it.\n* The pivot chose should always be the first element.\n* @param l CLL identified by its tail\n*/",
     "code": "private Node<E> quicksort(Node<E> tail) {\nif(tail.next.next == tail) return tail;\n\nNode<E> pivot = tail.next.next;\nNode<E> dum = tail.next;\ntail = partition(tail);\n\nNode<E> tail2 = tail.next;\nwhile(tail2.next != pivot) tail2 = tail2.next;\ntail2.next = dum;\ntail2 = quicksort(tail2);\nNode<E> beforeHead = tail2.next.next;\ntail2.next = beforeHead;\n\nif(tail == pivot) tail = dum;\ntail.next = dum;\ndum.next = pivot.next;\ntail = quicksort(tail);\nNode<E> afterHead = tail.next.next;\n\ntail2.next = pivot;\npivot.next = afterHead;\nif(tail.data == null) tail = pivot;\ntail.next = dum;\nif(beforeHead.data != null) dum.next = beforeHead;\n\nreturn tail;\n}",
-    "accessModifier": "private",
-    "returnType": "Node<E>",
-    "methodName": "quicksort"
+    "method_name": "quicksort",
+    "parameters": "Node<E> tail",
+    "return_type": "Node<E>",
+    "return_variable": "tail",
+    "called_methods": [
+      "partition"
+    ],
+    "local_variables": [
+      "tail",
+      "pivot",
+      "dum",
+      "tail2",
+      "beforeHead",
+      "afterHead",
+      "tail"
+    ],
+    "thrown_exceptions": []
   },
   {
     "javadoc": "/*** Instantiates a new vector with specified delta values.\n*\n* @param dx the initial deltax value\n* @param dy the initial deltay value\n*/",
     "code": "public Vector(double dx, double dy){\nthis.deltax = dx;\nthis.deltay = dy;\n}",
-    "accessModifier": "default",
-    "returnType": "public",
-    "methodName": "Vector"
+    "method_name": "Vector",
+    "parameters": "double dx, double dy",
+    "return_type": "public",
+    "return_variable": "",
+    "called_methods": [],
+    "local_variables": [],
+    "thrown_exceptions": []
   },
   {
     "javadoc": "/*** Create a sorted collection using the given comparator.\n* @param comp comparator to use, must not be null\n*/",
     "code": "public SortedCollection(Comparator<E> comp) {\nif (comp == null) throw new IllegalArgumentException(\"comparator cannot be null\");\n// TODO set up data structure for an empty list.\ncomparator = comp;\ntail = new Node<>(null, null);\ntail.next = tail;\nsize = 0;\nversion = 0;\nassert wellFormed() : \"invariant failed at end of constructor\";\n}",
-    "accessModifier": "default",
-    "returnType": "public",
-    "methodName": "SortedCollection"
+    "method_name": "SortedCollection",
+    "parameters": "Comparator<E> comp",
+    "return_type": "public",
+    "return_variable": "",
+    "called_methods": [
+      "IllegalArgumentException",
+      "wellFormed"
+    ],
+    "local_variables": [],
+    "thrown_exceptions": [
+      "IllegalArgumentException"
+    ]
   },
   {
     "javadoc": "/*** Create a sorted collection with the natural comparator,\n* and with all the elements from the given collection\n* @param from collection to get elements from, must not be null\n*/",
     "code": "public SortedCollection(Collection<? extends E> from) {\nthis();\naddAll(from);\nassert wellFormed() : \"invariant failed at end of constructor\";\n}",
-    "accessModifier": "default",
-    "returnType": "public",
-    "methodName": "SortedCollection"
+    "method_name": "SortedCollection",
+    "parameters": "Collection<? extends E> from",
+    "return_type": "public",
+    "return_variable": "",
+    "called_methods": [
+      "addAll",
+      "wellFormed"
+    ],
+    "local_variables": [],
+    "thrown_exceptions": []
   },
   {
     "javadoc": "/*** Instantiates a new unit vector with specified angle.\n*\n* @param theta the angle to construct, in radians\n*/",
     "code": "public Vector(double theta){\nthis.deltax = Math.cos(theta);\nthis.deltay = Math.sin(theta);\n}",
-    "accessModifier": "default",
-    "returnType": "public",
-    "methodName": "Vector"
+    "method_name": "Vector",
+    "parameters": "double theta",
+    "return_type": "public",
+    "return_variable": "",
+    "called_methods": [
+      "cos",
+      "sin"
+    ],
+    "local_variables": [],
+    "thrown_exceptions": []
   },
   {
     "javadoc": "/*** Instantiates a new vector between two points.\n* If applied to the first point, the result is the second point.\n*\n* @param p the first point\n* @param q the second point\n*/",
     "code": "public Vector(Point p, Point q){\nthis.deltax = q.x() - p.x();\nthis.deltay = q.y() - p.y();\n}",
-    "accessModifier": "default",
-    "returnType": "public",
-    "methodName": "Vector"
+    "method_name": "Vector",
+    "parameters": "Point p, Point q",
+    "return_type": "public",
+    "return_variable": "",
+    "called_methods": [
+      "x",
+      "y"
+    ],
+    "local_variables": [],
+    "thrown_exceptions": []
   },
   {
     "javadoc": "/*** Getter for deltax field.\n*\n* @return the current deltax value\n*/",
     "code": "public double dx(){\nreturn this.deltax;\n}",
-    "accessModifier": "public",
-    "returnType": "double",
-    "methodName": "dx"
+    "method_name": "dx",
+    "parameters": "",
+    "return_type": "double",
+    "return_variable": "this.deltax",
+    "called_methods": [],
+    "local_variables": [],
+    "thrown_exceptions": []
   },
   {
     "javadoc": "/*** Gets the radius.\n*\n* @return the radius\n*/",
     "code": "public int getRadius(){return radius;}",
-    "accessModifier": "public",
-    "returnType": "int",
-    "methodName": "getRadius"
+    "method_name": "getRadius",
+    "parameters": "",
+    "return_type": "int",
+    "return_variable": "radius",
+    "called_methods": [],
+    "local_variables": [
+      "radius"
+    ],
+    "thrown_exceptions": []
   },
   {
     "javadoc": "/*** Getter for deltay field.\n*\n* @return the current deltay value\n*/",
     "code": "public double dy(){\nreturn this.deltay;\n}",
-    "accessModifier": "public",
-    "returnType": "double",
-    "methodName": "dy"
+    "method_name": "dy",
+    "parameters": "",
+    "return_type": "double",
+    "return_variable": "this.deltay",
+    "called_methods": [],
+    "local_variables": [],
+    "thrown_exceptions": []
   },
   {
     "javadoc": "/*** Translates the parameter point by this vector.\n*\n* @param p the point to translate\n* @return the  translated point\n*/",
     "code": "public Point move(Point p){\nreturn new Point(p.x() + this.dx(), p.y() + this.dy());\n}",
-    "accessModifier": "public",
-    "returnType": "Point",
-    "methodName": "move"
+    "method_name": "move",
+    "parameters": "Point p",
+    "return_type": "Point",
+    "return_variable": "new Point(p.x() + this.dx(), p.y() + this.dy())",
+    "called_methods": [
+      "Point",
+      "x",
+      "dx",
+      "y",
+      "dy"
+    ],
+    "local_variables": [],
+    "thrown_exceptions": []
   },
   {
     "javadoc": "/*** Adds the parameter vector with this vector.\n*\n* @param v the vector to add\n* @return the vector sum\n*/",
     "code": "public Vector add(Vector v){\nreturn new Vector(this.dx() + v.dx(), this.dy() + v.dy());\n}",
-    "accessModifier": "public",
-    "returnType": "Vector",
-    "methodName": "add"
+    "method_name": "add",
+    "parameters": "Vector v",
+    "return_type": "Vector",
+    "return_variable": "new Vector(this.dx() + v.dx(), this.dy() + v.dy())",
+    "called_methods": [
+      "Vector",
+      "dx",
+      "dy"
+    ],
+    "local_variables": [],
+    "thrown_exceptions": []
   },
   {
     "javadoc": "/*** Takes the dot product of this vector and the parameter vector.\n*\n* @param v the other vector\n* @return the dot product\n*/",
     "code": "public double dot(Vector v){\nreturn this.dx() * v.dx() + this.dy() * v.dy();\n}",
-    "accessModifier": "public",
-    "returnType": "double",
-    "methodName": "dot"
+    "method_name": "dot",
+    "parameters": "Vector v",
+    "return_type": "double",
+    "return_variable": "this.dx() * v.dx() + this.dy() * v.dy()",
+    "called_methods": [
+      "dx",
+      "dy"
+    ],
+    "local_variables": [],
+    "thrown_exceptions": []
   },
   {
     "javadoc": "/*** Scales this vector by the parameter.\n*\n* @param s the constant to scale by\n* @return the scaled vector\n*/",
     "code": "public Vector scale(double s){\nreturn new Vector(s * this.dx(), s * this.dy());\n}",
-    "accessModifier": "public",
-    "returnType": "Vector",
-    "methodName": "scale"
+    "method_name": "scale",
+    "parameters": "double s",
+    "return_type": "Vector",
+    "return_variable": "new Vector(s * this.dx(), s * this.dy())",
+    "called_methods": [
+      "Vector",
+      "dx",
+      "dy"
+    ],
+    "local_variables": [],
+    "thrown_exceptions": []
   },
   {
     "javadoc": "/*** Finds the magnitude of this vector.\n*\n* @return how long this vector is (never negative).\n*/",
     "code": "public double magnitude(){\ndouble temp = this.dx() * this.dx() + this.dy() * this.dy();\nreturn Math.sqrt(temp);\n}",
-    "accessModifier": "public",
-    "returnType": "double",
-    "methodName": "magnitude"
+    "method_name": "magnitude",
+    "parameters": "",
+    "return_type": "double",
+    "return_variable": "Math.sqrt(temp)",
+    "called_methods": [
+      "dx",
+      "dy",
+      "sqrt"
+    ],
+    "local_variables": [
+      "temp"
+    ],
+    "thrown_exceptions": []
   },
   {
     "javadoc": "/*** Normalizes this vector.\n*\n* @return a vector with the same angle but magnitude of one.\n*/",
     "code": "public Vector normalize(){\ndouble magnitude = this.magnitude();\nreturn new Vector(this.dx() / magnitude, this.dy() / magnitude);\n}",
-    "accessModifier": "public",
-    "returnType": "Vector",
-    "methodName": "normalize"
+    "method_name": "normalize",
+    "parameters": "",
+    "return_type": "Vector",
+    "return_variable": "new Vector(this.dx() / magnitude, this.dy() / magnitude)",
+    "called_methods": [
+      "magnitude",
+      "Vector",
+      "dx",
+      "dy"
+    ],
+    "local_variables": [
+      "magnitude"
+    ],
+    "thrown_exceptions": []
   },
   {
     "javadoc": "/*** gets angle theta\n*\n* @return angle of vector off x axis\n*/",
     "code": "public double theta() {\n\nif(this.dx() == 0 && this.dy() > 0)\nreturn Math.PI/2;\nelse if(this.dx() == 0)\nreturn Math.PI * 3 / 2;\n\ndouble theta = Math.atan(this.dy() / this.dx());\nif(this.dx() < 0)\ntheta += Math.PI;\nreturn theta;\n}",
-    "accessModifier": "public",
-    "returnType": "double",
-    "methodName": "theta"
+    "method_name": "theta",
+    "parameters": "",
+    "return_type": "double",
+    "return_variable": "Math.PI/2",
+    "called_methods": [
+      "dx",
+      "dy",
+      "atan"
+    ],
+    "local_variables": [
+      "theta",
+      "theta"
+    ],
+    "thrown_exceptions": []
   },
   {
     "javadoc": "/*** Rotates this vector clockwise by the parameter angle (in radians).\n*\n* @param theta the angle to rotate (in radians)\n* @return the rotated vector\n*/",
     "code": "public Vector rotate(double theta){\ndouble angle = this.theta() + theta;\nVector v = new Vector(angle);\nreturn v.scale(this.magnitude());\n}",
-    "accessModifier": "public",
-    "returnType": "Vector",
-    "methodName": "rotate"
+    "method_name": "rotate",
+    "parameters": "double theta",
+    "return_type": "Vector",
+    "return_variable": "v.scale(this.magnitude())",
+    "called_methods": [
+      "theta",
+      "Vector",
+      "scale",
+      "magnitude"
+    ],
+    "local_variables": [
+      "angle",
+      "v"
+    ],
+    "thrown_exceptions": []
   },
   {
     "javadoc": "/*** Compute the angle of this vector, in radians,\n* clockwise from the x-axis.\n*\n* @return the angle in range [0,2Pi)\n*/",
     "code": "public double angle() {\ndouble magn = magnitude();\nif (magn == 0.0) return 0;\ndouble alpha = Math.acos(dx()/magn);\nif(dy() < 0) alpha = 2*Math.PI-alpha;\nreturn alpha;\n}",
-    "accessModifier": "public",
-    "returnType": "double",
-    "methodName": "angle"
+    "method_name": "angle",
+    "parameters": "",
+    "return_type": "double",
+    "return_variable": "0",
+    "called_methods": [
+      "magnitude",
+      "acos",
+      "dx",
+      "dy"
+    ],
+    "local_variables": [
+      "magn",
+      "alpha",
+      "alpha"
+    ],
+    "thrown_exceptions": []
   },
   {
     "javadoc": "/*** Return the current movement of the ball.\n*\n* @return the current movement\n*/",
     "code": "public Vector getMove(){return move;}",
-    "accessModifier": "public",
-    "returnType": "Vector",
-    "methodName": "getMove"
+    "method_name": "getMove",
+    "parameters": "",
+    "return_type": "Vector",
+    "return_variable": "move",
+    "called_methods": [],
+    "local_variables": [
+      "move"
+    ],
+    "thrown_exceptions": []
   },
   {
     "javadoc": "/*** Initialize an empty sequence with an initial capacity of INITIAL_CAPACITY.\n* The append method works\n* efficiently (without needing more memory) until this capacity is reached.\n* @param - none\n* @postcondition\n*   This sequence is empty and has an initial capacity of INITIAL_CAPACITY\n* @exception OutOfMemoryError\n*   Indicates insufficient memory for initial array.\n**/",
     "code": "public BallSeq( )\n{\nthis(INITIAL_CAPACITY);\nassert wellFormed() : \"Invariant false at end of constructor\";\n}",
-    "accessModifier": "default",
-    "returnType": "public",
-    "methodName": "BallSeq"
+    "method_name": "BallSeq",
+    "parameters": "",
+    "return_type": "public",
+    "return_variable": "",
+    "called_methods": [
+      "wellFormed"
+    ],
+    "local_variables": [],
+    "thrown_exceptions": []
   },
   {
     "javadoc": "/*** Initialize an empty sequence with a specified initial capacity. Note that\n* the append method works\n* efficiently (without needing more memory) until this capacity is reached.\n* @param initialCapacity\n*   the initial capacity of this sequence\n* @precondition\n*   initialCapacity is non-negative.\n* @postcondition\n*   This sequence is empty and has the given initial capacity.\n* @exception IllegalArgumentException\n*   Indicates that initialCapacity is negative.\n* @exception OutOfMemoryError\n*   Indicates insufficient memory for an array with this many elements.\n*   new Ball[initialCapacity].\n**/",
     "code": "public BallSeq(int initialCapacity)\n{\nif(initialCapacity < 0) throw new IllegalArgumentException(\"Inital Capacity must be non-negative\");\n\ndata = new Ball[initialCapacity];\nmanyItems = 0;\ncurrentIndex = 0;\nassert wellFormed() : \"Invariant false at end of constructor\";\n}",
-    "accessModifier": "default",
-    "returnType": "public",
-    "methodName": "BallSeq"
+    "method_name": "BallSeq",
+    "parameters": "int initialCapacity",
+    "return_type": "public",
+    "return_variable": "",
+    "called_methods": [
+      "IllegalArgumentException",
+      "wellFormed"
+    ],
+    "local_variables": [],
+    "thrown_exceptions": [
+      "IllegalArgumentException"
+    ]
   },
   {
     "javadoc": "/*** Determine the number of elements in this sequence.\n* @param - none\n* @return\n*   the number of elements in this sequence\n**/",
     "code": "public int size( )\n{\nassert wellFormed() : \"invariant failed at start of size\";\n\nreturn manyItems;\n}",
-    "accessModifier": "public",
-    "returnType": "int",
-    "methodName": "size"
+    "method_name": "size",
+    "parameters": "",
+    "return_type": "int",
+    "return_variable": "manyItems",
+    "called_methods": [
+      "wellFormed"
+    ],
+    "local_variables": [
+      "manyItems"
+    ],
+    "thrown_exceptions": []
   },
   {
     "javadoc": "/*** The first element (if any) of this sequence is now current.\n* @param - none\n* @postcondition\n*   The front element of this sequence (if any) is now the current element (but\n*   if this sequence has no elements at all, then there is no current\n*   element).\n**/",
     "code": "public void start( )\n{\nassert wellFormed() : \"invariant failed at start of start\";\n\ncurrentIndex = 0;\nassert wellFormed() : \"invariant failed at end of start\";\n}",
-    "accessModifier": "public",
-    "returnType": "void",
-    "methodName": "start"
+    "method_name": "start",
+    "parameters": "",
+    "return_type": "void",
+    "return_variable": "",
+    "called_methods": [
+      "wellFormed"
+    ],
+    "local_variables": [],
+    "thrown_exceptions": []
   },
   {
     "javadoc": "/*** Accessor method to determine whether this sequence has a specified\n* current element (a Ball or null) that can be retrieved with the\n* getCurrent method. This depends on the status of the cursor.\n* @param - none\n* @return\n*   true (there is a current element) or false (there is no current element at the moment)\n**/",
     "code": "public boolean isCurrent( )\n{\nassert wellFormed() : \"invariant failed at start of isCurrent\";\n\nreturn currentIndex < manyItems;\n}",
-    "accessModifier": "public",
-    "returnType": "boolean",
-    "methodName": "isCurrent"
+    "method_name": "isCurrent",
+    "parameters": "",
+    "return_type": "boolean",
+    "return_variable": "currentIndex < manyItems",
+    "called_methods": [
+      "wellFormed"
+    ],
+    "local_variables": [],
+    "thrown_exceptions": []
   },
   {
     "javadoc": "/*** Accessor method to get the current element of this sequence.\n* @param - none\n* @precondition\n*   isCurrent() returns true.\n* @return\n*   the current element of this sequence, possibly null\n* @exception IllegalStateException\n*   Indicates that there is no current element, so\n*   getCurrent may not be called.\n**/",
     "code": "public Ball getCurrent( )\n{\nassert wellFormed() : \"invariant failed at start of getCurrent\";\n\nif(!isCurrent()) throw new IllegalStateException(\"No current element found\");\n\nreturn data[currentIndex];\n\n}",
-    "accessModifier": "public",
-    "returnType": "Ball",
-    "methodName": "getCurrent"
+    "method_name": "getCurrent",
+    "parameters": "",
+    "return_type": "Ball",
+    "return_variable": "data[currentIndex]",
+    "called_methods": [
+      "wellFormed",
+      "isCurrent",
+      "IllegalStateException"
+    ],
+    "local_variables": [],
+    "thrown_exceptions": [
+      "IllegalStateException"
+    ]
   },
   {
     "javadoc": "/*** Move forward, so that the next element is now the current element in\n* this sequence.\n* @param - none\n* @precondition\n*   isCurrent() returns true.\n* @postcondition\n*   If the current element was already the end element of this sequence\n*   (with nothing after it), then there is no longer any current element.\n*   Otherwise, the new current element is the element immediately after the\n*   original current element.\n* @exception IllegalStateException\n*   If there was no current element, so\n*   advance may not be called (the precondition was false).\n**/",
     "code": "public void advance( )\n{\nassert wellFormed() : \"invariant failed at start of advance\";\n\nif(!isCurrent()) throw new IllegalStateException(\"Can not advance\");\nif(data.length > currentIndex)\ncurrentIndex++;\n\nassert wellFormed() : \"invariant failed at end of advance\";\n}",
-    "accessModifier": "public",
-    "returnType": "void",
-    "methodName": "advance"
+    "method_name": "advance",
+    "parameters": "",
+    "return_type": "void",
+    "return_variable": "",
+    "called_methods": [
+      "wellFormed",
+      "isCurrent",
+      "IllegalStateException"
+    ],
+    "local_variables": [],
+    "thrown_exceptions": [
+      "IllegalStateException"
+    ]
   },
   {
     "javadoc": "/*** Remove the current element from this sequence.\n* @param - none\n* @precondition\n*   isCurrent() returns true.\n* @postcondition\n*   The current element has been removed from this sequence, and the\n*   following element (if there is one) is now the new current element.\n*   If there was no following element, then there is now no current\n*   element.\n* @exception IllegalStateException\n*   Indicates that there is no current element, so\n*   removeCurrent may not be called.\n**/",
     "code": "public void removeCurrent( )\n{\nassert wellFormed() : \"invariant failed at start of removeCurrent\";\n\nif(!isCurrent()) throw new IllegalStateException(\"No current element\");\n\n\nfor(int i = currentIndex; i < manyItems-1; i++) {\ndata[i] = data[i+1];\n}\ndata[manyItems-1] = null;\nmanyItems--;\nassert wellFormed() : \"invariant failed at end of removeCurrent\";\n}",
-    "accessModifier": "public",
-    "returnType": "void",
-    "methodName": "removeCurrent"
+    "method_name": "removeCurrent",
+    "parameters": "",
+    "return_type": "void",
+    "return_variable": "",
+    "called_methods": [
+      "wellFormed",
+      "isCurrent",
+      "IllegalStateException"
+    ],
+    "local_variables": [
+      "i"
+    ],
+    "thrown_exceptions": [
+      "IllegalStateException"
+    ]
   },
   {
     "javadoc": "/*** Change the current capacity of this sequence if needed.\n* @param minimumCapacity\n*   the new capacity for this sequence\n* @postcondition\n*   This sequence's capacity has been changed to at least minimumCapacity.\n*   If the capacity was already at or greater than minimumCapacity,\n*   then the capacity is left unchanged.\n*   If the capacity is changed, it must be at least twice as big as before.\n* @exception OutOfMemoryError\n*   Indicates insufficient memory for: new array of minimumCapacity elements.\n**/",
     "code": "private void ensureCapacity(int minimumCapacity)\n{\nif(data.length >= minimumCapacity) return;\n\nint newSize = data.length * 2;\nif (newSize < minimumCapacity) newSize = minimumCapacity;\n\nBall[] newArray = new Ball[newSize];\nfor(int i = 0; i < data.length; i++) {\nnewArray[i] = data[i];\n}\ndata = newArray;\n}",
-    "accessModifier": "private",
-    "returnType": "void",
-    "methodName": "ensureCapacity"
+    "method_name": "ensureCapacity",
+    "parameters": "int minimumCapacity",
+    "return_type": "void",
+    "return_variable": "",
+    "called_methods": [],
+    "local_variables": [
+      "newSize",
+      "newArray",
+      "i"
+    ],
+    "thrown_exceptions": []
   },
   {
     "javadoc": "/*** Add a new element to this sequence, before the current element (if any).\n* If the new element would take this sequence beyond its current capacity,\n* then the capacity is increased before adding the new element.\n* @param element\n*   the new element that is being added\n* @postcondition\n*   A new copy of the element has been added to this sequence. If there was\n*   a current element, then the new element is placed before the current\n*   element. If there was no current element, then the new element is placed\n*   at the end of the sequence. In all cases, the new element becomes the\n*   new current element of this sequence.\n* @exception OutOfMemoryError\n*   Indicates insufficient memory for increasing the sequence's capacity.\n**/",
     "code": "public void insert(Ball element)\n{\nassert wellFormed() : \"invariant failed at start of insert\";\n\nensureCapacity(manyItems + 1);\n\nfor(int i = manyItems; i > currentIndex; i--) {\ndata[i] = data[i-1];\n}\ndata[currentIndex] = element;\n\nmanyItems++;\n\nassert wellFormed() : \"invariant failed at end of insert\";\n}",
-    "accessModifier": "public",
-    "returnType": "void",
-    "methodName": "insert"
+    "method_name": "insert",
+    "parameters": "Ball element",
+    "return_type": "void",
+    "return_variable": "",
+    "called_methods": [
+      "wellFormed",
+      "ensureCapacity"
+    ],
+    "local_variables": [
+      "i"
+    ],
+    "thrown_exceptions": []
   },
   {
     "javadoc": "/*** Set the radius of this ball.\n* @param r new radius, must be positive.\n*/",
     "code": "public void setRadius(int r) {\nif (r <= 0) throw new IllegalArgumentException(\"radius must be positive, not \" + r);\nradius = r;\n}",
-    "accessModifier": "public",
-    "returnType": "void",
-    "methodName": "setRadius"
+    "method_name": "setRadius",
+    "parameters": "int r",
+    "return_type": "void",
+    "return_variable": "",
+    "called_methods": [
+      "IllegalArgumentException"
+    ],
+    "local_variables": [],
+    "thrown_exceptions": [
+      "IllegalArgumentException"
+    ]
   },
   {
     "javadoc": "/*** Place the contents of another sequence (which may be the\n* same one as this!) into this sequence before the current element (if any).\n* @param addend\n*   a sequence whose contents will be placed into this sequence\n* @precondition\n*   The parameter, addend, is not null.\n* @postcondition\n*   The elements from addend have been placed into\n*   this sequence. The current element of this sequence (if any)\n*   is unchanged.  The addend is unchanged.\n* @exception NullPointerException\n*   Indicates that addend is null.\n* @exception OutOfMemoryError\n*   Indicates insufficient memory to increase the size of this sequence.\n**/",
     "code": "public void insertAll(BallSeq addend) {\nassert wellFormed() : \"invariant failed at start of addAll\";\n\nif(addend == null) throw new NullPointerException(\"Sequence is null\");\n\nBallSeq clone = addend.clone();\nensureCapacity(manyItems + clone.manyItems);\nint indexInc = clone.manyItems;\nfor(int i = clone.manyItems - 1; i >= 0; i--) {\ninsert(clone.data[i]);\n}\n\ncurrentIndex += indexInc;\n\n\nassert wellFormed() : \"invariant failed at end of addAll\";\n}",
-    "accessModifier": "public",
-    "returnType": "void",
-    "methodName": "insertAll"
+    "method_name": "insertAll",
+    "parameters": "BallSeq addend",
+    "return_type": "void",
+    "return_variable": "",
+    "called_methods": [
+      "wellFormed",
+      "NullPointerException",
+      "clone",
+      "ensureCapacity",
+      "insert"
+    ],
+    "local_variables": [
+      "clone",
+      "indexInc",
+      "i"
+    ],
+    "thrown_exceptions": [
+      "NullPointerException"
+    ]
   },
   {
     "javadoc": "/*** Generate a copy of this sequence.\n* @param - none\n* @return\n*   The return value is a copy of this sequence. Subsequent changes to the\n*   copy will not affect the original, nor vice versa.\n* @exception OutOfMemoryError\n*   Indicates insufficient memory for creating the clone.\n**/",
     "code": "public BallSeq clone( )\n{  // Clone a BallSeq object.\nassert wellFormed() : \"invariant failed at start of clone\";\nBallSeq answer = new BallSeq(manyItems);\n\nanswer.currentIndex = currentIndex;\nanswer.manyItems = manyItems;\n\nfor(int i = 0; i < manyItems; i++) {\nanswer.data[i] = data[i];\n}\n\nassert wellFormed() : \"invariant failed at end of clone\";\nassert answer.wellFormed() : \"invariant failed for clone\";\n\nreturn answer;\n}",
-    "accessModifier": "public",
-    "returnType": "BallSeq",
-    "methodName": "clone"
+    "method_name": "clone",
+    "parameters": "",
+    "return_type": "BallSeq",
+    "return_variable": "answer",
+    "called_methods": [
+      "wellFormed",
+      "BallSeq"
+    ],
+    "local_variables": [
+      "answer",
+      "i",
+      "answer"
+    ],
+    "thrown_exceptions": []
   },
   {
     "javadoc": "/*** default constructor for default capacity of zero\n*/",
     "code": "public BallCollection() {\nthis(INITIAL_CAPACITY);\n}",
-    "accessModifier": "default",
-    "returnType": "public",
-    "methodName": "BallCollection"
+    "method_name": "BallCollection",
+    "parameters": "",
+    "return_type": "public",
+    "return_variable": "",
+    "called_methods": [],
+    "local_variables": [],
+    "thrown_exceptions": []
   },
   {
     "javadoc": "/*** constructor\n* @param manyItems: number of items\n*/",
     "code": "public BallCollection(int manyItems) {\ndata = new Ball[manyItems];\nthis.manyItems = manyItems;\nversion = 0;\n\nassert wellFormed() : \"invariant failed at end of constructor\";\n}",
-    "accessModifier": "default",
-    "returnType": "public",
-    "methodName": "BallCollection"
+    "method_name": "BallCollection",
+    "parameters": "int manyItems",
+    "return_type": "public",
+    "return_variable": "",
+    "called_methods": [
+      "wellFormed"
+    ],
+    "local_variables": [],
+    "thrown_exceptions": []
   },
   {
     "javadoc": "/*** Instantiates a new player.\n*\n* @param loc the initial location\n*/",
     "code": "public Player(Point loc){location=loc;radius = DodgeBall.PLAYER_RADIUS;}",
-    "accessModifier": "default",
-    "returnType": "public",
-    "methodName": "Player"
+    "method_name": "Player",
+    "parameters": "Point loc",
+    "return_type": "public",
+    "return_variable": "",
+    "called_methods": [],
+    "local_variables": [],
+    "thrown_exceptions": []
   },
   {
     "javadoc": "/*** Sets the current image.\n*\n* @param img the new player image\n*/",
     "code": "public void setImg(BufferedImage img){playerImg = img;}",
-    "accessModifier": "public",
-    "returnType": "void",
-    "methodName": "setImg"
+    "method_name": "setImg",
+    "parameters": "BufferedImage img",
+    "return_type": "void",
+    "return_variable": "",
+    "called_methods": [],
+    "local_variables": [],
+    "thrown_exceptions": []
   },
   {
     "javadoc": "/*** Increases the player's radius.\n*\n* @see DodgeBall.makeHarder()\n*/",
     "code": "public void grow(){radius += 2;}",
-    "accessModifier": "public",
-    "returnType": "void",
-    "methodName": "grow"
+    "method_name": "grow",
+    "parameters": "",
+    "return_type": "void",
+    "return_variable": "",
+    "called_methods": [],
+    "local_variables": [],
+    "thrown_exceptions": []
   },
   {
     "javadoc": "/*** Checks if colliding with parameter ball.\n*\n* @param b the ball\n* @return true if colliding\n*/",
     "code": "public boolean isColliding(Ball b){\nreturn DodgeBall.MORTAL && location.distance(b.getLoc()) <= (radius + b.getRadius());}",
-    "accessModifier": "public",
-    "returnType": "boolean",
-    "methodName": "isColliding"
+    "method_name": "isColliding",
+    "parameters": "Ball b",
+    "return_type": "boolean",
+    "return_variable": "DodgeBall.MORTAL && location.distance(b.getLoc()) <= (radius + b.getRadius())",
+    "called_methods": [
+      "distance",
+      "getLoc",
+      "getRadius"
+    ],
+    "local_variables": [],
+    "thrown_exceptions": []
   },
   {
     "javadoc": "/*** Update the player's location.\n*\n* @param mouseLoc the current [adjusted] mouse location\n*/",
     "code": "public void update(Point mouseLoc){\nint new_x = Math.max(radius, mouseLoc.intX());\nint new_y = Math.max(radius, mouseLoc.intY());\nnew_x = Math.min(new_x, DodgeBall.BOUNDS.width -radius);\nnew_y = Math.min(new_y, DodgeBall.BOUNDS.height - radius);\nlocation = new Point(new_x, new_y);\n}",
-    "accessModifier": "public",
-    "returnType": "void",
-    "methodName": "update"
+    "method_name": "update",
+    "parameters": "Point mouseLoc",
+    "return_type": "void",
+    "return_variable": "",
+    "called_methods": [
+      "max",
+      "intX",
+      "intY",
+      "min",
+      "Point"
+    ],
+    "local_variables": [
+      "new_x",
+      "new_y"
+    ],
+    "thrown_exceptions": []
   },
   {
     "javadoc": "/*** Draws the player.\n*\n* @param g the Graphics context on which to draw\n*/",
     "code": "public void draw(Graphics g){\ng.drawImage(playerImg,\nlocation.intX() - radius, location.intY() - radius,\nradius*2, radius*2, null);\n}",
-    "accessModifier": "public",
-    "returnType": "void",
-    "methodName": "draw"
+    "method_name": "draw",
+    "parameters": "Graphics g",
+    "return_type": "void",
+    "return_variable": "",
+    "called_methods": [
+      "drawImage",
+      "intX",
+      "intY"
+    ],
+    "local_variables": [],
+    "thrown_exceptions": []
   },
   {
     "javadoc": "/*** Launches the ball by setting active to true.\n*/",
     "code": "public void launch(){active=true;}",
-    "accessModifier": "public",
-    "returnType": "void",
-    "methodName": "launch"
+    "method_name": "launch",
+    "parameters": "",
+    "return_type": "void",
+    "return_variable": "",
+    "called_methods": [],
+    "local_variables": [],
+    "thrown_exceptions": []
   },
   {
     "javadoc": "/*** Create an empty sequence\n* @param - none\n* @postcondition\n*   This sequence is empty\n**/",
     "code": "public BallSeq( )\n{\nmanyNodes = 0;\nhead = null;\ntail = null;\ncursor = null;\nprecursor = null;\n\nassert wellFormed() : \"invariant failed in constructor\";\n}",
-    "accessModifier": "default",
-    "returnType": "public",
-    "methodName": "BallSeq"
+    "method_name": "BallSeq",
+    "parameters": "",
+    "return_type": "public",
+    "return_variable": "",
+    "called_methods": [
+      "wellFormed"
+    ],
+    "local_variables": [],
+    "thrown_exceptions": []
   },
   {
     "javadoc": "/*** Determine the number of elements in this sequence.\n* @param - none\n* @return\n*   the number of elements in this sequence\n**/",
     "code": "public int size( )\n{\nassert wellFormed() : \"invariant wrong at start of size()\";\n\nreturn manyNodes;\n}",
-    "accessModifier": "public",
-    "returnType": "int",
-    "methodName": "size"
+    "method_name": "size",
+    "parameters": "",
+    "return_type": "int",
+    "return_variable": "manyNodes",
+    "called_methods": [
+      "wellFormed"
+    ],
+    "local_variables": [
+      "manyNodes"
+    ],
+    "thrown_exceptions": []
   },
   {
     "javadoc": "/*** Set the current element at the front of this sequence.\n* @param - none\n* @postcondition\n*   The front element of this sequence is now the current element (but\n*   if this sequence has no elements at all, then there is no current\n*   element).\n**/",
     "code": "public void start( )\n{\nassert wellFormed() : \"invariant wrong at start of start()\";\n\ncursor = head;\nprecursor = null;\n\nassert wellFormed() : \"invariant wrong at end of start()\";\n}",
-    "accessModifier": "public",
-    "returnType": "void",
-    "methodName": "start"
+    "method_name": "start",
+    "parameters": "",
+    "return_type": "void",
+    "return_variable": "",
+    "called_methods": [
+      "wellFormed"
+    ],
+    "local_variables": [],
+    "thrown_exceptions": []
   },
   {
     "javadoc": "/*** Accessor method to determine whether this sequence has a specified\n* current element that can be retrieved with the\n* getCurrent method.\n* @param - none\n* @return\n*   true (there is a current element) or false (there is no current element at the moment)\n**/",
     "code": "public boolean isCurrent( )\n{\nassert wellFormed() : \"invariant wrong at start of getCurrent()\";\n// TODO: Implemented by student.\n// This method shouldn't modify any fields, hence no assertion at end\nreturn cursor != null;\n}",
-    "accessModifier": "public",
-    "returnType": "boolean",
-    "methodName": "isCurrent"
+    "method_name": "isCurrent",
+    "parameters": "",
+    "return_type": "boolean",
+    "return_variable": "cursor != null",
+    "called_methods": [
+      "wellFormed",
+      "getCurrent"
+    ],
+    "local_variables": [],
+    "thrown_exceptions": []
   },
   {
     "javadoc": "/*** Accessor method to get the current element of this sequence.\n* @param - none\n* @precondition\n*   isCurrent() returns true.\n* @return\n*   the current element of this sequence\n* @exception IllegalStateException\n*   Indicates that there is no current element, so\n*   getCurrent may not be called.\n**/",
     "code": "public Ball getCurrent( )\n{\nassert wellFormed() : \"invariant wrong at start of getCurrent()\";\nif(!isCurrent()) throw new IllegalStateException(\"no current element\");\n\nreturn cursor.data;\n}",
-    "accessModifier": "public",
-    "returnType": "Ball",
-    "methodName": "getCurrent"
+    "method_name": "getCurrent",
+    "parameters": "",
+    "return_type": "Ball",
+    "return_variable": "cursor.data",
+    "called_methods": [
+      "wellFormed",
+      "isCurrent",
+      "IllegalStateException"
+    ],
+    "local_variables": [],
+    "thrown_exceptions": [
+      "IllegalStateException"
+    ]
   },
   {
     "javadoc": "/*** Move forward, so that the current element is now the next element in\n* this sequence.\n* @param - none\n* @precondition\n*   isCurrent() returns true.\n* @postcondition\n*   If the current element was already the end element of this sequence\n*   (with nothing after it), then there is no longer any current element.\n*   Otherwise, the new element is the element immediately after the\n*   original current element.\n* @exception IllegalStateException\n*   Indicates that there is no current element, so\n*   advance may not be called.\n**/",
     "code": "public void advance( )\n{\nassert wellFormed() : \"invariant wrong at start of advance()\";\nif(!isCurrent()) throw new IllegalStateException(\"no current element\");\n\nif(cursor.next != null) {\nprecursor = cursor;\ncursor = cursor.next;\n}\nelse {\ncursor = null;\nprecursor = null;\n}\nassert wellFormed() : \"invariant wrong at end of advance()\";\n}",
-    "accessModifier": "public",
-    "returnType": "void",
-    "methodName": "advance"
+    "method_name": "advance",
+    "parameters": "",
+    "return_type": "void",
+    "return_variable": "",
+    "called_methods": [
+      "wellFormed",
+      "isCurrent",
+      "IllegalStateException"
+    ],
+    "local_variables": [],
+    "thrown_exceptions": [
+      "IllegalStateException"
+    ]
   },
   {
     "javadoc": "/*** Remove the current element from this sequence.\n* @param - none\n* @precondition\n*   isCurrent() returns true.\n* @postcondition\n*   The current element has been removed from this sequence, and the\n*   following element (if there is one) is now the new current element.\n*   If there was no following element, then there is now no current\n*   element.\n* @exception IllegalStateException\n*   Indicates that there is no current element, so\n*   removeCurrent may not be called.\n**/",
     "code": "public void removeCurrent( )\n{\nassert wellFormed() : \"invariant wrong at start of removeCurrent()\";\nif(!isCurrent()) throw new IllegalStateException(\"no element to remove\");\n// TODO: Implemented by student.\n// See textbook pp.176-78, 181-184\nif(manyNodes == 1) {\nhead = null;\ntail = null;\nprecursor = null;\ncursor = null;\n}\nelse if(cursor == tail) {\ntail = precursor;\ntail.next = null;\nprecursor = null;\ncursor = null;\n}\nelse if(cursor == head) {\nhead = head.next;\ncursor = head;\n}\nelse {\ncursor = cursor.next;\nprecursor.next = cursor;\n}\nmanyNodes--;\n\nassert wellFormed() : \"invariant wrong at end of removeCurrent()\";\n}",
-    "accessModifier": "public",
-    "returnType": "void",
-    "methodName": "removeCurrent"
+    "method_name": "removeCurrent",
+    "parameters": "",
+    "return_type": "void",
+    "return_variable": "",
+    "called_methods": [
+      "wellFormed",
+      "isCurrent",
+      "IllegalStateException"
+    ],
+    "local_variables": [],
+    "thrown_exceptions": [
+      "IllegalStateException"
+    ]
   },
   {
     "javadoc": "/*** Add a new element to this sequence, before the current element (if any).\n* If the new element would take this sequence beyond its current capacity,\n* then the capacity is increased before adding the new element.\n* @param element\n*   the new element that is being added\n* @postcondition\n*   A new copy of the element has been added to this sequence. If there was\n*   a current element, then the new element is placed before the current\n*   element. If there was no current element, then the new element is placed\n*   at the end of the sequence. In all cases, the new element becomes the\n*   new current element of this sequence.\n* @exception OutOfMemoryError\n*   Indicates insufficient memory for increasing the sequence.\n**/",
     "code": "public void insert(Ball element)\n{\nassert wellFormed() : \"invariant failed at start of insert\";\n\nif(manyNodes == 0) {\ncursor = new Node(element, cursor);\ntail = cursor;\nhead = cursor;\n}\nelse if(cursor == head){\ncursor = new Node(element, cursor);\nhead = cursor;\n}\nelse if(cursor == null) {\ntail.next = new Node(element, null);\nprecursor = tail;\ntail = tail.next;\ncursor = tail;\n}else {\ncursor = new Node(element, cursor);\nprecursor.next = cursor;\n}\n\nmanyNodes++;\n\nassert wellFormed() : \"invariant failed at end of insert\";\n}",
-    "accessModifier": "public",
-    "returnType": "void",
-    "methodName": "insert"
+    "method_name": "insert",
+    "parameters": "Ball element",
+    "return_type": "void",
+    "return_variable": "",
+    "called_methods": [
+      "wellFormed",
+      "Node"
+    ],
+    "local_variables": [],
+    "thrown_exceptions": []
   },
   {
     "javadoc": "/*** Place the contents of another sequence (which may be the\n* same one as this!) into this sequence before the current element (if any).\n* @param addend\n*   a sequence whose contents will be placed into this sequence\n* @precondition\n*   The parameter, addend, is not null.\n* @postcondition\n*   The elements from addend have been placed into\n*   this sequence. The current element of this sequence (if any)\n*   is unchanged.  The addend is unchanged.\n* @exception NullPointerException\n*   Indicates that addend is null.\n* @exception OutOfMemoryError\n*   Indicates insufficient memory to increase the size of this sequence.\n**/",
     "code": "public void insertAll(BallSeq addend) {\nassert wellFormed() : \"invariant failed at start of addAll\";\nif(addend == null) throw new NullPointerException(\"addend is null\");\n\nif(addend.head == null) return;\nBallSeq clone = addend.clone();\n\nif(manyNodes == 0) {\nhead = clone.head;\ntail = clone.tail;\n}\nelse if (cursor == head){\nhead = clone.head;\nclone.tail.next = cursor;\nprecursor = clone.tail;\n}\nelse if (cursor == null) {\ntail.next = clone.head;\ntail = clone.tail;\n}\nelse {\nprecursor.next = clone.head;\nprecursor = clone.tail;\nclone.tail.next = cursor;\n}\nmanyNodes += clone.manyNodes;\n\nassert wellFormed() : \"invariant failed at end of addAll\";\n}",
-    "accessModifier": "public",
-    "returnType": "void",
-    "methodName": "insertAll"
+    "method_name": "insertAll",
+    "parameters": "BallSeq addend",
+    "return_type": "void",
+    "return_variable": "",
+    "called_methods": [
+      "wellFormed",
+      "NullPointerException",
+      "clone"
+    ],
+    "local_variables": [
+      "clone"
+    ],
+    "thrown_exceptions": [
+      "NullPointerException"
+    ]
   },
   {
     "javadoc": "/*** Generate a copy of this sequence.\n* @param - none\n* @return\n*   The return value is a copy of this sequence. Subsequent changes to the\n*   copy will not affect the original, nor vice versa.\n*   Whatever was current in the original object is now current in the clone.\n* @exception OutOfMemoryError\n*   Indicates insufficient memory for creating the clone.\n**/",
     "code": "public BallSeq clone( )\n{\nassert wellFormed() : \"invariant wrong at start of clone()\";\n\nBallSeq result;\n\ntry\n{\nresult = (BallSeq) super.clone( );\n}\ncatch (CloneNotSupportedException e)\n{\n// This exception should not occur. But if it does, it would probably\n// indicate a programming error that made super.clone unavailable.\n// The most common error would be forgetting the \"Implements Cloneable\"\n// clause at the start of this class.\nthrow new RuntimeException\n(\"This class does not implement Cloneable\");\n}\n// This is inspired by the textbook for this class, page 203\nif(result.head == null) return result;\n\nNode source = result.head;\nNode copyHead = new Node(source.data, null);\nNode copyTail = copyHead;\n\nwhile(source.next != null) {\nif(source == cursor) result.cursor = copyTail;\nif(source == precursor) result.precursor = copyTail;\nif(source == tail) result.tail = source;\nsource = source.next;\ncopyTail.next = new Node(source.data, null);\ncopyTail = copyTail.next;\n}\nresult.head = copyHead;\nif(source == cursor) result.cursor = copyTail;\nif(source == precursor) result.precursor = copyTail;\nif(source == tail) result.tail = copyTail;\n\n// TODO: Implemented by student.\n// Now do the hard work of cloning the list.\n// See pp 200-204, 235 (3rd ed. pp. 193-197, 228)\n// Setting precursor, cursor and tail correctly is tricky.\n\n\nassert wellFormed() : \"invariant wrong at end of clone() for this\";\nassert result.wellFormed() : \"invariant wrong for result of clone() for copy\";\nreturn result;\n}",
-    "accessModifier": "public",
-    "returnType": "BallSeq",
-    "methodName": "clone"
+    "method_name": "clone",
+    "parameters": "",
+    "return_type": "BallSeq",
+    "return_variable": "result",
+    "called_methods": [
+      "wellFormed",
+      "RuntimeException",
+      "Node"
+    ],
+    "local_variables": [
+      "result",
+      "result",
+      "source",
+      "copyHead",
+      "copyTail",
+      "result"
+    ],
+    "thrown_exceptions": [
+      "RuntimeException"
+    ]
   },
   {
     "javadoc": "/*** If ball is active: moves location by the current movement.\n* If ball is not active: rotates vector by Math.PI/24.\n*/",
     "code": "public void step(){\nif(active == true) {\ndouble x = this.getLoc().x() + this.getMove().dx();\ndouble y = this.getLoc().y() + this.getMove().dy();\nthis.location = new Point(x, y);\n}\nelse\nthis.move = this.getMove().rotate(Math.PI/24);\n}",
-    "accessModifier": "public",
-    "returnType": "void",
-    "methodName": "step"
+    "method_name": "step",
+    "parameters": "",
+    "return_type": "void",
+    "return_variable": "",
+    "called_methods": [
+      "getLoc",
+      "x",
+      "getMove",
+      "dx",
+      "y",
+      "dy",
+      "Point",
+      "rotate"
+    ],
+    "local_variables": [
+      "x",
+      "y"
+    ],
+    "thrown_exceptions": []
   },
   {
     "javadoc": "/*** Gets a single instance of the comparator.\n* @return a single instance of the comparator\n*/",
     "code": "public static Comparator<Player> getInstance() { return instance; }",
-    "accessModifier": "public",
-    "returnType": "Comparator<Player>",
-    "methodName": "getInstance"
+    "method_name": "getInstance",
+    "parameters": "",
+    "return_type": "Comparator<Player>",
+    "return_variable": "instance",
+    "called_methods": [],
+    "local_variables": [
+      "instance"
+    ],
+    "thrown_exceptions": []
   },
   {
     "javadoc": "/*** Gets a single instance of Nondiscrimination comparator.\n* @return a single instance of Nondiscrimination comparator\n*/",
     "code": "public static Comparator<Player> getInstance() { return instance; }",
-    "accessModifier": "public",
-    "returnType": "Comparator<Player>",
-    "methodName": "getInstance"
+    "method_name": "getInstance",
+    "parameters": "",
+    "return_type": "Comparator<Player>",
+    "return_variable": "instance",
+    "called_methods": [],
+    "local_variables": [
+      "instance"
+    ],
+    "thrown_exceptions": []
   },
   {
     "javadoc": "/*** Instantiates a new Player.\n* @param name the name of the player, must not be null\n* @param score how many points this player has scored\n* @param position the position of the player, where null means can play ANY position\n*/",
     "code": "public Player(String name, int score, Position position) {\nif (name == null) throw new NullPointerException(\"name cannot be null\");\nthis.name = name;\nthis.position = position;\ncheckParameter(\"score\",score);\nthis.score = score;\n}",
-    "accessModifier": "default",
-    "returnType": "public",
-    "methodName": "Player"
+    "method_name": "Player",
+    "parameters": "String name, int score, Position position",
+    "return_type": "public",
+    "return_variable": "",
+    "called_methods": [
+      "NullPointerException",
+      "checkParameter"
+    ],
+    "local_variables": [],
+    "thrown_exceptions": [
+      "NullPointerException"
+    ]
   },
   {
     "javadoc": "/**Gets the name.\n* @return the name */",
     "code": "public String getName() {return name;}",
-    "accessModifier": "public",
-    "returnType": "String",
-    "methodName": "getName"
+    "method_name": "getName",
+    "parameters": "",
+    "return_type": "String",
+    "return_variable": "name",
+    "called_methods": [],
+    "local_variables": [
+      "name"
+    ],
+    "thrown_exceptions": []
   },
   {
     "javadoc": "/**Gets this player's score.\n* @return the score */",
     "code": "public int getScore() {return score;}",
-    "accessModifier": "public",
-    "returnType": "int",
-    "methodName": "getScore"
+    "method_name": "getScore",
+    "parameters": "",
+    "return_type": "int",
+    "return_variable": "score",
+    "called_methods": [],
+    "local_variables": [
+      "score"
+    ],
+    "thrown_exceptions": []
   },
   {
     "javadoc": "/**Sets the score.\n* @param the score */",
     "code": "public void setScore(int score) {this.score = score;}",
-    "accessModifier": "public",
-    "returnType": "void",
-    "methodName": "setScore"
+    "method_name": "setScore",
+    "parameters": "int score",
+    "return_type": "void",
+    "return_variable": "",
+    "called_methods": [],
+    "local_variables": [],
+    "thrown_exceptions": []
   },
   {
     "javadoc": "/**Gets this player's position.\n* @return the position */",
     "code": "public Position getPosition() {return position;}",
-    "accessModifier": "public",
-    "returnType": "Position",
-    "methodName": "getPosition"
+    "method_name": "getPosition",
+    "parameters": "",
+    "return_type": "Position",
+    "return_variable": "position",
+    "called_methods": [],
+    "local_variables": [
+      "position"
+    ],
+    "thrown_exceptions": []
   },
   {
     "javadoc": "/**Gets the previous player.\n* @return the previous player */",
     "code": "public Player getPrevious() {return prev;}",
-    "accessModifier": "public",
-    "returnType": "Player",
-    "methodName": "getPrevious"
+    "method_name": "getPrevious",
+    "parameters": "",
+    "return_type": "Player",
+    "return_variable": "prev",
+    "called_methods": [],
+    "local_variables": [
+      "prev"
+    ],
+    "thrown_exceptions": []
   },
   {
     "javadoc": "/**Gets the next player.\n* @return the next player */",
     "code": "public Player getNext() {return next;}",
-    "accessModifier": "public",
-    "returnType": "Player",
-    "methodName": "getNext"
+    "method_name": "getNext",
+    "parameters": "",
+    "return_type": "Player",
+    "return_variable": "next",
+    "called_methods": [],
+    "local_variables": [
+      "next"
+    ],
+    "thrown_exceptions": []
   },
   {
     "javadoc": "/*** Add another player into this player's team by priority order.\n* <ul>\n* <li> If the other player has higher priority, place it somewhere before this player.\n* <li> If the other player has equal priority, it should be placed immediately after this player.\n* <li> If the other player has lower priority, place it somewhere after this player.\n* </ul>\n* It may be necessary to move multiple times forward or multiple times backward (but not both!)\n* <p>\n* Also, the code must use recursion to traverse the list - no loops are allowed!\n* @param p the player to add to our list, must not be null\n* @param priority comparator of players in the list, must not be null\n*/",
     "code": "public void addInPriority(Player p, Comparator<Player> priority) {\n// TODO: Implement this method.  No loops, only recursion\n//\n// NB: While Team happens to call this method only on the head of the list,\n//\t   we can't assume all classes that utilize Player will do so. That is why\n//\t   we must consider all scenarios, including those where this method is\n//\t   called on a player in the middle or end of the list.\n\nif(priority.compare(p, this) < 0) {\nif(next == null) {\np.prev = this;\nnext = p;\n}else if(priority.compare(p, next) > 0) {\np.prev = this;\np.next = next;\nnext.prev = p;\nnext = p;\n}else {\nnext.addInPriority(p, priority);\n}\n}else if(priority.compare(p, this) > 0) {\nif(prev == null) {\np.next = this;\nprev = p;\n}else if(priority.compare(p, prev) < 0) {\np.next = this;\np.prev = prev;\nprev.next = p;\nprev = p;\n}else {\nprev.addInPriority(p, priority);\n}\n}else {//(priority.compare(p, this) == 0)\nif(next == null) {\np.prev = this;\nnext = p;\n}else {\np.prev = this;\np.next = next;\nnext.prev = p;\nnext = p;\n}\n}\n}",
-    "accessModifier": "public",
-    "returnType": "void",
-    "methodName": "addInPriority"
+    "method_name": "addInPriority",
+    "parameters": "Player p, Comparator<Player> priority",
+    "return_type": "void",
+    "return_variable": "",
+    "called_methods": [
+      "compare"
+    ],
+    "local_variables": [],
+    "thrown_exceptions": []
   },
   {
     "javadoc": "/*** Checks if ball is at or outside BOUNDS dimension and moving further out,\n* and reflects movement if so.  If the ball isn't moving further out, the\n* movement isn't reflected.\n* @param bounds dimension of area to check (all four walls), must not be null\n*/",
     "code": "public void bounceWalls(Dimension bounds) {\nif((this.getLoc().x() + this.getRadius() >= bounds.getWidth()) && this.getMove().dx() > 0)\nthis.move = new Vector(-1*this.getMove().dx(), this.getMove().dy());\nif((this.getLoc().y() + this.getRadius() >= bounds.getHeight()) && this.getMove().dy() > 0)\nthis.move = new Vector(this.getMove().dx(), -1*this.getMove().dy());\nif((this.getLoc().x() - this.getRadius() <= 0) && this.getMove().dx() < 0)\nthis.move = new Vector(-1*this.getMove().dx(), this.getMove().dy());\nif((this.getLoc().y() - this.getRadius() <= 0) && this.getMove().dy() < 0)\nthis.move = new Vector(this.getMove().dx(), -1*this.getMove().dy());\n\n}",
-    "accessModifier": "public",
-    "returnType": "void",
-    "methodName": "bounceWalls"
+    "method_name": "bounceWalls",
+    "parameters": "Dimension bounds",
+    "return_type": "void",
+    "return_variable": "",
+    "called_methods": [
+      "getLoc",
+      "x",
+      "getRadius",
+      "getWidth",
+      "getMove",
+      "dx",
+      "Vector",
+      "dy",
+      "y",
+      "getHeight"
+    ],
+    "local_variables": [],
+    "thrown_exceptions": []
   },
   {
     "javadoc": "/*** Assuming all the players before this one are sorted correctly\n* according to the priority and come before this one,\n* ensure that the ones coming after are also sorted correctly.\n* @param c comparator to use, must not be null\n*/",
     "code": "public void sortByPriority(Comparator<Player> c) {\n// TODO: Implement this method.  Use a loop here and then recursion\n// when everything OK up to the next one.\n\nif(next == null) return;\n\nPlayer unsorted = next;\nnext.remove();\naddInPriority(unsorted, c);\nif(next == unsorted) next.sortByPriority(c);\nelse sortByPriority(c);\n\n}",
-    "accessModifier": "public",
-    "returnType": "void",
-    "methodName": "sortByPriority"
+    "method_name": "sortByPriority",
+    "parameters": "Comparator<Player> c",
+    "return_type": "void",
+    "return_variable": "",
+    "called_methods": [
+      "remove",
+      "addInPriority"
+    ],
+    "local_variables": [
+      "unsorted"
+    ],
+    "thrown_exceptions": []
   },
   {
     "javadoc": "/*** Remove this item from its list.\n* This player will be completely disconnected from any other players.\n*/",
     "code": "public void remove() {\n// TODO: Implement this method.  No loops or recursion required.\nif(prev != null && next != null) {\nprev.next = next;\nnext.prev = prev;\n}else if(prev != null && next == null) {\nprev.next = null;\n}else if(prev == null && next != null) {\nnext.prev = null;\n}\nnext = null;\nprev = null;\n}",
-    "accessModifier": "public",
-    "returnType": "void",
-    "methodName": "remove"
+    "method_name": "remove",
+    "parameters": "",
+    "return_type": "void",
+    "return_variable": "",
+    "called_methods": [],
+    "local_variables": [],
+    "thrown_exceptions": []
   },
   {
     "javadoc": "/*** Instantiates a new Team with the given priority comparator.\n* @param c the priority comparator this Team will use\n* @param n the name of the team.\n*/",
     "code": "public Team(Comparator<Player> c, String n) {\npriority = c;\ndummy = new Player(\"\", Integer.MAX_VALUE, null);\nteamName = n;\n\nassert wellFormed() : \"invariant fails at end of constructor\";}",
-    "accessModifier": "default",
-    "returnType": "public",
-    "methodName": "Team"
+    "method_name": "Team",
+    "parameters": "Comparator<Player> c, String n",
+    "return_type": "public",
+    "return_variable": "",
+    "called_methods": [
+      "Player",
+      "wellFormed"
+    ],
+    "local_variables": [],
+    "thrown_exceptions": []
   },
   {
     "javadoc": "/*** Adds a Player to this Team.\n* It should be added according to the priority of the team.\n* @param t the Player to add, must not be null and must not be in another team.\n* @throws IllegalArgumentException if the player is already in a team or if the added player would come before the\n* the dummy player (a player with an empty name, highest score possible and null position).\n*/",
     "code": "public void add(Player t) {\nassert wellFormed() : \"invariant fails at beginning of add\";\nif(t.getNext() != null || t.getPrevious() != null) throw new IllegalArgumentException(\"Player already in team\");\n\ndummy.addInPriority(t, priority);\n\nassert wellFormed() : \"invariant fails at end of add\";\n}",
-    "accessModifier": "public",
-    "returnType": "void",
-    "methodName": "add"
+    "method_name": "add",
+    "parameters": "Player t",
+    "return_type": "void",
+    "return_variable": "",
+    "called_methods": [
+      "wellFormed",
+      "getNext",
+      "getPrevious",
+      "IllegalArgumentException",
+      "addInPriority"
+    ],
+    "local_variables": [],
+    "thrown_exceptions": [
+      "IllegalArgumentException"
+    ]
   },
   {
     "javadoc": "/*** Change the priority for this list of players,\n* and then make sure the order reflects the new priority.\n* @param p priority to use, must not be null.\n*/",
     "code": "public void setPriority(Comparator<Player> p) {\nassert wellFormed() : \"invariant broken before set priority\";\nif (p == null) throw new NullPointerException(\"need a priority!\");\npriority = p;\nrefreshPriority();\nassert wellFormed() : \"invariant failed during set priority\";\n}",
-    "accessModifier": "public",
-    "returnType": "void",
-    "methodName": "setPriority"
+    "method_name": "setPriority",
+    "parameters": "Comparator<Player> p",
+    "return_type": "void",
+    "return_variable": "",
+    "called_methods": [
+      "wellFormed",
+      "NullPointerException",
+      "refreshPriority"
+    ],
+    "local_variables": [],
+    "thrown_exceptions": [
+      "NullPointerException"
+    ]
   },
   {
     "javadoc": "/*** Some elements of the players may have changed the\n* way the players are ordered.  This method\n* reorders the list to fix things up.\n* This will use insertion sort for efficiency.\n* In particular if only a constant number of players\n* are in the wrong position, this method will take linear time.\n* If the priority ends up as \"perverse\" (something shows up\n* before the dummy) we discard all team members.\n* (This is not actually ideal for an ADT.)\n*/",
     "code": "public void refreshPriority() {\nassert wellFormed() : \"invariant broken before refresh priority\";\ndummy.sortByPriority(priority);\nif (dummy.getPrevious() != null) {\n// Suddenly the priority shows up as perverse.\ndummy.remove(); // actually removes everyone else.\n}\nassert wellFormed() : \"invariant failed during refresh priority\";\n}",
-    "accessModifier": "public",
-    "returnType": "void",
-    "methodName": "refreshPriority"
+    "method_name": "refreshPriority",
+    "parameters": "",
+    "return_type": "void",
+    "return_variable": "",
+    "called_methods": [
+      "wellFormed",
+      "sortByPriority",
+      "getPrevious",
+      "remove"
+    ],
+    "local_variables": [],
+    "thrown_exceptions": []
   },
   {
     "javadoc": "/*** Compute the number of players.\n* @return number of players\n*/",
     "code": "public int size() {\nassert wellFormed() : \"invariant fails at beginning of size\";\n\nint count = 0;\nfor(Player source = dummy.getNext(); source != null; source = source.getNext()) {\ncount++;\n}\nreturn count;\n}",
-    "accessModifier": "public",
-    "returnType": "int",
-    "methodName": "size"
+    "method_name": "size",
+    "parameters": "",
+    "return_type": "int",
+    "return_variable": "count",
+    "called_methods": [
+      "wellFormed",
+      "getNext"
+    ],
+    "local_variables": [
+      "count",
+      "source",
+      "count"
+    ],
+    "thrown_exceptions": []
   },
   {
     "javadoc": "/*** Return the n'th player (0-based).\n* @param index index of the element to return\n* @return the player at the specified position in this list\n* @throws IndexOutOfBoundsException if the index is out of range.\n*/",
     "code": "public Player get(int index) {\nassert wellFormed() : \"invariant fails at beginning of get\";\n\nif(index < 0 || index >= size()) throw new IndexOutOfBoundsException(\"index is out of bounds\");\n\nint count = 0;\nfor(Player source = dummy.getNext(); source != null; source = source.getNext()) {\nif(count == index) return source;\ncount++;\n}\nreturn null; // TODO\n}",
-    "accessModifier": "public",
-    "returnType": "Player",
-    "methodName": "get"
+    "method_name": "get",
+    "parameters": "int index",
+    "return_type": "Player",
+    "return_variable": "source",
+    "called_methods": [
+      "wellFormed",
+      "size",
+      "IndexOutOfBoundsException",
+      "getNext"
+    ],
+    "local_variables": [
+      "count",
+      "source",
+      "source",
+      "null"
+    ],
+    "thrown_exceptions": [
+      "IndexOutOfBoundsException"
+    ]
   },
   {
     "javadoc": "/*** Returns team's total score\n* @return the sum of all player's scores on this team\n*/",
     "code": "public int totalScore() {\nassert wellFormed() : \"invariant fails at beginning of totalScore\";\nint score = 0;\n//TODO implement totalScore (don't use the dummy player!)\nfor(Player source = dummy.getNext(); source != null; source = source.getNext()) {\nscore += source.getScore();\n}\nreturn score;\n}",
-    "accessModifier": "public",
-    "returnType": "int",
-    "methodName": "totalScore"
+    "method_name": "totalScore",
+    "parameters": "",
+    "return_type": "int",
+    "return_variable": "score",
+    "called_methods": [
+      "wellFormed",
+      "getNext",
+      "getScore"
+    ],
+    "local_variables": [
+      "score",
+      "source",
+      "score"
+    ],
+    "thrown_exceptions": []
   },
   {
     "javadoc": "/*** prints this team's players\n*/",
     "code": "public void printPlayers() {\nfor(Player i = dummy.getNext(); i != null; i = i.getNext()) {\nSystem.out.println(i);\n}\n}",
-    "accessModifier": "public",
-    "returnType": "void",
-    "methodName": "printPlayers"
+    "method_name": "printPlayers",
+    "parameters": "",
+    "return_type": "void",
+    "return_variable": "",
+    "called_methods": [
+      "getNext",
+      "println"
+    ],
+    "local_variables": [
+      "i"
+    ],
+    "thrown_exceptions": []
   },
   {
     "javadoc": "/*** Checks if colliding with the parameter ball.\n*\n* @param other the other ball\n* @return true if colliding\n*/",
     "code": "public boolean isColliding(Ball other){\nreturn this.getLoc().distance(other.getLoc()) <= this.getRadius() + other.getRadius();\n}",
-    "accessModifier": "public",
-    "returnType": "boolean",
-    "methodName": "isColliding"
+    "method_name": "isColliding",
+    "parameters": "Ball other",
+    "return_type": "boolean",
+    "return_variable": "this.getLoc().distance(other.getLoc()) <= this.getRadius() + other.getRadius()",
+    "called_methods": [
+      "getLoc",
+      "distance",
+      "getRadius"
+    ],
+    "local_variables": [],
+    "thrown_exceptions": []
   },
   {
     "javadoc": "/*** Used to report an error found when checking the invariant.\n* By providing a string, this will help debugging the class if the invariant should fail.\n* @param error string to print to report the exact error found\n* @return false always\n*/",
     "code": "private boolean report(String error) {\nreporter.accept(error);\nreturn false;\n}",
-    "accessModifier": "private",
-    "returnType": "boolean",
-    "methodName": "report"
+    "method_name": "report",
+    "parameters": "String error",
+    "return_type": "boolean",
+    "return_variable": "false",
+    "called_methods": [
+      "accept"
+    ],
+    "local_variables": [
+      "false"
+    ],
+    "thrown_exceptions": []
   },
   {
     "javadoc": "/**Return the head node from the data structure since we do not have a head field. */",
     "code": "private Node<E> getHead() {\nreturn tail.next.next;\n}",
-    "accessModifier": "private",
-    "returnType": "Node<E>",
-    "methodName": "getHead"
+    "method_name": "getHead",
+    "parameters": "",
+    "return_type": "Node<E>",
+    "return_variable": "tail.next.next",
+    "called_methods": [],
+    "local_variables": [],
+    "thrown_exceptions": []
   },
   {
     "javadoc": "/**Return the dummy node from the data structure since we do not have a dummy field. */",
     "code": "private Node<E> getDummy() {\nreturn tail.next; // TODO\n}",
-    "accessModifier": "private",
-    "returnType": "Node<E>",
-    "methodName": "getDummy"
+    "method_name": "getDummy",
+    "parameters": "",
+    "return_type": "Node<E>",
+    "return_variable": "tail.next",
+    "called_methods": [],
+    "local_variables": [],
+    "thrown_exceptions": []
   },
   {
     "javadoc": "/**Return the cursor from the data structure since we do not have a cursor field. */",
     "code": "private Node<E> getCursor() {\nreturn precursor.next; // TODO\n}",
-    "accessModifier": "private",
-    "returnType": "Node<E>",
-    "methodName": "getCursor"
+    "method_name": "getCursor",
+    "parameters": "",
+    "return_type": "Node<E>",
+    "return_variable": "precursor.next",
+    "called_methods": [],
+    "local_variables": [],
+    "thrown_exceptions": []
   },
   {
     "javadoc": "/*** Create an empty sequence.\n* @param - none\n* @postcondition\n*   This sequence is empty\n**/",
     "code": "public LinkedSequence( )\n{\ntail = precursor = new Node<E>();\nsize = 0;\nassert wellFormed() : \"invariant failed in constructor\";\n}",
-    "accessModifier": "default",
-    "returnType": "public",
-    "methodName": "LinkedSequence"
+    "method_name": "LinkedSequence",
+    "parameters": "",
+    "return_type": "public",
+    "return_variable": "",
+    "called_methods": [
+      "wellFormed"
+    ],
+    "local_variables": [],
+    "thrown_exceptions": []
   },
   {
     "javadoc": "/*** Determine the number of elements in this sequence.\n* @param - none\n* @return\n*   the number of elements in this sequence\n**/",
     "code": "public int size( )\n{\nassert wellFormed() : \"invariant wrong at start of size()\";\n// TODO: Implemented by student.\n// This method shouldn't modify any fields, hence no assertion at end\nreturn size;\n}",
-    "accessModifier": "public",
-    "returnType": "int",
-    "methodName": "size"
+    "method_name": "size",
+    "parameters": "",
+    "return_type": "int",
+    "return_variable": "size",
+    "called_methods": [
+      "wellFormed"
+    ],
+    "local_variables": [
+      "size"
+    ],
+    "thrown_exceptions": []
   },
   {
     "javadoc": "/*** Set the current element at the front of this sequence.\n* @param - none\n* @postcondition\n*   The front element of this sequence is now the current element (but\n*   if this sequence has no elements at all, then there is no current\n*   element).\n**/",
     "code": "public void start( )\n{\nassert wellFormed() : \"invariant wrong at start of start()\";\n\nprecursor = getDummy();\n\nassert wellFormed() : \"invariant wrong at end of start()\";\n}",
-    "accessModifier": "public",
-    "returnType": "void",
-    "methodName": "start"
+    "method_name": "start",
+    "parameters": "",
+    "return_type": "void",
+    "return_variable": "",
+    "called_methods": [
+      "wellFormed",
+      "getDummy"
+    ],
+    "local_variables": [],
+    "thrown_exceptions": []
   },
   {
     "javadoc": "/*** Accessor method to determine whether this sequence has a specified\n* current element that can be retrieved with the\n* getCurrent method.\n* @param - none\n* @return\n*   true (there is a current element) or false (there is no current element at the moment)\n**/",
     "code": "public boolean isCurrent( )\n{\nassert wellFormed() : \"invariant wrong at start of getCurrent()\";\n// TODO: Implemented by student.\n// This method shouldn't modify any fields, hence no assertion at end\nreturn precursor != tail;\n}",
-    "accessModifier": "public",
-    "returnType": "boolean",
-    "methodName": "isCurrent"
+    "method_name": "isCurrent",
+    "parameters": "",
+    "return_type": "boolean",
+    "return_variable": "precursor != tail",
+    "called_methods": [
+      "wellFormed",
+      "getCurrent"
+    ],
+    "local_variables": [],
+    "thrown_exceptions": []
   },
   {
     "javadoc": "/*** Accessor method to get the current element of this sequence.\n* @param - none\n* @precondition\n*   isCurrent() returns true.\n* @return\n*   the current element of this sequence\n* @exception IllegalStateException\n*   Indicates that there is no current element, so\n*   getCurrent may not be called.\n**/",
     "code": "public E getCurrent( )\n{\nassert wellFormed() : \"invariant wrong at start of getCurrent()\";\nif(!isCurrent()) throw new IllegalStateException(\"no current element\");\n\nreturn precursor.next.data;\n}",
-    "accessModifier": "public",
-    "returnType": "E",
-    "methodName": "getCurrent"
+    "method_name": "getCurrent",
+    "parameters": "",
+    "return_type": "E",
+    "return_variable": "precursor.next.data",
+    "called_methods": [
+      "wellFormed",
+      "isCurrent",
+      "IllegalStateException"
+    ],
+    "local_variables": [],
+    "thrown_exceptions": [
+      "IllegalStateException"
+    ]
   },
   {
     "javadoc": "/*** Move forward, so that the current element is now the next element in\n* this sequence.\n* @param - none\n* @precondition\n*   isCurrent() returns true.\n* @postcondition\n*   If the current element was already the end element of this sequence\n*   (with nothing after it), then there is no longer any current element.\n*   Otherwise, the new element is the element immediately after the\n*   original current element.\n* @exception IllegalStateException\n*   Indicates that there is no current element, so\n*   advance may not be called.\n**/",
     "code": "public void advance( )\n{\nassert wellFormed() : \"invariant wrong at start of advance()\";\nif(!isCurrent()) throw new IllegalStateException(\"no current element\");\nprecursor = precursor.next;\nassert wellFormed() : \"invariant wrong at end of advance()\";\n}",
-    "accessModifier": "public",
-    "returnType": "void",
-    "methodName": "advance"
+    "method_name": "advance",
+    "parameters": "",
+    "return_type": "void",
+    "return_variable": "",
+    "called_methods": [
+      "wellFormed",
+      "isCurrent",
+      "IllegalStateException"
+    ],
+    "local_variables": [],
+    "thrown_exceptions": [
+      "IllegalStateException"
+    ]
   },
   {
     "javadoc": "/*** Calculates new vectors for this and the parameter ball using normal and\n* tangent vectors, then calls step() on both until no longer colliding.\n*\n* @param other the other ball\n*/",
     "code": "public void bounce(Ball other){\nVector my_unit_normal = new Vector(location, other.getLoc()).normalize();\nVector other_unit_normal = new Vector(other.getLoc(), location).normalize();\nVector my_normal = my_unit_normal.scale(move.dot(my_unit_normal));\nVector other_normal = other_unit_normal.scale(other.move.dot(other_unit_normal));\nVector my_tangent = move.add(my_normal.scale(-1));\nVector other_tangent = other.move.add(other_normal.scale(-1));\n\nmove = my_tangent.add(other_normal);\nother.move = other_tangent.add(my_normal);\n\nwhile (isColliding(other)){\nstep();\nother.step();}\n}",
-    "accessModifier": "public",
-    "returnType": "void",
-    "methodName": "bounce"
+    "method_name": "bounce",
+    "parameters": "Ball other",
+    "return_type": "void",
+    "return_variable": "",
+    "called_methods": [
+      "Vector",
+      "getLoc",
+      "normalize",
+      "scale",
+      "dot",
+      "add",
+      "isColliding",
+      "step"
+    ],
+    "local_variables": [
+      "my_unit_normal",
+      "other_unit_normal",
+      "my_normal",
+      "other_normal",
+      "my_tangent",
+      "other_tangent"
+    ],
+    "thrown_exceptions": []
   },
   {
     "javadoc": "/*** Remove the current element from this sequence.\n* @param - none\n* @precondition\n*   isCurrent() returns true.\n* @postcondition\n*   The current element has been removed from this sequence, and the\n*   following element (if there is one) is now the new current element.\n*   If there was no following element, then there is now no current\n*   element.\n* @exception IllegalStateException\n*   Indicates that there is no current element, so\n*   removeCurrent may not be called.\n**/",
     "code": "public void removeCurrent( )\n{\nassert wellFormed() : \"invariant wrong at start of removeCurrent()\";\nif(!isCurrent()) throw new IllegalStateException(\"no element to remove\");\n\nif(size == 1) {\ntail = tail.next;\ntail.next = tail;\nprecursor = tail;\n}else if(precursor.next == tail){\nprecursor.next = precursor.next.next;\ntail = precursor;\n}else {\nprecursor.next = precursor.next.next;\n}\n\nsize--;\n// TODO: Implemented by student.\n// See textbook pp.176-78, 181-184\nassert wellFormed() : \"invariant wrong at end of removeCurrent()\";\n}",
-    "accessModifier": "public",
-    "returnType": "void",
-    "methodName": "removeCurrent"
+    "method_name": "removeCurrent",
+    "parameters": "",
+    "return_type": "void",
+    "return_variable": "",
+    "called_methods": [
+      "wellFormed",
+      "isCurrent",
+      "IllegalStateException"
+    ],
+    "local_variables": [],
+    "thrown_exceptions": [
+      "IllegalStateException"
+    ]
   },
   {
     "javadoc": "/*** Add a new element to this sequence, before the current element (if any).\n* @param element\n*   the new element that is being added\n* @postcondition\n*   A new copy of the element has been added to this sequence. If there was\n*   a current element, then the new element is placed before the current\n*   element. If there was no current element, then the new element is placed\n*   at the end of the sequence. In all cases, the new element becomes the\n*   new current element of this sequence.\n* @exception OutOfMemoryError\n*   Indicates insufficient memory for increasing the sequence.\n**/",
     "code": "public void insert(E element)\n{\n\nassert wellFormed() : \"invariant failed at start of insert\";\nif(size == 0) {\ntail = new Node<>(element, tail.next);\nprecursor = tail.next;\ntail.next.next = tail;\n}else if(precursor == tail) {\ntail = new Node<>(element, precursor.next);\nprecursor.next = tail;\n}else {\nNode<E> node = new Node<>(element, precursor.next);\nprecursor.next = node;\n}\nsize++;\nassert wellFormed() : \"invariant failed at end of insert\";\n}",
-    "accessModifier": "public",
-    "returnType": "void",
-    "methodName": "insert"
+    "method_name": "insert",
+    "parameters": "E element",
+    "return_type": "void",
+    "return_variable": "",
+    "called_methods": [
+      "wellFormed"
+    ],
+    "local_variables": [
+      "node"
+    ],
+    "thrown_exceptions": []
   },
   {
     "javadoc": "/*** Place the contents of another sequence (which may be the\n* same one as this!) into this sequence before the current element (if any).\n* @param addend\n*   a sequence whose contents will be placed into this sequence\n* @precondition\n*   The parameter, addend, is not null.\n* @postcondition\n*   The elements from addend have been placed into\n*   this sequence. The current element of this sequence (if any)\n*   is unchanged.  The addend is unchanged.\n* @exception NullPointerException\n*   Indicates that addend is null.\n* @exception OutOfMemoryError\n*   Indicates insufficient memory to increase the size of this sequence.\n**/",
     "code": "public void insertAll(LinkedSequence<E> addend) {\n\nassert wellFormed() : \"invariant failed at start of addAll\";\nif(addend == null) throw new NullPointerException(\"addend is null\");\nif(addend.size == 0) return;\n\nLinkedSequence<E> clone = addend.clone();\nif(size == 0) {\nNode<E> cloneHead = clone.getHead();\nclone.tail.next = precursor.next;\nprecursor.next = cloneHead;\nprecursor = clone.tail;\ntail = clone.tail;\n}else if(precursor == tail) {\nNode<E> cloneHead = clone.getHead();\nclone.tail.next = precursor.next;\nprecursor.next = cloneHead;\nprecursor = clone.tail;\ntail = clone.tail;\n}else {\nNode<E> cloneHead = clone.getHead();\nclone.tail.next = precursor.next;\nprecursor.next = cloneHead;\nprecursor = clone.tail;\n\n}\n\n\nsize += clone.size;\n\nassert wellFormed() : \"invariant failed at end of addAll\";\n}",
-    "accessModifier": "public",
-    "returnType": "void",
-    "methodName": "insertAll"
+    "method_name": "insertAll",
+    "parameters": "LinkedSequence<E> addend",
+    "return_type": "void",
+    "return_variable": "",
+    "called_methods": [
+      "wellFormed",
+      "NullPointerException",
+      "clone",
+      "getHead"
+    ],
+    "local_variables": [
+      "clone",
+      "cloneHead",
+      "cloneHead",
+      "cloneHead"
+    ],
+    "thrown_exceptions": [
+      "NullPointerException"
+    ]
   },
   {
     "javadoc": "/*** Generate a copy of this sequence.\n* @param - none\n* @return\n*   The return value is a copy of this sequence. Subsequent changes to the\n*   copy will not affect the original, nor vice versa.\n*   Whatever was current in the original object is now current in the clone.\n* @exception OutOfMemoryError\n*   Indicates insufficient memory for creating the clone.\n**/",
     "code": "@SuppressWarnings(\"unchecked\")\npublic LinkedSequence<E> clone( )\n{\nassert wellFormed() : \"invariant wrong at start of clone()\";\n\nLinkedSequence<E> result;\n\ntry\n{\nresult = (LinkedSequence<E>) super.clone( );\n}\ncatch (CloneNotSupportedException e)\n{\n// This exception should not occur. But if it does, it would probably\n// indicate a programming error that made super.clone unavailable.\n// The most common error would be forgetting the \"Implements Cloneable\"\n// clause at the start of this class.\nthrow new RuntimeException\n(\"This class does not implement Cloneable\");\n}\n\nNode<E> cursor = new Node<>(tail.data, tail.next);\nresult.tail = cursor;\nNode<E> source = tail.next;\nwhile(source != tail) {\ncursor.next = new Node<E>(source.data, source.next);\nif(source == precursor) result.precursor = cursor.next;\ncursor = cursor.next;\nsource = source.next;\n}\ncursor.next = result.tail;\nresult.tail.next.data = (E)result.tail.next;\nif(source == precursor) result.precursor = cursor.next;\n\n\n// TODO: Implemented by student.\n// Now do the hard work of cloning the list.\n// Similar to Homework #4, setting result.precursor requires an \"if\"\n// It's possible to handle the dummy without a second if or an unsafe cast.\n// but it's OK to have a second if and/or a cast to handle this.\nassert wellFormed() : \"invariant wrong at end of clone()\";\nassert result.wellFormed() : \"invariant wrong for result of clone()\";\nreturn result;\n}",
-    "accessModifier": "unknown",
-    "returnType": "unknown",
-    "methodName": "unknown"
+    "method_name": "clone",
+    "parameters": "",
+    "return_type": "LinkedSequence<E>",
+    "return_variable": "result",
+    "called_methods": [
+      "SuppressWarnings",
+      "wellFormed",
+      "RuntimeException"
+    ],
+    "local_variables": [
+      "result",
+      "cursor",
+      "source",
+      "result"
+    ],
+    "thrown_exceptions": [
+      "RuntimeException"
+    ]
   },
   {
     "javadoc": "/*** Instantiates a new process.\n*\n* @param name the name of the process, must not be null\n* @param totalIns the total instructions of the process\n*/",
     "code": "public Process(String name, int totalIns) {\nif (name == null) throw new NullPointerException(\"name must not be null\");\nthis.name = name;\nthis.totalInstructions = totalIns;\n}",
-    "accessModifier": "default",
-    "returnType": "public",
-    "methodName": "Process"
+    "method_name": "Process",
+    "parameters": "String name, int totalIns",
+    "return_type": "public",
+    "return_variable": "",
+    "called_methods": [
+      "NullPointerException"
+    ],
+    "local_variables": [],
+    "thrown_exceptions": [
+      "NullPointerException"
+    ]
   },
   {
     "javadoc": "/*** Create an internal process to be used as a dummy node.\n*/",
     "code": "private Process() {\nname = null;\ntotalInstructions = 0;\n}",
-    "accessModifier": "default",
-    "returnType": "private",
-    "methodName": "Process"
+    "method_name": "Process",
+    "parameters": "",
+    "return_type": "private",
+    "return_variable": "",
+    "called_methods": [],
+    "local_variables": [],
+    "thrown_exceptions": []
   },
   {
     "javadoc": "/**Gets the name.\n* @return the name */",
     "code": "public String getName(){return name;}",
-    "accessModifier": "public",
-    "returnType": "String",
-    "methodName": "getName"
+    "method_name": "getName",
+    "parameters": "",
+    "return_type": "String",
+    "return_variable": "name",
+    "called_methods": [],
+    "local_variables": [
+      "name"
+    ],
+    "thrown_exceptions": []
   },
   {
     "javadoc": "/**Gets the progress bar.\n* Creates and initializes it if necessary.\n* @return the progress bar */",
     "code": "public JProgressBar getBar(){\nif (bar == null) createProgressBar();\nreturn bar;\n}",
-    "accessModifier": "public",
-    "returnType": "JProgressBar",
-    "methodName": "getBar"
+    "method_name": "getBar",
+    "parameters": "",
+    "return_type": "JProgressBar",
+    "return_variable": "bar",
+    "called_methods": [
+      "createProgressBar"
+    ],
+    "local_variables": [
+      "bar"
+    ],
+    "thrown_exceptions": []
   },
   {
     "javadoc": "/**Gets the total amount of instructions in the process.\n* @return the total instructions */",
     "code": "public int getTotal(){return totalInstructions;}",
-    "accessModifier": "public",
-    "returnType": "int",
-    "methodName": "getTotal"
+    "method_name": "getTotal",
+    "parameters": "",
+    "return_type": "int",
+    "return_variable": "totalInstructions",
+    "called_methods": [],
+    "local_variables": [
+      "totalInstructions"
+    ],
+    "thrown_exceptions": []
   },
   {
     "javadoc": "/*** Gets the amount of finished instructions.\n* @return the finished instructions */",
     "code": "public int getFinished(){return finishedInstructions;}",
-    "accessModifier": "public",
-    "returnType": "int",
-    "methodName": "getFinished"
+    "method_name": "getFinished",
+    "parameters": "",
+    "return_type": "int",
+    "return_variable": "finishedInstructions",
+    "called_methods": [],
+    "local_variables": [
+      "finishedInstructions"
+    ],
+    "thrown_exceptions": []
   }
 ]

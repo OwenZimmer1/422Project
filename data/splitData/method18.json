@@ -1,7 +1,14 @@
 {
   "javadoc": "/*** Instantiates a new vector between two points.\n* If applied to the first point, the result is the second point.\n*\n* @param p the first point\n* @param q the second point\n*/",
   "code": "public Vector(Point p, Point q){\nthis.deltax = q.x() - p.x();\nthis.deltay = q.y() - p.y();\n}",
-  "accessModifier": "default",
-  "returnType": "public",
-  "methodName": "Vector"
+  "method_name": "Vector",
+  "parameters": "Point p, Point q",
+  "return_type": "public",
+  "return_variable": "",
+  "called_methods": [
+    "x",
+    "y"
+  ],
+  "local_variables": [],
+  "thrown_exceptions": []
 }

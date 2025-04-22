@@ -1,7 +1,26 @@
 {
   "javadoc": "/*** Gets the next [lexicographically] greater string than the given string.\n* @param str the string of which to find the next greatest\n* @return the next string greater than str, or null if no other\n* @throws NullPointerException if str is null\n*/",
   "code": "public String getNext(String str) {\nassert wellFormed() : \"invariant false at start of getNext()\";\n// TODO: Implement this method using the special iterator constructor.\n// HINT: If you add \"\\0\" to the string and look for it with the iterator,\n// you are most of the way there.\nif(str == null) throw new NullPointerException(\"str is null\");\nstr.concat(\"\\0\");\nIterator<String> it = iterator(str);\nString next = null;\nif(it.hasNext()) next = it.next();\nif(str.equals(next)) {\nif(it.hasNext()) next = it.next();\nelse next = null;\n}\nreturn next;\n}",
-  "accessModifier": "public",
-  "returnType": "String",
-  "methodName": "getNext"
+  "method_name": "getNext",
+  "parameters": "String str",
+  "return_type": "String",
+  "return_variable": "next",
+  "called_methods": [
+    "wellFormed",
+    "NullPointerException",
+    "concat",
+    "iterator",
+    "hasNext",
+    "next",
+    "equals"
+  ],
+  "local_variables": [
+    "it",
+    "next",
+    "next",
+    "next"
+  ],
+  "thrown_exceptions": [
+    "NullPointerException"
+  ]
 }

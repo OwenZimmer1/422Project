@@ -1,7 +1,13 @@
 {
   "javadoc": "/**Gets the name.\n* @return the name */",
   "code": "public String getName() {return name;}",
-  "accessModifier": "public",
-  "returnType": "String",
-  "methodName": "getName"
+  "method_name": "getName",
+  "parameters": "",
+  "return_type": "String",
+  "return_variable": "name",
+  "called_methods": [],
+  "local_variables": [
+    "name"
+  ],
+  "thrown_exceptions": []
 }

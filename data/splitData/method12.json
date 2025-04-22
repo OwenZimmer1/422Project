@@ -1,7 +1,11 @@
 {
   "javadoc": "/*** gets y value\n*\n* @return current y value\n*/",
   "code": "public double y() {\nreturn this.y;\n}",
-  "accessModifier": "public",
-  "returnType": "double",
-  "methodName": "y"
+  "method_name": "y",
+  "parameters": "",
+  "return_type": "double",
+  "return_variable": "this.y",
+  "called_methods": [],
+  "local_variables": [],
+  "thrown_exceptions": []
 }

@@ -1,7 +1,14 @@
 {
   "javadoc": "/**Instantiates a new driver, loading lexicon from file.\n* @param name the name of the file */",
   "code": "public Driver(String name) {\nlexicon = new Lexicon();\nfilename = name;\nin = new Scanner(System.in);\n}",
-  "accessModifier": "default",
-  "returnType": "public",
-  "methodName": "Driver"
+  "method_name": "Driver",
+  "parameters": "String name",
+  "return_type": "public",
+  "return_variable": "",
+  "called_methods": [
+    "Lexicon",
+    "Scanner"
+  ],
+  "local_variables": [],
+  "thrown_exceptions": []
 }

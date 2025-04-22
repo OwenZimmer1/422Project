@@ -1,7 +1,27 @@
 {
   "javadoc": "/*** Calculates new vectors for this and the parameter ball using normal and\n* tangent vectors, then calls step() on both until no longer colliding.\n*\n* @param other the other ball\n*/",
   "code": "public void bounce(Ball other){\nVector my_unit_normal = new Vector(location, other.getLoc()).normalize();\nVector other_unit_normal = new Vector(other.getLoc(), location).normalize();\nVector my_normal = my_unit_normal.scale(move.dot(my_unit_normal));\nVector other_normal = other_unit_normal.scale(other.move.dot(other_unit_normal));\nVector my_tangent = move.add(my_normal.scale(-1));\nVector other_tangent = other.move.add(other_normal.scale(-1));\n\nmove = my_tangent.add(other_normal);\nother.move = other_tangent.add(my_normal);\n\nwhile (isColliding(other)){\nstep();\nother.step();}\n}",
-  "accessModifier": "public",
-  "returnType": "void",
-  "methodName": "bounce"
+  "method_name": "bounce",
+  "parameters": "Ball other",
+  "return_type": "void",
+  "return_variable": "",
+  "called_methods": [
+    "Vector",
+    "getLoc",
+    "normalize",
+    "scale",
+    "dot",
+    "add",
+    "isColliding",
+    "step"
+  ],
+  "local_variables": [
+    "my_unit_normal",
+    "other_unit_normal",
+    "my_normal",
+    "other_normal",
+    "my_tangent",
+    "other_tangent"
+  ],
+  "thrown_exceptions": []
 }

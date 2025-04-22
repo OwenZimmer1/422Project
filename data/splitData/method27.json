@@ -1,7 +1,18 @@
 {
   "javadoc": "/*** gets angle theta\n*\n* @return angle of vector off x axis\n*/",
   "code": "public double theta() {\n\nif(this.dx() == 0 && this.dy() > 0)\nreturn Math.PI/2;\nelse if(this.dx() == 0)\nreturn Math.PI * 3 / 2;\n\ndouble theta = Math.atan(this.dy() / this.dx());\nif(this.dx() < 0)\ntheta += Math.PI;\nreturn theta;\n}",
-  "accessModifier": "public",
-  "returnType": "double",
-  "methodName": "theta"
+  "method_name": "theta",
+  "parameters": "",
+  "return_type": "double",
+  "return_variable": "Math.PI/2",
+  "called_methods": [
+    "dx",
+    "dy",
+    "atan"
+  ],
+  "local_variables": [
+    "theta",
+    "theta"
+  ],
+  "thrown_exceptions": []
 }

@@ -1,7 +1,11 @@
 {
   "javadoc": "/*** Create an internal process to be used as a dummy node.\n*/",
   "code": "private Process() {\nname = null;\ntotalInstructions = 0;\n}",
-  "accessModifier": "default",
-  "returnType": "private",
-  "methodName": "Process"
+  "method_name": "Process",
+  "parameters": "",
+  "return_type": "private",
+  "return_variable": "",
+  "called_methods": [],
+  "local_variables": [],
+  "thrown_exceptions": []
 }

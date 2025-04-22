@@ -1,7 +1,17 @@
 {
   "javadoc": "/*** Finds the magnitude of this vector.\n*\n* @return how long this vector is (never negative).\n*/",
   "code": "public double magnitude(){\ndouble temp = this.dx() * this.dx() + this.dy() * this.dy();\nreturn Math.sqrt(temp);\n}",
-  "accessModifier": "public",
-  "returnType": "double",
-  "methodName": "magnitude"
+  "method_name": "magnitude",
+  "parameters": "",
+  "return_type": "double",
+  "return_variable": "Math.sqrt(temp)",
+  "called_methods": [
+    "dx",
+    "dy",
+    "sqrt"
+  ],
+  "local_variables": [
+    "temp"
+  ],
+  "thrown_exceptions": []
 }

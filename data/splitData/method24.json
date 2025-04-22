@@ -1,7 +1,15 @@
 {
   "javadoc": "/*** Scales this vector by the parameter.\n*\n* @param s the constant to scale by\n* @return the scaled vector\n*/",
   "code": "public Vector scale(double s){\nreturn new Vector(s * this.dx(), s * this.dy());\n}",
-  "accessModifier": "public",
-  "returnType": "Vector",
-  "methodName": "scale"
+  "method_name": "scale",
+  "parameters": "double s",
+  "return_type": "Vector",
+  "return_variable": "new Vector(s * this.dx(), s * this.dy())",
+  "called_methods": [
+    "Vector",
+    "dx",
+    "dy"
+  ],
+  "local_variables": [],
+  "thrown_exceptions": []
 }

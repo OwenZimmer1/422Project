@@ -1,7 +1,16 @@
 {
   "javadoc": "/*** prints this team's players\n*/",
   "code": "public void printPlayers() {\nfor(Player i = dummy.getNext(); i != null; i = i.getNext()) {\nSystem.out.println(i);\n}\n}",
-  "accessModifier": "public",
-  "returnType": "void",
-  "methodName": "printPlayers"
+  "method_name": "printPlayers",
+  "parameters": "",
+  "return_type": "void",
+  "return_variable": "",
+  "called_methods": [
+    "getNext",
+    "println"
+  ],
+  "local_variables": [
+    "i"
+  ],
+  "thrown_exceptions": []
 }

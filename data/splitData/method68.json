@@ -1,7 +1,13 @@
 {
   "javadoc": "/**Gets the next player.\n* @return the next player */",
   "code": "public Player getNext() {return next;}",
-  "accessModifier": "public",
-  "returnType": "Player",
-  "methodName": "getNext"
+  "method_name": "getNext",
+  "parameters": "",
+  "return_type": "Player",
+  "return_variable": "next",
+  "called_methods": [],
+  "local_variables": [
+    "next"
+  ],
+  "thrown_exceptions": []
 }

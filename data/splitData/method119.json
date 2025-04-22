@@ -1,7 +1,19 @@
 {
   "javadoc": "/*** Checks if the given string is in the lexicon.\n* @param str the string to search for (maybe null)\n* @return true if str is in the lexicon, false otherwise\n*/",
   "code": "public boolean contains(String str) {\nassert wellFormed() : \"invariant false at start of contains()\";\nif(str == null) return false;\nNode source = root;\nwhile(source != null) {\nif(source.string.compareTo(str) > 0) source = source.left;\nelse if(source.string.compareTo(str) < 0) source = source.right;\nelse return true;\n}\nreturn false;\n}",
-  "accessModifier": "public",
-  "returnType": "boolean",
-  "methodName": "contains"
+  "method_name": "contains",
+  "parameters": "String str",
+  "return_type": "boolean",
+  "return_variable": "false",
+  "called_methods": [
+    "wellFormed",
+    "compareTo"
+  ],
+  "local_variables": [
+    "false",
+    "source",
+    "true",
+    "false"
+  ],
+  "thrown_exceptions": []
 }

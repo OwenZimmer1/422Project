@@ -1,7 +1,11 @@
 {
   "javadoc": "/*** default constructor for default capacity of zero\n*/",
   "code": "public BallCollection() {\nthis(INITIAL_CAPACITY);\n}",
-  "accessModifier": "default",
-  "returnType": "public",
-  "methodName": "BallCollection"
+  "method_name": "BallCollection",
+  "parameters": "",
+  "return_type": "public",
+  "return_variable": "",
+  "called_methods": [],
+  "local_variables": [],
+  "thrown_exceptions": []
 }

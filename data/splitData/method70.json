@@ -1,7 +1,16 @@
 {
   "javadoc": "/*** Assuming all the players before this one are sorted correctly\n* according to the priority and come before this one,\n* ensure that the ones coming after are also sorted correctly.\n* @param c comparator to use, must not be null\n*/",
   "code": "public void sortByPriority(Comparator<Player> c) {\n// TODO: Implement this method.  Use a loop here and then recursion\n// when everything OK up to the next one.\n\nif(next == null) return;\n\nPlayer unsorted = next;\nnext.remove();\naddInPriority(unsorted, c);\nif(next == unsorted) next.sortByPriority(c);\nelse sortByPriority(c);\n\n}",
-  "accessModifier": "public",
-  "returnType": "void",
-  "methodName": "sortByPriority"
+  "method_name": "sortByPriority",
+  "parameters": "Comparator<Player> c",
+  "return_type": "void",
+  "return_variable": "",
+  "called_methods": [
+    "remove",
+    "addInPriority"
+  ],
+  "local_variables": [
+    "unsorted"
+  ],
+  "thrown_exceptions": []
 }

@@ -1,7 +1,14 @@
 {
   "javadoc": "/*** gets x value to nearest integer\n*\n* @return x value to nearest integer\n*/",
   "code": "public int intX() {\nreturn (int)Math.round(this.x());\n}",
-  "accessModifier": "public",
-  "returnType": "int",
-  "methodName": "intX"
+  "method_name": "intX",
+  "parameters": "",
+  "return_type": "int",
+  "return_variable": "(int)Math.round(this.x())",
+  "called_methods": [
+    "round",
+    "x"
+  ],
+  "local_variables": [],
+  "thrown_exceptions": []
 }

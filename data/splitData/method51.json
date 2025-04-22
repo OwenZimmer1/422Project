@@ -1,7 +1,15 @@
 {
   "javadoc": "/*** Determine the number of elements in this sequence.\n* @param - none\n* @return\n*   the number of elements in this sequence\n**/",
   "code": "public int size( )\n{\nassert wellFormed() : \"invariant wrong at start of size()\";\n\nreturn manyNodes;\n}",
-  "accessModifier": "public",
-  "returnType": "int",
-  "methodName": "size"
+  "method_name": "size",
+  "parameters": "",
+  "return_type": "int",
+  "return_variable": "manyNodes",
+  "called_methods": [
+    "wellFormed"
+  ],
+  "local_variables": [
+    "manyNodes"
+  ],
+  "thrown_exceptions": []
 }

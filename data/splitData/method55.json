@@ -1,7 +1,17 @@
 {
   "javadoc": "/*** Move forward, so that the current element is now the next element in\n* this sequence.\n* @param - none\n* @precondition\n*   isCurrent() returns true.\n* @postcondition\n*   If the current element was already the end element of this sequence\n*   (with nothing after it), then there is no longer any current element.\n*   Otherwise, the new element is the element immediately after the\n*   original current element.\n* @exception IllegalStateException\n*   Indicates that there is no current element, so\n*   advance may not be called.\n**/",
   "code": "public void advance( )\n{\nassert wellFormed() : \"invariant wrong at start of advance()\";\nif(!isCurrent()) throw new IllegalStateException(\"no current element\");\n\nif(cursor.next != null) {\nprecursor = cursor;\ncursor = cursor.next;\n}\nelse {\ncursor = null;\nprecursor = null;\n}\nassert wellFormed() : \"invariant wrong at end of advance()\";\n}",
-  "accessModifier": "public",
-  "returnType": "void",
-  "methodName": "advance"
+  "method_name": "advance",
+  "parameters": "",
+  "return_type": "void",
+  "return_variable": "",
+  "called_methods": [
+    "wellFormed",
+    "isCurrent",
+    "IllegalStateException"
+  ],
+  "local_variables": [],
+  "thrown_exceptions": [
+    "IllegalStateException"
+  ]
 }

@@ -1,7 +1,11 @@
 {
   "javadoc": "/*** Remove this item from its list.\n* This player will be completely disconnected from any other players.\n*/",
   "code": "public void remove() {\n// TODO: Implement this method.  No loops or recursion required.\nif(prev != null && next != null) {\nprev.next = next;\nnext.prev = prev;\n}else if(prev != null && next == null) {\nprev.next = null;\n}else if(prev == null && next != null) {\nnext.prev = null;\n}\nnext = null;\nprev = null;\n}",
-  "accessModifier": "public",
-  "returnType": "void",
-  "methodName": "remove"
+  "method_name": "remove",
+  "parameters": "",
+  "return_type": "void",
+  "return_variable": "",
+  "called_methods": [],
+  "local_variables": [],
+  "thrown_exceptions": []
 }

@@ -1,7 +1,17 @@
 {
   "javadoc": "/*** Translates the parameter point by this vector.\n*\n* @param p the point to translate\n* @return the  translated point\n*/",
   "code": "public Point move(Point p){\nreturn new Point(p.x() + this.dx(), p.y() + this.dy());\n}",
-  "accessModifier": "public",
-  "returnType": "Point",
-  "methodName": "move"
+  "method_name": "move",
+  "parameters": "Point p",
+  "return_type": "Point",
+  "return_variable": "new Point(p.x() + this.dx(), p.y() + this.dy())",
+  "called_methods": [
+    "Point",
+    "x",
+    "dx",
+    "y",
+    "dy"
+  ],
+  "local_variables": [],
+  "thrown_exceptions": []
 }

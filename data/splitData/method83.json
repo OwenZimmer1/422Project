@@ -1,7 +1,11 @@
 {
   "javadoc": "/**Return the cursor from the data structure since we do not have a cursor field. */",
   "code": "private Node<E> getCursor() {\nreturn precursor.next; // TODO\n}",
-  "accessModifier": "private",
-  "returnType": "Node<E>",
-  "methodName": "getCursor"
+  "method_name": "getCursor",
+  "parameters": "",
+  "return_type": "Node<E>",
+  "return_variable": "precursor.next",
+  "called_methods": [],
+  "local_variables": [],
+  "thrown_exceptions": []
 }

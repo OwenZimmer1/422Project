@@ -1,7 +1,13 @@
 {
   "javadoc": "/*** Return an empty stack.\n* @return empty stack, never null\n*/",
   "code": "@SuppressWarnings(\"unchecked\")\npublic static <T> ImmutableStack<T> empty() {\nreturn (ImmutableStack<T>) empty;\n}",
-  "accessModifier": "unknown",
-  "returnType": "unknown",
-  "methodName": "unknown"
+  "method_name": "empty",
+  "parameters": "",
+  "return_type": "ImmutableStack<T>",
+  "return_variable": "(ImmutableStack<T>) empty",
+  "called_methods": [
+    "SuppressWarnings"
+  ],
+  "local_variables": [],
+  "thrown_exceptions": []
 }

@@ -1,7 +1,15 @@
 {
   "javadoc": "/*** Set the radius of this ball.\n* @param r new radius, must be positive.\n*/",
   "code": "public void setRadius(int r) {\nif (r <= 0) throw new IllegalArgumentException(\"radius must be positive, not \" + r);\nradius = r;\n}",
-  "accessModifier": "public",
-  "returnType": "void",
-  "methodName": "setRadius"
+  "method_name": "setRadius",
+  "parameters": "int r",
+  "return_type": "void",
+  "return_variable": "",
+  "called_methods": [
+    "IllegalArgumentException"
+  ],
+  "local_variables": [],
+  "thrown_exceptions": [
+    "IllegalArgumentException"
+  ]
 }

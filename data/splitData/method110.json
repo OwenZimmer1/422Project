@@ -1,7 +1,23 @@
 {
   "javadoc": "/**Returns a new copy of this queue. The copy should be unaffected\n*  by subsequent changes made to this queue, and vice versa. The\n*  processes added to the copy should be clones.\n*\n* @return a clone of this queue\n* @see java.lang.Object#clone()\n*/",
   "code": "@Override\npublic Queue clone(){\nassert wellFormed() : \"invariant failed at start of clone()\";\n\nQueue copy = new Queue();\n\ntry{ copy = (Queue) super.clone();}\ncatch(CloneNotSupportedException e){\n// should not happen\n}\n\nProcess source = dummy;\nProcess copier = source.clone();\ncopy.dummy = copier;\nsource = source.next;\nwhile(source != dummy) {\ncopier.next = source.clone();\ncopier.next.prev = copier;\ncopier = copier.next;\nsource = source.next;\n}\ncopier.next = copy.dummy;\ncopier.next.prev = copier;\n\nassert wellFormed() : \"invariant failed at end of clone()\";\nassert copy.wellFormed() : \"invariant of result failed at end of clone()\";\nreturn copy;\n}\n\npublic boolean hasNext() {\nassert wellFormed() : \"invariant failed at start of hasNext()\";\nif(version != myVersion) throw new ConcurrentModificationException(\"versions don't match\");\nreturn cursor.next != dummy;\n}",
-  "accessModifier": "unknown",
-  "returnType": "unknown",
-  "methodName": "unknown"
+  "method_name": "clone",
+  "parameters": "",
+  "return_type": "Queue",
+  "return_variable": "copy",
+  "called_methods": [
+    "wellFormed",
+    "Queue",
+    "hasNext",
+    "ConcurrentModificationException"
+  ],
+  "local_variables": [
+    "copy",
+    "source",
+    "copier",
+    "copy"
+  ],
+  "thrown_exceptions": [
+    "ConcurrentModificationException"
+  ]
 }

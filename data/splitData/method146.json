@@ -1,7 +1,15 @@
 {
   "javadoc": "/*** Used to report an error found when checking the invariant.\n* By providing a string, this will help debugging the class if the invariant should fail.\n* @param error string to print to report the exact error found\n* @return false always\n*/",
   "code": "private static boolean report(String error) {\nreporter.accept(error);\nreturn false;\n}",
-  "accessModifier": "private",
-  "returnType": "boolean",
-  "methodName": "report"
+  "method_name": "report",
+  "parameters": "String error",
+  "return_type": "boolean",
+  "return_variable": "false",
+  "called_methods": [
+    "accept"
+  ],
+  "local_variables": [
+    "false"
+  ],
+  "thrown_exceptions": []
 }

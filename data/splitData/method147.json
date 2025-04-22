@@ -1,7 +1,21 @@
 {
   "javadoc": "/*** Add a new string to the multiset. If it already exists,\n* increase the count for the string and return false.\n* Otherwise, set the count to one and return true.\n* @param str the string to add (must not be null)\n* @return true if str was added, false otherwise\n* @throws NullPointerException if str is null\n*/",
   "code": "public boolean add(String str) {\nassert wellFormed() : \"invariant false at start of add\";\nboolean result = false;\n\nint i = hash(str, false);\nif(isOpen(i)) {\nif(data[i] == null) numUsed++;\nresult = true;\ndata[i] = new MyEntry(str);\nnumEntries++;\nif(numUsed > data.length / 2) rehash();\nversion++;\n}else {\ndata[i].count++;\n}\n\nassert wellFormed() : \"invariant false at end of add\";\nreturn result;\n}",
-  "accessModifier": "public",
-  "returnType": "boolean",
-  "methodName": "add"
+  "method_name": "add",
+  "parameters": "String str",
+  "return_type": "boolean",
+  "return_variable": "result",
+  "called_methods": [
+    "wellFormed",
+    "hash",
+    "isOpen",
+    "MyEntry",
+    "rehash"
+  ],
+  "local_variables": [
+    "result",
+    "i",
+    "result"
+  ],
+  "thrown_exceptions": []
 }

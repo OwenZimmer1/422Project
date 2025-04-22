@@ -1,7 +1,13 @@
 {
   "javadoc": "/**A method to compare two objects.\n* This method is superseded by Objects.equals\n* @param o1 one object, may be null\n* @param o2 another object, may be null\n* @return whether they are equal (both null, or usign equals).\n*/",
   "code": "private static boolean eq(Object o1, Object o2) {\nreturn (o1 == null ? o2 == null : o1.equals(o2));\n}",
-  "accessModifier": "private",
-  "returnType": "boolean",
-  "methodName": "eq"
+  "method_name": "eq",
+  "parameters": "Object o1, Object o2",
+  "return_type": "boolean",
+  "return_variable": "(o1 == null ? o2 == null : o1.equals(o2))",
+  "called_methods": [
+    "equals"
+  ],
+  "local_variables": [],
+  "thrown_exceptions": []
 }

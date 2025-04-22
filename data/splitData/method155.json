@@ -1,7 +1,14 @@
 {
   "javadoc": "/*** Create a CLL from the elements in the given collection in the same order.\n* @param dummy dummy node to use, if null, a new dummy will be created\n* @param coll collection to use, must not be null, but may be empty\n* @return CLL of elements in same order\n*/",
   "code": "private Node<E> toCLL(Node<E> dummy, Collection<? extends E> coll) {\nif (dummy == null) dummy = new Node<E>(null,null);\ndummy.next = dummy;\nNode<E> t = dummy;\nfor (E e : coll) {\nt = t.next = new Node<E>(e,dummy);\n}\nreturn t;\n}",
-  "accessModifier": "private",
-  "returnType": "Node<E>",
-  "methodName": "toCLL"
+  "method_name": "toCLL",
+  "parameters": "Node<E> dummy, Collection<? extends E> coll",
+  "return_type": "Node<E>",
+  "return_variable": "t",
+  "called_methods": [],
+  "local_variables": [
+    "t",
+    "t"
+  ],
+  "thrown_exceptions": []
 }

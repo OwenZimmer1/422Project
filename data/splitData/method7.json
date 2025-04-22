@@ -1,7 +1,22 @@
 {
   "javadoc": "/*** Checks if ball is at or outside BOUNDS dimension and moving further out,\n* and reflects movement if so.  If the ball isn't moving further out, the\n* movement isn't reflected.\n* @param bounds dimension of area to check (all four walls), must not be null\n*/",
   "code": "public void bounceWalls(Dimension bounds) {\nif((this.getLoc().x() + this.getRadius() >= bounds.getWidth()) && this.getMove().dx() > 0)\nthis.move = new Vector(-1*this.getMove().dx(), this.getMove().dy());\nif((this.getLoc().y() + this.getRadius() >= bounds.getHeight()) && this.getMove().dy() > 0)\nthis.move = new Vector(this.getMove().dx(), -1*this.getMove().dy());\nif((this.getLoc().x() - this.getRadius() <= 0) && this.getMove().dx() < 0)\nthis.move = new Vector(-1*this.getMove().dx(), this.getMove().dy());\nif((this.getLoc().y() - this.getRadius() <= 0) && this.getMove().dy() < 0)\nthis.move = new Vector(this.getMove().dx(), -1*this.getMove().dy());\n\n}",
-  "accessModifier": "public",
-  "returnType": "void",
-  "methodName": "bounceWalls"
+  "method_name": "bounceWalls",
+  "parameters": "Dimension bounds",
+  "return_type": "void",
+  "return_variable": "",
+  "called_methods": [
+    "getLoc",
+    "x",
+    "getRadius",
+    "getWidth",
+    "getMove",
+    "dx",
+    "Vector",
+    "dy",
+    "y",
+    "getHeight"
+  ],
+  "local_variables": [],
+  "thrown_exceptions": []
 }

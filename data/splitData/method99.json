@@ -1,7 +1,13 @@
 {
   "javadoc": "/*** Gets the amount of finished instructions.\n* @return the finished instructions */",
   "code": "public int getFinished(){return finishedInstructions;}",
-  "accessModifier": "public",
-  "returnType": "int",
-  "methodName": "getFinished"
+  "method_name": "getFinished",
+  "parameters": "",
+  "return_type": "int",
+  "return_variable": "finishedInstructions",
+  "called_methods": [],
+  "local_variables": [
+    "finishedInstructions"
+  ],
+  "thrown_exceptions": []
 }

@@ -1,7 +1,14 @@
 {
   "javadoc": "/*** Create a sorted collection with the natural comparator,\n* and with all the elements from the given collection\n* @param from collection to get elements from, must not be null\n*/",
   "code": "public SortedCollection(Collection<? extends E> from) {\nthis();\naddAll(from);\nassert wellFormed() : \"invariant failed at end of constructor\";\n}",
-  "accessModifier": "default",
-  "returnType": "public",
-  "methodName": "SortedCollection"
+  "method_name": "SortedCollection",
+  "parameters": "Collection<? extends E> from",
+  "return_type": "public",
+  "return_variable": "",
+  "called_methods": [
+    "addAll",
+    "wellFormed"
+  ],
+  "local_variables": [],
+  "thrown_exceptions": []
 }

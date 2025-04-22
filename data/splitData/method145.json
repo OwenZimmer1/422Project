@@ -1,7 +1,25 @@
 {
   "javadoc": "/*** Hash the key to a table index, following double hashing,\n* returning the first index that\n* (1) includes an entry with the key, or\n* (2) has null, or\n* (3) has a placeholder (if phOK is true *and* the key cannot be found).\n* This code assumes that double hashing\n* will find a valid index.  It may run forever otherwise.\n* @param key string to look for, must not be null\n* @param phOK whether we return a slot with a placeholder in preference to an empty slot\n* @return first index meeting the requirements using double hashing.\n*/",
   "code": "private int hash(String key, boolean phOK) {\nif(key == null) throw new NullPointerException(\"String is null\");\nint phIndex = -1;\n\nint hash1 = key.hashCode() % data.length;\nif(hash1 < 0) hash1 += data.length;\n\nint hash2 = key.hashCode() % (data.length - 2);\nif(hash2 < 0) hash2 += data.length - 2;\nhash2 += 1;\n\nif(phOK && data[hash1] == PLACE_HOLDER && phIndex < 0) phIndex = hash1;\nwhile(!(data[hash1] == null || (data[hash1].getKey() != null && data[hash1].getKey().equals(key)))) {\nhash1 += hash2;\nif(hash1 >= data.length) hash1 -= data.length;\n\nif(phOK && data[hash1] == PLACE_HOLDER && phIndex < 0) phIndex = hash1;\n}\nif(data[hash1] != null && (data[hash1].getKey() != null && data[hash1].getKey().equals(key))) return hash1;\nif(phOK && phIndex >= 0) return phIndex;\nreturn hash1;\n}",
-  "accessModifier": "private",
-  "returnType": "int",
-  "methodName": "hash"
+  "method_name": "hash",
+  "parameters": "String key, boolean phOK",
+  "return_type": "int",
+  "return_variable": "hash1",
+  "called_methods": [
+    "NullPointerException",
+    "hashCode",
+    "getKey",
+    "equals"
+  ],
+  "local_variables": [
+    "phIndex",
+    "hash1",
+    "hash2",
+    "hash1",
+    "phIndex",
+    "hash1"
+  ],
+  "thrown_exceptions": [
+    "NullPointerException"
+  ]
 }

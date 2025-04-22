@@ -1,7 +1,13 @@
 {
   "javadoc": "/**Gets the previous player.\n* @return the previous player */",
   "code": "public Player getPrevious() {return prev;}",
-  "accessModifier": "public",
-  "returnType": "Player",
-  "methodName": "getPrevious"
+  "method_name": "getPrevious",
+  "parameters": "",
+  "return_type": "Player",
+  "return_variable": "prev",
+  "called_methods": [],
+  "local_variables": [
+    "prev"
+  ],
+  "thrown_exceptions": []
 }

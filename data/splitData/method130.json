@@ -1,7 +1,19 @@
 {
   "javadoc": "/*** Gets the [lexicographically] least string in the lexicon.\n* @return the least string or null if empty\n*/",
   "code": "public String getMin() {\nassert wellFormed() : \"invariant false at start of getMin()\";\nIterator<String> it = iterator();\nif(it.hasNext()) return it.next();\nreturn null;\n}",
-  "accessModifier": "public",
-  "returnType": "String",
-  "methodName": "getMin"
+  "method_name": "getMin",
+  "parameters": "",
+  "return_type": "String",
+  "return_variable": "it.next()",
+  "called_methods": [
+    "wellFormed",
+    "iterator",
+    "hasNext",
+    "next"
+  ],
+  "local_variables": [
+    "it",
+    "null"
+  ],
+  "thrown_exceptions": []
 }
