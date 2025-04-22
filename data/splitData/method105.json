@@ -14,7 +14,7 @@
     "true"
   ],
   "thrown_exceptions": [
-    "IllegalArgumentException",
-    "NullPointerException"
+    "NullPointerException",
+    "IllegalArgumentException"
   ]
 }
