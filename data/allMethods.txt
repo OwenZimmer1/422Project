@@ -2871,3 +2871,1385 @@ this();
 addAll(from);
 assert wellFormed() : "invariant failed at end of constructor";
 }
+
+/**
+* Create an array robot with the given capacity
+* If the capacity is zero, the robot cannot have any parts
+* @param cap capacity to use, cannot be negative
+*/
+public ArrayRobot(int cap)
+{
+functions = new String[cap];
+parts = new Part[cap];
+}
+
+/**
+* Add a part to the robot.
+* @param function the type of part this is (arm, leg, etc), must not be null
+* @param part the part to add, must not be null.
+* @return whether the part was added.
+* @exception NullPointerException if the function or part is null
+*/
+@Override//required
+public boolean addPart(String function, Part part)
+{
+if(function == null || part == null) throw new NullPointerException();
+for (int i=0; i < functions.length; ++i)//For the empty space,
+{
+if(functions[i] == null) {//put it here! Checks if the space is empty
+functions[i] = function;//puts function into the space
+parts[i] = part;//puts part into the space
+return true;//confirms that it was added
+}
+}
+return false;
+}
+
+/**
+* Remove a part from the robot if there is one with this function.
+* @param function the type of part to remove, null means any part
+* @return part that was removed
+*/
+@Override // required
+public Part removePart(String function)
+{
+for(int i = 0; i < functions.length; ++i)
+{
+if(parts[i] == null) continue;
+//The continue statement allows us to look over nulls and look for
+//next available part, moving beyond just index zero if needed.
+if(function == null || function.equals(functions[i]))//remove this one
+{
+Part p = parts[i];
+functions[i] = null;
+parts[i] = null;
+return p;
+}
+}
+return null;
+}
+
+/**
+* Return the part with the given function.
+* @param function the type of part to look for, null means any part
+* @param index zero-based index of part to return of the given type, must not be negative
+* @return indicated part, or null if no such part (index is at least the number of this kind of kind)
+*/
+@Override//required
+public Part getPart(String function, int index)
+{
+if(index < 0) throw new IllegalArgumentException("index cannot be negative: " + index);
+
+for(int i=0; i < functions.length; ++i)
+{
+if(parts[i] == null)continue;
+else if(function == null)
+{
+if(index-- == 0)return parts[i];
+}
+else if(function.equals(functions[i]))
+{
+if(index-- == 0)return parts[i];
+}
+}
+return null;
+}
+
+/**
+* Add a part to the robot.
+* @param function the type of part this is (arm, leg, etc), must not be null
+* @param part the part to add, must not be null.
+* @return whether the part was added.
+* @exception NullPointerException if the function or part is null
+*/
+@Override // required
+public boolean addPart(String function, Part part)
+{
+if(function == null || part == null) throw new NullPointerException("part cannot be null");//exception thrown if there is no part
+if(function.equals(ARM))//if function is and arm
+{
+if(arm1 == null)//if arm1 is empty...
+{
+arm1= part;//put the contents of part into arm1
+return true;//confirm that it worked
+}
+else if(arm2 == null)//if arm2 is empty....
+{
+arm2 = part;//put the contents of part into arm2
+return true;//confirm that it worked
+}
+}
+
+else if(function.equals(LEG))//if fucntion is leg
+{
+if(leg1 == null)//if leg1 is empty...
+{
+leg1 = part;//put contents of part into leg1
+return true;//confirm that it worked.
+}
+else if(leg2 == null)//if leg2 is empty...
+{
+leg2 = part;//put contents of part into leg2
+return true;//confirm that it worked
+}
+
+}
+else if(otherFunction == null)//if it's anything else like a head
+{
+otherFunction = function;//put the contents of function into otherFunction
+otherPart = part;//put the contents of part into otherPart
+return true;//confirm it works
+}
+return false;//Nothing happens
+}
+
+/**
+* Remove a part from the robot if there is one with this function.
+* @param function the type of part to remove, null means any part
+* @return part that was removed
+*/
+@Override // required
+public Part removePart(String function) {
+Part result = null;
+if(function == null)
+{
+if(arm1 != null)
+{
+result = arm1;
+arm1 = null;
+}
+else if(arm2 != null)
+{
+result = arm2;
+arm2 = null;
+}
+else if(leg1 != null)
+{
+result = leg1;
+leg1 = null;
+}
+else if(leg2 != null)
+{
+result = leg2;
+leg2 = null;
+}
+else if(otherPart != null)
+{
+result = otherPart;
+otherPart = null;
+}
+}
+
+else if(function.equals(ARM))
+{
+if(arm1 != null)
+{
+result = arm1;
+arm1 = null;
+}
+else if(arm2 != null)
+{
+result = arm2;
+arm2 = null;
+}
+}
+else if(function.equals(LEG))
+{
+if(leg1 != null)
+{
+result = leg1;
+leg1 = null;
+}
+else if(leg2 != null)
+{
+result = leg2;
+leg2 = null;
+}
+}
+else
+{
+if(otherPart != null)
+{
+result = otherPart;
+otherPart = null;
+}
+}
+return result;
+}
+
+/**
+* Return the part with the given function.
+* @param function the type of part to look for, null means any part
+* @param index zero-based index of part to return of the given type, must not be negative
+* @return indicated part, or null if no such part (index is at least the number of this kind of kind)
+*/
+@Override // required
+public Part getPart(String function, int index) {
+if(index < 0)throw new IllegalArgumentException("Index cannot be negative.");
+
+Part result = null;
+
+if(function == null  || function.equals(ARM))
+{
+if(arm1 != null)
+{
+if(index-- == 0)result = arm1;
+}
+if(arm2 != null)
+{
+if(index-- == 0)result = arm2;
+}
+}
+if(function == null||function.equals(LEG))
+{
+if(leg1 != null)
+{
+if(index-- == 0)result = leg1;
+}
+
+if(leg2 != null)
+{
+if(index-- == 0)result = leg2;
+}
+}
+if(function == null || function.equals("head"))
+{
+if(index-- == 0) result = otherPart;
+}
+
+return result;
+}
+
+/**
+* Create a part with the given serial number
+* @param serial serial number, must not be null
+*/
+public Part(String serial)
+{
+//initialize the part after checking for errors.
+if(serial == null) throw new NullPointerException("null is not a serial number");
+this.serial = serial;
+}
+
+/**
+* Create a part with a random serial number.
+*/
+public Part()
+{
+// call the other constructor with "this(...)"
+// filling in the "..." with a random string which
+// can indeed be a series of digits.
+// Our solution uses "new Random().nextInt()" as part of this.
+this("RSN" + new Random().nextInt());
+}
+
+/**
+* Indicates whether some other object is "equal to" this one.
+* @param x the reference object with which to compare.
+* @return true if this object is the same as the obj argument; false otherwise.
+*/
+@Override//implementation
+public boolean equals(Object x)
+{
+if(!(x instanceof Part)) return false;
+Part p = (Part)x;
+return serial.equals(p.serial);
+}
+
+/**
+* @return a hash code value for the object.
+*/
+@Override//implementation
+public int hashCode()
+{
+return serial.hashCode();
+}
+
+/**
+* @return a string representation of the object.
+*/
+@Override // implementation
+public String toString()
+{
+return "Part(" + serial + ")";
+}
+
+/**
+* @return the serial number of this part
+*/
+public String getSerial()
+{
+return serial;
+}
+
+/**
+* Return once the data structure has been updated so that
+* the capacity of the arrays is at least the parameter.
+* If we create new arrays, they will be at least twice as long as the existing arrays.
+* This code assumes the arrays are the same length, and preserves this property.
+* @param cap capacity desired
+*/
+private void ensureCapacity(int cap)
+{
+// Follow activity but update to handle two arrays at once (same length)
+if(cap <= functions.length && cap <= parts.length) return;
+int newSize = functions.length*2;
+if(newSize < cap)cap = newSize;
+String[] newFunctions = new String[newSize];
+Part[] newParts = new Part[newSize];
+for(int i=0; i < size; ++i)
+{
+newFunctions[i] = functions[i];
+newParts[i] = parts[i];
+}
+functions = newFunctions;
+parts = newParts;
+}
+
+/**
+* Create an empty part sequence.
+*/
+public DynamicArrayPartSeq() {
+this(INITIAL_CAPACITY); // call specifying constructor to do the work
+// no assertion required because other constructor asserts it
+}
+
+/**
+* Create a dynamic array part sequence with the given capacity
+* (how many parts that can be added without requiring allocation of a new array).
+* @param cap number of elements to prepare for, cannot be negative
+*/
+public DynamicArrayPartSeq(int cap) {
+// TODO
+functions = new String[cap];
+parts = new Part[cap];
+
+assert wellFormed() : "invariant broken by constructor";
+}
+
+/**
+* Return the number of elements in the sequence.
+* @return number of elements in sequence
+*/
+public int size() {
+assert wellFormed() : "invariant broken in size";
+return size;
+}
+
+/**
+* Start running through all parts.
+*/
+public void start() {
+// not asserting invariant before this will be done by the other start
+start(null);
+}
+
+/**
+* Start running through all parts with the given function.
+* @param function kind of parts to access, may be null (any part)
+*/
+public void start(String function)
+{
+// TODO: don't forget to assert the invariant twice: before and after
+assert wellFormed():"invariant broken in start.";
+if(function == null)
+{
+this.function =null;
+currentIndex=0;
+return;
+}
+this.function = function;
+currentIndex = -1;
+moveForStart();
+assert wellFormed():"invariant broken in start";
+}
+
+/**
+* Return whether there is a current element.
+* @return whether there is a current element
+*/
+public boolean isCurrent()
+{
+assert wellFormed():"invariant broken in isCurrent";
+return currentIndex < size;
+}
+
+/**
+* Return the current element.
+* This method can only be called if there is a current element.
+* @return the part which is current
+* @throws IllegalStateException if there is no current element
+*/
+public Part getCurrent() {
+assert wellFormed():"invariant broken in getCurrent.";
+if(parts[currentIndex] == null)throw new IllegalStateException("There is no current element in getCurrent.");
+return parts[currentIndex];
+}
+
+/**
+* Move the cursor to the next part with the current function.
+* If there is no such part, then after this call, there is no current element.
+* @throws IllegalStateException
+*/
+public void advance() {
+assert wellFormed() : "invariant broken in advance";
+// TODO (our solution uses the helper method)
+if(currentIndex > size-1)throw new IllegalStateException("Current index is greater than the size.");
+if(function==null)
+{
+currentIndex++;
+assert wellFormed():"invariant broken by advance.";
+return;
+}
+for(int i =currentIndex+1;i < size;i++) {
+if(function.equals(functions[i])){
+currentIndex=i;
+assert wellFormed():"invariant broken by advance.";
+return;
+}
+}
+currentIndex=size;
+assert wellFormed() : "invariant broken by advance";
+}
+
+/**
+* Remove the current element.  Then the next part (of the function)
+* is made current, or there is no current if there are not more parts
+* (of the function).
+* @throws IllegalStateException if there is no current element
+*/
+public void removeCurrent() {
+// TODO: lots to do
+assert wellFormed(): "invariant broken in removeCurrent";
+if(functions[currentIndex] == null || parts[currentIndex]== null)
+{
+throw new IllegalStateException("There is no current element.");
+}
+
+functions[currentIndex]=null;
+parts[currentIndex]=null;
+size--;
+
+if(currentIndex+1 < functions.length && functions[currentIndex+1]!=null) shiftLeft(currentIndex);
+
+if(size==0)
+{
+assert wellFormed():"invariant broken by removeCurrent";
+return;
+}
+else if(function != null)
+{
+while(currentIndex<size)
+{
+if(function.equals(functions[currentIndex]))
+{
+break;
+}
+currentIndex++;
+}
+}
+
+assert wellFormed():"invariant broken by removeCurrent";
+}
+
+/**
+* Add a part before the current element.  If there is no current element,
+* then add at the beginning.  There must have been a function
+* defined (See [@link #start(String)}).
+* @throws IllegalStateException if no function defined, or if the function was null
+* @param p part to add at this spot, must not be null.
+*/
+public void addBefore(Part p) {
+assert wellFormed() : "invariant broken in addBefore";
+// TODO
+if(p==null)throw new NullPointerException("Null data cannot be added to the array.");
+if(function == null)throw new IllegalStateException("function cannot be null or undefined in addBefore.");
+ensureCapacity(size*2);
+if(functions[currentIndex]==null)
+{
+shiftRight(0);
+functions[0] = function;
+parts[0] = p;
+currentIndex=0;
+}
+else
+{
+shiftRight(currentIndex);
+functions[currentIndex] = function;
+parts[currentIndex] = p;
+}
+size++;
+ensureCapacity(size*2);
+assert wellFormed() : "invariant broken by addBefore";
+}
+
+/**
+* Add a part after the current element.  If there is no current element,
+* then add at the end.  There must have been a function
+* defined (See [@link #start(String)}).
+* @throws IllegalStateException if no function defined, or if the function was null
+* @param p part to add at this spot, must not be null.
+*/
+public void addAfter(Part p) {
+// TODO: (remember the invariant!)
+assert wellFormed():"invariant broken in addAfter";
+if(p==null) throw new NullPointerException("Cannot add null data to the array.");
+ensureCapacity(size*2);
+if(function == null)throw new IllegalStateException("function cannot be null or undefined in addBefore.");
+if(size==0)
+{
+doAdd(0,p);
+assert wellFormed():"invariant broken by addAfter";
+return;
+} else if(currentIndex==size) {
+doAdd(size, p);
+assert wellFormed():"invariant broken by addAfter";
+return;
+}
+
+shiftRight(currentIndex);
+doAdd(currentIndex+1,p);
+currentIndex++;
+assert wellFormed():"invariant broken by addAfter";
+}
+
+/**
+* Return the function of this part.
+* @return string of this part, null if this part not in a robot
+*/
+public String getFunction() {
+return function;
+}
+
+/**
+* Return the next part in this robot.
+* This is valid only if the part is in a robot.
+* @return the next part, possibly null
+* @exception IllegalStateException if this part is not a part of a robot
+*/
+public FunctionalPart getNext() {
+if (function == null) throw new IllegalStateException("not part of a robot");
+return next;
+}
+
+/**
+* Create a wired robot without parts
+* and no order.
+*/
+public WiredRobot()
+{
+this(null);
+}
+
+/**
+* Create a wired robot without parts
+* with the given order
+* @param comp order to use, if null, then unordered
+*/
+public WiredRobot(Comparator<FunctionalPart> comp) {
+if(comp == null)
+{
+comp = (p1,p2) -> 0;
+}
+this.comparator = comp;
+dummy = new FunctionalPart();
+assert wellFormed() : "Invariant not established by constructor";
+}
+
+/**
+* Return the function of this part.
+* @return string of this part, null if this part not in a robot
+*/
+public String getFunction() {
+return function;
+}
+
+/**
+* Return the next part in this robot.
+* This is valid only if the part is in a robot.
+* @return the next part, possibly null
+* @exception IllegalStateException if this part is not a part of a robot
+*/
+public FunctionalPart getNext() {
+throw new UnsupportedOperationException("not implemented");
+}
+
+/**
+* Compare two parts according to our purposes.
+* We use the supplied comparator except when it
+* says it doesn't care, in which case, we use the (unique) id to
+* distinguish two parts, older first.
+* @param p1 first part, must not be null
+* @param p2 second part, must not be null
+* @return comparison, only 0 if p1 and p2 are the same
+*/
+private int compare(FunctionalPart p1, FunctionalPart p2) //Received assistance from Alex K in tutoring center
+{
+if(comparator == null || comparator.compare(p1, p2) == 0)
+{
+if(p1.getId() < p2.getId())
+{
+return -1;
+}
+else if(p1.getId() == p2.getId())
+{
+return 0;
+}
+else if(p1.getId() > p2.getId())
+{
+return 1;
+}
+}
+return comparator.compare(p1, p2);
+}
+
+/**
+* Check a tree of parts within bounds.
+* The subtree must be properly ordered, and every part
+* must have a non-null function assigned.
+* @param r root of subtree to check, may be null
+* @param lo lower bound (exclusive) of all parts in subtree.
+*   If null, then no lower bound
+* @param hi upper bound (exclusive) of all parts in subtree.
+*   If null, then no upper bound
+* @return whether the subtree checks out OK.
+* If false is returned, then exactly one report has been generated.
+*/
+private boolean checkInRange(FunctionalPart r, FunctionalPart lo, FunctionalPart hi) //Received assistance from Alex Dueppen in tutoring center
+{
+/***************************
+* We need a base case
+* Then do some work
+* We need a recursive call
+* Only work with r
+***************************/
+//if r is null there is nothing to check
+if(r == null)return true;
+if(!checkInRange(r.left,lo,r)) return false;
+if(!checkInRange(r.right,r,hi))return false;
+
+//1.Checking if function is null
+if(r.function == null)return report("roots function cannot be null if the part is not null.");
+
+//2.
+//Checking if lo < r < hi
+if(lo != null && compare(r,lo) <= 0)return report("lo is greater than root");
+if(hi != null && compare(r,hi) >= 0)return report("hi is less than the root");
+
+return true;
+}
+
+/**
+* Create a wired robot without parts
+* and no order.
+*/
+public WiredRobot() {
+this(null);
+}
+
+/**
+* Create a wired robot without parts
+* with the given order
+* @param comp order to use, if null, then unordered
+*/
+public WiredRobot(Comparator<FunctionalPart> comp) {
+
+if(comp == null)
+{
+comp = (p1,p2) -> 0;
+}
+comparator = comp;
+root = null;
+assert wellFormed() : "Invariant not established by constructor";
+}
+
+/**
+* Return the 0-based index part from the subtree given that
+* matches the given function.  The mutable index should be decremented
+* for every part we find that matches, so that if we find a match
+* when it is zero we return that one.  Once we find the result, we stop
+* looking (and stop decrementing).  If there is no such functional part,
+* this method returns null.
+* @param r subtree to examine, may be null
+* @param function kind of part to look for, null means any part
+* @param mutableIndex index to look for (0-based); decremented whenever a matching
+*   part is encountered in in-order traversal until the desired index.
+* @return 0-based matching part, may be null
+*/
+private static FunctionalPart getHelper(FunctionalPart r, String function, Cell<Integer> mutableIndex)
+{
+if(r == null)
+{
+return null;
+}
+
+//r.left first, r second, r.right third
+//First go into the left subtree to find the function.  Delegate, don't micromanage
+FunctionalPart tempLeft = getHelper(r.left, function, mutableIndex);
+if(tempLeft !=null) return tempLeft;
+
+if(function == null || r.function.equals(function))
+{
+if(mutableIndex.get() == 0)return r;
+mutableIndex.set(mutableIndex.get()-1);
+}
+
+FunctionalPart tempRight = getHelper(r.right, function,mutableIndex);
+if(tempRight != null)return tempRight;
+
+return null;
+// Use recursion.  Do not micro-manage!
+// Never check a child for null or look at its function.
+}
+
+/**
+* Helper method for addPart.
+* @param r
+* @param add
+* @return r
+*/
+private FunctionalPart insert(FunctionalPart r, FunctionalPart add)
+{
+
+if(r==null)
+{
+r=add;
+}
+else if(compare(add,r) < 0)
+{
+r.left = insert(r.left,add);
+}
+else//if(compare(add,r) > 0)
+{
+r.right = insert(r.right,add);
+}
+return r;
+}
+
+/**
+* Return the first part in this robot.
+* @return the first part, null if this robot is empty
+*/
+public FunctionalPart getFirst()
+{
+assert wellFormed():"invariant broken in getFirst";
+if(root == null)
+{
+return null;
+}
+FunctionalPart getter = root;
+while(getter.left != null)
+{
+getter = getter.left;
+}
+assert wellFormed():"invariant broken in getFirst";
+return getHelper(getter,null, new Cell<>(0));
+}
+
+/**
+* Change the comparator used to order the robot parts.
+* The parts will be reorganized as necessary to accommodate the new order,
+* but two parts will be reordered only if necessary.
+* (The sorting is "stable".)
+* @param comp comparator to use, if null, then henceforth the parts
+* can be in any order.
+*/
+public void setComparator(Comparator<FunctionalPart> comp) {
+assert wellFormed() : "invariant broken in setComparator";
+//: Complete this!
+// Hint: After handling special easy case,
+//   reinsert all parts back into an emptied tree
+//      in pre-order over the tree.
+//      This requires a new helper method.
+
+comparator = comp;
+if(root == null)return;
+FunctionalPart savedRoot = root;
+root = null;
+compHelper(savedRoot);
+
+assert wellFormed() : "invariant broken by setComparator";
+}
+
+/** Change the stored value to the given value.
+* @param newValue new value for cell, may be null
+*/
+public void set(T newValue) {
+value = newValue;
+}
+
+/**
+* Return the function of this part.
+* @return string of this part, null if this part not in a robot
+*/
+public String getFunction() {
+return function;
+}
+
+/**
+* Return the next part in this robot.
+* This is valid only if the part is in a robot.
+* @return the next part, possibly null
+* @exception IllegalStateException if this part is not a part of a robot
+*/
+public FunctionalPart getNext() {
+
+if(this.getFunction() == null)throw new IllegalStateException("Part is not in the robot");
+FunctionalPart cur = this;
+
+if(cur.right != null)
+{
+if(cur.right.left != null)
+{
+cur = cur.right.left;
+while(cur.left !=null)
+{
+cur = cur.left;
+}
+
+return cur;
+}
+cur = cur.right;
+return cur;
+}
+
+else{
+if(cur.parent == null)return null;
+if(cur.parent.left == cur)
+{
+cur = cur.parent;
+}
+else
+{
+if(cur.parent == null)return null;
+while(cur.parent.left != cur)
+{
+cur = cur.parent;
+if(cur.parent == null)return null;
+}
+cur = cur.parent;
+}
+
+return cur;
+}
+}
+
+/**
+* Compare two parts according to our purposes.
+* We use the supplied comparator except when it
+* says it doesn't care, in which case, we use the (unique) id to
+* distinguish two parts, older first.
+* @param p1 first part, must not be null
+* @param p2 second part, must not be null
+* @return comparison, only 0 if p1 and p2 are the same
+*/
+private int compare(FunctionalPart p1, FunctionalPart p2) {
+if (comparator != null) {
+int c= comparator.compare(p1, p2);
+if (c != 0) return c;
+}
+return p1.getId() - p2.getId();
+}
+
+/**
+* Check a tree of parts within bounds.
+* The subtree must be properly ordered, and every part
+* must have a non-null function assigned.
+* @param r root of subtree to check, may be null
+* @param lo lower bound (exclusive) of all parts in subtree.
+*   If null, then no lower bound
+* @param hi upper bound (exclusive) of all parts in subtree.
+*   If null, then no upper bound
+* @param p the parent part
+* @return whether the subtree checks out OK.
+* If false is returned, then exactly one report has been generated.
+*/
+private boolean checkInRange(FunctionalPart r, FunctionalPart lo, FunctionalPart hi, FunctionalPart p) {
+if (r == null) return true;
+if (r.function == null) return report("Has null function: " + r);
+if (lo != null && compare(lo, r) >= 0) return report("Out of lo bound: " + r + " <= " + lo);
+if (hi != null && compare(r,hi) >= 0) return report("Out of hi bound: " + r + " >= " + hi);
+
+//Checking if the roots parent is equal to the parent parameter
+if(r.parent != p)return report("Out of root bound");
+
+//r goes into the p param because when you move down the tree the root variable becomes the parent
+return checkInRange(r.left, lo, r,r) && checkInRange(r.right, r, hi,r);
+}
+
+/**
+* Create a wired robot without parts
+* and no order.
+*/
+public WiredRobot() {
+this(null);
+}
+
+/**
+* Create a wired robot without parts
+* with the given order
+* @param comp order to use, if null, then unordered
+*/
+public WiredRobot(Comparator<FunctionalPart> comp) {
+comparator = comp;
+assert wellFormed() : "Invariant not established by constructor";
+}
+
+/**
+* Return the first part in this robot.
+* @return the first part, null if this robot is empty
+*/
+public FunctionalPart getFirst() {
+assert wellFormed() : "invariant broken in getFirst";
+FunctionalPart r = root;
+while (r != null && r.left != null) {
+r = r.left;
+}
+return r;
+}
+
+/**
+* Return the 0-based index part from the subtree given that
+* matches the given function.  The mutable inex should be decremented
+* for every part we find that matches, so that if we find a match
+* when it is zero we return that one.  Once we find the result, we stop
+* looking (and stop decrementing).  If there is no such functional part,
+* this method returns null.
+* @param r subtree to examine, may be null
+* @param function kind of part to look for, null means any part
+* @param mutableIndex index to look for (0-based); decremented whenever a matching
+*   part is encountered in in-order traversal until the desired index.
+* @return 0-based matching part, may be null
+*/
+private static FunctionalPart getHelper(FunctionalPart r, String function, Cell<Integer> mutableIndex) {
+if (r == null) return r;
+FunctionalPart result = getHelper(r.left, function, mutableIndex);
+if (result != null) return result;
+if (function == null ||function.equals(r.function)) {
+int index = mutableIndex.get();
+if (index == 0) return r;
+mutableIndex.set(index-1);
+}
+return getHelper(r.right, function, mutableIndex);
+}
+
+/**
+*	A method that removes a part with the assistance of a removal helper method
+* @param p
+* @return ture if part is removed
+* @return false if part is not removed
+*/
+public boolean remove(Part p)
+{
+if(root == null)return false;
+
+assert wellFormed():"invariant broken at the start of remove";
+
+//check if the part is even in the robot
+FunctionalPart traverse = getFirst();
+if(traverse.getNext()!=null && !traverse.equals((FunctionalPart)p))
+{
+traverse = traverse.getNext();
+while(traverse !=null)
+{
+if(traverse.equals((FunctionalPart)p))break;
+traverse = traverse.getNext();
+}
+}
+if(traverse != (FunctionalPart)p || traverse == null)return false;
+
+FunctionalPart saveRoot = root;
+FunctionalPart holdP = (FunctionalPart) p;
+if(holdP.getFunction() ==null)return false;
+
+p = doRemove(root,(FunctionalPart) p);
+assert wellFormed():"invariant broken at the end of remove";
+
+//check the root
+//check the parent
+//if niether is different return false
+if(saveRoot != null && !saveRoot.equals(root)){
+return true;
+}
+else if(p != null && p.equals(holdP))
+{
+return false;
+}
+else return false;
+}
+
+/**
+* Change the comparator used to order the robot parts.
+* The parts will be reorganized as necessary to accommodate the new order,
+* but two parts will be reordered only if necessary.
+* (The sorting is "stable".)
+* @param comp comparator to use, if null, then henceforth the parts
+* can be in any order.
+*/
+public void setComparator(Comparator<FunctionalPart> comp) {
+assert wellFormed() : "invariant broken in setComparator";
+if (comp != comparator) {
+comparator = comp;
+FunctionalPart saved = root;
+root = null;
+reInsertAll(saved);
+}
+assert wellFormed() : "invariant broken by setComparator";
+}
+
+/**
+* Return the number of nodes in this subtree.
+* If the subtree isn't null, we use the stored `count' field rather than
+* computing the count.
+* @param r subtree to count nodes for, must not be null
+* @return count of nodes in this subtree
+*/
+private static int getCount(Node<?> r) {
+if (r == null) return 0;
+return r.count;
+}
+
+/**
+* Check that a subtree's count and parent fields are correct.
+* @param r subtree to check
+* @param p what the parent should be.
+* @return whether any problems ere found.  If false is returned than
+* exactly one problem has been reported.
+*/
+private boolean checkTree(Node<T> r, Node<T> p) {
+if (r == null) return true;
+if (r.parent != p) return report("parent is wrong for " + r);
+if (r.count != getCount(r.left) + getCount(r.right) + 1) {
+return report("computed count " + r.count + " not consistent with subtrees");
+}
+return checkTree(r.left, r) && checkTree(r.right, r);
+}
+
+/**
+* Create a maze of the given size, in which everything is blocked.
+* @param rows number of rows, must be positive
+* @param columns number of columns, must be positive
+*/
+public Maze(int rows, int columns) {
+if (rows < 1 || columns < 1) throw new IllegalArgumentException("Maze must not be empty");
+this.rows = rows;
+this.columns = columns;
+ropen = new boolean[rows-1][columns];
+copen = new boolean[rows][columns-1];
+}
+
+/**
+* Is this cell open to the left?
+* As a special case, the bottom left cell is open to the left
+* (this is the maze entry).
+* @param i row
+* @param j column
+* @return whether there is an opening to the left.
+* @exception IllegalArgumentException if coordinates out of range.
+*/
+public boolean isOpenLeft(int i, int j) {
+checkCell(i,j);
+if(j==0 && rows()-1 == i)return true;//special case
+
+if(j==0) return false;
+else if(copen[i][j-1])return true;
+else return false;
+}
+
+/**
+* Is this cell open to the right?
+* @param i row
+* @param j column
+* @return whether there is an opening to the right.
+* @exception IllegalArgumentException if coordinates out of range.
+*/
+public boolean isOpenRight(int i, int j) {
+
+checkCell(i,j);
+
+if(j>=copen[0].length)return false;
+else if(copen[i][j])return true;
+else return false;
+}
+
+/**
+* Is this cell open above?
+* As special case, the top right cell is open above
+* (this is the maze exit).
+* @param i row
+* @param j column
+* @return whether there is an opening going up
+* @exception IllegalArgumentException if coordinates out of range.
+*/
+public boolean isOpenUp(int i, int j) {
+
+checkCell(i,j);
+if(i==0&&j==columns()-1)return true;
+
+if(i==0)return false;
+else if(ropen[i-1][j])return true;
+else return false;
+}
+
+/**
+* Is this cell open below?
+* @param i row
+* @param j column
+* @return whether there is an opening down down
+* @exception IllegalArgumentException if coordinates out of range.
+*/
+public boolean isOpenDown(int i, int j) {
+
+checkCell(i,j);
+if(i>=ropen.length)return false;
+else if(ropen[i][j])return true;
+else return false;
+}
+
+/**
+* Read in contents of a maze printed with ASCII graphics from the file.
+* The rows and columns are already set (do not read these).
+* Example (assuming rows = 3, columns = 4)
+* <pre>
+* +-+-+-+ +
+* |   |   |
+* + + + +-+
+* | |     |
+* + +---+ +
+*       | |
+* +-----+-+
+* </pre>
+* @param r buffered reader to read lines from
+* @throws IOException if a problem happens with reading
+* @throws ParseException if the maze is badly formatted.
+* (The implementation is also permitted to simply overlook
+* format errors)
+*/
+public void read(BufferedReader r) throws IOException {
+//read() will return the ascii value of the character
+String reader;
+r.readLine();
+for(int i =0; i < rows;i++) {//rows
+reader=r.readLine();
+for (int j = 2; j < reader.length();j+=2)//columns
+{
+char ha = reader.charAt(j);
+if(ha == ' ')setOpenRight(i,(j/2)-1,true);
+}
+if(i!=rows-1) {//rows
+reader = r.readLine();
+for (int j = 1; j < reader.length(); j+=2)
+{
+char ha =reader.charAt(j);
+if(ha == ' ')setOpenDown(i,j/2,true);
+}
+}
+
+}
+}
+
+/**
+* Write out the maze in a specific textual and human readable form.
+* For example:
+* <pre>
+* +-+-+-+ +
+* |   |   |
+* + + + +-+
+* | |     |
+* + +---+ +
+*       | |
+* +-----+-+
+* </pre>
+*
+* @param pw print writer to write to, must not be null
+*/
+public void write(PrintWriter pw) {
+int copenCount =0;
+int ropenCount=0;
+StringBuilder table = new StringBuilder();
+
+for(int i =0; i < rows()*2+1; i++)//change second condition
+{
+//special cases
+if(i ==0)//first line
+{
+for(int a=0;a < columns()*2+1;a++)
+{
+if(a == columns()*2-1) table.append(" ");
+else if(a%2==0) table.append("+");
+else table.append("-");
+}
+}
+else if(i == rows()*2-1)//second to last line
+{
+for(int b =0;b < columns()*2+1;b++)
+{
+if(b==0 || b%2==1)table.append(" ");
+else{
+if(isOpenRight(ropenCount,copenCount))table.append(" ");
+else table.append("|");
+copenCount++;
+}
+}
+copenCount=0;
+}
+
+//Main cases
+else if(i%2==1)//copen
+{
+for(int d=0; d <columns()*2+1;d++)
+{
+if(d == 0 || d == columns()*2) table.append("|");
+else if(d%2==0)
+{
+if(isOpenRight(ropenCount,copenCount)) table.append(" ");
+else table.append("|");
+copenCount++;
+}
+else table.append(" ");
+}
+copenCount=0;
+}
+else if(i%2==0)//ropen
+{
+for (int e = 0; e < columns() * 2 + 1; e++) {
+if (e % 2 == 1) {
+if (isOpenDown(ropenCount, copenCount)) table.append(" ");
+else table.append("-");
+copenCount++;
+} else table.append("+");
+}
+ropenCount++;
+copenCount = 0;
+if(i == rows()*2)
+{
+table.append("\n");
+String finalMaze = table.toString();
+pw.write(finalMaze);
+}
+}
+table.append("\n");
+}
+}
+
+/**
+* Clear maze (everything is the same open/closed).
+* @param open whether everything should be open (or closed)
+*/
+public void clear(boolean open) {
+for (int i = 0; i < rows; ++i) {
+for (int j=0; j < columns; ++j) {
+if (i+1 != rows) ropen[i][j] = open;
+if (j+1 != columns) copen[i][j] = open;
+}
+}
+}
+
+/**
+* Exception thrown by {@link #read} if it notices a problem.
+*
+*/
+public static class ParseException extends IOException {
+/**
+* Keep Eclipse happy
+*/
+private static final long serialVersionUID = 1L;
+
+public ParseException(String s) { super(s); }
+}
+
+/** Create a cell for row i and column j.
+* This is a convenience method for creating new cells,
+* since the Java syntax for doing so in a different class is tricky.
+* You don't need to use this method.
+* @param i row
+* @param j column
+* @return new Cell(i,j)
+*/
+public Cell makeCell(int i, int j) {
+return new Cell(i,j);
+}
+
+/**
+* Set the displayed solution to the argument
+* @param sd (may be null -- show no solution)
+*/
+public void setSolution(SolutionDisplay sd) {
+solution = sd;
+}
+
+/**
+* Create a maze solver for this maze.
+*
+* @param m maze to solve, must not be null
+*/
+public MazeSolver(Maze m) {
+maze = m;
+visited = new Cell[maze.rows()][maze.columns()];
+}
+
+/**
+* Try to find a path, and return a solution display:
+* either a path solution display, if a path was found,
+* or a visited solution display if no path was found.
+*
+* @return solution display (must not be null)
+*/
+public SolutionDisplay findPath() {
+int rows = maze.rows();
+int columns = maze.columns();
+Stack<Maze.Cell> prev = new Stack<Cell>();
+
+Cell cur = maze.makeCell(rows - 1, 0);
+prev.push(cur);
+visited[rows-1][0] = cur;
+
+Cell look = null;
+boolean winner = false;
+ArrayList<Cell> path = new ArrayList<>(rows * columns);
+
+int saveSize=pending.size();
+
+boolean noAdded=false;
+
+while (!winner) {
+//Special case for if solution is reached
+if (cur.row == 0 && cur.column == columns - 1) {
+winner = true;
+break;
+}
+noAdded = doPending(cur);
+if(pending.isEmpty())break;
+
+look = pending.peek();
+if(!noAdded) {
+prev = doPrev(prev, cur, look);
+}
+
+// If the cell has not been visited then we jump there
+if (visited[look.row][look.column] == null) {
+cur = pending.pop();
+prev.push(cur);
+visited[cur.row][cur.column] = cur;
+} else pending.pop();
+
+}
+
+if (winner) {
+
+for(int i = prev.search(visited[rows-1][0])-1; i > -1; i--)
+{
+path.add(0,prev.pop());
+}
+return new PathSolutionDisplay(maze, path);
+} else {
+boolean[][] marked = new boolean[rows][columns];
+for (int i = 0; i < visited.length; i++) {
+for (int j = 0; j < visited[i].length; j++) {
+if (visited[i][j] == null) marked[i][j] = false;
+else marked[i][j] = true;
+}
+}
+return new VisitedSolutionDisplay(maze, marked);
+}
+}

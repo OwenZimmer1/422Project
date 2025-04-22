@@ -126,8 +126,8 @@
       "true"
     ],
     "thrown_exceptions": [
-      "IllegalArgumentException",
-      "NullPointerException"
+      "NullPointerException",
+      "IllegalArgumentException"
     ]
   },
   {
@@ -244,8 +244,8 @@
       "cursor"
     ],
     "thrown_exceptions": [
-      "ConcurrentModificationException",
-      "NoSuchElementException"
+      "NoSuchElementException",
+      "ConcurrentModificationException"
     ]
   },
   {
@@ -1235,6 +1235,147 @@
     "thrown_exceptions": []
   },
   {
+    "javadoc": "/*** Create an array robot with the given capacity\n* If the capacity is zero, the robot cannot have any parts\n* @param cap capacity to use, cannot be negative\n*/",
+    "code": "public ArrayRobot(int cap)\n{\nfunctions = new String[cap];\nparts = new Part[cap];\n}",
+    "method_name": "ArrayRobot",
+    "parameters": "int cap",
+    "return_type": "public",
+    "return_variable": "",
+    "called_methods": [],
+    "local_variables": [],
+    "thrown_exceptions": []
+  },
+  {
+    "javadoc": "/*** Add a part to the robot.\n* @param function the type of part this is (arm, leg, etc), must not be null\n* @param part the part to add, must not be null.\n* @return whether the part was added.\n* @exception NullPointerException if the function or part is null\n*/",
+    "code": "@Override//required\npublic boolean addPart(String function, Part part)\n{\nif(function == null || part == null) throw new NullPointerException();\nfor (int i=0; i < functions.length; ++i)//For the empty space,\n{\nif(functions[i] == null) {//put it here! Checks if the space is empty\nfunctions[i] = function;//puts function into the space\nparts[i] = part;//puts part into the space\nreturn true;//confirms that it was added\n}\n}\nreturn false;\n}",
+    "method_name": "addPart",
+    "parameters": "String function, Part part",
+    "return_type": "boolean",
+    "return_variable": "true",
+    "called_methods": [
+      "NullPointerException"
+    ],
+    "local_variables": [
+      "i",
+      "true",
+      "false"
+    ],
+    "thrown_exceptions": [
+      "NullPointerException"
+    ]
+  },
+  {
+    "javadoc": "/*** Remove a part from the robot if there is one with this function.\n* @param function the type of part to remove, null means any part\n* @return part that was removed\n*/",
+    "code": "@Override // required\npublic Part removePart(String function)\n{\nfor(int i = 0; i < functions.length; ++i)\n{\nif(parts[i] == null) continue;\n//The continue statement allows us to look over nulls and look for\n//next available part, moving beyond just index zero if needed.\nif(function == null || function.equals(functions[i]))//remove this one\n{\nPart p = parts[i];\nfunctions[i] = null;\nparts[i] = null;\nreturn p;\n}\n}\nreturn null;\n}",
+    "method_name": "removePart",
+    "parameters": "String function",
+    "return_type": "Part",
+    "return_variable": "p",
+    "called_methods": [
+      "equals"
+    ],
+    "local_variables": [
+      "i",
+      "p",
+      "p",
+      "null"
+    ],
+    "thrown_exceptions": []
+  },
+  {
+    "javadoc": "/*** Return the part with the given function.\n* @param function the type of part to look for, null means any part\n* @param index zero-based index of part to return of the given type, must not be negative\n* @return indicated part, or null if no such part (index is at least the number of this kind of kind)\n*/",
+    "code": "@Override//required\npublic Part getPart(String function, int index)\n{\nif(index < 0) throw new IllegalArgumentException(\"index cannot be negative: \" + index);\n\nfor(int i=0; i < functions.length; ++i)\n{\nif(parts[i] == null)continue;\nelse if(function == null)\n{\nif(index-- == 0)return parts[i];\n}\nelse if(function.equals(functions[i]))\n{\nif(index-- == 0)return parts[i];\n}\n}\nreturn null;\n}",
+    "method_name": "getPart",
+    "parameters": "String function, int index",
+    "return_type": "Part",
+    "return_variable": "parts[i]",
+    "called_methods": [
+      "IllegalArgumentException",
+      "equals"
+    ],
+    "local_variables": [
+      "i",
+      "null"
+    ],
+    "thrown_exceptions": [
+      "IllegalArgumentException"
+    ]
+  },
+  {
+    "javadoc": "/*** Add a part to the robot.\n* @param function the type of part this is (arm, leg, etc), must not be null\n* @param part the part to add, must not be null.\n* @return whether the part was added.\n* @exception NullPointerException if the function or part is null\n*/",
+    "code": "@Override // required\npublic boolean addPart(String function, Part part)\n{\nif(function == null || part == null) throw new NullPointerException(\"part cannot be null\");//exception thrown if there is no part\nif(function.equals(ARM))//if function is and arm\n{\nif(arm1 == null)//if arm1 is empty...\n{\narm1= part;//put the contents of part into arm1\nreturn true;//confirm that it worked\n}\nelse if(arm2 == null)//if arm2 is empty....\n{\narm2 = part;//put the contents of part into arm2\nreturn true;//confirm that it worked\n}\n}\n\nelse if(function.equals(LEG))//if fucntion is leg\n{\nif(leg1 == null)//if leg1 is empty...\n{\nleg1 = part;//put contents of part into leg1\nreturn true;//confirm that it worked.\n}\nelse if(leg2 == null)//if leg2 is empty...\n{\nleg2 = part;//put contents of part into leg2\nreturn true;//confirm that it worked\n}\n\n}\nelse if(otherFunction == null)//if it's anything else like a head\n{\notherFunction = function;//put the contents of function into otherFunction\notherPart = part;//put the contents of part into otherPart\nreturn true;//confirm it works\n}\nreturn false;//Nothing happens\n}",
+    "method_name": "addPart",
+    "parameters": "String function, Part part",
+    "return_type": "boolean",
+    "return_variable": "true",
+    "called_methods": [
+      "NullPointerException",
+      "equals"
+    ],
+    "local_variables": [
+      "true",
+      "true",
+      "true",
+      "true",
+      "otherPart",
+      "true",
+      "false"
+    ],
+    "thrown_exceptions": [
+      "NullPointerException"
+    ]
+  },
+  {
+    "javadoc": "/*** Remove a part from the robot if there is one with this function.\n* @param function the type of part to remove, null means any part\n* @return part that was removed\n*/",
+    "code": "@Override // required\npublic Part removePart(String function) {\nPart result = null;\nif(function == null)\n{\nif(arm1 != null)\n{\nresult = arm1;\narm1 = null;\n}\nelse if(arm2 != null)\n{\nresult = arm2;\narm2 = null;\n}\nelse if(leg1 != null)\n{\nresult = leg1;\nleg1 = null;\n}\nelse if(leg2 != null)\n{\nresult = leg2;\nleg2 = null;\n}\nelse if(otherPart != null)\n{\nresult = otherPart;\notherPart = null;\n}\n}\n\nelse if(function.equals(ARM))\n{\nif(arm1 != null)\n{\nresult = arm1;\narm1 = null;\n}\nelse if(arm2 != null)\n{\nresult = arm2;\narm2 = null;\n}\n}\nelse if(function.equals(LEG))\n{\nif(leg1 != null)\n{\nresult = leg1;\nleg1 = null;\n}\nelse if(leg2 != null)\n{\nresult = leg2;\nleg2 = null;\n}\n}\nelse\n{\nif(otherPart != null)\n{\nresult = otherPart;\notherPart = null;\n}\n}\nreturn result;\n}",
+    "method_name": "removePart",
+    "parameters": "String function",
+    "return_type": "Part",
+    "return_variable": "result",
+    "called_methods": [
+      "equals"
+    ],
+    "local_variables": [
+      "result",
+      "result"
+    ],
+    "thrown_exceptions": []
+  },
+  {
+    "javadoc": "/*** Return the part with the given function.\n* @param function the type of part to look for, null means any part\n* @param index zero-based index of part to return of the given type, must not be negative\n* @return indicated part, or null if no such part (index is at least the number of this kind of kind)\n*/",
+    "code": "@Override // required\npublic Part getPart(String function, int index) {\nif(index < 0)throw new IllegalArgumentException(\"Index cannot be negative.\");\n\nPart result = null;\n\nif(function == null  || function.equals(ARM))\n{\nif(arm1 != null)\n{\nif(index-- == 0)result = arm1;\n}\nif(arm2 != null)\n{\nif(index-- == 0)result = arm2;\n}\n}\nif(function == null||function.equals(LEG))\n{\nif(leg1 != null)\n{\nif(index-- == 0)result = leg1;\n}\n\nif(leg2 != null)\n{\nif(index-- == 0)result = leg2;\n}\n}\nif(function == null || function.equals(\"head\"))\n{\nif(index-- == 0) result = otherPart;\n}\n\nreturn result;\n}",
+    "method_name": "getPart",
+    "parameters": "String function, int index",
+    "return_type": "Part",
+    "return_variable": "result",
+    "called_methods": [
+      "IllegalArgumentException",
+      "equals"
+    ],
+    "local_variables": [
+      "result",
+      "result"
+    ],
+    "thrown_exceptions": [
+      "IllegalArgumentException"
+    ]
+  },
+  {
+    "javadoc": "/*** Create a part with the given serial number\n* @param serial serial number, must not be null\n*/",
+    "code": "public Part(String serial)\n{\n//initialize the part after checking for errors.\nif(serial == null) throw new NullPointerException(\"null is not a serial number\");\nthis.serial = serial;\n}",
+    "method_name": "Part",
+    "parameters": "String serial",
+    "return_type": "public",
+    "return_variable": "",
+    "called_methods": [
+      "NullPointerException"
+    ],
+    "local_variables": [],
+    "thrown_exceptions": [
+      "NullPointerException"
+    ]
+  },
+  {
     "javadoc": "/*** Instantiates a new unit vector with specified angle.\n*\n* @param theta the angle to construct, in radians\n*/",
     "code": "public Vector(double theta){\nthis.deltax = Math.cos(theta);\nthis.deltay = Math.sin(theta);\n}",
     "method_name": "Vector",
@@ -1245,6 +1386,141 @@
       "cos",
       "sin"
     ],
+    "local_variables": [],
+    "thrown_exceptions": []
+  },
+  {
+    "javadoc": "/*** Create a part with a random serial number.\n*/",
+    "code": "public Part()\n{\n// call the other constructor with \"this(...)\"\n// filling in the \"...\" with a random string which\n// can indeed be a series of digits.\n// Our solution uses \"new Random().nextInt()\" as part of this.\nthis(\"RSN\" + new Random().nextInt());\n}",
+    "method_name": "Part",
+    "parameters": "",
+    "return_type": "public",
+    "return_variable": "",
+    "called_methods": [
+      "Random",
+      "nextInt"
+    ],
+    "local_variables": [],
+    "thrown_exceptions": []
+  },
+  {
+    "javadoc": "/*** Indicates whether some other object is \"equal to\" this one.\n* @param x the reference object with which to compare.\n* @return true if this object is the same as the obj argument; false otherwise.\n*/",
+    "code": "@Override//implementation\npublic boolean equals(Object x)\n{\nif(!(x instanceof Part)) return false;\nPart p = (Part)x;\nreturn serial.equals(p.serial);\n}",
+    "method_name": "equals",
+    "parameters": "Object x",
+    "return_type": "boolean",
+    "return_variable": "false",
+    "called_methods": [],
+    "local_variables": [
+      "false",
+      "p"
+    ],
+    "thrown_exceptions": []
+  },
+  {
+    "javadoc": "/*** @return a hash code value for the object.\n*/",
+    "code": "@Override//implementation\npublic int hashCode()\n{\nreturn serial.hashCode();\n}",
+    "method_name": "hashCode",
+    "parameters": "",
+    "return_type": "int",
+    "return_variable": "serial.hashCode()",
+    "called_methods": [],
+    "local_variables": [],
+    "thrown_exceptions": []
+  },
+  {
+    "javadoc": "/*** @return a string representation of the object.\n*/",
+    "code": "@Override // implementation\npublic String toString()\n{\nreturn \"Part(\" + serial + \")\";\n}",
+    "method_name": "toString",
+    "parameters": "",
+    "return_type": "String",
+    "return_variable": "\"Part(\" + serial + \")\"",
+    "called_methods": [
+      "Part"
+    ],
+    "local_variables": [],
+    "thrown_exceptions": []
+  },
+  {
+    "javadoc": "/*** @return the serial number of this part\n*/",
+    "code": "public String getSerial()\n{\nreturn serial;\n}",
+    "method_name": "getSerial",
+    "parameters": "",
+    "return_type": "String",
+    "return_variable": "serial",
+    "called_methods": [],
+    "local_variables": [
+      "serial"
+    ],
+    "thrown_exceptions": []
+  },
+  {
+    "javadoc": "/*** Return once the data structure has been updated so that\n* the capacity of the arrays is at least the parameter.\n* If we create new arrays, they will be at least twice as long as the existing arrays.\n* This code assumes the arrays are the same length, and preserves this property.\n* @param cap capacity desired\n*/",
+    "code": "private void ensureCapacity(int cap)\n{\n// Follow activity but update to handle two arrays at once (same length)\nif(cap <= functions.length && cap <= parts.length) return;\nint newSize = functions.length*2;\nif(newSize < cap)cap = newSize;\nString[] newFunctions = new String[newSize];\nPart[] newParts = new Part[newSize];\nfor(int i=0; i < size; ++i)\n{\nnewFunctions[i] = functions[i];\nnewParts[i] = parts[i];\n}\nfunctions = newFunctions;\nparts = newParts;\n}",
+    "method_name": "ensureCapacity",
+    "parameters": "int cap",
+    "return_type": "void",
+    "return_variable": "",
+    "called_methods": [
+      "once"
+    ],
+    "local_variables": [
+      "newSize",
+      "newFunctions",
+      "newParts",
+      "i"
+    ],
+    "thrown_exceptions": []
+  },
+  {
+    "javadoc": "/*** Create an empty part sequence.\n*/",
+    "code": "public DynamicArrayPartSeq() {\nthis(INITIAL_CAPACITY); // call specifying constructor to do the work\n// no assertion required because other constructor asserts it\n}",
+    "method_name": "DynamicArrayPartSeq",
+    "parameters": "",
+    "return_type": "public",
+    "return_variable": "",
+    "called_methods": [],
+    "local_variables": [],
+    "thrown_exceptions": []
+  },
+  {
+    "javadoc": "/*** Create a dynamic array part sequence with the given capacity\n* (how many parts that can be added without requiring allocation of a new array).\n* @param cap number of elements to prepare for, cannot be negative\n*/",
+    "code": "public DynamicArrayPartSeq(int cap) {\n// TODO\nfunctions = new String[cap];\nparts = new Part[cap];\n\nassert wellFormed() : \"invariant broken by constructor\";\n}",
+    "method_name": "DynamicArrayPartSeq",
+    "parameters": "int cap",
+    "return_type": "public",
+    "return_variable": "",
+    "called_methods": [
+      "wellFormed"
+    ],
+    "local_variables": [
+      "functions"
+    ],
+    "thrown_exceptions": []
+  },
+  {
+    "javadoc": "/*** Return the number of elements in the sequence.\n* @return number of elements in sequence\n*/",
+    "code": "public int size() {\nassert wellFormed() : \"invariant broken in size\";\nreturn size;\n}",
+    "method_name": "size",
+    "parameters": "",
+    "return_type": "int",
+    "return_variable": "size",
+    "called_methods": [
+      "wellFormed"
+    ],
+    "local_variables": [
+      "size"
+    ],
+    "thrown_exceptions": []
+  },
+  {
+    "javadoc": "/*** Start running through all parts.\n*/",
+    "code": "public void start() {\n// not asserting invariant before this will be done by the other start\nstart(null);\n}",
+    "method_name": "start",
+    "parameters": "",
+    "return_type": "void",
+    "return_variable": "",
+    "called_methods": [],
     "local_variables": [],
     "thrown_exceptions": []
   },
@@ -1263,6 +1539,169 @@
     "thrown_exceptions": []
   },
   {
+    "javadoc": "/*** Start running through all parts with the given function.\n* @param function kind of parts to access, may be null (any part)\n*/",
+    "code": "public void start(String function)\n{\n// TODO: don't forget to assert the invariant twice: before and after\nassert wellFormed():\"invariant broken in start.\";\nif(function == null)\n{\nthis.function =null;\ncurrentIndex=0;\nreturn;\n}\nthis.function = function;\ncurrentIndex = -1;\nmoveForStart();\nassert wellFormed():\"invariant broken in start\";\n}",
+    "method_name": "start",
+    "parameters": "String function",
+    "return_type": "void",
+    "return_variable": "",
+    "called_methods": [
+      "wellFormed",
+      "moveForStart"
+    ],
+    "local_variables": [],
+    "thrown_exceptions": []
+  },
+  {
+    "javadoc": "/*** Return whether there is a current element.\n* @return whether there is a current element\n*/",
+    "code": "public boolean isCurrent()\n{\nassert wellFormed():\"invariant broken in isCurrent\";\nreturn currentIndex < size;\n}",
+    "method_name": "isCurrent",
+    "parameters": "",
+    "return_type": "boolean",
+    "return_variable": "currentIndex < size",
+    "called_methods": [
+      "wellFormed"
+    ],
+    "local_variables": [],
+    "thrown_exceptions": []
+  },
+  {
+    "javadoc": "/*** Return the current element.\n* This method can only be called if there is a current element.\n* @return the part which is current\n* @throws IllegalStateException if there is no current element\n*/",
+    "code": "public Part getCurrent() {\nassert wellFormed():\"invariant broken in getCurrent.\";\nif(parts[currentIndex] == null)throw new IllegalStateException(\"There is no current element in getCurrent.\");\nreturn parts[currentIndex];\n}",
+    "method_name": "getCurrent",
+    "parameters": "",
+    "return_type": "Part",
+    "return_variable": "parts[currentIndex]",
+    "called_methods": [
+      "wellFormed",
+      "IllegalStateException"
+    ],
+    "local_variables": [],
+    "thrown_exceptions": [
+      "IllegalStateException"
+    ]
+  },
+  {
+    "javadoc": "/*** Move the cursor to the next part with the current function.\n* If there is no such part, then after this call, there is no current element.\n* @throws IllegalStateException\n*/",
+    "code": "public void advance() {\nassert wellFormed() : \"invariant broken in advance\";\n// TODO (our solution uses the helper method)\nif(currentIndex > size-1)throw new IllegalStateException(\"Current index is greater than the size.\");\nif(function==null)\n{\ncurrentIndex++;\nassert wellFormed():\"invariant broken by advance.\";\nreturn;\n}\nfor(int i =currentIndex+1;i < size;i++) {\nif(function.equals(functions[i])){\ncurrentIndex=i;\nassert wellFormed():\"invariant broken by advance.\";\nreturn;\n}\n}\ncurrentIndex=size;\nassert wellFormed() : \"invariant broken by advance\";\n}",
+    "method_name": "advance",
+    "parameters": "",
+    "return_type": "void",
+    "return_variable": "",
+    "called_methods": [
+      "wellFormed",
+      "TODO",
+      "IllegalStateException",
+      "equals"
+    ],
+    "local_variables": [
+      "i"
+    ],
+    "thrown_exceptions": [
+      "IllegalStateException"
+    ]
+  },
+  {
+    "javadoc": "/*** Remove the current element.  Then the next part (of the function)\n* is made current, or there is no current if there are not more parts\n* (of the function).\n* @throws IllegalStateException if there is no current element\n*/",
+    "code": "public void removeCurrent() {\n// TODO: lots to do\nassert wellFormed(): \"invariant broken in removeCurrent\";\nif(functions[currentIndex] == null || parts[currentIndex]== null)\n{\nthrow new IllegalStateException(\"There is no current element.\");\n}\n\nfunctions[currentIndex]=null;\nparts[currentIndex]=null;\nsize--;\n\nif(currentIndex+1 < functions.length && functions[currentIndex+1]!=null) shiftLeft(currentIndex);\n\nif(size==0)\n{\nassert wellFormed():\"invariant broken by removeCurrent\";\nreturn;\n}\nelse if(function != null)\n{\nwhile(currentIndex<size)\n{\nif(function.equals(functions[currentIndex]))\n{\nbreak;\n}\ncurrentIndex++;\n}\n}\n\nassert wellFormed():\"invariant broken by removeCurrent\";\n}",
+    "method_name": "removeCurrent",
+    "parameters": "",
+    "return_type": "void",
+    "return_variable": "",
+    "called_methods": [
+      "wellFormed",
+      "IllegalStateException",
+      "shiftLeft",
+      "equals"
+    ],
+    "local_variables": [],
+    "thrown_exceptions": [
+      "IllegalStateException"
+    ]
+  },
+  {
+    "javadoc": "/*** Add a part before the current element.  If there is no current element,\n* then add at the beginning.  There must have been a function\n* defined (See [@link #start(String)}).\n* @throws IllegalStateException if no function defined, or if the function was null\n* @param p part to add at this spot, must not be null.\n*/",
+    "code": "public void addBefore(Part p) {\nassert wellFormed() : \"invariant broken in addBefore\";\n// TODO\nif(p==null)throw new NullPointerException(\"Null data cannot be added to the array.\");\nif(function == null)throw new IllegalStateException(\"function cannot be null or undefined in addBefore.\");\nensureCapacity(size*2);\nif(functions[currentIndex]==null)\n{\nshiftRight(0);\nfunctions[0] = function;\nparts[0] = p;\ncurrentIndex=0;\n}\nelse\n{\nshiftRight(currentIndex);\nfunctions[currentIndex] = function;\nparts[currentIndex] = p;\n}\nsize++;\nensureCapacity(size*2);\nassert wellFormed() : \"invariant broken by addBefore\";\n}",
+    "method_name": "addBefore",
+    "parameters": "Part p",
+    "return_type": "void",
+    "return_variable": "",
+    "called_methods": [
+      "wellFormed",
+      "NullPointerException",
+      "IllegalStateException",
+      "ensureCapacity",
+      "shiftRight"
+    ],
+    "local_variables": [],
+    "thrown_exceptions": [
+      "NullPointerException",
+      "IllegalStateException"
+    ]
+  },
+  {
+    "javadoc": "/*** Add a part after the current element.  If there is no current element,\n* then add at the end.  There must have been a function\n* defined (See [@link #start(String)}).\n* @throws IllegalStateException if no function defined, or if the function was null\n* @param p part to add at this spot, must not be null.\n*/",
+    "code": "public void addAfter(Part p) {\n// TODO: (remember the invariant!)\nassert wellFormed():\"invariant broken in addAfter\";\nif(p==null) throw new NullPointerException(\"Cannot add null data to the array.\");\nensureCapacity(size*2);\nif(function == null)throw new IllegalStateException(\"function cannot be null or undefined in addBefore.\");\nif(size==0)\n{\ndoAdd(0,p);\nassert wellFormed():\"invariant broken by addAfter\";\nreturn;\n} else if(currentIndex==size) {\ndoAdd(size, p);\nassert wellFormed():\"invariant broken by addAfter\";\nreturn;\n}\n\nshiftRight(currentIndex);\ndoAdd(currentIndex+1,p);\ncurrentIndex++;\nassert wellFormed():\"invariant broken by addAfter\";\n}",
+    "method_name": "addAfter",
+    "parameters": "Part p",
+    "return_type": "void",
+    "return_variable": "",
+    "called_methods": [
+      "wellFormed",
+      "NullPointerException",
+      "ensureCapacity",
+      "IllegalStateException",
+      "doAdd",
+      "shiftRight"
+    ],
+    "local_variables": [],
+    "thrown_exceptions": [
+      "NullPointerException",
+      "IllegalStateException"
+    ]
+  },
+  {
+    "javadoc": "/*** Return the function of this part.\n* @return string of this part, null if this part not in a robot\n*/",
+    "code": "public String getFunction() {\nreturn function;\n}",
+    "method_name": "getFunction",
+    "parameters": "",
+    "return_type": "String",
+    "return_variable": "function",
+    "called_methods": [],
+    "local_variables": [
+      "function"
+    ],
+    "thrown_exceptions": []
+  },
+  {
+    "javadoc": "/*** Return the next part in this robot.\n* This is valid only if the part is in a robot.\n* @return the next part, possibly null\n* @exception IllegalStateException if this part is not a part of a robot\n*/",
+    "code": "public FunctionalPart getNext() {\nif (function == null) throw new IllegalStateException(\"not part of a robot\");\nreturn next;\n}",
+    "method_name": "getNext",
+    "parameters": "",
+    "return_type": "FunctionalPart",
+    "return_variable": "next",
+    "called_methods": [
+      "IllegalStateException"
+    ],
+    "local_variables": [
+      "next"
+    ],
+    "thrown_exceptions": [
+      "IllegalStateException"
+    ]
+  },
+  {
+    "javadoc": "/*** Create a wired robot without parts\n* and no order.\n*/",
+    "code": "public WiredRobot()\n{\nthis(null);\n}",
+    "method_name": "WiredRobot",
+    "parameters": "",
+    "return_type": "public",
+    "return_variable": "",
+    "called_methods": [],
+    "local_variables": [],
+    "thrown_exceptions": []
+  },
+  {
     "javadoc": "/*** Getter for deltax field.\n*\n* @return the current deltax value\n*/",
     "code": "public double dx(){\nreturn this.deltax;\n}",
     "method_name": "dx",
@@ -1271,6 +1710,154 @@
     "return_variable": "this.deltax",
     "called_methods": [],
     "local_variables": [],
+    "thrown_exceptions": []
+  },
+  {
+    "javadoc": "/*** Create a wired robot without parts\n* with the given order\n* @param comp order to use, if null, then unordered\n*/",
+    "code": "public WiredRobot(Comparator<FunctionalPart> comp) {\nif(comp == null)\n{\ncomp = (p1,p2) -> 0;\n}\nthis.comparator = comp;\ndummy = new FunctionalPart();\nassert wellFormed() : \"Invariant not established by constructor\";\n}",
+    "method_name": "WiredRobot",
+    "parameters": "Comparator<FunctionalPart> comp",
+    "return_type": "public",
+    "return_variable": "",
+    "called_methods": [
+      "FunctionalPart",
+      "wellFormed"
+    ],
+    "local_variables": [],
+    "thrown_exceptions": []
+  },
+  {
+    "javadoc": "/*** Return the function of this part.\n* @return string of this part, null if this part not in a robot\n*/",
+    "code": "public String getFunction() {\nreturn function;\n}",
+    "method_name": "getFunction",
+    "parameters": "",
+    "return_type": "String",
+    "return_variable": "function",
+    "called_methods": [],
+    "local_variables": [
+      "function"
+    ],
+    "thrown_exceptions": []
+  },
+  {
+    "javadoc": "/*** Return the next part in this robot.\n* This is valid only if the part is in a robot.\n* @return the next part, possibly null\n* @exception IllegalStateException if this part is not a part of a robot\n*/",
+    "code": "public FunctionalPart getNext() {\nthrow new UnsupportedOperationException(\"not implemented\");\n}",
+    "method_name": "getNext",
+    "parameters": "",
+    "return_type": "FunctionalPart",
+    "return_variable": "",
+    "called_methods": [
+      "UnsupportedOperationException"
+    ],
+    "local_variables": [],
+    "thrown_exceptions": [
+      "UnsupportedOperationException"
+    ]
+  },
+  {
+    "javadoc": "/*** Compare two parts according to our purposes.\n* We use the supplied comparator except when it\n* says it doesn't care, in which case, we use the (unique) id to\n* distinguish two parts, older first.\n* @param p1 first part, must not be null\n* @param p2 second part, must not be null\n* @return comparison, only 0 if p1 and p2 are the same\n*/",
+    "code": "private int compare(FunctionalPart p1, FunctionalPart p2) //Received assistance from Alex K in tutoring center\n{\nif(comparator == null || comparator.compare(p1, p2) == 0)\n{\nif(p1.getId() < p2.getId())\n{\nreturn -1;\n}\nelse if(p1.getId() == p2.getId())\n{\nreturn 0;\n}\nelse if(p1.getId() > p2.getId())\n{\nreturn 1;\n}\n}\nreturn comparator.compare(p1, p2);\n}",
+    "method_name": "compare",
+    "parameters": "FunctionalPart p1, FunctionalPart p2",
+    "return_type": "int",
+    "return_variable": "-1",
+    "called_methods": [
+      "getId"
+    ],
+    "local_variables": [],
+    "thrown_exceptions": []
+  },
+  {
+    "javadoc": "/*** Check a tree of parts within bounds.\n* The subtree must be properly ordered, and every part\n* must have a non-null function assigned.\n* @param r root of subtree to check, may be null\n* @param lo lower bound (exclusive) of all parts in subtree.\n*   If null, then no lower bound\n* @param hi upper bound (exclusive) of all parts in subtree.\n*   If null, then no upper bound\n* @return whether the subtree checks out OK.\n* If false is returned, then exactly one report has been generated.\n*/",
+    "code": "private boolean checkInRange(FunctionalPart r, FunctionalPart lo, FunctionalPart hi) //Received assistance from Alex Dueppen in tutoring center\n{",
+    "method_name": "checkInRange",
+    "parameters": "FunctionalPart r, FunctionalPart lo, FunctionalPart hi",
+    "return_type": "boolean",
+    "return_variable": "",
+    "called_methods": [],
+    "local_variables": [],
+    "thrown_exceptions": []
+  },
+  {
+    "javadoc": "/***************************\n* We need a base case\n* Then do some work\n* We need a recursive call\n* Only work with r\n***************************/",
+    "code": "//if r is null there is nothing to check\nif(r == null)return true;\nif(!checkInRange(r.left,lo,r)) return false;\nif(!checkInRange(r.right,r,hi))return false;\n\n//1.Checking if function is null\nif(r.function == null)return report(\"roots function cannot be null if the part is not null.\");\n\n//2.\n//Checking if lo < r < hi\nif(lo != null && compare(r,lo) <= 0)return report(\"lo is greater than root\");\nif(hi != null && compare(r,hi) >= 0)return report(\"hi is less than the root\");\n\nreturn true;\n}",
+    "method_name": "if",
+    "parameters": "r == null",
+    "return_type": "check",
+    "return_variable": "true",
+    "called_methods": [
+      "checkInRange",
+      "report",
+      "compare"
+    ],
+    "local_variables": [
+      "true",
+      "false",
+      "false",
+      "true"
+    ],
+    "thrown_exceptions": []
+  },
+  {
+    "javadoc": "/*** Create a wired robot without parts\n* and no order.\n*/",
+    "code": "public WiredRobot() {\nthis(null);\n}",
+    "method_name": "WiredRobot",
+    "parameters": "",
+    "return_type": "public",
+    "return_variable": "",
+    "called_methods": [],
+    "local_variables": [],
+    "thrown_exceptions": []
+  },
+  {
+    "javadoc": "/*** Create a wired robot without parts\n* with the given order\n* @param comp order to use, if null, then unordered\n*/",
+    "code": "public WiredRobot(Comparator<FunctionalPart> comp) {\n\nif(comp == null)\n{\ncomp = (p1,p2) -> 0;\n}\ncomparator = comp;\nroot = null;\nassert wellFormed() : \"Invariant not established by constructor\";\n}",
+    "method_name": "WiredRobot",
+    "parameters": "Comparator<FunctionalPart> comp",
+    "return_type": "public",
+    "return_variable": "",
+    "called_methods": [
+      "wellFormed"
+    ],
+    "local_variables": [],
+    "thrown_exceptions": []
+  },
+  {
+    "javadoc": "/*** Return the 0-based index part from the subtree given that\n* matches the given function.  The mutable index should be decremented\n* for every part we find that matches, so that if we find a match\n* when it is zero we return that one.  Once we find the result, we stop\n* looking (and stop decrementing).  If there is no such functional part,\n* this method returns null.\n* @param r subtree to examine, may be null\n* @param function kind of part to look for, null means any part\n* @param mutableIndex index to look for (0-based); decremented whenever a matching\n*   part is encountered in in-order traversal until the desired index.\n* @return 0-based matching part, may be null\n*/",
+    "code": "private static FunctionalPart getHelper(FunctionalPart r, String function, Cell<Integer> mutableIndex)\n{\nif(r == null)\n{\nreturn null;\n}\n\n//r.left first, r second, r.right third\n//First go into the left subtree to find the function.  Delegate, don't micromanage\nFunctionalPart tempLeft = getHelper(r.left, function, mutableIndex);\nif(tempLeft !=null) return tempLeft;\n\nif(function == null || r.function.equals(function))\n{\nif(mutableIndex.get() == 0)return r;\nmutableIndex.set(mutableIndex.get()-1);\n}\n\nFunctionalPart tempRight = getHelper(r.right, function,mutableIndex);\nif(tempRight != null)return tempRight;\n\nreturn null;\n// Use recursion.  Do not micro-manage!\n// Never check a child for null or look at its function.\n}",
+    "method_name": "getHelper",
+    "parameters": "FunctionalPart r, String function, Cell<Integer> mutableIndex",
+    "return_type": "FunctionalPart",
+    "return_variable": "null",
+    "called_methods": [
+      "equals",
+      "get",
+      "set"
+    ],
+    "local_variables": [
+      "null",
+      "tempLeft",
+      "tempLeft",
+      "r",
+      "tempRight",
+      "tempRight",
+      "null"
+    ],
+    "thrown_exceptions": []
+  },
+  {
+    "javadoc": "/*** Helper method for addPart.\n* @param r\n* @param add\n* @return r\n*/",
+    "code": "private FunctionalPart insert(FunctionalPart r, FunctionalPart add)\n{\n\nif(r==null)\n{\nr=add;\n}\nelse if(compare(add,r) < 0)\n{\nr.left = insert(r.left,add);\n}\nelse//if(compare(add,r) > 0)\n{\nr.right = insert(r.right,add);\n}\nreturn r;\n}",
+    "method_name": "insert",
+    "parameters": "FunctionalPart r, FunctionalPart add",
+    "return_type": "FunctionalPart",
+    "return_variable": "r",
+    "called_methods": [
+      "compare"
+    ],
+    "local_variables": [
+      "r"
+    ],
     "thrown_exceptions": []
   },
   {
@@ -1298,6 +1885,159 @@
     "thrown_exceptions": []
   },
   {
+    "javadoc": "/*** Return the first part in this robot.\n* @return the first part, null if this robot is empty\n*/",
+    "code": "public FunctionalPart getFirst()\n{\nassert wellFormed():\"invariant broken in getFirst\";\nif(root == null)\n{\nreturn null;\n}\nFunctionalPart getter = root;\nwhile(getter.left != null)\n{\ngetter = getter.left;\n}\nassert wellFormed():\"invariant broken in getFirst\";\nreturn getHelper(getter,null, new Cell<>(0));\n}",
+    "method_name": "getFirst",
+    "parameters": "",
+    "return_type": "FunctionalPart",
+    "return_variable": "null",
+    "called_methods": [
+      "wellFormed",
+      "getHelper"
+    ],
+    "local_variables": [
+      "null",
+      "getter"
+    ],
+    "thrown_exceptions": []
+  },
+  {
+    "javadoc": "/*** Change the comparator used to order the robot parts.\n* The parts will be reorganized as necessary to accommodate the new order,\n* but two parts will be reordered only if necessary.\n* (The sorting is \"stable\".)\n* @param comp comparator to use, if null, then henceforth the parts\n* can be in any order.\n*/",
+    "code": "public void setComparator(Comparator<FunctionalPart> comp) {\nassert wellFormed() : \"invariant broken in setComparator\";\n//: Complete this!\n// Hint: After handling special easy case,\n//   reinsert all parts back into an emptied tree\n//      in pre-order over the tree.\n//      This requires a new helper method.\n\ncomparator = comp;\nif(root == null)return;\nFunctionalPart savedRoot = root;\nroot = null;\ncompHelper(savedRoot);\n\nassert wellFormed() : \"invariant broken by setComparator\";\n}",
+    "method_name": "setComparator",
+    "parameters": "Comparator<FunctionalPart> comp",
+    "return_type": "void",
+    "return_variable": "",
+    "called_methods": [
+      "wellFormed",
+      "compHelper"
+    ],
+    "local_variables": [
+      "savedRoot"
+    ],
+    "thrown_exceptions": []
+  },
+  {
+    "javadoc": "/**Change the stored value to the given value.\n* @param newValue new value for cell, may be null\n*/",
+    "code": "public void set(T newValue) {\nvalue = newValue;\n}",
+    "method_name": "set",
+    "parameters": "T newValue",
+    "return_type": "void",
+    "return_variable": "",
+    "called_methods": [],
+    "local_variables": [],
+    "thrown_exceptions": []
+  },
+  {
+    "javadoc": "/*** Return the function of this part.\n* @return string of this part, null if this part not in a robot\n*/",
+    "code": "public String getFunction() {\nreturn function;\n}",
+    "method_name": "getFunction",
+    "parameters": "",
+    "return_type": "String",
+    "return_variable": "function",
+    "called_methods": [],
+    "local_variables": [
+      "function"
+    ],
+    "thrown_exceptions": []
+  },
+  {
+    "javadoc": "/*** Return the next part in this robot.\n* This is valid only if the part is in a robot.\n* @return the next part, possibly null\n* @exception IllegalStateException if this part is not a part of a robot\n*/",
+    "code": "public FunctionalPart getNext() {\n\nif(this.getFunction() == null)throw new IllegalStateException(\"Part is not in the robot\");\nFunctionalPart cur = this;\n\nif(cur.right != null)\n{\nif(cur.right.left != null)\n{\ncur = cur.right.left;\nwhile(cur.left !=null)\n{\ncur = cur.left;\n}\n\nreturn cur;\n}\ncur = cur.right;\nreturn cur;\n}\n\nelse{\nif(cur.parent == null)return null;\nif(cur.parent.left == cur)\n{\ncur = cur.parent;\n}\nelse\n{\nif(cur.parent == null)return null;\nwhile(cur.parent.left != cur)\n{\ncur = cur.parent;\nif(cur.parent == null)return null;\n}\ncur = cur.parent;\n}\n\nreturn cur;\n}\n}",
+    "method_name": "getNext",
+    "parameters": "",
+    "return_type": "FunctionalPart",
+    "return_variable": "cur",
+    "called_methods": [
+      "getFunction",
+      "IllegalStateException"
+    ],
+    "local_variables": [
+      "cur",
+      "cur",
+      "cur",
+      "null",
+      "null",
+      "null",
+      "cur"
+    ],
+    "thrown_exceptions": [
+      "IllegalStateException"
+    ]
+  },
+  {
+    "javadoc": "/*** Compare two parts according to our purposes.\n* We use the supplied comparator except when it\n* says it doesn't care, in which case, we use the (unique) id to\n* distinguish two parts, older first.\n* @param p1 first part, must not be null\n* @param p2 second part, must not be null\n* @return comparison, only 0 if p1 and p2 are the same\n*/",
+    "code": "private int compare(FunctionalPart p1, FunctionalPart p2) {\nif (comparator != null) {\nint c= comparator.compare(p1, p2);\nif (c != 0) return c;\n}\nreturn p1.getId() - p2.getId();\n}",
+    "method_name": "compare",
+    "parameters": "FunctionalPart p1, FunctionalPart p2",
+    "return_type": "int",
+    "return_variable": "c",
+    "called_methods": [
+      "getId"
+    ],
+    "local_variables": [
+      "c",
+      "c"
+    ],
+    "thrown_exceptions": []
+  },
+  {
+    "javadoc": "/*** Check a tree of parts within bounds.\n* The subtree must be properly ordered, and every part\n* must have a non-null function assigned.\n* @param r root of subtree to check, may be null\n* @param lo lower bound (exclusive) of all parts in subtree.\n*   If null, then no lower bound\n* @param hi upper bound (exclusive) of all parts in subtree.\n*   If null, then no upper bound\n* @param p the parent part\n* @return whether the subtree checks out OK.\n* If false is returned, then exactly one report has been generated.\n*/",
+    "code": "private boolean checkInRange(FunctionalPart r, FunctionalPart lo, FunctionalPart hi, FunctionalPart p) {\nif (r == null) return true;\nif (r.function == null) return report(\"Has null function: \" + r);\nif (lo != null && compare(lo, r) >= 0) return report(\"Out of lo bound: \" + r + \" <= \" + lo);\nif (hi != null && compare(r,hi) >= 0) return report(\"Out of hi bound: \" + r + \" >= \" + hi);\n\n//Checking if the roots parent is equal to the parent parameter\nif(r.parent != p)return report(\"Out of root bound\");\n\n//r goes into the p param because when you move down the tree the root variable becomes the parent\nreturn checkInRange(r.left, lo, r,r) && checkInRange(r.right, r, hi,r);\n}",
+    "method_name": "checkInRange",
+    "parameters": "FunctionalPart r, FunctionalPart lo, FunctionalPart hi, FunctionalPart p",
+    "return_type": "boolean",
+    "return_variable": "true",
+    "called_methods": [
+      "report",
+      "compare"
+    ],
+    "local_variables": [
+      "true"
+    ],
+    "thrown_exceptions": []
+  },
+  {
+    "javadoc": "/*** Create a wired robot without parts\n* and no order.\n*/",
+    "code": "public WiredRobot() {\nthis(null);\n}",
+    "method_name": "WiredRobot",
+    "parameters": "",
+    "return_type": "public",
+    "return_variable": "",
+    "called_methods": [],
+    "local_variables": [],
+    "thrown_exceptions": []
+  },
+  {
+    "javadoc": "/*** Create a wired robot without parts\n* with the given order\n* @param comp order to use, if null, then unordered\n*/",
+    "code": "public WiredRobot(Comparator<FunctionalPart> comp) {\ncomparator = comp;\nassert wellFormed() : \"Invariant not established by constructor\";\n}",
+    "method_name": "WiredRobot",
+    "parameters": "Comparator<FunctionalPart> comp",
+    "return_type": "public",
+    "return_variable": "",
+    "called_methods": [
+      "wellFormed"
+    ],
+    "local_variables": [],
+    "thrown_exceptions": []
+  },
+  {
+    "javadoc": "/*** Return the first part in this robot.\n* @return the first part, null if this robot is empty\n*/",
+    "code": "public FunctionalPart getFirst() {\nassert wellFormed() : \"invariant broken in getFirst\";\nFunctionalPart r = root;\nwhile (r != null && r.left != null) {\nr = r.left;\n}\nreturn r;\n}",
+    "method_name": "getFirst",
+    "parameters": "",
+    "return_type": "FunctionalPart",
+    "return_variable": "r",
+    "called_methods": [
+      "wellFormed"
+    ],
+    "local_variables": [
+      "r",
+      "r"
+    ],
+    "thrown_exceptions": []
+  },
+  {
     "javadoc": "/*** Translates the parameter point by this vector.\n*\n* @param p the point to translate\n* @return the  translated point\n*/",
     "code": "public Point move(Point p){\nreturn new Point(p.x() + this.dx(), p.y() + this.dy());\n}",
     "method_name": "move",
@@ -1315,6 +2055,185 @@
     "thrown_exceptions": []
   },
   {
+    "javadoc": "/*** Return the 0-based index part from the subtree given that\n* matches the given function.  The mutable inex should be decremented\n* for every part we find that matches, so that if we find a match\n* when it is zero we return that one.  Once we find the result, we stop\n* looking (and stop decrementing).  If there is no such functional part,\n* this method returns null.\n* @param r subtree to examine, may be null\n* @param function kind of part to look for, null means any part\n* @param mutableIndex index to look for (0-based); decremented whenever a matching\n*   part is encountered in in-order traversal until the desired index.\n* @return 0-based matching part, may be null\n*/",
+    "code": "private static FunctionalPart getHelper(FunctionalPart r, String function, Cell<Integer> mutableIndex) {\nif (r == null) return r;\nFunctionalPart result = getHelper(r.left, function, mutableIndex);\nif (result != null) return result;\nif (function == null ||function.equals(r.function)) {\nint index = mutableIndex.get();\nif (index == 0) return r;\nmutableIndex.set(index-1);\n}\nreturn getHelper(r.right, function, mutableIndex);\n}",
+    "method_name": "getHelper",
+    "parameters": "FunctionalPart r, String function, Cell<Integer> mutableIndex",
+    "return_type": "FunctionalPart",
+    "return_variable": "r",
+    "called_methods": [
+      "equals",
+      "get",
+      "set"
+    ],
+    "local_variables": [
+      "r",
+      "result",
+      "result",
+      "index",
+      "r"
+    ],
+    "thrown_exceptions": []
+  },
+  {
+    "javadoc": "/***\tA method that removes a part with the assistance of a removal helper method\n* @param p\n* @return ture if part is removed\n* @return false if part is not removed\n*/",
+    "code": "public boolean remove(Part p)\n{\nif(root == null)return false;\n\nassert wellFormed():\"invariant broken at the start of remove\";\n\n//check if the part is even in the robot\nFunctionalPart traverse = getFirst();\nif(traverse.getNext()!=null && !traverse.equals((FunctionalPart)p))\n{\ntraverse = traverse.getNext();\nwhile(traverse !=null)\n{\nif(traverse.equals((FunctionalPart)p))break;\ntraverse = traverse.getNext();\n}\n}\nif(traverse != (FunctionalPart)p || traverse == null)return false;\n\nFunctionalPart saveRoot = root;\nFunctionalPart holdP = (FunctionalPart) p;\nif(holdP.getFunction() ==null)return false;\n\np = doRemove(root,(FunctionalPart) p);\nassert wellFormed():\"invariant broken at the end of remove\";\n\n//check the root\n//check the parent\n//if niether is different return false\nif(saveRoot != null && !saveRoot.equals(root)){\nreturn true;\n}\nelse if(p != null && p.equals(holdP))\n{\nreturn false;\n}\nelse return false;\n}",
+    "method_name": "remove",
+    "parameters": "Part p",
+    "return_type": "boolean",
+    "return_variable": "false",
+    "called_methods": [
+      "wellFormed",
+      "getFirst",
+      "getNext",
+      "equals",
+      "getFunction",
+      "doRemove"
+    ],
+    "local_variables": [
+      "false",
+      "traverse",
+      "false",
+      "saveRoot",
+      "holdP",
+      "false",
+      "true",
+      "false",
+      "false"
+    ],
+    "thrown_exceptions": []
+  },
+  {
+    "javadoc": "/*** Change the comparator used to order the robot parts.\n* The parts will be reorganized as necessary to accommodate the new order,\n* but two parts will be reordered only if necessary.\n* (The sorting is \"stable\".)\n* @param comp comparator to use, if null, then henceforth the parts\n* can be in any order.\n*/",
+    "code": "public void setComparator(Comparator<FunctionalPart> comp) {\nassert wellFormed() : \"invariant broken in setComparator\";\nif (comp != comparator) {\ncomparator = comp;\nFunctionalPart saved = root;\nroot = null;\nreInsertAll(saved);\n}\nassert wellFormed() : \"invariant broken by setComparator\";\n}",
+    "method_name": "setComparator",
+    "parameters": "Comparator<FunctionalPart> comp",
+    "return_type": "void",
+    "return_variable": "",
+    "called_methods": [
+      "wellFormed",
+      "reInsertAll"
+    ],
+    "local_variables": [
+      "saved"
+    ],
+    "thrown_exceptions": []
+  },
+  {
+    "javadoc": "/*** Return the number of nodes in this subtree.\n* If the subtree isn't null, we use the stored `count' field rather than\n* computing the count.\n* @param r subtree to count nodes for, must not be null\n* @return count of nodes in this subtree\n*/",
+    "code": "private static int getCount(Node<?> r) {\nif (r == null) return 0;\nreturn r.count;\n}",
+    "method_name": "getCount",
+    "parameters": "Node<?> r",
+    "return_type": "int",
+    "return_variable": "0",
+    "called_methods": [],
+    "local_variables": [],
+    "thrown_exceptions": []
+  },
+  {
+    "javadoc": "/*** Check that a subtree's count and parent fields are correct.\n* @param r subtree to check\n* @param p what the parent should be.\n* @return whether any problems ere found.  If false is returned than\n* exactly one problem has been reported.\n*/",
+    "code": "private boolean checkTree(Node<T> r, Node<T> p) {\nif (r == null) return true;\nif (r.parent != p) return report(\"parent is wrong for \" + r);\nif (r.count != getCount(r.left) + getCount(r.right) + 1) {\nreturn report(\"computed count \" + r.count + \" not consistent with subtrees\");\n}\nreturn checkTree(r.left, r) && checkTree(r.right, r);\n}",
+    "method_name": "checkTree",
+    "parameters": "Node<T> r, Node<T> p",
+    "return_type": "boolean",
+    "return_variable": "true",
+    "called_methods": [
+      "report",
+      "getCount"
+    ],
+    "local_variables": [
+      "true"
+    ],
+    "thrown_exceptions": []
+  },
+  {
+    "javadoc": "/*** Create a maze of the given size, in which everything is blocked.\n* @param rows number of rows, must be positive\n* @param columns number of columns, must be positive\n*/",
+    "code": "public Maze(int rows, int columns) {\nif (rows < 1 || columns < 1) throw new IllegalArgumentException(\"Maze must not be empty\");\nthis.rows = rows;\nthis.columns = columns;\nropen = new boolean[rows-1][columns];\ncopen = new boolean[rows][columns-1];\n}",
+    "method_name": "Maze",
+    "parameters": "int rows, int columns",
+    "return_type": "public",
+    "return_variable": "",
+    "called_methods": [
+      "IllegalArgumentException"
+    ],
+    "local_variables": [],
+    "thrown_exceptions": [
+      "IllegalArgumentException"
+    ]
+  },
+  {
+    "javadoc": "/*** Is this cell open to the left?\n* As a special case, the bottom left cell is open to the left\n* (this is the maze entry).\n* @param i row\n* @param j column\n* @return whether there is an opening to the left.\n* @exception IllegalArgumentException if coordinates out of range.\n*/",
+    "code": "public boolean isOpenLeft(int i, int j) {\ncheckCell(i,j);\nif(j==0 && rows()-1 == i)return true;//special case\n\nif(j==0) return false;\nelse if(copen[i][j-1])return true;\nelse return false;\n}",
+    "method_name": "isOpenLeft",
+    "parameters": "int i, int j",
+    "return_type": "boolean",
+    "return_variable": "true",
+    "called_methods": [
+      "checkCell",
+      "rows"
+    ],
+    "local_variables": [
+      "true",
+      "false",
+      "true",
+      "false"
+    ],
+    "thrown_exceptions": []
+  },
+  {
+    "javadoc": "/*** Is this cell open to the right?\n* @param i row\n* @param j column\n* @return whether there is an opening to the right.\n* @exception IllegalArgumentException if coordinates out of range.\n*/",
+    "code": "public boolean isOpenRight(int i, int j) {\n\ncheckCell(i,j);\n\nif(j>=copen[0].length)return false;\nelse if(copen[i][j])return true;\nelse return false;\n}",
+    "method_name": "isOpenRight",
+    "parameters": "int i, int j",
+    "return_type": "boolean",
+    "return_variable": "false",
+    "called_methods": [
+      "checkCell"
+    ],
+    "local_variables": [
+      "false",
+      "true",
+      "false"
+    ],
+    "thrown_exceptions": []
+  },
+  {
+    "javadoc": "/*** Is this cell open above?\n* As special case, the top right cell is open above\n* (this is the maze exit).\n* @param i row\n* @param j column\n* @return whether there is an opening going up\n* @exception IllegalArgumentException if coordinates out of range.\n*/",
+    "code": "public boolean isOpenUp(int i, int j) {\n\ncheckCell(i,j);\nif(i==0&&j==columns()-1)return true;\n\nif(i==0)return false;\nelse if(ropen[i-1][j])return true;\nelse return false;\n}",
+    "method_name": "isOpenUp",
+    "parameters": "int i, int j",
+    "return_type": "boolean",
+    "return_variable": "true",
+    "called_methods": [
+      "checkCell",
+      "columns"
+    ],
+    "local_variables": [
+      "true",
+      "false",
+      "true",
+      "false"
+    ],
+    "thrown_exceptions": []
+  },
+  {
+    "javadoc": "/*** Is this cell open below?\n* @param i row\n* @param j column\n* @return whether there is an opening down down\n* @exception IllegalArgumentException if coordinates out of range.\n*/",
+    "code": "public boolean isOpenDown(int i, int j) {\n\ncheckCell(i,j);\nif(i>=ropen.length)return false;\nelse if(ropen[i][j])return true;\nelse return false;\n}",
+    "method_name": "isOpenDown",
+    "parameters": "int i, int j",
+    "return_type": "boolean",
+    "return_variable": "false",
+    "called_methods": [
+      "checkCell"
+    ],
+    "local_variables": [
+      "false",
+      "true",
+      "false"
+    ],
+    "thrown_exceptions": []
+  },
+  {
     "javadoc": "/*** Adds the parameter vector with this vector.\n*\n* @param v the vector to add\n* @return the vector sum\n*/",
     "code": "public Vector add(Vector v){\nreturn new Vector(this.dx() + v.dx(), this.dy() + v.dy());\n}",
     "method_name": "add",
@@ -1327,6 +2246,177 @@
       "dy"
     ],
     "local_variables": [],
+    "thrown_exceptions": []
+  },
+  {
+    "javadoc": "/*** Read in contents of a maze printed with ASCII graphics from the file.\n* The rows and columns are already set (do not read these).\n* Example (assuming rows = 3, columns = 4)\n* <pre>\n* +-+-+-+ +\n* |   |   |\n* + + + +-+\n* | |     |\n* + +---+ +\n*       | |\n* +-----+-+\n* </pre>\n* @param r buffered reader to read lines from\n* @throws IOException if a problem happens with reading\n* @throws ParseException if the maze is badly formatted.\n* (The implementation is also permitted to simply overlook\n* format errors)\n*/",
+    "code": "public void read(BufferedReader r) throws IOException {\n//read() will return the ascii value of the character\nString reader;\nr.readLine();\nfor(int i =0; i < rows;i++) {//rows\nreader=r.readLine();\nfor (int j = 2; j < reader.length();j+=2)//columns\n{\nchar ha = reader.charAt(j);\nif(ha == ' ')setOpenRight(i,(j/2)-1,true);\n}\nif(i!=rows-1) {//rows\nreader = r.readLine();\nfor (int j = 1; j < reader.length(); j+=2)\n{\nchar ha =reader.charAt(j);\nif(ha == ' ')setOpenDown(i,j/2,true);\n}\n}\n\n}\n}",
+    "method_name": "read",
+    "parameters": "BufferedReader r",
+    "return_type": "void",
+    "return_variable": "the ascii value of the character\nString reader",
+    "called_methods": [
+      "readLine",
+      "length",
+      "charAt",
+      "setOpenRight",
+      "setOpenDown"
+    ],
+    "local_variables": [
+      "reader",
+      "i",
+      "reader",
+      "j",
+      "ha",
+      "reader",
+      "j",
+      "ha"
+    ],
+    "thrown_exceptions": []
+  },
+  {
+    "javadoc": "/*** Write out the maze in a specific textual and human readable form.\n* For example:\n* <pre>\n* +-+-+-+ +\n* |   |   |\n* + + + +-+\n* | |     |\n* + +---+ +\n*       | |\n* +-----+-+\n* </pre>\n*\n* @param pw print writer to write to, must not be null\n*/",
+    "code": "public void write(PrintWriter pw) {\nint copenCount =0;\nint ropenCount=0;\nStringBuilder table = new StringBuilder();\n\nfor(int i =0; i < rows()*2+1; i++)//change second condition\n{\n//special cases\nif(i ==0)//first line\n{\nfor(int a=0;a < columns()*2+1;a++)\n{\nif(a == columns()*2-1) table.append(\" \");\nelse if(a%2==0) table.append(\"+\");\nelse table.append(\"-\");\n}\n}\nelse if(i == rows()*2-1)//second to last line\n{\nfor(int b =0;b < columns()*2+1;b++)\n{\nif(b==0 || b%2==1)table.append(\" \");\nelse{\nif(isOpenRight(ropenCount,copenCount))table.append(\" \");\nelse table.append(\"|\");\ncopenCount++;\n}\n}\ncopenCount=0;\n}\n\n//Main cases\nelse if(i%2==1)//copen\n{\nfor(int d=0; d <columns()*2+1;d++)\n{\nif(d == 0 || d == columns()*2) table.append(\"|\");\nelse if(d%2==0)\n{\nif(isOpenRight(ropenCount,copenCount)) table.append(\" \");\nelse table.append(\"|\");\ncopenCount++;\n}\nelse table.append(\" \");\n}\ncopenCount=0;\n}\nelse if(i%2==0)//ropen\n{\nfor (int e = 0; e < columns() * 2 + 1; e++) {\nif (e % 2 == 1) {\nif (isOpenDown(ropenCount, copenCount)) table.append(\" \");\nelse table.append(\"-\");\ncopenCount++;\n} else table.append(\"+\");\n}\nropenCount++;\ncopenCount = 0;\nif(i == rows()*2)\n{\ntable.append(\"\\n\");\nString finalMaze = table.toString();\npw.write(finalMaze);\n}\n}\ntable.append(\"\\n\");\n}\n}",
+    "method_name": "write",
+    "parameters": "PrintWriter pw",
+    "return_type": "void",
+    "return_variable": "",
+    "called_methods": [
+      "StringBuilder",
+      "rows",
+      "columns",
+      "append",
+      "isOpenRight",
+      "isOpenDown",
+      "toString"
+    ],
+    "local_variables": [
+      "copenCount",
+      "ropenCount",
+      "table",
+      "i",
+      "a",
+      "b",
+      "d",
+      "e",
+      "finalMaze"
+    ],
+    "thrown_exceptions": []
+  },
+  {
+    "javadoc": "/*** Clear maze (everything is the same open/closed).\n* @param open whether everything should be open (or closed)\n*/",
+    "code": "public void clear(boolean open) {\nfor (int i = 0; i < rows; ++i) {\nfor (int j=0; j < columns; ++j) {\nif (i+1 != rows) ropen[i][j] = open;\nif (j+1 != columns) copen[i][j] = open;\n}\n}\n}",
+    "method_name": "clear",
+    "parameters": "boolean open",
+    "return_type": "void",
+    "return_variable": "",
+    "called_methods": [],
+    "local_variables": [
+      "i",
+      "j"
+    ],
+    "thrown_exceptions": []
+  },
+  {
+    "javadoc": "/*** Exception thrown by {@link #read} if it notices a problem.\n*\n*/",
+    "code": "public static class ParseException extends IOException {",
+    "method_name": "unknown",
+    "parameters": "",
+    "return_type": "unknown",
+    "return_variable": "",
+    "called_methods": [],
+    "local_variables": [],
+    "thrown_exceptions": []
+  },
+  {
+    "javadoc": "/*** Keep Eclipse happy\n*/",
+    "code": "private static final long serialVersionUID = 1L;\n\npublic ParseException(String s) { super(s); }\n}",
+    "method_name": "ParseException",
+    "parameters": "String s",
+    "return_type": "public",
+    "return_variable": "",
+    "called_methods": [],
+    "local_variables": [
+      "serialVersionUID"
+    ],
+    "thrown_exceptions": []
+  },
+  {
+    "javadoc": "/**Create a cell for row i and column j.\n* This is a convenience method for creating new cells,\n* since the Java syntax for doing so in a different class is tricky.\n* You don't need to use this method.\n* @param i row\n* @param j column\n* @return new Cell(i,j)\n*/",
+    "code": "public Cell makeCell(int i, int j) {\nreturn new Cell(i,j);\n}",
+    "method_name": "makeCell",
+    "parameters": "int i, int j",
+    "return_type": "Cell",
+    "return_variable": "new Cell(i,j)",
+    "called_methods": [
+      "Cell"
+    ],
+    "local_variables": [],
+    "thrown_exceptions": []
+  },
+  {
+    "javadoc": "/*** Set the displayed solution to the argument\n* @param sd (may be null -- show no solution)\n*/",
+    "code": "public void setSolution(SolutionDisplay sd) {\nsolution = sd;\n}",
+    "method_name": "setSolution",
+    "parameters": "SolutionDisplay sd",
+    "return_type": "void",
+    "return_variable": "",
+    "called_methods": [],
+    "local_variables": [],
+    "thrown_exceptions": []
+  },
+  {
+    "javadoc": "/*** Create a maze solver for this maze.\n*\n* @param m maze to solve, must not be null\n*/",
+    "code": "public MazeSolver(Maze m) {\nmaze = m;\nvisited = new Cell[maze.rows()][maze.columns()];\n}",
+    "method_name": "MazeSolver",
+    "parameters": "Maze m",
+    "return_type": "public",
+    "return_variable": "",
+    "called_methods": [
+      "rows",
+      "columns"
+    ],
+    "local_variables": [],
+    "thrown_exceptions": []
+  },
+  {
+    "javadoc": "/*** Try to find a path, and return a solution display:\n* either a path solution display, if a path was found,\n* or a visited solution display if no path was found.\n*\n* @return solution display (must not be null)\n*/",
+    "code": "public SolutionDisplay findPath() {\nint rows = maze.rows();\nint columns = maze.columns();\nStack<Maze.Cell> prev = new Stack<Cell>();\n\nCell cur = maze.makeCell(rows - 1, 0);\nprev.push(cur);\nvisited[rows-1][0] = cur;\n\nCell look = null;\nboolean winner = false;\nArrayList<Cell> path = new ArrayList<>(rows * columns);\n\nint saveSize=pending.size();\n\nboolean noAdded=false;\n\nwhile (!winner) {\n//Special case for if solution is reached\nif (cur.row == 0 && cur.column == columns - 1) {\nwinner = true;\nbreak;\n}\nnoAdded = doPending(cur);\nif(pending.isEmpty())break;\n\nlook = pending.peek();\nif(!noAdded) {\nprev = doPrev(prev, cur, look);\n}\n\n// If the cell has not been visited then we jump there\nif (visited[look.row][look.column] == null) {\ncur = pending.pop();\nprev.push(cur);\nvisited[cur.row][cur.column] = cur;\n} else pending.pop();\n\n}\n\nif (winner) {\n\nfor(int i = prev.search(visited[rows-1][0])-1; i > -1; i--)\n{\npath.add(0,prev.pop());\n}\nreturn new PathSolutionDisplay(maze, path);\n} else {\nboolean[][] marked = new boolean[rows][columns];\nfor (int i = 0; i < visited.length; i++) {\nfor (int j = 0; j < visited[i].length; j++) {\nif (visited[i][j] == null) marked[i][j] = false;\nelse marked[i][j] = true;\n}\n}\nreturn new VisitedSolutionDisplay(maze, marked);\n}\n}",
+    "method_name": "findPath",
+    "parameters": "",
+    "return_type": "SolutionDisplay",
+    "return_variable": "new PathSolutionDisplay(maze, path)",
+    "called_methods": [
+      "rows",
+      "columns",
+      "makeCell",
+      "push",
+      "size",
+      "doPending",
+      "isEmpty",
+      "peek",
+      "doPrev",
+      "pop",
+      "search",
+      "add",
+      "PathSolutionDisplay",
+      "VisitedSolutionDisplay"
+    ],
+    "local_variables": [
+      "rows",
+      "columns",
+      "prev",
+      "cur",
+      "look",
+      "winner",
+      "path",
+      "saveSize",
+      "noAdded",
+      "i",
+      "marked",
+      "i",
+      "j"
+    ],
     "thrown_exceptions": []
   },
   {
