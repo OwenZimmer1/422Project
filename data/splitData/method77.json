@@ -19,5 +19,6 @@
   ],
   "thrown_exceptions": [
     "IndexOutOfBoundsException"
-  ]
+  ],
+  "class_name": "Team"
 }

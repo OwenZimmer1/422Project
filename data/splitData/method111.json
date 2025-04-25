@@ -17,5 +17,6 @@
   "thrown_exceptions": [
     "ConcurrentModificationException",
     "NoSuchElementException"
-  ]
+  ],
+  "class_name": "MyIterator"
 }

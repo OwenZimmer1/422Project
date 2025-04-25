@@ -17,5 +17,6 @@
     "c",
     "r"
   ],
-  "thrown_exceptions": []
+  "thrown_exceptions": [],
+  "class_name": "WordMultiset"
 }

@@ -17,5 +17,6 @@
   ],
   "thrown_exceptions": [
     "NullPointerException"
-  ]
+  ],
+  "class_name": "Lexicon"
 }

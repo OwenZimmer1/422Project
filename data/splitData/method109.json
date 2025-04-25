@@ -11,5 +11,6 @@
   "local_variables": [
     "manyItems"
   ],
-  "thrown_exceptions": []
+  "thrown_exceptions": [],
+  "class_name": "Queue"
 }

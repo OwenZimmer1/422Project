@@ -12,5 +12,6 @@
   "local_variables": [
     "unsorted"
   ],
-  "thrown_exceptions": []
+  "thrown_exceptions": [],
+  "class_name": "Player"
 }

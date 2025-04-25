@@ -9,5 +9,6 @@
   "local_variables": [
     "next"
   ],
-  "thrown_exceptions": []
+  "thrown_exceptions": [],
+  "class_name": "Player"
 }

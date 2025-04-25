@@ -15,5 +15,6 @@
     "angle",
     "v"
   ],
-  "thrown_exceptions": []
+  "thrown_exceptions": [],
+  "class_name": "Vector"
 }

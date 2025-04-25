@@ -11,5 +11,6 @@
   "local_variables": [],
   "thrown_exceptions": [
     "IllegalArgumentException"
-  ]
+  ],
+  "class_name": "Ball"
 }

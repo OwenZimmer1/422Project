@@ -19,5 +19,6 @@
   ],
   "thrown_exceptions": [
     "ConcurrentModificationException"
-  ]
+  ],
+  "class_name": "Queue"
 }

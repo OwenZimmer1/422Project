@@ -18,5 +18,6 @@
     "next",
     "tail"
   ],
-  "thrown_exceptions": []
+  "thrown_exceptions": [],
+  "class_name": "SortedCollection"
 }

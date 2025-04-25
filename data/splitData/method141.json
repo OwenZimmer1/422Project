@@ -7,5 +7,6 @@
   "return_variable": "getNode(dummy.right, key, create, dummy)",
   "called_methods": [],
   "local_variables": [],
-  "thrown_exceptions": []
+  "thrown_exceptions": [],
+  "class_name": "WordMultiset"
 }

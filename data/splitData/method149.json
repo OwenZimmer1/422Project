@@ -33,5 +33,6 @@
   ],
   "thrown_exceptions": [
     "IllegalArgumentException"
-  ]
+  ],
+  "class_name": "FindPath"
 }

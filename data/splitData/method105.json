@@ -16,5 +16,6 @@
   "thrown_exceptions": [
     "IllegalArgumentException",
     "NullPointerException"
-  ]
+  ],
+  "class_name": "Queue"
 }

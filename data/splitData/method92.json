@@ -19,5 +19,6 @@
   ],
   "thrown_exceptions": [
     "NullPointerException"
-  ]
+  ],
+  "class_name": "LinkedSequence"
 }

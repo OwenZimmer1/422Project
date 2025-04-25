@@ -18,5 +18,6 @@
   ],
   "thrown_exceptions": [
     "RuntimeException"
-  ]
+  ],
+  "class_name": "LinkedSequence"
 }

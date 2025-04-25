@@ -23,5 +23,6 @@
     "my_tangent",
     "other_tangent"
   ],
-  "thrown_exceptions": []
+  "thrown_exceptions": [],
+  "class_name": "Ball"
 }

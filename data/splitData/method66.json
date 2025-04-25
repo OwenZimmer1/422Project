@@ -9,5 +9,6 @@
   "local_variables": [
     "position"
   ],
-  "thrown_exceptions": []
+  "thrown_exceptions": [],
+  "class_name": "Player"
 }

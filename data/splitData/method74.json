@@ -13,5 +13,6 @@
   "local_variables": [],
   "thrown_exceptions": [
     "NullPointerException"
-  ]
+  ],
+  "class_name": "Team"
 }

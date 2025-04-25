@@ -19,5 +19,6 @@
     "x",
     "y"
   ],
-  "thrown_exceptions": []
+  "thrown_exceptions": [],
+  "class_name": "Ball"
 }

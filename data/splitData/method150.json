@@ -25,5 +25,6 @@
   ],
   "thrown_exceptions": [
     "IOException"
-  ]
+  ],
+  "class_name": "LoadPath"
 }

@@ -14,5 +14,6 @@
     "leftSubtree",
     "rightSubtree"
   ],
-  "thrown_exceptions": []
+  "thrown_exceptions": [],
+  "class_name": "WordMultiset"
 }

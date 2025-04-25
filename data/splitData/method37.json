@@ -15,5 +15,6 @@
   ],
   "thrown_exceptions": [
     "IllegalStateException"
-  ]
+  ],
+  "class_name": "BallSeq"
 }

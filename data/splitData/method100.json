@@ -9,5 +9,6 @@
   "local_variables": [
     "finishedInstructions"
   ],
-  "thrown_exceptions": []
+  "thrown_exceptions": [],
+  "class_name": "Process"
 }

@@ -9,5 +9,6 @@
     "SuppressWarnings"
   ],
   "local_variables": [],
-  "thrown_exceptions": []
+  "thrown_exceptions": [],
+  "class_name": "ImmutableStack"
 }
