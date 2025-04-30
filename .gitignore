@@ -3,5 +3,5 @@ data/splitData
 venv/
 unsloth_compiled_cache
 .env
-422Project\notebooks\trainer_output
-422Project\notebooks\output
+trainer_output
+notebooks\output
