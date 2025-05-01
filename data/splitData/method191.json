@@ -1,0 +1,13 @@
+{
+  "javadoc": "/*** Return the function of this part.\n* @return string of this part, null if this part not in a robot\n*/",
+  "code": "public String getFunction() {\nreturn function;\n}",
+  "method_name": "getFunction",
+  "parameters": "",
+  "return_type": "String",
+  "return_variable": "function",
+  "called_methods": [],
+  "local_variables": [
+    "function"
+  ],
+  "thrown_exceptions": []
+}

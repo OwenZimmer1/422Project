@@ -1,0 +1,24 @@
+{
+  "javadoc": "/*** Return the next part in this robot.\n* This is valid only if the part is in a robot.\n* @return the next part, possibly null\n* @exception IllegalStateException if this part is not a part of a robot\n*/",
+  "code": "public FunctionalPart getNext() {\n\nif(this.getFunction() == null)throw new IllegalStateException(\"Part is not in the robot\");\nFunctionalPart cur = this;\n\nif(cur.right != null)\n{\nif(cur.right.left != null)\n{\ncur = cur.right.left;\nwhile(cur.left !=null)\n{\ncur = cur.left;\n}\n\nreturn cur;\n}\ncur = cur.right;\nreturn cur;\n}\n\nelse{\nif(cur.parent == null)return null;\nif(cur.parent.left == cur)\n{\ncur = cur.parent;\n}\nelse\n{\nif(cur.parent == null)return null;\nwhile(cur.parent.left != cur)\n{\ncur = cur.parent;\nif(cur.parent == null)return null;\n}\ncur = cur.parent;\n}\n\nreturn cur;\n}\n}",
+  "method_name": "getNext",
+  "parameters": "",
+  "return_type": "FunctionalPart",
+  "return_variable": "cur",
+  "called_methods": [
+    "getFunction",
+    "IllegalStateException"
+  ],
+  "local_variables": [
+    "cur",
+    "cur",
+    "cur",
+    "null",
+    "null",
+    "null",
+    "cur"
+  ],
+  "thrown_exceptions": [
+    "IllegalStateException"
+  ]
+}

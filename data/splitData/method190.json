@@ -1,0 +1,14 @@
+{
+  "javadoc": "/*** Create a wired robot without parts\n* with the given order\n* @param comp order to use, if null, then unordered\n*/",
+  "code": "public WiredRobot(Comparator<FunctionalPart> comp) {\nif(comp == null)\n{\ncomp = (p1,p2) -> 0;\n}\nthis.comparator = comp;\ndummy = new FunctionalPart();\nassert wellFormed() : \"Invariant not established by constructor\";\n}",
+  "method_name": "WiredRobot",
+  "parameters": "Comparator<FunctionalPart> comp",
+  "return_type": "public",
+  "return_variable": "",
+  "called_methods": [
+    "FunctionalPart",
+    "wellFormed"
+  ],
+  "local_variables": [],
+  "thrown_exceptions": []
+}

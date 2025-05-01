@@ -1,0 +1,17 @@
+{
+  "javadoc": "/*** Is this cell open to the right?\n* @param i row\n* @param j column\n* @return whether there is an opening to the right.\n* @exception IllegalArgumentException if coordinates out of range.\n*/",
+  "code": "public boolean isOpenRight(int i, int j) {\n\ncheckCell(i,j);\n\nif(j>=copen[0].length)return false;\nelse if(copen[i][j])return true;\nelse return false;\n}",
+  "method_name": "isOpenRight",
+  "parameters": "int i, int j",
+  "return_type": "boolean",
+  "return_variable": "false",
+  "called_methods": [
+    "checkCell"
+  ],
+  "local_variables": [
+    "false",
+    "true",
+    "false"
+  ],
+  "thrown_exceptions": []
+}

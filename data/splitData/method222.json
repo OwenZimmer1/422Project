@@ -1,0 +1,14 @@
+{
+  "javadoc": "/*** Clear maze (everything is the same open/closed).\n* @param open whether everything should be open (or closed)\n*/",
+  "code": "public void clear(boolean open) {\nfor (int i = 0; i < rows; ++i) {\nfor (int j=0; j < columns; ++j) {\nif (i+1 != rows) ropen[i][j] = open;\nif (j+1 != columns) copen[i][j] = open;\n}\n}\n}",
+  "method_name": "clear",
+  "parameters": "boolean open",
+  "return_type": "void",
+  "return_variable": "",
+  "called_methods": [],
+  "local_variables": [
+    "i",
+    "j"
+  ],
+  "thrown_exceptions": []
+}

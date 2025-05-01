@@ -1,0 +1,15 @@
+{
+  "javadoc": "/*** Create a part with the given serial number\n* @param serial serial number, must not be null\n*/",
+  "code": "public Part(String serial)\n{\n//initialize the part after checking for errors.\nif(serial == null) throw new NullPointerException(\"null is not a serial number\");\nthis.serial = serial;\n}",
+  "method_name": "Part",
+  "parameters": "String serial",
+  "return_type": "public",
+  "return_variable": "",
+  "called_methods": [
+    "NullPointerException"
+  ],
+  "local_variables": [],
+  "thrown_exceptions": [
+    "NullPointerException"
+  ]
+}

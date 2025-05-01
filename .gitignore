@@ -1,5 +1,4 @@
 .notes
-data/splitData
 venv/
 unsloth_compiled_cache
 .env

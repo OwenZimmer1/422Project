@@ -1,0 +1,15 @@
+{
+  "javadoc": "/*** Create a dynamic array part sequence with the given capacity\n* (how many parts that can be added without requiring allocation of a new array).\n* @param cap number of elements to prepare for, cannot be negative\n*/",
+  "code": "public DynamicArrayPartSeq(int cap) {\n// TODO\nfunctions = new String[cap];\nparts = new Part[cap];\n\nassert wellFormed() : \"invariant broken by constructor\";\n}",
+  "method_name": "DynamicArrayPartSeq",
+  "parameters": "int cap",
+  "return_type": "public",
+  "return_variable": "",
+  "called_methods": [
+    "wellFormed"
+  ],
+  "local_variables": [
+    "functions"
+  ],
+  "thrown_exceptions": []
+}

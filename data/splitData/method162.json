@@ -1,0 +1,11 @@
+{
+  "javadoc": "/*** Create an array robot with the given capacity\n* If the capacity is zero, the robot cannot have any parts\n* @param cap capacity to use, cannot be negative\n*/",
+  "code": "public ArrayRobot(int cap)\n{\nfunctions = new String[cap];\nparts = new Part[cap];\n}",
+  "method_name": "ArrayRobot",
+  "parameters": "int cap",
+  "return_type": "public",
+  "return_variable": "",
+  "called_methods": [],
+  "local_variables": [],
+  "thrown_exceptions": []
+}

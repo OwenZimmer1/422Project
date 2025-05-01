@@ -1,0 +1,21 @@
+{
+  "javadoc": "/*** Return the 0-based index part from the subtree given that\n* matches the given function.  The mutable inex should be decremented\n* for every part we find that matches, so that if we find a match\n* when it is zero we return that one.  Once we find the result, we stop\n* looking (and stop decrementing).  If there is no such functional part,\n* this method returns null.\n* @param r subtree to examine, may be null\n* @param function kind of part to look for, null means any part\n* @param mutableIndex index to look for (0-based); decremented whenever a matching\n*   part is encountered in in-order traversal until the desired index.\n* @return 0-based matching part, may be null\n*/",
+  "code": "private static FunctionalPart getHelper(FunctionalPart r, String function, Cell<Integer> mutableIndex) {\nif (r == null) return r;\nFunctionalPart result = getHelper(r.left, function, mutableIndex);\nif (result != null) return result;\nif (function == null ||function.equals(r.function)) {\nint index = mutableIndex.get();\nif (index == 0) return r;\nmutableIndex.set(index-1);\n}\nreturn getHelper(r.right, function, mutableIndex);\n}",
+  "method_name": "getHelper",
+  "parameters": "FunctionalPart r, String function, Cell<Integer> mutableIndex",
+  "return_type": "FunctionalPart",
+  "return_variable": "r",
+  "called_methods": [
+    "equals",
+    "get",
+    "set"
+  ],
+  "local_variables": [
+    "r",
+    "result",
+    "result",
+    "index",
+    "r"
+  ],
+  "thrown_exceptions": []
+}

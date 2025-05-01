@@ -1,0 +1,14 @@
+{
+  "javadoc": "/*** Create a part with a random serial number.\n*/",
+  "code": "public Part()\n{\n// call the other constructor with \"this(...)\"\n// filling in the \"...\" with a random string which\n// can indeed be a series of digits.\n// Our solution uses \"new Random().nextInt()\" as part of this.\nthis(\"RSN\" + new Random().nextInt());\n}",
+  "method_name": "Part",
+  "parameters": "",
+  "return_type": "public",
+  "return_variable": "",
+  "called_methods": [
+    "Random",
+    "nextInt"
+  ],
+  "local_variables": [],
+  "thrown_exceptions": []
+}

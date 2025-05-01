@@ -1,0 +1,19 @@
+{
+  "javadoc": "/*** Add a part to the robot.\n* @param function the type of part this is (arm, leg, etc), must not be null\n* @param part the part to add, must not be null.\n* @return whether the part was added.\n* @exception NullPointerException if the function or part is null\n*/",
+  "code": "@Override//required\npublic boolean addPart(String function, Part part)\n{\nif(function == null || part == null) throw new NullPointerException();\nfor (int i=0; i < functions.length; ++i)//For the empty space,\n{\nif(functions[i] == null) {//put it here! Checks if the space is empty\nfunctions[i] = function;//puts function into the space\nparts[i] = part;//puts part into the space\nreturn true;//confirms that it was added\n}\n}\nreturn false;\n}",
+  "method_name": "addPart",
+  "parameters": "String function, Part part",
+  "return_type": "boolean",
+  "return_variable": "true",
+  "called_methods": [
+    "NullPointerException"
+  ],
+  "local_variables": [
+    "i",
+    "true",
+    "false"
+  ],
+  "thrown_exceptions": [
+    "NullPointerException"
+  ]
+}

@@ -1,0 +1,11 @@
+{
+  "javadoc": "/*** Return the number of nodes in this subtree.\n* If the subtree isn't null, we use the stored `count' field rather than\n* computing the count.\n* @param r subtree to count nodes for, must not be null\n* @return count of nodes in this subtree\n*/",
+  "code": "private static int getCount(Node<?> r) {\nif (r == null) return 0;\nreturn r.count;\n}",
+  "method_name": "getCount",
+  "parameters": "Node<?> r",
+  "return_type": "int",
+  "return_variable": "0",
+  "called_methods": [],
+  "local_variables": [],
+  "thrown_exceptions": []
+}

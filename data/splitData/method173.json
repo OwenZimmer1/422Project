@@ -1,0 +1,13 @@
+{
+  "javadoc": "/*** @return a string representation of the object.\n*/",
+  "code": "@Override // implementation\npublic String toString()\n{\nreturn \"Part(\" + serial + \")\";\n}",
+  "method_name": "toString",
+  "parameters": "",
+  "return_type": "String",
+  "return_variable": "\"Part(\" + serial + \")\"",
+  "called_methods": [
+    "Part"
+  ],
+  "local_variables": [],
+  "thrown_exceptions": []
+}

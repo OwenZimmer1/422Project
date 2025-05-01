@@ -1,0 +1,15 @@
+{
+  "javadoc": "/*** Return the next part in this robot.\n* This is valid only if the part is in a robot.\n* @return the next part, possibly null\n* @exception IllegalStateException if this part is not a part of a robot\n*/",
+  "code": "public FunctionalPart getNext() {\nthrow new UnsupportedOperationException(\"not implemented\");\n}",
+  "method_name": "getNext",
+  "parameters": "",
+  "return_type": "FunctionalPart",
+  "return_variable": "",
+  "called_methods": [
+    "UnsupportedOperationException"
+  ],
+  "local_variables": [],
+  "thrown_exceptions": [
+    "UnsupportedOperationException"
+  ]
+}

@@ -1,0 +1,16 @@
+{
+  "javadoc": "/*** Remove a part from the robot if there is one with this function.\n* @param function the type of part to remove, null means any part\n* @return part that was removed\n*/",
+  "code": "@Override // required\npublic Part removePart(String function) {\nPart result = null;\nif(function == null)\n{\nif(arm1 != null)\n{\nresult = arm1;\narm1 = null;\n}\nelse if(arm2 != null)\n{\nresult = arm2;\narm2 = null;\n}\nelse if(leg1 != null)\n{\nresult = leg1;\nleg1 = null;\n}\nelse if(leg2 != null)\n{\nresult = leg2;\nleg2 = null;\n}\nelse if(otherPart != null)\n{\nresult = otherPart;\notherPart = null;\n}\n}\n\nelse if(function.equals(ARM))\n{\nif(arm1 != null)\n{\nresult = arm1;\narm1 = null;\n}\nelse if(arm2 != null)\n{\nresult = arm2;\narm2 = null;\n}\n}\nelse if(function.equals(LEG))\n{\nif(leg1 != null)\n{\nresult = leg1;\nleg1 = null;\n}\nelse if(leg2 != null)\n{\nresult = leg2;\nleg2 = null;\n}\n}\nelse\n{\nif(otherPart != null)\n{\nresult = otherPart;\notherPart = null;\n}\n}\nreturn result;\n}",
+  "method_name": "removePart",
+  "parameters": "String function",
+  "return_type": "Part",
+  "return_variable": "result",
+  "called_methods": [
+    "equals"
+  ],
+  "local_variables": [
+    "result",
+    "result"
+  ],
+  "thrown_exceptions": []
+}

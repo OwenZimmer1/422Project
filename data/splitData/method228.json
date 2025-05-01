@@ -1,0 +1,40 @@
+{
+  "javadoc": "/*** Try to find a path, and return a solution display:\n* either a path solution display, if a path was found,\n* or a visited solution display if no path was found.\n*\n* @return solution display (must not be null)\n*/",
+  "code": "public SolutionDisplay findPath() {\nint rows = maze.rows();\nint columns = maze.columns();\nStack<Maze.Cell> prev = new Stack<Cell>();\n\nCell cur = maze.makeCell(rows - 1, 0);\nprev.push(cur);\nvisited[rows-1][0] = cur;\n\nCell look = null;\nboolean winner = false;\nArrayList<Cell> path = new ArrayList<>(rows * columns);\n\nint saveSize=pending.size();\n\nboolean noAdded=false;\n\nwhile (!winner) {\n//Special case for if solution is reached\nif (cur.row == 0 && cur.column == columns - 1) {\nwinner = true;\nbreak;\n}\nnoAdded = doPending(cur);\nif(pending.isEmpty())break;\n\nlook = pending.peek();\nif(!noAdded) {\nprev = doPrev(prev, cur, look);\n}\n\n// If the cell has not been visited then we jump there\nif (visited[look.row][look.column] == null) {\ncur = pending.pop();\nprev.push(cur);\nvisited[cur.row][cur.column] = cur;\n} else pending.pop();\n\n}\n\nif (winner) {\n\nfor(int i = prev.search(visited[rows-1][0])-1; i > -1; i--)\n{\npath.add(0,prev.pop());\n}\nreturn new PathSolutionDisplay(maze, path);\n} else {\nboolean[][] marked = new boolean[rows][columns];\nfor (int i = 0; i < visited.length; i++) {\nfor (int j = 0; j < visited[i].length; j++) {\nif (visited[i][j] == null) marked[i][j] = false;\nelse marked[i][j] = true;\n}\n}\nreturn new VisitedSolutionDisplay(maze, marked);\n}\n}",
+  "method_name": "findPath",
+  "parameters": "",
+  "return_type": "SolutionDisplay",
+  "return_variable": "new PathSolutionDisplay(maze, path)",
+  "called_methods": [
+    "rows",
+    "columns",
+    "makeCell",
+    "push",
+    "size",
+    "doPending",
+    "isEmpty",
+    "peek",
+    "doPrev",
+    "pop",
+    "search",
+    "add",
+    "PathSolutionDisplay",
+    "VisitedSolutionDisplay"
+  ],
+  "local_variables": [
+    "rows",
+    "columns",
+    "prev",
+    "cur",
+    "look",
+    "winner",
+    "path",
+    "saveSize",
+    "noAdded",
+    "i",
+    "marked",
+    "i",
+    "j"
+  ],
+  "thrown_exceptions": []
+}

@@ -1,0 +1,11 @@
+{
+  "javadoc": "/*** Start running through all parts.\n*/",
+  "code": "public void start() {\n// not asserting invariant before this will be done by the other start\nstart(null);\n}",
+  "method_name": "start",
+  "parameters": "",
+  "return_type": "void",
+  "return_variable": "",
+  "called_methods": [],
+  "local_variables": [],
+  "thrown_exceptions": []
+}

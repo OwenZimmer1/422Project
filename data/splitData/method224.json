@@ -1,0 +1,13 @@
+{
+  "javadoc": "/*** Keep Eclipse happy\n*/",
+  "code": "private static final long serialVersionUID = 1L;\n\npublic ParseException(String s) { super(s); }\n}",
+  "method_name": "ParseException",
+  "parameters": "String s",
+  "return_type": "public",
+  "return_variable": "",
+  "called_methods": [],
+  "local_variables": [
+    "serialVersionUID"
+  ],
+  "thrown_exceptions": []
+}

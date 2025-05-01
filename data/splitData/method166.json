@@ -1,0 +1,24 @@
+{
+  "javadoc": "/*** Add a part to the robot.\n* @param function the type of part this is (arm, leg, etc), must not be null\n* @param part the part to add, must not be null.\n* @return whether the part was added.\n* @exception NullPointerException if the function or part is null\n*/",
+  "code": "@Override // required\npublic boolean addPart(String function, Part part)\n{\nif(function == null || part == null) throw new NullPointerException(\"part cannot be null\");//exception thrown if there is no part\nif(function.equals(ARM))//if function is and arm\n{\nif(arm1 == null)//if arm1 is empty...\n{\narm1= part;//put the contents of part into arm1\nreturn true;//confirm that it worked\n}\nelse if(arm2 == null)//if arm2 is empty....\n{\narm2 = part;//put the contents of part into arm2\nreturn true;//confirm that it worked\n}\n}\n\nelse if(function.equals(LEG))//if fucntion is leg\n{\nif(leg1 == null)//if leg1 is empty...\n{\nleg1 = part;//put contents of part into leg1\nreturn true;//confirm that it worked.\n}\nelse if(leg2 == null)//if leg2 is empty...\n{\nleg2 = part;//put contents of part into leg2\nreturn true;//confirm that it worked\n}\n\n}\nelse if(otherFunction == null)//if it's anything else like a head\n{\notherFunction = function;//put the contents of function into otherFunction\notherPart = part;//put the contents of part into otherPart\nreturn true;//confirm it works\n}\nreturn false;//Nothing happens\n}",
+  "method_name": "addPart",
+  "parameters": "String function, Part part",
+  "return_type": "boolean",
+  "return_variable": "true",
+  "called_methods": [
+    "NullPointerException",
+    "equals"
+  ],
+  "local_variables": [
+    "true",
+    "true",
+    "true",
+    "true",
+    "otherPart",
+    "true",
+    "false"
+  ],
+  "thrown_exceptions": [
+    "NullPointerException"
+  ]
+}

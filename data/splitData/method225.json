@@ -1,0 +1,13 @@
+{
+  "javadoc": "/**Create a cell for row i and column j.\n* This is a convenience method for creating new cells,\n* since the Java syntax for doing so in a different class is tricky.\n* You don't need to use this method.\n* @param i row\n* @param j column\n* @return new Cell(i,j)\n*/",
+  "code": "public Cell makeCell(int i, int j) {\nreturn new Cell(i,j);\n}",
+  "method_name": "makeCell",
+  "parameters": "int i, int j",
+  "return_type": "Cell",
+  "return_variable": "new Cell(i,j)",
+  "called_methods": [
+    "Cell"
+  ],
+  "local_variables": [],
+  "thrown_exceptions": []
+}

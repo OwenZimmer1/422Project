@@ -1,0 +1,11 @@
+{
+  "javadoc": "/*** @return a hash code value for the object.\n*/",
+  "code": "@Override//implementation\npublic int hashCode()\n{\nreturn serial.hashCode();\n}",
+  "method_name": "hashCode",
+  "parameters": "",
+  "return_type": "int",
+  "return_variable": "serial.hashCode()",
+  "called_methods": [],
+  "local_variables": [],
+  "thrown_exceptions": []
+}

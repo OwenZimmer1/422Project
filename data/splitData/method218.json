@@ -1,0 +1,19 @@
+{
+  "javadoc": "/*** Is this cell open above?\n* As special case, the top right cell is open above\n* (this is the maze exit).\n* @param i row\n* @param j column\n* @return whether there is an opening going up\n* @exception IllegalArgumentException if coordinates out of range.\n*/",
+  "code": "public boolean isOpenUp(int i, int j) {\n\ncheckCell(i,j);\nif(i==0&&j==columns()-1)return true;\n\nif(i==0)return false;\nelse if(ropen[i-1][j])return true;\nelse return false;\n}",
+  "method_name": "isOpenUp",
+  "parameters": "int i, int j",
+  "return_type": "boolean",
+  "return_variable": "true",
+  "called_methods": [
+    "checkCell",
+    "columns"
+  ],
+  "local_variables": [
+    "true",
+    "false",
+    "true",
+    "false"
+  ],
+  "thrown_exceptions": []
+}

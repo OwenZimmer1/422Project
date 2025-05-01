@@ -1,0 +1,23 @@
+{
+  "javadoc": "/*** Return the 0-based index part from the subtree given that\n* matches the given function.  The mutable index should be decremented\n* for every part we find that matches, so that if we find a match\n* when it is zero we return that one.  Once we find the result, we stop\n* looking (and stop decrementing).  If there is no such functional part,\n* this method returns null.\n* @param r subtree to examine, may be null\n* @param function kind of part to look for, null means any part\n* @param mutableIndex index to look for (0-based); decremented whenever a matching\n*   part is encountered in in-order traversal until the desired index.\n* @return 0-based matching part, may be null\n*/",
+  "code": "private static FunctionalPart getHelper(FunctionalPart r, String function, Cell<Integer> mutableIndex)\n{\nif(r == null)\n{\nreturn null;\n}\n\n//r.left first, r second, r.right third\n//First go into the left subtree to find the function.  Delegate, don't micromanage\nFunctionalPart tempLeft = getHelper(r.left, function, mutableIndex);\nif(tempLeft !=null) return tempLeft;\n\nif(function == null || r.function.equals(function))\n{\nif(mutableIndex.get() == 0)return r;\nmutableIndex.set(mutableIndex.get()-1);\n}\n\nFunctionalPart tempRight = getHelper(r.right, function,mutableIndex);\nif(tempRight != null)return tempRight;\n\nreturn null;\n// Use recursion.  Do not micro-manage!\n// Never check a child for null or look at its function.\n}",
+  "method_name": "getHelper",
+  "parameters": "FunctionalPart r, String function, Cell<Integer> mutableIndex",
+  "return_type": "FunctionalPart",
+  "return_variable": "null",
+  "called_methods": [
+    "equals",
+    "get",
+    "set"
+  ],
+  "local_variables": [
+    "null",
+    "tempLeft",
+    "tempLeft",
+    "r",
+    "tempRight",
+    "tempRight",
+    "null"
+  ],
+  "thrown_exceptions": []
+}

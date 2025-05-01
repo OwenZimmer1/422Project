@@ -1,0 +1,16 @@
+{
+  "javadoc": "/*** Check that a subtree's count and parent fields are correct.\n* @param r subtree to check\n* @param p what the parent should be.\n* @return whether any problems ere found.  If false is returned than\n* exactly one problem has been reported.\n*/",
+  "code": "private boolean checkTree(Node<T> r, Node<T> p) {\nif (r == null) return true;\nif (r.parent != p) return report(\"parent is wrong for \" + r);\nif (r.count != getCount(r.left) + getCount(r.right) + 1) {\nreturn report(\"computed count \" + r.count + \" not consistent with subtrees\");\n}\nreturn checkTree(r.left, r) && checkTree(r.right, r);\n}",
+  "method_name": "checkTree",
+  "parameters": "Node<T> r, Node<T> p",
+  "return_type": "boolean",
+  "return_variable": "true",
+  "called_methods": [
+    "report",
+    "getCount"
+  ],
+  "local_variables": [
+    "true"
+  ],
+  "thrown_exceptions": []
+}

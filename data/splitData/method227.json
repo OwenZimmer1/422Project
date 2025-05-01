@@ -1,0 +1,14 @@
+{
+  "javadoc": "/*** Create a maze solver for this maze.\n*\n* @param m maze to solve, must not be null\n*/",
+  "code": "public MazeSolver(Maze m) {\nmaze = m;\nvisited = new Cell[maze.rows()][maze.columns()];\n}",
+  "method_name": "MazeSolver",
+  "parameters": "Maze m",
+  "return_type": "public",
+  "return_variable": "",
+  "called_methods": [
+    "rows",
+    "columns"
+  ],
+  "local_variables": [],
+  "thrown_exceptions": []
+}

@@ -1,0 +1,19 @@
+{
+  "javadoc": "/*** Return the part with the given function.\n* @param function the type of part to look for, null means any part\n* @param index zero-based index of part to return of the given type, must not be negative\n* @return indicated part, or null if no such part (index is at least the number of this kind of kind)\n*/",
+  "code": "@Override//required\npublic Part getPart(String function, int index)\n{\nif(index < 0) throw new IllegalArgumentException(\"index cannot be negative: \" + index);\n\nfor(int i=0; i < functions.length; ++i)\n{\nif(parts[i] == null)continue;\nelse if(function == null)\n{\nif(index-- == 0)return parts[i];\n}\nelse if(function.equals(functions[i]))\n{\nif(index-- == 0)return parts[i];\n}\n}\nreturn null;\n}",
+  "method_name": "getPart",
+  "parameters": "String function, int index",
+  "return_type": "Part",
+  "return_variable": "parts[i]",
+  "called_methods": [
+    "IllegalArgumentException",
+    "equals"
+  ],
+  "local_variables": [
+    "i",
+    "null"
+  ],
+  "thrown_exceptions": [
+    "IllegalArgumentException"
+  ]
+}

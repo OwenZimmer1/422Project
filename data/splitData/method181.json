@@ -1,0 +1,13 @@
+{
+  "javadoc": "/*** Return whether there is a current element.\n* @return whether there is a current element\n*/",
+  "code": "public boolean isCurrent()\n{\nassert wellFormed():\"invariant broken in isCurrent\";\nreturn currentIndex < size;\n}",
+  "method_name": "isCurrent",
+  "parameters": "",
+  "return_type": "boolean",
+  "return_variable": "currentIndex < size",
+  "called_methods": [
+    "wellFormed"
+  ],
+  "local_variables": [],
+  "thrown_exceptions": []
+}

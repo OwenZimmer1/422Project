@@ -1,0 +1,18 @@
+{
+  "javadoc": "/*** Remove a part from the robot if there is one with this function.\n* @param function the type of part to remove, null means any part\n* @return part that was removed\n*/",
+  "code": "@Override // required\npublic Part removePart(String function)\n{\nfor(int i = 0; i < functions.length; ++i)\n{\nif(parts[i] == null) continue;\n//The continue statement allows us to look over nulls and look for\n//next available part, moving beyond just index zero if needed.\nif(function == null || function.equals(functions[i]))//remove this one\n{\nPart p = parts[i];\nfunctions[i] = null;\nparts[i] = null;\nreturn p;\n}\n}\nreturn null;\n}",
+  "method_name": "removePart",
+  "parameters": "String function",
+  "return_type": "Part",
+  "return_variable": "p",
+  "called_methods": [
+    "equals"
+  ],
+  "local_variables": [
+    "i",
+    "p",
+    "p",
+    "null"
+  ],
+  "thrown_exceptions": []
+}

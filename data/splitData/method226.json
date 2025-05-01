@@ -1,0 +1,11 @@
+{
+  "javadoc": "/*** Set the displayed solution to the argument\n* @param sd (may be null -- show no solution)\n*/",
+  "code": "public void setSolution(SolutionDisplay sd) {\nsolution = sd;\n}",
+  "method_name": "setSolution",
+  "parameters": "SolutionDisplay sd",
+  "return_type": "void",
+  "return_variable": "",
+  "called_methods": [],
+  "local_variables": [],
+  "thrown_exceptions": []
+}

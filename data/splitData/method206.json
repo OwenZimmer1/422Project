@@ -1,0 +1,16 @@
+{
+  "javadoc": "/*** Check a tree of parts within bounds.\n* The subtree must be properly ordered, and every part\n* must have a non-null function assigned.\n* @param r root of subtree to check, may be null\n* @param lo lower bound (exclusive) of all parts in subtree.\n*   If null, then no lower bound\n* @param hi upper bound (exclusive) of all parts in subtree.\n*   If null, then no upper bound\n* @param p the parent part\n* @return whether the subtree checks out OK.\n* If false is returned, then exactly one report has been generated.\n*/",
+  "code": "private boolean checkInRange(FunctionalPart r, FunctionalPart lo, FunctionalPart hi, FunctionalPart p) {\nif (r == null) return true;\nif (r.function == null) return report(\"Has null function: \" + r);\nif (lo != null && compare(lo, r) >= 0) return report(\"Out of lo bound: \" + r + \" <= \" + lo);\nif (hi != null && compare(r,hi) >= 0) return report(\"Out of hi bound: \" + r + \" >= \" + hi);\n\n//Checking if the roots parent is equal to the parent parameter\nif(r.parent != p)return report(\"Out of root bound\");\n\n//r goes into the p param because when you move down the tree the root variable becomes the parent\nreturn checkInRange(r.left, lo, r,r) && checkInRange(r.right, r, hi,r);\n}",
+  "method_name": "checkInRange",
+  "parameters": "FunctionalPart r, FunctionalPart lo, FunctionalPart hi, FunctionalPart p",
+  "return_type": "boolean",
+  "return_variable": "true",
+  "called_methods": [
+    "report",
+    "compare"
+  ],
+  "local_variables": [
+    "true"
+  ],
+  "thrown_exceptions": []
+}

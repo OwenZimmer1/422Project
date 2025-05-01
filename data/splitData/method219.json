@@ -1,0 +1,17 @@
+{
+  "javadoc": "/*** Is this cell open below?\n* @param i row\n* @param j column\n* @return whether there is an opening down down\n* @exception IllegalArgumentException if coordinates out of range.\n*/",
+  "code": "public boolean isOpenDown(int i, int j) {\n\ncheckCell(i,j);\nif(i>=ropen.length)return false;\nelse if(ropen[i][j])return true;\nelse return false;\n}",
+  "method_name": "isOpenDown",
+  "parameters": "int i, int j",
+  "return_type": "boolean",
+  "return_variable": "false",
+  "called_methods": [
+    "checkCell"
+  ],
+  "local_variables": [
+    "false",
+    "true",
+    "false"
+  ],
+  "thrown_exceptions": []
+}

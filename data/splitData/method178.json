@@ -1,0 +1,15 @@
+{
+  "javadoc": "/*** Return the number of elements in the sequence.\n* @return number of elements in sequence\n*/",
+  "code": "public int size() {\nassert wellFormed() : \"invariant broken in size\";\nreturn size;\n}",
+  "method_name": "size",
+  "parameters": "",
+  "return_type": "int",
+  "return_variable": "size",
+  "called_methods": [
+    "wellFormed"
+  ],
+  "local_variables": [
+    "size"
+  ],
+  "thrown_exceptions": []
+}

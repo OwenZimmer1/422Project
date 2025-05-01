@@ -1,0 +1,13 @@
+{
+  "javadoc": "/*** @return the serial number of this part\n*/",
+  "code": "public String getSerial()\n{\nreturn serial;\n}",
+  "method_name": "getSerial",
+  "parameters": "",
+  "return_type": "String",
+  "return_variable": "serial",
+  "called_methods": [],
+  "local_variables": [
+    "serial"
+  ],
+  "thrown_exceptions": []
+}

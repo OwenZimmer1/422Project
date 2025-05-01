@@ -1,0 +1,14 @@
+{
+  "javadoc": "/*** Start running through all parts with the given function.\n* @param function kind of parts to access, may be null (any part)\n*/",
+  "code": "public void start(String function)\n{\n// TODO: don't forget to assert the invariant twice: before and after\nassert wellFormed():\"invariant broken in start.\";\nif(function == null)\n{\nthis.function =null;\ncurrentIndex=0;\nreturn;\n}\nthis.function = function;\ncurrentIndex = -1;\nmoveForStart();\nassert wellFormed():\"invariant broken in start\";\n}",
+  "method_name": "start",
+  "parameters": "String function",
+  "return_type": "void",
+  "return_variable": "",
+  "called_methods": [
+    "wellFormed",
+    "moveForStart"
+  ],
+  "local_variables": [],
+  "thrown_exceptions": []
+}

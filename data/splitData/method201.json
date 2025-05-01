@@ -1,0 +1,16 @@
+{
+  "javadoc": "/*** Change the comparator used to order the robot parts.\n* The parts will be reorganized as necessary to accommodate the new order,\n* but two parts will be reordered only if necessary.\n* (The sorting is \"stable\".)\n* @param comp comparator to use, if null, then henceforth the parts\n* can be in any order.\n*/",
+  "code": "public void setComparator(Comparator<FunctionalPart> comp) {\nassert wellFormed() : \"invariant broken in setComparator\";\n//: Complete this!\n// Hint: After handling special easy case,\n//   reinsert all parts back into an emptied tree\n//      in pre-order over the tree.\n//      This requires a new helper method.\n\ncomparator = comp;\nif(root == null)return;\nFunctionalPart savedRoot = root;\nroot = null;\ncompHelper(savedRoot);\n\nassert wellFormed() : \"invariant broken by setComparator\";\n}",
+  "method_name": "setComparator",
+  "parameters": "Comparator<FunctionalPart> comp",
+  "return_type": "void",
+  "return_variable": "",
+  "called_methods": [
+    "wellFormed",
+    "compHelper"
+  ],
+  "local_variables": [
+    "savedRoot"
+  ],
+  "thrown_exceptions": []
+}

@@ -1,0 +1,29 @@
+{
+  "javadoc": "/*** Write out the maze in a specific textual and human readable form.\n* For example:\n* <pre>\n* +-+-+-+ +\n* |   |   |\n* + + + +-+\n* | |     |\n* + +---+ +\n*       | |\n* +-----+-+\n* </pre>\n*\n* @param pw print writer to write to, must not be null\n*/",
+  "code": "public void write(PrintWriter pw) {\nint copenCount =0;\nint ropenCount=0;\nStringBuilder table = new StringBuilder();\n\nfor(int i =0; i < rows()*2+1; i++)//change second condition\n{\n//special cases\nif(i ==0)//first line\n{\nfor(int a=0;a < columns()*2+1;a++)\n{\nif(a == columns()*2-1) table.append(\" \");\nelse if(a%2==0) table.append(\"+\");\nelse table.append(\"-\");\n}\n}\nelse if(i == rows()*2-1)//second to last line\n{\nfor(int b =0;b < columns()*2+1;b++)\n{\nif(b==0 || b%2==1)table.append(\" \");\nelse{\nif(isOpenRight(ropenCount,copenCount))table.append(\" \");\nelse table.append(\"|\");\ncopenCount++;\n}\n}\ncopenCount=0;\n}\n\n//Main cases\nelse if(i%2==1)//copen\n{\nfor(int d=0; d <columns()*2+1;d++)\n{\nif(d == 0 || d == columns()*2) table.append(\"|\");\nelse if(d%2==0)\n{\nif(isOpenRight(ropenCount,copenCount)) table.append(\" \");\nelse table.append(\"|\");\ncopenCount++;\n}\nelse table.append(\" \");\n}\ncopenCount=0;\n}\nelse if(i%2==0)//ropen\n{\nfor (int e = 0; e < columns() * 2 + 1; e++) {\nif (e % 2 == 1) {\nif (isOpenDown(ropenCount, copenCount)) table.append(\" \");\nelse table.append(\"-\");\ncopenCount++;\n} else table.append(\"+\");\n}\nropenCount++;\ncopenCount = 0;\nif(i == rows()*2)\n{\ntable.append(\"\\n\");\nString finalMaze = table.toString();\npw.write(finalMaze);\n}\n}\ntable.append(\"\\n\");\n}\n}",
+  "method_name": "write",
+  "parameters": "PrintWriter pw",
+  "return_type": "void",
+  "return_variable": "",
+  "called_methods": [
+    "StringBuilder",
+    "rows",
+    "columns",
+    "append",
+    "isOpenRight",
+    "isOpenDown",
+    "toString"
+  ],
+  "local_variables": [
+    "copenCount",
+    "ropenCount",
+    "table",
+    "i",
+    "a",
+    "b",
+    "d",
+    "e",
+    "finalMaze"
+  ],
+  "thrown_exceptions": []
+}

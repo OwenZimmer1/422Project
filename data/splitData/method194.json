@@ -1,0 +1,11 @@
+{
+  "javadoc": "/*** Check a tree of parts within bounds.\n* The subtree must be properly ordered, and every part\n* must have a non-null function assigned.\n* @param r root of subtree to check, may be null\n* @param lo lower bound (exclusive) of all parts in subtree.\n*   If null, then no lower bound\n* @param hi upper bound (exclusive) of all parts in subtree.\n*   If null, then no upper bound\n* @return whether the subtree checks out OK.\n* If false is returned, then exactly one report has been generated.\n*/",
+  "code": "private boolean checkInRange(FunctionalPart r, FunctionalPart lo, FunctionalPart hi) //Received assistance from Alex Dueppen in tutoring center\n{",
+  "method_name": "checkInRange",
+  "parameters": "FunctionalPart r, FunctionalPart lo, FunctionalPart hi",
+  "return_type": "boolean",
+  "return_variable": "",
+  "called_methods": [],
+  "local_variables": [],
+  "thrown_exceptions": []
+}

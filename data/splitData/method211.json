@@ -1,0 +1,28 @@
+{
+  "javadoc": "/***\tA method that removes a part with the assistance of a removal helper method\n* @param p\n* @return ture if part is removed\n* @return false if part is not removed\n*/",
+  "code": "public boolean remove(Part p)\n{\nif(root == null)return false;\n\nassert wellFormed():\"invariant broken at the start of remove\";\n\n//check if the part is even in the robot\nFunctionalPart traverse = getFirst();\nif(traverse.getNext()!=null && !traverse.equals((FunctionalPart)p))\n{\ntraverse = traverse.getNext();\nwhile(traverse !=null)\n{\nif(traverse.equals((FunctionalPart)p))break;\ntraverse = traverse.getNext();\n}\n}\nif(traverse != (FunctionalPart)p || traverse == null)return false;\n\nFunctionalPart saveRoot = root;\nFunctionalPart holdP = (FunctionalPart) p;\nif(holdP.getFunction() ==null)return false;\n\np = doRemove(root,(FunctionalPart) p);\nassert wellFormed():\"invariant broken at the end of remove\";\n\n//check the root\n//check the parent\n//if niether is different return false\nif(saveRoot != null && !saveRoot.equals(root)){\nreturn true;\n}\nelse if(p != null && p.equals(holdP))\n{\nreturn false;\n}\nelse return false;\n}",
+  "method_name": "remove",
+  "parameters": "Part p",
+  "return_type": "boolean",
+  "return_variable": "false",
+  "called_methods": [
+    "wellFormed",
+    "getFirst",
+    "getNext",
+    "equals",
+    "getFunction",
+    "doRemove"
+  ],
+  "local_variables": [
+    "false",
+    "traverse",
+    "false",
+    "saveRoot",
+    "holdP",
+    "false",
+    "true",
+    "false",
+    "false"
+  ],
+  "thrown_exceptions": []
+}

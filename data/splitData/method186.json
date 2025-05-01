@@ -1,0 +1,21 @@
+{
+  "javadoc": "/*** Add a part after the current element.  If there is no current element,\n* then add at the end.  There must have been a function\n* defined (See [@link #start(String)}).\n* @throws IllegalStateException if no function defined, or if the function was null\n* @param p part to add at this spot, must not be null.\n*/",
+  "code": "public void addAfter(Part p) {\n// TODO: (remember the invariant!)\nassert wellFormed():\"invariant broken in addAfter\";\nif(p==null) throw new NullPointerException(\"Cannot add null data to the array.\");\nensureCapacity(size*2);\nif(function == null)throw new IllegalStateException(\"function cannot be null or undefined in addBefore.\");\nif(size==0)\n{\ndoAdd(0,p);\nassert wellFormed():\"invariant broken by addAfter\";\nreturn;\n} else if(currentIndex==size) {\ndoAdd(size, p);\nassert wellFormed():\"invariant broken by addAfter\";\nreturn;\n}\n\nshiftRight(currentIndex);\ndoAdd(currentIndex+1,p);\ncurrentIndex++;\nassert wellFormed():\"invariant broken by addAfter\";\n}",
+  "method_name": "addAfter",
+  "parameters": "Part p",
+  "return_type": "void",
+  "return_variable": "",
+  "called_methods": [
+    "wellFormed",
+    "NullPointerException",
+    "ensureCapacity",
+    "IllegalStateException",
+    "doAdd",
+    "shiftRight"
+  ],
+  "local_variables": [],
+  "thrown_exceptions": [
+    "IllegalStateException",
+    "NullPointerException"
+  ]
+}

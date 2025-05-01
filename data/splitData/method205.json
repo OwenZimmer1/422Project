@@ -1,0 +1,16 @@
+{
+  "javadoc": "/*** Compare two parts according to our purposes.\n* We use the supplied comparator except when it\n* says it doesn't care, in which case, we use the (unique) id to\n* distinguish two parts, older first.\n* @param p1 first part, must not be null\n* @param p2 second part, must not be null\n* @return comparison, only 0 if p1 and p2 are the same\n*/",
+  "code": "private int compare(FunctionalPart p1, FunctionalPart p2) {\nif (comparator != null) {\nint c= comparator.compare(p1, p2);\nif (c != 0) return c;\n}\nreturn p1.getId() - p2.getId();\n}",
+  "method_name": "compare",
+  "parameters": "FunctionalPart p1, FunctionalPart p2",
+  "return_type": "int",
+  "return_variable": "c",
+  "called_methods": [
+    "getId"
+  ],
+  "local_variables": [
+    "c",
+    "c"
+  ],
+  "thrown_exceptions": []
+}

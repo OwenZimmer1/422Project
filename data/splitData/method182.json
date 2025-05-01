@@ -1,0 +1,16 @@
+{
+  "javadoc": "/*** Return the current element.\n* This method can only be called if there is a current element.\n* @return the part which is current\n* @throws IllegalStateException if there is no current element\n*/",
+  "code": "public Part getCurrent() {\nassert wellFormed():\"invariant broken in getCurrent.\";\nif(parts[currentIndex] == null)throw new IllegalStateException(\"There is no current element in getCurrent.\");\nreturn parts[currentIndex];\n}",
+  "method_name": "getCurrent",
+  "parameters": "",
+  "return_type": "Part",
+  "return_variable": "parts[currentIndex]",
+  "called_methods": [
+    "wellFormed",
+    "IllegalStateException"
+  ],
+  "local_variables": [],
+  "thrown_exceptions": [
+    "IllegalStateException"
+  ]
+}

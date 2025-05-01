@@ -1,0 +1,11 @@
+{
+  "javadoc": "/*** Exception thrown by {@link #read} if it notices a problem.\n*\n*/",
+  "code": "public static class ParseException extends IOException {",
+  "method_name": "unknown",
+  "parameters": "",
+  "return_type": "unknown",
+  "return_variable": "",
+  "called_methods": [],
+  "local_variables": [],
+  "thrown_exceptions": []
+}

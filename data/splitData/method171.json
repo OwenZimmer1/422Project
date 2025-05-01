@@ -1,0 +1,14 @@
+{
+  "javadoc": "/*** Indicates whether some other object is \"equal to\" this one.\n* @param x the reference object with which to compare.\n* @return true if this object is the same as the obj argument; false otherwise.\n*/",
+  "code": "@Override//implementation\npublic boolean equals(Object x)\n{\nif(!(x instanceof Part)) return false;\nPart p = (Part)x;\nreturn serial.equals(p.serial);\n}",
+  "method_name": "equals",
+  "parameters": "Object x",
+  "return_type": "boolean",
+  "return_variable": "false",
+  "called_methods": [],
+  "local_variables": [
+    "false",
+    "p"
+  ],
+  "thrown_exceptions": []
+}

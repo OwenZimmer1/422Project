@@ -1,0 +1,11 @@
+{
+  "javadoc": "/**Change the stored value to the given value.\n* @param newValue new value for cell, may be null\n*/",
+  "code": "public void set(T newValue) {\nvalue = newValue;\n}",
+  "method_name": "set",
+  "parameters": "T newValue",
+  "return_type": "void",
+  "return_variable": "",
+  "called_methods": [],
+  "local_variables": [],
+  "thrown_exceptions": []
+}

@@ -1,0 +1,17 @@
+{
+  "javadoc": "/*** Return the first part in this robot.\n* @return the first part, null if this robot is empty\n*/",
+  "code": "public FunctionalPart getFirst()\n{\nassert wellFormed():\"invariant broken in getFirst\";\nif(root == null)\n{\nreturn null;\n}\nFunctionalPart getter = root;\nwhile(getter.left != null)\n{\ngetter = getter.left;\n}\nassert wellFormed():\"invariant broken in getFirst\";\nreturn getHelper(getter,null, new Cell<>(0));\n}",
+  "method_name": "getFirst",
+  "parameters": "",
+  "return_type": "FunctionalPart",
+  "return_variable": "null",
+  "called_methods": [
+    "wellFormed",
+    "getHelper"
+  ],
+  "local_variables": [
+    "null",
+    "getter"
+  ],
+  "thrown_exceptions": []
+}

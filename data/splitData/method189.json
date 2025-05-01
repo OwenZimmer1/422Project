@@ -1,0 +1,11 @@
+{
+  "javadoc": "/*** Create a wired robot without parts\n* and no order.\n*/",
+  "code": "public WiredRobot()\n{\nthis(null);\n}",
+  "method_name": "WiredRobot",
+  "parameters": "",
+  "return_type": "public",
+  "return_variable": "",
+  "called_methods": [],
+  "local_variables": [],
+  "thrown_exceptions": []
+}

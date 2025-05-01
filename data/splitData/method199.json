@@ -1,0 +1,15 @@
+{
+  "javadoc": "/*** Helper method for addPart.\n* @param r\n* @param add\n* @return r\n*/",
+  "code": "private FunctionalPart insert(FunctionalPart r, FunctionalPart add)\n{\n\nif(r==null)\n{\nr=add;\n}\nelse if(compare(add,r) < 0)\n{\nr.left = insert(r.left,add);\n}\nelse//if(compare(add,r) > 0)\n{\nr.right = insert(r.right,add);\n}\nreturn r;\n}",
+  "method_name": "insert",
+  "parameters": "FunctionalPart r, FunctionalPart add",
+  "return_type": "FunctionalPart",
+  "return_variable": "r",
+  "called_methods": [
+    "compare"
+  ],
+  "local_variables": [
+    "r"
+  ],
+  "thrown_exceptions": []
+}

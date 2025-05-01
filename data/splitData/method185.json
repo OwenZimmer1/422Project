@@ -1,0 +1,20 @@
+{
+  "javadoc": "/*** Add a part before the current element.  If there is no current element,\n* then add at the beginning.  There must have been a function\n* defined (See [@link #start(String)}).\n* @throws IllegalStateException if no function defined, or if the function was null\n* @param p part to add at this spot, must not be null.\n*/",
+  "code": "public void addBefore(Part p) {\nassert wellFormed() : \"invariant broken in addBefore\";\n// TODO\nif(p==null)throw new NullPointerException(\"Null data cannot be added to the array.\");\nif(function == null)throw new IllegalStateException(\"function cannot be null or undefined in addBefore.\");\nensureCapacity(size*2);\nif(functions[currentIndex]==null)\n{\nshiftRight(0);\nfunctions[0] = function;\nparts[0] = p;\ncurrentIndex=0;\n}\nelse\n{\nshiftRight(currentIndex);\nfunctions[currentIndex] = function;\nparts[currentIndex] = p;\n}\nsize++;\nensureCapacity(size*2);\nassert wellFormed() : \"invariant broken by addBefore\";\n}",
+  "method_name": "addBefore",
+  "parameters": "Part p",
+  "return_type": "void",
+  "return_variable": "",
+  "called_methods": [
+    "wellFormed",
+    "NullPointerException",
+    "IllegalStateException",
+    "ensureCapacity",
+    "shiftRight"
+  ],
+  "local_variables": [],
+  "thrown_exceptions": [
+    "IllegalStateException",
+    "NullPointerException"
+  ]
+}

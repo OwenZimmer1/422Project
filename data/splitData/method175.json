@@ -1,0 +1,18 @@
+{
+  "javadoc": "/*** Return once the data structure has been updated so that\n* the capacity of the arrays is at least the parameter.\n* If we create new arrays, they will be at least twice as long as the existing arrays.\n* This code assumes the arrays are the same length, and preserves this property.\n* @param cap capacity desired\n*/",
+  "code": "private void ensureCapacity(int cap)\n{\n// Follow activity but update to handle two arrays at once (same length)\nif(cap <= functions.length && cap <= parts.length) return;\nint newSize = functions.length*2;\nif(newSize < cap)cap = newSize;\nString[] newFunctions = new String[newSize];\nPart[] newParts = new Part[newSize];\nfor(int i=0; i < size; ++i)\n{\nnewFunctions[i] = functions[i];\nnewParts[i] = parts[i];\n}\nfunctions = newFunctions;\nparts = newParts;\n}",
+  "method_name": "ensureCapacity",
+  "parameters": "int cap",
+  "return_type": "void",
+  "return_variable": "",
+  "called_methods": [
+    "once"
+  ],
+  "local_variables": [
+    "newSize",
+    "newFunctions",
+    "newParts",
+    "i"
+  ],
+  "thrown_exceptions": []
+}

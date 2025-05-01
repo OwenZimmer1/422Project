@@ -1,0 +1,26 @@
+{
+  "javadoc": "/*** Read in contents of a maze printed with ASCII graphics from the file.\n* The rows and columns are already set (do not read these).\n* Example (assuming rows = 3, columns = 4)\n* <pre>\n* +-+-+-+ +\n* |   |   |\n* + + + +-+\n* | |     |\n* + +---+ +\n*       | |\n* +-----+-+\n* </pre>\n* @param r buffered reader to read lines from\n* @throws IOException if a problem happens with reading\n* @throws ParseException if the maze is badly formatted.\n* (The implementation is also permitted to simply overlook\n* format errors)\n*/",
+  "code": "public void read(BufferedReader r) throws IOException {\n//read() will return the ascii value of the character\nString reader;\nr.readLine();\nfor(int i =0; i < rows;i++) {//rows\nreader=r.readLine();\nfor (int j = 2; j < reader.length();j+=2)//columns\n{\nchar ha = reader.charAt(j);\nif(ha == ' ')setOpenRight(i,(j/2)-1,true);\n}\nif(i!=rows-1) {//rows\nreader = r.readLine();\nfor (int j = 1; j < reader.length(); j+=2)\n{\nchar ha =reader.charAt(j);\nif(ha == ' ')setOpenDown(i,j/2,true);\n}\n}\n\n}\n}",
+  "method_name": "read",
+  "parameters": "BufferedReader r",
+  "return_type": "void",
+  "return_variable": "the ascii value of the character\nString reader",
+  "called_methods": [
+    "readLine",
+    "length",
+    "charAt",
+    "setOpenRight",
+    "setOpenDown"
+  ],
+  "local_variables": [
+    "reader",
+    "i",
+    "reader",
+    "j",
+    "ha",
+    "reader",
+    "j",
+    "ha"
+  ],
+  "thrown_exceptions": []
+}

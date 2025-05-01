@@ -1,0 +1,20 @@
+{
+  "javadoc": "/*** Move the cursor to the next part with the current function.\n* If there is no such part, then after this call, there is no current element.\n* @throws IllegalStateException\n*/",
+  "code": "public void advance() {\nassert wellFormed() : \"invariant broken in advance\";\n// TODO (our solution uses the helper method)\nif(currentIndex > size-1)throw new IllegalStateException(\"Current index is greater than the size.\");\nif(function==null)\n{\ncurrentIndex++;\nassert wellFormed():\"invariant broken by advance.\";\nreturn;\n}\nfor(int i =currentIndex+1;i < size;i++) {\nif(function.equals(functions[i])){\ncurrentIndex=i;\nassert wellFormed():\"invariant broken by advance.\";\nreturn;\n}\n}\ncurrentIndex=size;\nassert wellFormed() : \"invariant broken by advance\";\n}",
+  "method_name": "advance",
+  "parameters": "",
+  "return_type": "void",
+  "return_variable": "",
+  "called_methods": [
+    "wellFormed",
+    "TODO",
+    "IllegalStateException",
+    "equals"
+  ],
+  "local_variables": [
+    "i"
+  ],
+  "thrown_exceptions": [
+    "IllegalStateException"
+  ]
+}

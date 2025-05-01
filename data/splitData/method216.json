@@ -1,0 +1,19 @@
+{
+  "javadoc": "/*** Is this cell open to the left?\n* As a special case, the bottom left cell is open to the left\n* (this is the maze entry).\n* @param i row\n* @param j column\n* @return whether there is an opening to the left.\n* @exception IllegalArgumentException if coordinates out of range.\n*/",
+  "code": "public boolean isOpenLeft(int i, int j) {\ncheckCell(i,j);\nif(j==0 && rows()-1 == i)return true;//special case\n\nif(j==0) return false;\nelse if(copen[i][j-1])return true;\nelse return false;\n}",
+  "method_name": "isOpenLeft",
+  "parameters": "int i, int j",
+  "return_type": "boolean",
+  "return_variable": "true",
+  "called_methods": [
+    "checkCell",
+    "rows"
+  ],
+  "local_variables": [
+    "true",
+    "false",
+    "true",
+    "false"
+  ],
+  "thrown_exceptions": []
+}

@@ -1,0 +1,19 @@
+{
+  "javadoc": "/*** Return the part with the given function.\n* @param function the type of part to look for, null means any part\n* @param index zero-based index of part to return of the given type, must not be negative\n* @return indicated part, or null if no such part (index is at least the number of this kind of kind)\n*/",
+  "code": "@Override // required\npublic Part getPart(String function, int index) {\nif(index < 0)throw new IllegalArgumentException(\"Index cannot be negative.\");\n\nPart result = null;\n\nif(function == null  || function.equals(ARM))\n{\nif(arm1 != null)\n{\nif(index-- == 0)result = arm1;\n}\nif(arm2 != null)\n{\nif(index-- == 0)result = arm2;\n}\n}\nif(function == null||function.equals(LEG))\n{\nif(leg1 != null)\n{\nif(index-- == 0)result = leg1;\n}\n\nif(leg2 != null)\n{\nif(index-- == 0)result = leg2;\n}\n}\nif(function == null || function.equals(\"head\"))\n{\nif(index-- == 0) result = otherPart;\n}\n\nreturn result;\n}",
+  "method_name": "getPart",
+  "parameters": "String function, int index",
+  "return_type": "Part",
+  "return_variable": "result",
+  "called_methods": [
+    "IllegalArgumentException",
+    "equals"
+  ],
+  "local_variables": [
+    "result",
+    "result"
+  ],
+  "thrown_exceptions": [
+    "IllegalArgumentException"
+  ]
+}

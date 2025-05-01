@@ -1,0 +1,11 @@
+{
+  "javadoc": "/*** Create an empty part sequence.\n*/",
+  "code": "public DynamicArrayPartSeq() {\nthis(INITIAL_CAPACITY); // call specifying constructor to do the work\n// no assertion required because other constructor asserts it\n}",
+  "method_name": "DynamicArrayPartSeq",
+  "parameters": "",
+  "return_type": "public",
+  "return_variable": "",
+  "called_methods": [],
+  "local_variables": [],
+  "thrown_exceptions": []
+}

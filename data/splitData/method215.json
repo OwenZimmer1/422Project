@@ -1,0 +1,15 @@
+{
+  "javadoc": "/*** Create a maze of the given size, in which everything is blocked.\n* @param rows number of rows, must be positive\n* @param columns number of columns, must be positive\n*/",
+  "code": "public Maze(int rows, int columns) {\nif (rows < 1 || columns < 1) throw new IllegalArgumentException(\"Maze must not be empty\");\nthis.rows = rows;\nthis.columns = columns;\nropen = new boolean[rows-1][columns];\ncopen = new boolean[rows][columns-1];\n}",
+  "method_name": "Maze",
+  "parameters": "int rows, int columns",
+  "return_type": "public",
+  "return_variable": "",
+  "called_methods": [
+    "IllegalArgumentException"
+  ],
+  "local_variables": [],
+  "thrown_exceptions": [
+    "IllegalArgumentException"
+  ]
+}

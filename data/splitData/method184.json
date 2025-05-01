@@ -1,0 +1,18 @@
+{
+  "javadoc": "/*** Remove the current element.  Then the next part (of the function)\n* is made current, or there is no current if there are not more parts\n* (of the function).\n* @throws IllegalStateException if there is no current element\n*/",
+  "code": "public void removeCurrent() {\n// TODO: lots to do\nassert wellFormed(): \"invariant broken in removeCurrent\";\nif(functions[currentIndex] == null || parts[currentIndex]== null)\n{\nthrow new IllegalStateException(\"There is no current element.\");\n}\n\nfunctions[currentIndex]=null;\nparts[currentIndex]=null;\nsize--;\n\nif(currentIndex+1 < functions.length && functions[currentIndex+1]!=null) shiftLeft(currentIndex);\n\nif(size==0)\n{\nassert wellFormed():\"invariant broken by removeCurrent\";\nreturn;\n}\nelse if(function != null)\n{\nwhile(currentIndex<size)\n{\nif(function.equals(functions[currentIndex]))\n{\nbreak;\n}\ncurrentIndex++;\n}\n}\n\nassert wellFormed():\"invariant broken by removeCurrent\";\n}",
+  "method_name": "removeCurrent",
+  "parameters": "",
+  "return_type": "void",
+  "return_variable": "",
+  "called_methods": [
+    "wellFormed",
+    "IllegalStateException",
+    "shiftLeft",
+    "equals"
+  ],
+  "local_variables": [],
+  "thrown_exceptions": [
+    "IllegalStateException"
+  ]
+}
