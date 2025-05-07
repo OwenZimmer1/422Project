@@ -1,8 +1,8 @@
-javadoc,code,method_name,parameters,return_type,return_variable,called_methods,local_variables,thrown_exceptions
+javadoc,code,method_name,parameters,return_type,return_variable,called_methods,local_variables,thrown_exceptions,class_name
 "/*** Gets the location.
 *
 * @return the current location
-*/",public Point getLoc(){return location;},getLoc,,Point,location,[],['location'],[]
+*/",public Point getLoc(){return location;},getLoc,,Point,location,[],['location'],[],Ball
 "/*** Draws the ball, and if non-active also draws its vector.
 *
 * @param g the Graphics context on which to draw
@@ -28,14 +28,14 @@ throw new RuntimeException
 (""This class does not Implament Cloneable"");
 }
 
-}",draw,Graphics g,void,(Ball)super.clone(),"['setColor', 'fillOval', 'intX', 'intY', 'normalize', 'scale', 'drawLine', 'move', 'clone', 'RuntimeException']",['standard_vec'],['RuntimeException']
+}",draw,Graphics g,void,(Ball)super.clone(),"['setColor', 'fillOval', 'intX', 'intY', 'normalize', 'scale', 'drawLine', 'move', 'clone', 'RuntimeException']",['standard_vec'],['RuntimeException'],Ball
 "/*** Checks if the process is completed.
 * @return true, if is done */","public boolean isDone(){
-return finishedInstructions == totalInstructions;}",isDone,,boolean,finishedInstructions == totalInstructions,[],['finishedInstructions'],[]
+return finishedInstructions == totalInstructions;}",isDone,,boolean,finishedInstructions == totalInstructions,[],['finishedInstructions'],[],Process
 /**Perform a single instruction of the process. */,"public void performInstruction(){
 if (!isDone())
 finishedInstructions++;
-}",performInstruction,,void,,['isDone'],[],[]
+}",performInstruction,,void,,['isDone'],[],[],Process
 "/***  Returns a clone of this process that is identical in every way
 *  except that it has null links.
 *
@@ -53,7 +53,7 @@ catch (CloneNotSupportedException e){
 throw new RuntimeException(""forgot to make Cloneable?"");
 }
 return copy;
-}",clone,,Process,copy,['RuntimeException'],"['copy', 'copy']",['RuntimeException']
+}",clone,,Process,copy,['RuntimeException'],"['copy', 'copy']",['RuntimeException'],Process
 "/***  Checks for equality of this process with the parameter process.
 *  It will check everything except for the links.
 *
@@ -68,7 +68,7 @@ Process p = (Process) other;
 return p.totalInstructions == totalInstructions &&
 p.finishedInstructions == finishedInstructions &&
 p.name.equals(name);
-}",equals,Object other,boolean,false,[],"['false', 'p']",[]
+}",equals,Object other,boolean,false,[],"['false', 'p']",[],Process
 "/**Instantiates a new queue object.
 *  It will only contain a dummy process with null name and 0 instructions,
 *  linked circularly to itself. This dummy process should never be
@@ -81,7 +81,7 @@ dummy.prev = dummy;
 version = 0;
 manyItems = 0;
 assert wellFormed() : ""invariant failed in constructor"";
-}",Queue,,public,,"['Process', 'wellFormed']",[],[]
+}",Queue,,public,,"['Process', 'wellFormed']",[],[],Queue
 "/**Adds a new process to the end of the queue.
 *
 * @param p process to add to the end of this queue
@@ -104,7 +104,7 @@ version++;
 manyItems++;
 assert wellFormed() : ""invariant failed at end of offer"";
 return true;
-}",offer,Process p,boolean,true,"['wellFormed', 'NullPointerException', 'IllegalArgumentException']",['true'],"['IllegalArgumentException', 'NullPointerException']"
+}",offer,Process p,boolean,true,"['wellFormed', 'NullPointerException', 'IllegalArgumentException']",['true'],"['IllegalArgumentException', 'NullPointerException']",Queue
 "/**Add all processes from parameter queue into the back of this queue.
 *  The parameter queue should be empty after this method,
 * except if the parameter is the same as this, in which case, nothing happens.
@@ -129,7 +129,7 @@ pq.version++;
 
 assert wellFormed() : ""invariant failed at end of takeAll"";
 assert pq.wellFormed() : ""parameter queue invariant failed at end of takeAll"";
-}",takeAll,Queue pq,void,,"['wellFormed', 'NullPointerException']",[],['NullPointerException']
+}",takeAll,Queue pq,void,,"['wellFormed', 'NullPointerException']",[],['NullPointerException'],Queue
 "/**Returns the next process to be polled from this queue.
 *
 * @return the next process to be polled by this queue, or null if empty
@@ -139,7 +139,7 @@ public Process peek(){
 assert wellFormed() : ""invariant failed at start of peek"";
 if(manyItems == 0) return null;
 return dummy.next;
-}",peek,,Process,null,['wellFormed'],['null'],[]
+}",peek,,Process,null,['wellFormed'],['null'],[],Queue
 "/**Removes and returns the process at the start of this queue, null if empty.
 *  This method should never return the dummy process!
 *
@@ -158,7 +158,7 @@ version++;
 manyItems--;
 assert wellFormed() : ""invariant failed at end of poll"";
 return result;
-}",poll,,Process,null,['wellFormed'],"['null', 'result', 'result']",[]
+}",poll,,Process,null,['wellFormed'],"['null', 'result', 'result']",[],Queue
 "/**Returns the number of non-dummy processes in this queue.
 *
 * @return the number of non-dummy processes
@@ -167,13 +167,13 @@ return result;
 public int size() {
 assert wellFormed() : ""invariant of result failed at start of size()"";
 return manyItems;
-}",size,,int,manyItems,['wellFormed'],['manyItems'],[]
+}",size,,int,manyItems,['wellFormed'],['manyItems'],[],Queue
 "/*** gets x value
 *
 * @return current x value
 */","public double x() {
 return this.x;
-}",x,,double,this.x,[],[],[]
+}",x,,double,this.x,[],[],[],Point
 "/**Returns a new copy of this queue. The copy should be unaffected
 *  by subsequent changes made to this queue, and vice versa. The
 *  processes added to the copy should be clones.
@@ -213,7 +213,7 @@ public boolean hasNext() {
 assert wellFormed() : ""invariant failed at start of hasNext()"";
 if(version != myVersion) throw new ConcurrentModificationException(""versions don't match"");
 return cursor.next != dummy;
-}",clone,,Queue,copy,"['wellFormed', 'Queue', 'hasNext', 'ConcurrentModificationException']","['copy', 'source', 'copier', 'copy']",['ConcurrentModificationException']
+}",clone,,Queue,copy,"['wellFormed', 'Queue', 'hasNext', 'ConcurrentModificationException']","['copy', 'source', 'copier', 'copy']",['ConcurrentModificationException'],Queue
 "/**Returns the next process in this queue. This method should
 *  *not* call poll, or change the state of the queue in any way.
 *
@@ -227,7 +227,7 @@ if(!hasNext()) throw new NoSuchElementException(""no element found"");
 cursor = cursor.next;
 assert wellFormed() : ""invariant failed at end of next()"";
 return cursor;
-}",next,,Process,cursor,"['wellFormed', 'ConcurrentModificationException', 'hasNext', 'NoSuchElementException']",['cursor'],"['ConcurrentModificationException', 'NoSuchElementException']"
+}",next,,Process,cursor,"['wellFormed', 'ConcurrentModificationException', 'hasNext', 'NoSuchElementException']",['cursor'],"['ConcurrentModificationException', 'NoSuchElementException']",MyIterator
 "/**The main method.
 * @param args the arguments */","public static void main(String[] args) {
 if (args.length != 1) {
@@ -235,13 +235,13 @@ System.out.println(""Usage: Main <lexicon file>"");
 System.exit(1);
 }
 new Driver(args[0]).run();
-}",main,String[] args,void,,"['println', 'exit', 'Driver', 'run']",[],[]
+}",main,String[] args,void,,"['println', 'exit', 'Driver', 'run']",[],[],Driver
 "/**Instantiates a new driver, loading lexicon from file.
 * @param name the name of the file */","public Driver(String name) {
 lexicon = new Lexicon();
 filename = name;
 in = new Scanner(System.in);
-}",Driver,String name,public,,"['Lexicon', 'Scanner']",[],[]
+}",Driver,String name,public,,"['Lexicon', 'Scanner']",[],[],Driver
 "/*** Used to report an error found when checking the invariant.
 * By providing a string, this will help debugging the class if the invariant should fail.
 * @param error string to print to report the exact error found
@@ -249,7 +249,7 @@ in = new Scanner(System.in);
 */","private boolean report(String error) {
 reporter.accept(error);
 return false;
-}",report,String error,boolean,false,['accept'],['false'],[]
+}",report,String error,boolean,false,['accept'],['false'],[],Lexicon
 "/*** Count all the nodes in this subtree,
 * while checking that all the keys are all in the range (lo,hi),
 * and that the keys are arranged in BST form.
@@ -279,7 +279,7 @@ return 1 + leftCount + rightCount;
 * Otherwise return the number of nodes in the subtree.
 * Note that the bounds in recursive calls may be different.
 */
-}",checkInRange,"Node n, String lo, String hi",int,0,"['reportNeg', 'compareTo']","['leftCount', 'rightCount']",[]
+}",checkInRange,"Node n, String lo, String hi",int,0,"['reportNeg', 'compareTo']","['leftCount', 'rightCount']",[],Lexicon
 "/*** Check the invariant.
 * Returns false if any problem is found.
 * @return whether invariant is currently true.
@@ -289,13 +289,13 @@ int sizeGuess = checkInRange(root, null, null);
 if(sizeGuess == -1) return false;
 if(sizeGuess != manyNodes) return report(""manyNodes is wrong"");
 return true;
-}",wellFormed,,boolean,false,"['checkInRange', 'report']","['sizeGuess', 'false', 'true']",[]
+}",wellFormed,,boolean,false,"['checkInRange', 'report']","['sizeGuess', 'false', 'true']",[],Lexicon
 "/**Gets the size of this lexicon.
 * @return the count of strings in this lexicon
 */","public int size() {
 assert wellFormed() : ""invariant false at start of size()"";
 return manyNodes;
-}",size,,int,manyNodes,['wellFormed'],['manyNodes'],[]
+}",size,,int,manyNodes,['wellFormed'],['manyNodes'],[],Lexicon
 "/*** Gets the [lexicographically] least string in the lexicon.
 * @return the least string or null if empty
 */","public String getMin() {
@@ -306,7 +306,7 @@ while(source.left != null) {
 source = source.left;
 }
 return source.string;
-}",getMin,,String,null,['wellFormed'],"['null', 'source']",[]
+}",getMin,,String,null,['wellFormed'],"['null', 'source']",[],Lexicon
 "/*** Checks if the given string is in the lexicon.
 * @param str the string to search for (maybe null)
 * @return true if str is in the lexicon, false otherwise
@@ -320,13 +320,13 @@ else if(source.string.compareTo(str) < 0) source = source.right;
 else return true;
 }
 return false;
-}",contains,String str,boolean,false,"['wellFormed', 'compareTo']","['false', 'source', 'true', 'false']",[]
+}",contains,String str,boolean,false,"['wellFormed', 'compareTo']","['false', 'source', 'true', 'false']",[],Lexicon
 "/*** gets y value
 *
 * @return current y value
 */","public double y() {
 return this.y;
-}",y,,double,this.y,[],[],[]
+}",y,,double,this.y,[],[],[],Point
 "/*** Gets the next [lexicographically] greater string than the given string.
 * @param str the string of which to find the next greatest
 * @return the next string greater than str
@@ -346,7 +346,7 @@ source = source.right;
 }
 if(before == null) return null;
 return before.string;
-}",getNext,String str,String,null,"['wellFormed', 'NullPointerException', 'compareTo']","['source', 'before', 'null']",['NullPointerException']
+}",getNext,String str,String,null,"['wellFormed', 'NullPointerException', 'compareTo']","['source', 'before', 'null']",['NullPointerException'],Lexicon
 "/*** Accept into the consumer all strings in this lexicon.
 * @param consumer the consumer to accept the strings
 * @throws NullPointerException if consumer is null
@@ -354,7 +354,7 @@ return before.string;
 // We don't assert the invariant, because we do nothing other than
 // call another public method.
 consumeAllWithPrefix(consumer,"""");
-}",consumeAll,Consumer<String> consumer,void,,['consumeAllWithPrefix'],[],[]
+}",consumeAll,Consumer<String> consumer,void,,['consumeAllWithPrefix'],[],[],Lexicon
 "/*** Accept into the consumer all strings that start with the given prefix.
 * @param consumer the consumer to accept the strings
 * @param prefix the prefix to find all strings starting with
@@ -364,7 +364,7 @@ consumeAllWithPrefix(consumer,"""");
 if(prefix == null) throw new NullPointerException(""prefix is null"");
 if(consumer == null) throw new NullPointerException(""consumer is null"");
 consumeAllHelper(consumer, prefix, root);
-}",consumeAllWithPrefix,"Consumer<String> consumer, String prefix",void,,"['checks', 'NullPointerException', 'consumeAllHelper']",[],['NullPointerException']
+}",consumeAllWithPrefix,"Consumer<String> consumer, String prefix",void,,"['checks', 'NullPointerException', 'consumeAllHelper']",[],['NullPointerException'],Lexicon
 "/*** Add a new string to the lexicon. If it already exists, do nothing and return false.
 * @param str the string to add (must not be null)
 * @return true if str was added, false otherwise
@@ -376,7 +376,7 @@ int manyNodesBefore = manyNodes;
 root = addHelper(root, str);
 assert wellFormed() : ""invariant false at end of add()"";
 return manyNodesBefore != manyNodes;
-}",add,String str,boolean,manyNodesBefore != manyNodes,"['wellFormed', 'NullPointerException', 'addHelper']",['manyNodesBefore'],['NullPointerException']
+}",add,String str,boolean,manyNodesBefore != manyNodes,"['wellFormed', 'NullPointerException', 'addHelper']",['manyNodesBefore'],['NullPointerException'],Lexicon
 "/*** Add all strings in the array into this lexicon from the range [lo,hi).
 * The elements are added recursively from the middle, so that
 * if the array was sorted, the tree will be balanced.
@@ -402,7 +402,7 @@ count += addAll(array, mid + 1, hi);
 // you shouldn't *need* to check the invariant. We will anyway.
 assert wellFormed() : ""invariant false at end of addAll()"";
 return count++;
-}",addAll,"String[] array, int lo, int hi",int,0,"['wellFormed', 'method', 'add', 'directly']","['count', 'mid']",[]
+}",addAll,"String[] array, int lo, int hi",int,0,"['wellFormed', 'method', 'add', 'directly']","['count', 'mid']",[],Lexicon
 "/*** Copy all the strings from lexicon (in sorted order) into the array starting
 * at the given index.  Return the next index for (later) elements.
 * This is a helper method for {@link #toArray(String[])}.
@@ -417,7 +417,7 @@ array[index] = root.string;
 index++;
 index = copyInto(array, root.right, index);
 return index;
-}",copyInto,"String[] array, Node root, int index",int,index,[],"['index', 'index']",[]
+}",copyInto,"String[] array, Node root, int index",int,index,[],"['index', 'index']",[],Lexicon
 "/*** Return an array of all the strings in this lexicon (in order).
 * @param array to use unless null or too small
 * @return array copied into
@@ -432,7 +432,7 @@ copyInto(array, root, 0);
 return array;
 }
 
-}",toArray,String[] array,String[],array2,"['wellFormed', 'copyInto']","['array2', 'array2', 'array']",[]
+}",toArray,String[] array,String[],array2,"['wellFormed', 'copyInto']","['array2', 'array2', 'array']",[],Lexicon
 "/*** Used to report an error found when checking the invariant.
 * By providing a string, this will help debugging the class if the invariant should fail.
 * @param error string to print to report the exact error found
@@ -440,7 +440,7 @@ return array;
 */","private boolean report(String error) {
 reporter.accept(error);
 return false;
-}",report,String error,boolean,false,['accept'],['false'],[]
+}",report,String error,boolean,false,['accept'],['false'],[],Lexicon
 "/*** Count all the nodes in this subtree,
 * while checking that all the keys are all in the range (lo,hi),
 * and that the keys are arranged in BST form.
@@ -473,7 +473,7 @@ if (rightSubtree < 0) return -1;
 
 //otherwise return 1 + nodes in subtrees
 return 1 + leftSubtree + rightSubtree;
-}",checkInRange,"Node n, String lo, String hi",int,0,"['reportNeg', 'equals', 'compareTo']","['leftSubtree', 'rightSubtree']",[]
+}",checkInRange,"Node n, String lo, String hi",int,0,"['reportNeg', 'equals', 'compareTo']","['leftSubtree', 'rightSubtree']",[],Lexicon
 "/*** Check the invariant.
 * Returns false if any problem is found.
 * @return whether invariant is currently true.
@@ -483,13 +483,13 @@ int n = checkInRange(root, null, null);
 if (n < 0) return false; // problem already reported
 if (n != numNodes) return report(""numNodes is "" + numNodes + "" but should be "" + n);
 return true;
-}",wellFormed,,boolean,false,"['checkInRange', 'report']","['n', 'false', 'true']",[]
+}",wellFormed,,boolean,false,"['checkInRange', 'report']","['n', 'false', 'true']",[],Lexicon
 "/*** gets x value to nearest integer
 *
 * @return x value to nearest integer
 */","public int intX() {
 return (int)Math.round(this.x());
-}",intX,,int,(int)Math.round(this.x()),"['round', 'x']",[],[]
+}",intX,,int,(int)Math.round(this.x()),"['round', 'x']",[],[],Point
 "/*** Gets the [lexicographically] least string in the lexicon.
 * @return the least string or null if empty
 */","public String getMin() {
@@ -497,7 +497,7 @@ assert wellFormed() : ""invariant false at start of getMin()"";
 Iterator<String> it = iterator();
 if(it.hasNext()) return it.next();
 return null;
-}",getMin,,String,it.next(),"['wellFormed', 'iterator', 'hasNext', 'next']","['it', 'null']",[]
+}",getMin,,String,it.next(),"['wellFormed', 'iterator', 'hasNext', 'next']","['it', 'null']",[],Lexicon
 "/*** Gets the next [lexicographically] greater string than the given string.
 * @param str the string of which to find the next greatest
 * @return the next string greater than str, or null if no other
@@ -517,13 +517,13 @@ if(it.hasNext()) next = it.next();
 else next = null;
 }
 return next;
-}",getNext,String str,String,next,"['wellFormed', 'NullPointerException', 'concat', 'iterator', 'hasNext', 'next', 'equals']","['it', 'next', 'next', 'next']",['NullPointerException']
+}",getNext,String str,String,next,"['wellFormed', 'NullPointerException', 'concat', 'iterator', 'hasNext', 'next', 'equals']","['it', 'next', 'next', 'next']",['NullPointerException'],Lexicon
 "/*** Accept into the consumer all strings in this lexicon.
 * @param consumer the consumer to accept the strings
 * @throws NullPointerException if consumer is null
 */","public void consumeAll(Consumer<String> consumer) {
 consumeAllWithPrefix(consumer,"""");
-}",consumeAll,Consumer<String> consumer,void,,['consumeAllWithPrefix'],[],[]
+}",consumeAll,Consumer<String> consumer,void,,['consumeAllWithPrefix'],[],[],Lexicon
 "/*** Accept into the consumer all strings that start with the given prefix.
 * @param consumer the consumer to accept the strings
 * @param prefix the prefix to find all strings starting with
@@ -540,7 +540,7 @@ String next = it.next();
 if(next.startsWith(prefix)) consumer.accept(next);
 else done = true;
 }
-}",consumeAllWithPrefix,"Consumer<String> consumer, String prefix",void,,"['wellFormed', 'NullPointerException', 'iterator', 'hasNext', 'next', 'startsWith', 'accept']","['it', 'done', 'next', 'done']",['NullPointerException']
+}",consumeAllWithPrefix,"Consumer<String> consumer, String prefix",void,,"['wellFormed', 'NullPointerException', 'iterator', 'hasNext', 'next', 'startsWith', 'accept']","['it', 'done', 'next', 'done']",['NullPointerException'],Lexicon
 "/*** Add a new string to the lexicon. If it already exists, do nothing and return false.
 * @param str the string to add (must not be null)
 * @return true if str was added, false otherwise
@@ -573,7 +573,7 @@ version++;
 // XXX: Something is missing from this code that is needed for Homework #9
 assert wellFormed() : ""invariant false at end of add()"";
 return result;
-}",add,String str,boolean,result,"['wellFormed', 'NullPointerException', 'equals', 'compareTo', 'Node']","['result', 'n', 'lag', 'n', 'result']",['NullPointerException']
+}",add,String str,boolean,result,"['wellFormed', 'NullPointerException', 'equals', 'compareTo', 'Node']","['result', 'n', 'lag', 'n', 'result']",['NullPointerException'],Lexicon
 "/*** Return an iterator that starts at the given element, or the next
 * available element from the set.
 * @param start starting element (or element before starting element,
@@ -581,7 +581,7 @@ return result;
 * @return iterator starting ""in the middle"" (never null)
 */","public Iterator<String> iterator(String start) {
 return new MyIterator(start);
-}",iterator,String start,Iterator<String>,new MyIterator(start),['MyIterator'],[],[]
+}",iterator,String start,Iterator<String>,new MyIterator(start),['MyIterator'],[],[],Lexicon
 "/*** Start the iterator at this element, or at the first element after it
 * (if any).
 * @param initial string to start at, must not be null
@@ -607,7 +607,7 @@ current = null;
 colVersion = version;
 
 assert wellFormed() : ""Iterator messed up after special constructor"";
-}",MyIterator,String initial,public,,"['given', 'NullPointerException', 'compareTo', 'push', 'add', 'wellFormed']",['source'],['NullPointerException']
+}",MyIterator,String initial,public,,"['given', 'NullPointerException', 'compareTo', 'push', 'add', 'wellFormed']",['source'],['NullPointerException'],MyIterator
 "/*** Used to report an error found when checking the invariant.
 * By providing a string, this will help debugging the class if the invariant should fail.
 * @param error string to print to report the exact error found
@@ -615,7 +615,7 @@ assert wellFormed() : ""Iterator messed up after special constructor"";
 */","private static boolean report(String error) {
 reporter.accept(error);
 return false;
-}",report,String error,boolean,false,['accept'],['false'],[]
+}",report,String error,boolean,false,['accept'],['false'],[],WordMultiset
 "/*** Count all the nodes in this subtree,
 * while checking that all the keys are all in the range (lo,hi),
 * and that the keys are arranged in BST form,
@@ -656,7 +656,7 @@ if (rightSubtree < 0) return -1;
 
 //otherwise return 1 + nodes in subtrees
 return 1 + leftSubtree + rightSubtree;
-}",checkInRange,"Node n, String lo, String hi, Node first, Node next",int,"reportNeg(""tree out of order"")","['reportNeg', 'equals', 'compareTo']","['leftSubtree', 'rightSubtree']",[]
+}",checkInRange,"Node n, String lo, String hi, Node first, Node next",int,"reportNeg(""tree out of order"")","['reportNeg', 'equals', 'compareTo']","['leftSubtree', 'rightSubtree']",[],WordMultiset
 "/*** Check the invariant.
 * Returns false if any problem is found.
 * @return whether invariant is currently true.
@@ -673,13 +673,13 @@ int n = checkInRange(dummy.right, null, null, min, null);
 if (n < 0) return false; // problem already reported
 if (n != numEntries) return report(""manyNodes is "" + numEntries + "" but should be "" + n);
 return true;
-}",wellFormed,,boolean,"report(""dummy is null"")","['report', 'checkInRange']","['min', 'n', 'false', 'true']",[]
+}",wellFormed,,boolean,"report(""dummy is null"")","['report', 'checkInRange']","['min', 'n', 'false', 'true']",[],WordMultiset
 "/*** gets y value to nearest integer
 *
 * @return y value to nearest integer
 */","public int intY() {
 return (int)Math.round(this.y());
-}",intY,,int,(int)Math.round(this.y()),"['round', 'y']",[],[]
+}",intY,,int,(int)Math.round(this.y()),"['round', 'y']",[],[],Point
 "/*** Look for the node for a particular key, creating it if requested
 * if it doesn't exist.
 * @param r subtree to look for the key, may be null
@@ -711,7 +711,7 @@ else if (c > 0) {
 return getNode(r.right, key, create, r);
 }else return r;
 
-}",getNode,"Node r, String key, boolean create, Node before",Node,null,"['Node', 'compareTo']","['null', 'n', 'source', 'n', 'c', 'r']",[]
+}",getNode,"Node r, String key, boolean create, Node before",Node,null,"['Node', 'compareTo']","['null', 'n', 'source', 'n', 'c', 'r']",[],WordMultiset
 "/*** Find the node with the given key, creating it if necessary
 * (but only if ""create"" is true).  If create is true, then
 * the data structure invariant will be temporarily false
@@ -722,7 +722,7 @@ return getNode(r.right, key, create, r);
 * @return node, or null if not present (and create is false)
 */","private Node getNode(String key, boolean create) {
 return getNode(dummy.right, key, create, dummy);
-}",getNode,"String key, boolean create",Node,"getNode(dummy.right, key, create, dummy)",[],[],[]
+}",getNode,"String key, boolean create",Node,"getNode(dummy.right, key, create, dummy)",[],[],[],WordMultiset
 "/*** Add a new string to the multiset. If it already exists,
 * increase the count for the string and return false.
 * Otherwise, set the count to one and return true.
@@ -742,7 +742,7 @@ result = true;
 n.count++;
 assert wellFormed() : ""invariant false at end of add"";
 return result;
-}",add,String str,boolean,result,"['wellFormed', 'NullPointerException', 'getNode']","['result', 'n', 'result']",['NullPointerException']
+}",add,String str,boolean,result,"['wellFormed', 'NullPointerException', 'getNode']","['result', 'n', 'result']",['NullPointerException'],WordMultiset
 "/*** Remove one copy of a word from the multiset.
 * If there are multiple copies, then we just adjust the count,
 * and the map is unaffected (iterators don't go stale).
@@ -754,7 +754,7 @@ if(str == null) return false;
 dummy.right = doRemove(dummy.right, str, dummy, true, null);
 assert wellFormed() : ""invariant false at end of removeOne"";
 return lastRemoved != null;
-}",removeOne,String str,boolean,false,"['wellFormed', 'doRemove']",['false'],[]
+}",removeOne,String str,boolean,false,"['wellFormed', 'doRemove']",['false'],[],WordMultiset
 "/**A method to compare two objects.
 * This method is superseded by Objects.equals
 * @param o1 one object, may be null
@@ -762,7 +762,7 @@ return lastRemoved != null;
 * @return whether they are equal (both null, or usign equals).
 */","private static boolean eq(Object o1, Object o2) {
 return (o1 == null ? o2 == null : o1.equals(o2));
-}",eq,"Object o1, Object o2",boolean,(o1 == null ? o2 == null : o1.equals(o2)),['equals'],[],[]
+}",eq,"Object o1, Object o2",boolean,(o1 == null ? o2 == null : o1.equals(o2)),['equals'],[],[],AbstractEntry
 "/*** Hash the key to a table index, following double hashing,
 * returning the first index that
 * (1) includes an entry with the key, or
@@ -794,7 +794,7 @@ if(phOK && data[hash1] == PLACE_HOLDER && phIndex < 0) phIndex = hash1;
 if(data[hash1] != null && (data[hash1].getKey() != null && data[hash1].getKey().equals(key))) return hash1;
 if(phOK && phIndex >= 0) return phIndex;
 return hash1;
-}",hash,"String key, boolean phOK",int,hash1,"['NullPointerException', 'hashCode', 'getKey', 'equals']","['phIndex', 'hash1', 'hash2', 'hash1', 'phIndex', 'hash1']",['NullPointerException']
+}",hash,"String key, boolean phOK",int,hash1,"['NullPointerException', 'hashCode', 'getKey', 'equals']","['phIndex', 'hash1', 'hash2', 'hash1', 'phIndex', 'hash1']",['NullPointerException'],WordMultiset
 "/*** Used to report an error found when checking the invariant.
 * By providing a string, this will help debugging the class if the invariant should fail.
 * @param error string to print to report the exact error found
@@ -802,7 +802,7 @@ return hash1;
 */","private static boolean report(String error) {
 reporter.accept(error);
 return false;
-}",report,String error,boolean,false,['accept'],['false'],[]
+}",report,String error,boolean,false,['accept'],['false'],[],WordMultiset
 "/*** Add a new string to the multiset. If it already exists,
 * increase the count for the string and return false.
 * Otherwise, set the count to one and return true.
@@ -827,7 +827,7 @@ data[i].count++;
 
 assert wellFormed() : ""invariant false at end of add"";
 return result;
-}",add,String str,boolean,result,"['wellFormed', 'hash', 'isOpen', 'MyEntry', 'rehash']","['result', 'i', 'result']",[]
+}",add,String str,boolean,result,"['wellFormed', 'hash', 'isOpen', 'MyEntry', 'rehash']","['result', 'i', 'result']",[],WordMultiset
 "/*** Remove one copy of a word from the multiset.
 * If there are multiple copies, then we just adjust the count,
 * and the map is unaffected (iterators don't go stale).
@@ -849,7 +849,7 @@ result = true;
 
 assert wellFormed() : ""invariant false at end of removeOne"";
 return result;
-}",removeOne,String str,boolean,false,"['wellFormed', 'hash', 'isOpen', 'remove']","['result', 'false', 'i', 'false', 'result']",[]
+}",removeOne,String str,boolean,false,"['wellFormed', 'hash', 'isOpen', 'remove']","['result', 'false', 'i', 'false', 'result']",[],WordMultiset
 "/*** Return the shortest path between two vertices in the graph
 * @param v1 starting vertex
 * @param v2 ending vertex
@@ -886,7 +886,7 @@ for(T vert : connected) {
 }
 
 return null; // no path found
-}",shortestPath,"T v1, T v2",List<T>,list,"['SuppressWarnings', 'containsVertex', 'IllegalArgumentException', 'add', 'push', 'isEmpty', 'poll', 'get', 'size', 'contains', 'equals', 'getConnected', 'addLast', 'clone', 'remove']","['queue', 'visited', 'list', 'current', 'list', 'connected', 'null']",['IllegalArgumentException']
+}",shortestPath,"T v1, T v2",List<T>,list,"['SuppressWarnings', 'containsVertex', 'IllegalArgumentException', 'add', 'push', 'isEmpty', 'poll', 'get', 'size', 'contains', 'equals', 'getConnected', 'addLast', 'clone', 'remove']","['queue', 'visited', 'list', 'current', 'list', 'connected', 'null']",['IllegalArgumentException'],FindPath
 "/*** finds the distance between 2 points
 *
 * @param point the point that will be found the distance from
@@ -894,7 +894,7 @@ return null; // no path found
 */","public double distance(Point point) {
 Vector temp = new Vector(this, point);
 return temp.magnitude();
-}",distance,Point point,double,temp.magnitude(),"['Vector', 'magnitude']",['temp'],[]
+}",distance,Point point,double,temp.magnitude(),"['Vector', 'magnitude']",['temp'],[],Point
 "/*** Read in a graph from the given reader.
 * Each line (once trimmed of whitespace) names a vertex (a string),
 * but before we trim, we check to see if the line begins with whitespace,
@@ -934,33 +934,33 @@ before = s;
 }
 
 return result;
-}",read,Reader r,Graph<String>,result,"['BufferedReader', 'readLine', 'startsWith', 'IOException', 'strip', 'containsVertex', 'addVertex', 'containsEdge', 'addEdge']","['result', 'reader', 'before', 's', 'result']",['IOException']
+}",read,Reader r,Graph<String>,result,"['BufferedReader', 'readLine', 'startsWith', 'IOException', 'strip', 'containsVertex', 'addVertex', 'containsEdge', 'addEdge']","['result', 'reader', 'before', 's', 'result']",['IOException'],LoadPath
 "/*** Return an empty stack.
 * @return empty stack, never null
 */","@SuppressWarnings(""unchecked"")
 public static <T> ImmutableStack<T> empty() {
 return (ImmutableStack<T>) empty;
-}",empty,,ImmutableStack<T>,(ImmutableStack<T>) empty,['SuppressWarnings'],[],[]
+}",empty,,ImmutableStack<T>,(ImmutableStack<T>) empty,['SuppressWarnings'],[],[],ImmutableStack
 "/*** Return the top of the stack.
 * @throws NoSuchELementException if the stack is empty
 * @return top of the stack
 */","public T top() {
 if (this == empty) throw new NoSuchElementException(""stack is empty"");
 return top;
-}",top,,T,top,['NoSuchElementException'],['top'],['NoSuchElementException']
+}",top,,T,top,['NoSuchElementException'],['top'],['NoSuchElementException'],ImmutableStack
 "/*** Return the stack that results from popping off the top element.
 * @throws NoSuchElementException if the stack is empty
 * @return stack after popping element
 */","public ImmutableStack<T> pop() {
 if (this == empty) throw new NoSuchElementException(""empty stack"");
 return shorter;
-}",pop,,ImmutableStack<T>,shorter,['NoSuchElementException'],['shorter'],['NoSuchElementException']
+}",pop,,ImmutableStack<T>,shorter,['NoSuchElementException'],['shorter'],['NoSuchElementException'],ImmutableStack
 "/*** Return the stack that results from pushing another element on top.
 * @param val element to push
 * @return new stack resulting from pushing element
 */","public ImmutableStack<T> push(T val) {
 return new ImmutableStack<>(val,this);
-}",push,T val,ImmutableStack<T>,"new ImmutableStack<>(val,this)",[],[],[]
+}",push,T val,ImmutableStack<T>,"new ImmutableStack<>(val,this)",[],[],[],ImmutableStack
 "/*** Create a CLL from the elements in the given collection in the same order.
 * @param dummy dummy node to use, if null, a new dummy will be created
 * @param coll collection to use, must not be null, but may be empty
@@ -973,7 +973,7 @@ for (E e : coll) {
 t = t.next = new Node<E>(e,dummy);
 }
 return t;
-}",toCLL,"Node<E> dummy, Collection<? extends E> coll",Node<E>,t,[],"['t', 't']",[]
+}",toCLL,"Node<E> dummy, Collection<? extends E> coll",Node<E>,t,[],"['t', 't']",[],SortedCollection
 "/*** Convert a CLL to a string.
 * A problem is signified by a string without a proper ending paren.
 * Use this for debugging.
@@ -1003,7 +1003,7 @@ if (fast != dummy && fast != null) fast = fast.next;
 }
 sb.append("")""); // clean close
 return sb.toString();
-}",CLLtoString,Node<E> tail,String,"""<NULL>""","['StringBuilder', 'toString', 'println', 'length', 'append']","['dummy', 'head', 'sb', 'fast']",[]
+}",CLLtoString,Node<E> tail,String,"""<NULL>""","['StringBuilder', 'toString', 'println', 'length', 'append']","['dummy', 'head', 'sb', 'fast']",[],SortedCollection
 "/*** Merge two sorted CLLs, or rather, merge the elements
 * of the second list into the first list.
 * This method should not create any new nodes!
@@ -1072,7 +1072,7 @@ t2 = dum2;
 t2.next = t2;
 
 return t1;
-}",merge,"Node<E> t1, Node<E> t2",Node<E>,t1,['compare'],"['t1', 'dummy', 't1', 'n1', 'n2', 'cur', 'first', 'dum1', 'dum2', 't1']",[]
+}",merge,"Node<E> t1, Node<E> t2",Node<E>,t1,['compare'],"['t1', 'dummy', 't1', 'n1', 'n2', 'cur', 'first', 'dum1', 'dum2', 't1']",[],SortedCollection
 "/*** Partition a CLL w.r.t. the first element in the list.
 * The list elements are rearranged so that those which
 * are less that the pivot are placed before it, and those
@@ -1112,7 +1112,7 @@ cur = cur.next;
 tail = prev;
 
 return tail;
-}",partition,Node<E> tail,Node<E>,tail,['compare'],"['cur', 'p', 'pivot', 'dum', 'prev', 'next', 'next', 'tail']",[]
+}",partition,Node<E> tail,Node<E>,tail,['compare'],"['cur', 'p', 'pivot', 'dum', 'prev', 'next', 'next', 'tail']",[],SortedCollection
 "/*** Destructively sort a CLL using quicksort, and return it.
 * The pivot chose should always be the first element.
 * @param l CLL identified by its tail
@@ -1143,7 +1143,7 @@ tail.next = dum;
 if(beforeHead.data != null) dum.next = beforeHead;
 
 return tail;
-}",quicksort,Node<E> tail,Node<E>,tail,['partition'],"['tail', 'pivot', 'dum', 'tail2', 'beforeHead', 'afterHead', 'tail']",[]
+}",quicksort,Node<E> tail,Node<E>,tail,['partition'],"['tail', 'pivot', 'dum', 'tail2', 'beforeHead', 'afterHead', 'tail']",[],SortedCollection
 "/*** Instantiates a new vector with specified delta values.
 *
 * @param dx the initial deltax value
@@ -1151,7 +1151,7 @@ return tail;
 */","public Vector(double dx, double dy){
 this.deltax = dx;
 this.deltay = dy;
-}",Vector,"double dx, double dy",public,,[],[],[]
+}",Vector,"double dx, double dy",public,,[],[],[],Vector
 "/*** Create a sorted collection using the given comparator.
 * @param comp comparator to use, must not be null
 */","public SortedCollection(Comparator<E> comp) {
@@ -1163,7 +1163,7 @@ tail.next = tail;
 size = 0;
 version = 0;
 assert wellFormed() : ""invariant failed at end of constructor"";
-}",SortedCollection,Comparator<E> comp,public,,"['IllegalArgumentException', 'wellFormed']",[],['IllegalArgumentException']
+}",SortedCollection,Comparator<E> comp,public,,"['IllegalArgumentException', 'wellFormed']",[],['IllegalArgumentException'],SortedCollection
 "/*** Create a sorted collection with the natural comparator,
 * and with all the elements from the given collection
 * @param from collection to get elements from, must not be null
@@ -1171,14 +1171,332 @@ assert wellFormed() : ""invariant failed at end of constructor"";
 this();
 addAll(from);
 assert wellFormed() : ""invariant failed at end of constructor"";
-}",SortedCollection,Collection<? extends E> from,public,,"['addAll', 'wellFormed']",[],[]
+}",SortedCollection,Collection<? extends E> from,public,,"['addAll', 'wellFormed']",[],[],SortedCollection
+"/*** Create an array robot with the given capacity
+* If the capacity is zero, the robot cannot have any parts
+* @param cap capacity to use, cannot be negative
+*/","public ArrayRobot(int cap)
+{
+functions = new String[cap];
+parts = new Part[cap];
+}",ArrayRobot,int cap,public,,[],[],[],
+"/*** Add a part to the robot.
+* @param function the type of part this is (arm, leg, etc), must not be null
+* @param part the part to add, must not be null.
+* @return whether the part was added.
+* @exception NullPointerException if the function or part is null
+*/","@Override//required
+public boolean addPart(String function, Part part)
+{
+if(function == null || part == null) throw new NullPointerException();
+for (int i=0; i < functions.length; ++i)//For the empty space,
+{
+if(functions[i] == null) {//put it here! Checks if the space is empty
+functions[i] = function;//puts function into the space
+parts[i] = part;//puts part into the space
+return true;//confirms that it was added
+}
+}
+return false;
+}",addPart,"String function, Part part",boolean,true,['NullPointerException'],"['i', 'true', 'false']",['NullPointerException'],
+"/*** Remove a part from the robot if there is one with this function.
+* @param function the type of part to remove, null means any part
+* @return part that was removed
+*/","@Override // required
+public Part removePart(String function)
+{
+for(int i = 0; i < functions.length; ++i)
+{
+if(parts[i] == null) continue;
+//The continue statement allows us to look over nulls and look for
+//next available part, moving beyond just index zero if needed.
+if(function == null || function.equals(functions[i]))//remove this one
+{
+Part p = parts[i];
+functions[i] = null;
+parts[i] = null;
+return p;
+}
+}
+return null;
+}",removePart,String function,Part,p,['equals'],"['i', 'p', 'p', 'null']",[],
+"/*** Return the part with the given function.
+* @param function the type of part to look for, null means any part
+* @param index zero-based index of part to return of the given type, must not be negative
+* @return indicated part, or null if no such part (index is at least the number of this kind of kind)
+*/","@Override//required
+public Part getPart(String function, int index)
+{
+if(index < 0) throw new IllegalArgumentException(""index cannot be negative: "" + index);
+
+for(int i=0; i < functions.length; ++i)
+{
+if(parts[i] == null)continue;
+else if(function == null)
+{
+if(index-- == 0)return parts[i];
+}
+else if(function.equals(functions[i]))
+{
+if(index-- == 0)return parts[i];
+}
+}
+return null;
+}",getPart,"String function, int index",Part,parts[i],"['IllegalArgumentException', 'equals']","['i', 'null']",['IllegalArgumentException'],
+"/*** Add a part to the robot.
+* @param function the type of part this is (arm, leg, etc), must not be null
+* @param part the part to add, must not be null.
+* @return whether the part was added.
+* @exception NullPointerException if the function or part is null
+*/","@Override // required
+public boolean addPart(String function, Part part)
+{
+if(function == null || part == null) throw new NullPointerException(""part cannot be null"");//exception thrown if there is no part
+if(function.equals(ARM))//if function is and arm
+{
+if(arm1 == null)//if arm1 is empty...
+{
+arm1= part;//put the contents of part into arm1
+return true;//confirm that it worked
+}
+else if(arm2 == null)//if arm2 is empty....
+{
+arm2 = part;//put the contents of part into arm2
+return true;//confirm that it worked
+}
+}
+
+else if(function.equals(LEG))//if fucntion is leg
+{
+if(leg1 == null)//if leg1 is empty...
+{
+leg1 = part;//put contents of part into leg1
+return true;//confirm that it worked.
+}
+else if(leg2 == null)//if leg2 is empty...
+{
+leg2 = part;//put contents of part into leg2
+return true;//confirm that it worked
+}
+
+}
+else if(otherFunction == null)//if it's anything else like a head
+{
+otherFunction = function;//put the contents of function into otherFunction
+otherPart = part;//put the contents of part into otherPart
+return true;//confirm it works
+}
+return false;//Nothing happens
+}",addPart,"String function, Part part",boolean,true,"['NullPointerException', 'equals']","['true', 'true', 'true', 'true', 'otherPart', 'true', 'false']",['NullPointerException'],
+"/*** Remove a part from the robot if there is one with this function.
+* @param function the type of part to remove, null means any part
+* @return part that was removed
+*/","@Override // required
+public Part removePart(String function) {
+Part result = null;
+if(function == null)
+{
+if(arm1 != null)
+{
+result = arm1;
+arm1 = null;
+}
+else if(arm2 != null)
+{
+result = arm2;
+arm2 = null;
+}
+else if(leg1 != null)
+{
+result = leg1;
+leg1 = null;
+}
+else if(leg2 != null)
+{
+result = leg2;
+leg2 = null;
+}
+else if(otherPart != null)
+{
+result = otherPart;
+otherPart = null;
+}
+}
+
+else if(function.equals(ARM))
+{
+if(arm1 != null)
+{
+result = arm1;
+arm1 = null;
+}
+else if(arm2 != null)
+{
+result = arm2;
+arm2 = null;
+}
+}
+else if(function.equals(LEG))
+{
+if(leg1 != null)
+{
+result = leg1;
+leg1 = null;
+}
+else if(leg2 != null)
+{
+result = leg2;
+leg2 = null;
+}
+}
+else
+{
+if(otherPart != null)
+{
+result = otherPart;
+otherPart = null;
+}
+}
+return result;
+}",removePart,String function,Part,result,['equals'],"['result', 'result']",[],
+"/*** Return the part with the given function.
+* @param function the type of part to look for, null means any part
+* @param index zero-based index of part to return of the given type, must not be negative
+* @return indicated part, or null if no such part (index is at least the number of this kind of kind)
+*/","@Override // required
+public Part getPart(String function, int index) {
+if(index < 0)throw new IllegalArgumentException(""Index cannot be negative."");
+
+Part result = null;
+
+if(function == null  || function.equals(ARM))
+{
+if(arm1 != null)
+{
+if(index-- == 0)result = arm1;
+}
+if(arm2 != null)
+{
+if(index-- == 0)result = arm2;
+}
+}
+if(function == null||function.equals(LEG))
+{
+if(leg1 != null)
+{
+if(index-- == 0)result = leg1;
+}
+
+if(leg2 != null)
+{
+if(index-- == 0)result = leg2;
+}
+}
+if(function == null || function.equals(""head""))
+{
+if(index-- == 0) result = otherPart;
+}
+
+return result;
+}",getPart,"String function, int index",Part,result,"['IllegalArgumentException', 'equals']","['result', 'result']",['IllegalArgumentException'],
+"/*** Create a part with the given serial number
+* @param serial serial number, must not be null
+*/","public Part(String serial)
+{
+//initialize the part after checking for errors.
+if(serial == null) throw new NullPointerException(""null is not a serial number"");
+this.serial = serial;
+}",Part,String serial,public,,['NullPointerException'],[],['NullPointerException'],
 "/*** Instantiates a new unit vector with specified angle.
 *
 * @param theta the angle to construct, in radians
 */","public Vector(double theta){
 this.deltax = Math.cos(theta);
 this.deltay = Math.sin(theta);
-}",Vector,double theta,public,,"['cos', 'sin']",[],[]
+}",Vector,double theta,public,,"['cos', 'sin']",[],[],Vector
+"/*** Create a part with a random serial number.
+*/","public Part()
+{
+// call the other constructor with ""this(...)""
+// filling in the ""..."" with a random string which
+// can indeed be a series of digits.
+// Our solution uses ""new Random().nextInt()"" as part of this.
+this(""RSN"" + new Random().nextInt());
+}",Part,,public,,"['Random', 'nextInt']",[],[],
+"/*** Indicates whether some other object is ""equal to"" this one.
+* @param x the reference object with which to compare.
+* @return true if this object is the same as the obj argument; false otherwise.
+*/","@Override//implementation
+public boolean equals(Object x)
+{
+if(!(x instanceof Part)) return false;
+Part p = (Part)x;
+return serial.equals(p.serial);
+}",equals,Object x,boolean,false,[],"['false', 'p']",[],
+"/*** @return a hash code value for the object.
+*/","@Override//implementation
+public int hashCode()
+{
+return serial.hashCode();
+}",hashCode,,int,serial.hashCode(),[],[],[],
+"/*** @return a string representation of the object.
+*/","@Override // implementation
+public String toString()
+{
+return ""Part("" + serial + "")"";
+}",toString,,String,"""Part("" + serial + "")""",['Part'],[],[],
+"/*** @return the serial number of this part
+*/","public String getSerial()
+{
+return serial;
+}",getSerial,,String,serial,[],['serial'],[],
+"/*** Return once the data structure has been updated so that
+* the capacity of the arrays is at least the parameter.
+* If we create new arrays, they will be at least twice as long as the existing arrays.
+* This code assumes the arrays are the same length, and preserves this property.
+* @param cap capacity desired
+*/","private void ensureCapacity(int cap)
+{
+// Follow activity but update to handle two arrays at once (same length)
+if(cap <= functions.length && cap <= parts.length) return;
+int newSize = functions.length*2;
+if(newSize < cap)cap = newSize;
+String[] newFunctions = new String[newSize];
+Part[] newParts = new Part[newSize];
+for(int i=0; i < size; ++i)
+{
+newFunctions[i] = functions[i];
+newParts[i] = parts[i];
+}
+functions = newFunctions;
+parts = newParts;
+}",ensureCapacity,int cap,void,,['once'],"['newSize', 'newFunctions', 'newParts', 'i']",[],
+"/*** Create an empty part sequence.
+*/","public DynamicArrayPartSeq() {
+this(INITIAL_CAPACITY); // call specifying constructor to do the work
+// no assertion required because other constructor asserts it
+}",DynamicArrayPartSeq,,public,,[],[],[],
+"/*** Create a dynamic array part sequence with the given capacity
+* (how many parts that can be added without requiring allocation of a new array).
+* @param cap number of elements to prepare for, cannot be negative
+*/","public DynamicArrayPartSeq(int cap) {
+// TODO
+functions = new String[cap];
+parts = new Part[cap];
+
+assert wellFormed() : ""invariant broken by constructor"";
+}",DynamicArrayPartSeq,int cap,public,,['wellFormed'],['functions'],[],
+"/*** Return the number of elements in the sequence.
+* @return number of elements in sequence
+*/","public int size() {
+assert wellFormed() : ""invariant broken in size"";
+return size;
+}",size,,int,size,['wellFormed'],['size'],[],
+"/*** Start running through all parts.
+*/","public void start() {
+// not asserting invariant before this will be done by the other start
+start(null);
+}",start,,void,,[],[],[],
 "/*** Instantiates a new vector between two points.
 * If applied to the first point, the result is the second point.
 *
@@ -1187,65 +1505,934 @@ this.deltay = Math.sin(theta);
 */","public Vector(Point p, Point q){
 this.deltax = q.x() - p.x();
 this.deltay = q.y() - p.y();
-}",Vector,"Point p, Point q",public,,"['x', 'y']",[],[]
+}",Vector,"Point p, Point q",public,,"['x', 'y']",[],[],Vector
+"/*** Start running through all parts with the given function.
+* @param function kind of parts to access, may be null (any part)
+*/","public void start(String function)
+{
+// TODO: don't forget to assert the invariant twice: before and after
+assert wellFormed():""invariant broken in start."";
+if(function == null)
+{
+this.function =null;
+currentIndex=0;
+return;
+}
+this.function = function;
+currentIndex = -1;
+moveForStart();
+assert wellFormed():""invariant broken in start"";
+}",start,String function,void,,"['wellFormed', 'moveForStart']",[],[],
+"/*** Return whether there is a current element.
+* @return whether there is a current element
+*/","public boolean isCurrent()
+{
+assert wellFormed():""invariant broken in isCurrent"";
+return currentIndex < size;
+}",isCurrent,,boolean,currentIndex < size,['wellFormed'],[],[],
+"/*** Return the current element.
+* This method can only be called if there is a current element.
+* @return the part which is current
+* @throws IllegalStateException if there is no current element
+*/","public Part getCurrent() {
+assert wellFormed():""invariant broken in getCurrent."";
+if(parts[currentIndex] == null)throw new IllegalStateException(""There is no current element in getCurrent."");
+return parts[currentIndex];
+}",getCurrent,,Part,parts[currentIndex],"['wellFormed', 'IllegalStateException']",[],['IllegalStateException'],
+"/*** Move the cursor to the next part with the current function.
+* If there is no such part, then after this call, there is no current element.
+* @throws IllegalStateException
+*/","public void advance() {
+assert wellFormed() : ""invariant broken in advance"";
+// TODO (our solution uses the helper method)
+if(currentIndex > size-1)throw new IllegalStateException(""Current index is greater than the size."");
+if(function==null)
+{
+currentIndex++;
+assert wellFormed():""invariant broken by advance."";
+return;
+}
+for(int i =currentIndex+1;i < size;i++) {
+if(function.equals(functions[i])){
+currentIndex=i;
+assert wellFormed():""invariant broken by advance."";
+return;
+}
+}
+currentIndex=size;
+assert wellFormed() : ""invariant broken by advance"";
+}",advance,,void,,"['wellFormed', 'TODO', 'IllegalStateException', 'equals']",['i'],['IllegalStateException'],
+"/*** Remove the current element.  Then the next part (of the function)
+* is made current, or there is no current if there are not more parts
+* (of the function).
+* @throws IllegalStateException if there is no current element
+*/","public void removeCurrent() {
+// TODO: lots to do
+assert wellFormed(): ""invariant broken in removeCurrent"";
+if(functions[currentIndex] == null || parts[currentIndex]== null)
+{
+throw new IllegalStateException(""There is no current element."");
+}
+
+functions[currentIndex]=null;
+parts[currentIndex]=null;
+size--;
+
+if(currentIndex+1 < functions.length && functions[currentIndex+1]!=null) shiftLeft(currentIndex);
+
+if(size==0)
+{
+assert wellFormed():""invariant broken by removeCurrent"";
+return;
+}
+else if(function != null)
+{
+while(currentIndex<size)
+{
+if(function.equals(functions[currentIndex]))
+{
+break;
+}
+currentIndex++;
+}
+}
+
+assert wellFormed():""invariant broken by removeCurrent"";
+}",removeCurrent,,void,,"['wellFormed', 'IllegalStateException', 'shiftLeft', 'equals']",[],['IllegalStateException'],
+"/*** Add a part before the current element.  If there is no current element,
+* then add at the beginning.  There must have been a function
+* defined (See [@link #start(String)}).
+* @throws IllegalStateException if no function defined, or if the function was null
+* @param p part to add at this spot, must not be null.
+*/","public void addBefore(Part p) {
+assert wellFormed() : ""invariant broken in addBefore"";
+// TODO
+if(p==null)throw new NullPointerException(""Null data cannot be added to the array."");
+if(function == null)throw new IllegalStateException(""function cannot be null or undefined in addBefore."");
+ensureCapacity(size*2);
+if(functions[currentIndex]==null)
+{
+shiftRight(0);
+functions[0] = function;
+parts[0] = p;
+currentIndex=0;
+}
+else
+{
+shiftRight(currentIndex);
+functions[currentIndex] = function;
+parts[currentIndex] = p;
+}
+size++;
+ensureCapacity(size*2);
+assert wellFormed() : ""invariant broken by addBefore"";
+}",addBefore,Part p,void,,"['wellFormed', 'NullPointerException', 'IllegalStateException', 'ensureCapacity', 'shiftRight']",[],"['IllegalStateException', 'NullPointerException']",
+"/*** Add a part after the current element.  If there is no current element,
+* then add at the end.  There must have been a function
+* defined (See [@link #start(String)}).
+* @throws IllegalStateException if no function defined, or if the function was null
+* @param p part to add at this spot, must not be null.
+*/","public void addAfter(Part p) {
+// TODO: (remember the invariant!)
+assert wellFormed():""invariant broken in addAfter"";
+if(p==null) throw new NullPointerException(""Cannot add null data to the array."");
+ensureCapacity(size*2);
+if(function == null)throw new IllegalStateException(""function cannot be null or undefined in addBefore."");
+if(size==0)
+{
+doAdd(0,p);
+assert wellFormed():""invariant broken by addAfter"";
+return;
+} else if(currentIndex==size) {
+doAdd(size, p);
+assert wellFormed():""invariant broken by addAfter"";
+return;
+}
+
+shiftRight(currentIndex);
+doAdd(currentIndex+1,p);
+currentIndex++;
+assert wellFormed():""invariant broken by addAfter"";
+}",addAfter,Part p,void,,"['wellFormed', 'NullPointerException', 'ensureCapacity', 'IllegalStateException', 'doAdd', 'shiftRight']",[],"['IllegalStateException', 'NullPointerException']",
+"/*** Return the function of this part.
+* @return string of this part, null if this part not in a robot
+*/","public String getFunction() {
+return function;
+}",getFunction,,String,function,[],['function'],[],
+"/*** Return the next part in this robot.
+* This is valid only if the part is in a robot.
+* @return the next part, possibly null
+* @exception IllegalStateException if this part is not a part of a robot
+*/","public FunctionalPart getNext() {
+if (function == null) throw new IllegalStateException(""not part of a robot"");
+return next;
+}",getNext,,FunctionalPart,next,['IllegalStateException'],['next'],['IllegalStateException'],
+"/*** Create a wired robot without parts
+* and no order.
+*/","public WiredRobot()
+{
+this(null);
+}",WiredRobot,,public,,[],[],[],
 "/*** Getter for deltax field.
 *
 * @return the current deltax value
 */","public double dx(){
 return this.deltax;
-}",dx,,double,this.deltax,[],[],[]
+}",dx,,double,this.deltax,[],[],[],Vector
+"/*** Create a wired robot without parts
+* with the given order
+* @param comp order to use, if null, then unordered
+*/","public WiredRobot(Comparator<FunctionalPart> comp) {
+if(comp == null)
+{
+comp = (p1,p2) -> 0;
+}
+this.comparator = comp;
+dummy = new FunctionalPart();
+assert wellFormed() : ""Invariant not established by constructor"";
+}",WiredRobot,Comparator<FunctionalPart> comp,public,,"['FunctionalPart', 'wellFormed']",[],[],
+"/*** Return the function of this part.
+* @return string of this part, null if this part not in a robot
+*/","public String getFunction() {
+return function;
+}",getFunction,,String,function,[],['function'],[],
+"/*** Return the next part in this robot.
+* This is valid only if the part is in a robot.
+* @return the next part, possibly null
+* @exception IllegalStateException if this part is not a part of a robot
+*/","public FunctionalPart getNext() {
+throw new UnsupportedOperationException(""not implemented"");
+}",getNext,,FunctionalPart,,['UnsupportedOperationException'],[],['UnsupportedOperationException'],
+"/*** Compare two parts according to our purposes.
+* We use the supplied comparator except when it
+* says it doesn't care, in which case, we use the (unique) id to
+* distinguish two parts, older first.
+* @param p1 first part, must not be null
+* @param p2 second part, must not be null
+* @return comparison, only 0 if p1 and p2 are the same
+*/","private int compare(FunctionalPart p1, FunctionalPart p2) //Received assistance from Alex K in tutoring center
+{
+if(comparator == null || comparator.compare(p1, p2) == 0)
+{
+if(p1.getId() < p2.getId())
+{
+return -1;
+}
+else if(p1.getId() == p2.getId())
+{
+return 0;
+}
+else if(p1.getId() > p2.getId())
+{
+return 1;
+}
+}
+return comparator.compare(p1, p2);
+}",compare,"FunctionalPart p1, FunctionalPart p2",int,-1,['getId'],[],[],
+"/*** Check a tree of parts within bounds.
+* The subtree must be properly ordered, and every part
+* must have a non-null function assigned.
+* @param r root of subtree to check, may be null
+* @param lo lower bound (exclusive) of all parts in subtree.
+*   If null, then no lower bound
+* @param hi upper bound (exclusive) of all parts in subtree.
+*   If null, then no upper bound
+* @return whether the subtree checks out OK.
+* If false is returned, then exactly one report has been generated.
+*/","private boolean checkInRange(FunctionalPart r, FunctionalPart lo, FunctionalPart hi) //Received assistance from Alex Dueppen in tutoring center
+{",checkInRange,"FunctionalPart r, FunctionalPart lo, FunctionalPart hi",boolean,,[],[],[],
+"/***************************
+* We need a base case
+* Then do some work
+* We need a recursive call
+* Only work with r
+***************************/","//if r is null there is nothing to check
+if(r == null)return true;
+if(!checkInRange(r.left,lo,r)) return false;
+if(!checkInRange(r.right,r,hi))return false;
+
+//1.Checking if function is null
+if(r.function == null)return report(""roots function cannot be null if the part is not null."");
+
+//2.
+//Checking if lo < r < hi
+if(lo != null && compare(r,lo) <= 0)return report(""lo is greater than root"");
+if(hi != null && compare(r,hi) >= 0)return report(""hi is less than the root"");
+
+return true;
+}",if,r == null,check,true,"['checkInRange', 'report', 'compare']","['true', 'false', 'false', 'true']",[],
+"/*** Create a wired robot without parts
+* and no order.
+*/","public WiredRobot() {
+this(null);
+}",WiredRobot,,public,,[],[],[],
+"/*** Create a wired robot without parts
+* with the given order
+* @param comp order to use, if null, then unordered
+*/","public WiredRobot(Comparator<FunctionalPart> comp) {
+
+if(comp == null)
+{
+comp = (p1,p2) -> 0;
+}
+comparator = comp;
+root = null;
+assert wellFormed() : ""Invariant not established by constructor"";
+}",WiredRobot,Comparator<FunctionalPart> comp,public,,['wellFormed'],[],[],
+"/*** Return the 0-based index part from the subtree given that
+* matches the given function.  The mutable index should be decremented
+* for every part we find that matches, so that if we find a match
+* when it is zero we return that one.  Once we find the result, we stop
+* looking (and stop decrementing).  If there is no such functional part,
+* this method returns null.
+* @param r subtree to examine, may be null
+* @param function kind of part to look for, null means any part
+* @param mutableIndex index to look for (0-based); decremented whenever a matching
+*   part is encountered in in-order traversal until the desired index.
+* @return 0-based matching part, may be null
+*/","private static FunctionalPart getHelper(FunctionalPart r, String function, Cell<Integer> mutableIndex)
+{
+if(r == null)
+{
+return null;
+}
+
+//r.left first, r second, r.right third
+//First go into the left subtree to find the function.  Delegate, don't micromanage
+FunctionalPart tempLeft = getHelper(r.left, function, mutableIndex);
+if(tempLeft !=null) return tempLeft;
+
+if(function == null || r.function.equals(function))
+{
+if(mutableIndex.get() == 0)return r;
+mutableIndex.set(mutableIndex.get()-1);
+}
+
+FunctionalPart tempRight = getHelper(r.right, function,mutableIndex);
+if(tempRight != null)return tempRight;
+
+return null;
+// Use recursion.  Do not micro-manage!
+// Never check a child for null or look at its function.
+}",getHelper,"FunctionalPart r, String function, Cell<Integer> mutableIndex",FunctionalPart,null,"['equals', 'get', 'set']","['null', 'tempLeft', 'tempLeft', 'r', 'tempRight', 'tempRight', 'null']",[],
+"/*** Helper method for addPart.
+* @param r
+* @param add
+* @return r
+*/","private FunctionalPart insert(FunctionalPart r, FunctionalPart add)
+{
+
+if(r==null)
+{
+r=add;
+}
+else if(compare(add,r) < 0)
+{
+r.left = insert(r.left,add);
+}
+else//if(compare(add,r) > 0)
+{
+r.right = insert(r.right,add);
+}
+return r;
+}",insert,"FunctionalPart r, FunctionalPart add",FunctionalPart,r,['compare'],['r'],[],
 "/*** Gets the radius.
 *
 * @return the radius
-*/",public int getRadius(){return radius;},getRadius,,int,radius,[],['radius'],[]
+*/",public int getRadius(){return radius;},getRadius,,int,radius,[],['radius'],[],Ball
 "/*** Getter for deltay field.
 *
 * @return the current deltay value
 */","public double dy(){
 return this.deltay;
-}",dy,,double,this.deltay,[],[],[]
+}",dy,,double,this.deltay,[],[],[],Vector
+"/*** Return the first part in this robot.
+* @return the first part, null if this robot is empty
+*/","public FunctionalPart getFirst()
+{
+assert wellFormed():""invariant broken in getFirst"";
+if(root == null)
+{
+return null;
+}
+FunctionalPart getter = root;
+while(getter.left != null)
+{
+getter = getter.left;
+}
+assert wellFormed():""invariant broken in getFirst"";
+return getHelper(getter,null, new Cell<>(0));
+}",getFirst,,FunctionalPart,null,"['wellFormed', 'getHelper']","['null', 'getter']",[],
+"/*** Change the comparator used to order the robot parts.
+* The parts will be reorganized as necessary to accommodate the new order,
+* but two parts will be reordered only if necessary.
+* (The sorting is ""stable"".)
+* @param comp comparator to use, if null, then henceforth the parts
+* can be in any order.
+*/","public void setComparator(Comparator<FunctionalPart> comp) {
+assert wellFormed() : ""invariant broken in setComparator"";
+//: Complete this!
+// Hint: After handling special easy case,
+//   reinsert all parts back into an emptied tree
+//      in pre-order over the tree.
+//      This requires a new helper method.
+
+comparator = comp;
+if(root == null)return;
+FunctionalPart savedRoot = root;
+root = null;
+compHelper(savedRoot);
+
+assert wellFormed() : ""invariant broken by setComparator"";
+}",setComparator,Comparator<FunctionalPart> comp,void,,"['wellFormed', 'compHelper']",['savedRoot'],[],
+"/**Change the stored value to the given value.
+* @param newValue new value for cell, may be null
+*/","public void set(T newValue) {
+value = newValue;
+}",set,T newValue,void,,[],[],[],
+"/*** Return the function of this part.
+* @return string of this part, null if this part not in a robot
+*/","public String getFunction() {
+return function;
+}",getFunction,,String,function,[],['function'],[],
+"/*** Return the next part in this robot.
+* This is valid only if the part is in a robot.
+* @return the next part, possibly null
+* @exception IllegalStateException if this part is not a part of a robot
+*/","public FunctionalPart getNext() {
+
+if(this.getFunction() == null)throw new IllegalStateException(""Part is not in the robot"");
+FunctionalPart cur = this;
+
+if(cur.right != null)
+{
+if(cur.right.left != null)
+{
+cur = cur.right.left;
+while(cur.left !=null)
+{
+cur = cur.left;
+}
+
+return cur;
+}
+cur = cur.right;
+return cur;
+}
+
+else{
+if(cur.parent == null)return null;
+if(cur.parent.left == cur)
+{
+cur = cur.parent;
+}
+else
+{
+if(cur.parent == null)return null;
+while(cur.parent.left != cur)
+{
+cur = cur.parent;
+if(cur.parent == null)return null;
+}
+cur = cur.parent;
+}
+
+return cur;
+}
+}",getNext,,FunctionalPart,cur,"['getFunction', 'IllegalStateException']","['cur', 'cur', 'cur', 'null', 'null', 'null', 'cur']",['IllegalStateException'],
+"/*** Compare two parts according to our purposes.
+* We use the supplied comparator except when it
+* says it doesn't care, in which case, we use the (unique) id to
+* distinguish two parts, older first.
+* @param p1 first part, must not be null
+* @param p2 second part, must not be null
+* @return comparison, only 0 if p1 and p2 are the same
+*/","private int compare(FunctionalPart p1, FunctionalPart p2) {
+if (comparator != null) {
+int c= comparator.compare(p1, p2);
+if (c != 0) return c;
+}
+return p1.getId() - p2.getId();
+}",compare,"FunctionalPart p1, FunctionalPart p2",int,c,['getId'],"['c', 'c']",[],
+"/*** Check a tree of parts within bounds.
+* The subtree must be properly ordered, and every part
+* must have a non-null function assigned.
+* @param r root of subtree to check, may be null
+* @param lo lower bound (exclusive) of all parts in subtree.
+*   If null, then no lower bound
+* @param hi upper bound (exclusive) of all parts in subtree.
+*   If null, then no upper bound
+* @param p the parent part
+* @return whether the subtree checks out OK.
+* If false is returned, then exactly one report has been generated.
+*/","private boolean checkInRange(FunctionalPart r, FunctionalPart lo, FunctionalPart hi, FunctionalPart p) {
+if (r == null) return true;
+if (r.function == null) return report(""Has null function: "" + r);
+if (lo != null && compare(lo, r) >= 0) return report(""Out of lo bound: "" + r + "" <= "" + lo);
+if (hi != null && compare(r,hi) >= 0) return report(""Out of hi bound: "" + r + "" >= "" + hi);
+
+//Checking if the roots parent is equal to the parent parameter
+if(r.parent != p)return report(""Out of root bound"");
+
+//r goes into the p param because when you move down the tree the root variable becomes the parent
+return checkInRange(r.left, lo, r,r) && checkInRange(r.right, r, hi,r);
+}",checkInRange,"FunctionalPart r, FunctionalPart lo, FunctionalPart hi, FunctionalPart p",boolean,true,"['report', 'compare']",['true'],[],
+"/*** Create a wired robot without parts
+* and no order.
+*/","public WiredRobot() {
+this(null);
+}",WiredRobot,,public,,[],[],[],
+"/*** Create a wired robot without parts
+* with the given order
+* @param comp order to use, if null, then unordered
+*/","public WiredRobot(Comparator<FunctionalPart> comp) {
+comparator = comp;
+assert wellFormed() : ""Invariant not established by constructor"";
+}",WiredRobot,Comparator<FunctionalPart> comp,public,,['wellFormed'],[],[],
+"/*** Return the first part in this robot.
+* @return the first part, null if this robot is empty
+*/","public FunctionalPart getFirst() {
+assert wellFormed() : ""invariant broken in getFirst"";
+FunctionalPart r = root;
+while (r != null && r.left != null) {
+r = r.left;
+}
+return r;
+}",getFirst,,FunctionalPart,r,['wellFormed'],"['r', 'r']",[],
 "/*** Translates the parameter point by this vector.
 *
 * @param p the point to translate
 * @return the  translated point
 */","public Point move(Point p){
 return new Point(p.x() + this.dx(), p.y() + this.dy());
-}",move,Point p,Point,"new Point(p.x() + this.dx(), p.y() + this.dy())","['Point', 'x', 'dx', 'y', 'dy']",[],[]
+}",move,Point p,Point,"new Point(p.x() + this.dx(), p.y() + this.dy())","['Point', 'x', 'dx', 'y', 'dy']",[],[],Vector
+"/*** Return the 0-based index part from the subtree given that
+* matches the given function.  The mutable inex should be decremented
+* for every part we find that matches, so that if we find a match
+* when it is zero we return that one.  Once we find the result, we stop
+* looking (and stop decrementing).  If there is no such functional part,
+* this method returns null.
+* @param r subtree to examine, may be null
+* @param function kind of part to look for, null means any part
+* @param mutableIndex index to look for (0-based); decremented whenever a matching
+*   part is encountered in in-order traversal until the desired index.
+* @return 0-based matching part, may be null
+*/","private static FunctionalPart getHelper(FunctionalPart r, String function, Cell<Integer> mutableIndex) {
+if (r == null) return r;
+FunctionalPart result = getHelper(r.left, function, mutableIndex);
+if (result != null) return result;
+if (function == null ||function.equals(r.function)) {
+int index = mutableIndex.get();
+if (index == 0) return r;
+mutableIndex.set(index-1);
+}
+return getHelper(r.right, function, mutableIndex);
+}",getHelper,"FunctionalPart r, String function, Cell<Integer> mutableIndex",FunctionalPart,r,"['equals', 'get', 'set']","['r', 'result', 'result', 'index', 'r']",[],
+"/***	A method that removes a part with the assistance of a removal helper method
+* @param p
+* @return ture if part is removed
+* @return false if part is not removed
+*/","public boolean remove(Part p)
+{
+if(root == null)return false;
+
+assert wellFormed():""invariant broken at the start of remove"";
+
+//check if the part is even in the robot
+FunctionalPart traverse = getFirst();
+if(traverse.getNext()!=null && !traverse.equals((FunctionalPart)p))
+{
+traverse = traverse.getNext();
+while(traverse !=null)
+{
+if(traverse.equals((FunctionalPart)p))break;
+traverse = traverse.getNext();
+}
+}
+if(traverse != (FunctionalPart)p || traverse == null)return false;
+
+FunctionalPart saveRoot = root;
+FunctionalPart holdP = (FunctionalPart) p;
+if(holdP.getFunction() ==null)return false;
+
+p = doRemove(root,(FunctionalPart) p);
+assert wellFormed():""invariant broken at the end of remove"";
+
+//check the root
+//check the parent
+//if niether is different return false
+if(saveRoot != null && !saveRoot.equals(root)){
+return true;
+}
+else if(p != null && p.equals(holdP))
+{
+return false;
+}
+else return false;
+}",remove,Part p,boolean,false,"['wellFormed', 'getFirst', 'getNext', 'equals', 'getFunction', 'doRemove']","['false', 'traverse', 'false', 'saveRoot', 'holdP', 'false', 'true', 'false', 'false']",[],
+"/*** Change the comparator used to order the robot parts.
+* The parts will be reorganized as necessary to accommodate the new order,
+* but two parts will be reordered only if necessary.
+* (The sorting is ""stable"".)
+* @param comp comparator to use, if null, then henceforth the parts
+* can be in any order.
+*/","public void setComparator(Comparator<FunctionalPart> comp) {
+assert wellFormed() : ""invariant broken in setComparator"";
+if (comp != comparator) {
+comparator = comp;
+FunctionalPart saved = root;
+root = null;
+reInsertAll(saved);
+}
+assert wellFormed() : ""invariant broken by setComparator"";
+}",setComparator,Comparator<FunctionalPart> comp,void,,"['wellFormed', 'reInsertAll']",['saved'],[],
+"/*** Return the number of nodes in this subtree.
+* If the subtree isn't null, we use the stored `count' field rather than
+* computing the count.
+* @param r subtree to count nodes for, must not be null
+* @return count of nodes in this subtree
+*/","private static int getCount(Node<?> r) {
+if (r == null) return 0;
+return r.count;
+}",getCount,Node<?> r,int,0,[],[],[],
+"/*** Check that a subtree's count and parent fields are correct.
+* @param r subtree to check
+* @param p what the parent should be.
+* @return whether any problems ere found.  If false is returned than
+* exactly one problem has been reported.
+*/","private boolean checkTree(Node<T> r, Node<T> p) {
+if (r == null) return true;
+if (r.parent != p) return report(""parent is wrong for "" + r);
+if (r.count != getCount(r.left) + getCount(r.right) + 1) {
+return report(""computed count "" + r.count + "" not consistent with subtrees"");
+}
+return checkTree(r.left, r) && checkTree(r.right, r);
+}",checkTree,"Node<T> r, Node<T> p",boolean,true,"['report', 'getCount']",['true'],[],
+"/*** Create a maze of the given size, in which everything is blocked.
+* @param rows number of rows, must be positive
+* @param columns number of columns, must be positive
+*/","public Maze(int rows, int columns) {
+if (rows < 1 || columns < 1) throw new IllegalArgumentException(""Maze must not be empty"");
+this.rows = rows;
+this.columns = columns;
+ropen = new boolean[rows-1][columns];
+copen = new boolean[rows][columns-1];
+}",Maze,"int rows, int columns",public,,['IllegalArgumentException'],[],['IllegalArgumentException'],
+"/*** Is this cell open to the left?
+* As a special case, the bottom left cell is open to the left
+* (this is the maze entry).
+* @param i row
+* @param j column
+* @return whether there is an opening to the left.
+* @exception IllegalArgumentException if coordinates out of range.
+*/","public boolean isOpenLeft(int i, int j) {
+checkCell(i,j);
+if(j==0 && rows()-1 == i)return true;//special case
+
+if(j==0) return false;
+else if(copen[i][j-1])return true;
+else return false;
+}",isOpenLeft,"int i, int j",boolean,true,"['checkCell', 'rows']","['true', 'false', 'true', 'false']",[],
+"/*** Is this cell open to the right?
+* @param i row
+* @param j column
+* @return whether there is an opening to the right.
+* @exception IllegalArgumentException if coordinates out of range.
+*/","public boolean isOpenRight(int i, int j) {
+
+checkCell(i,j);
+
+if(j>=copen[0].length)return false;
+else if(copen[i][j])return true;
+else return false;
+}",isOpenRight,"int i, int j",boolean,false,['checkCell'],"['false', 'true', 'false']",[],
+"/*** Is this cell open above?
+* As special case, the top right cell is open above
+* (this is the maze exit).
+* @param i row
+* @param j column
+* @return whether there is an opening going up
+* @exception IllegalArgumentException if coordinates out of range.
+*/","public boolean isOpenUp(int i, int j) {
+
+checkCell(i,j);
+if(i==0&&j==columns()-1)return true;
+
+if(i==0)return false;
+else if(ropen[i-1][j])return true;
+else return false;
+}",isOpenUp,"int i, int j",boolean,true,"['checkCell', 'columns']","['true', 'false', 'true', 'false']",[],
+"/*** Is this cell open below?
+* @param i row
+* @param j column
+* @return whether there is an opening down down
+* @exception IllegalArgumentException if coordinates out of range.
+*/","public boolean isOpenDown(int i, int j) {
+
+checkCell(i,j);
+if(i>=ropen.length)return false;
+else if(ropen[i][j])return true;
+else return false;
+}",isOpenDown,"int i, int j",boolean,false,['checkCell'],"['false', 'true', 'false']",[],
 "/*** Adds the parameter vector with this vector.
 *
 * @param v the vector to add
 * @return the vector sum
 */","public Vector add(Vector v){
 return new Vector(this.dx() + v.dx(), this.dy() + v.dy());
-}",add,Vector v,Vector,"new Vector(this.dx() + v.dx(), this.dy() + v.dy())","['Vector', 'dx', 'dy']",[],[]
+}",add,Vector v,Vector,"new Vector(this.dx() + v.dx(), this.dy() + v.dy())","['Vector', 'dx', 'dy']",[],[],Vector
+"/*** Read in contents of a maze printed with ASCII graphics from the file.
+* The rows and columns are already set (do not read these).
+* Example (assuming rows = 3, columns = 4)
+* <pre>
+* +-+-+-+ +
+* |   |   |
+* + + + +-+
+* | |     |
+* + +---+ +
+*       | |
+* +-----+-+
+* </pre>
+* @param r buffered reader to read lines from
+* @throws IOException if a problem happens with reading
+* @throws ParseException if the maze is badly formatted.
+* (The implementation is also permitted to simply overlook
+* format errors)
+*/","public void read(BufferedReader r) throws IOException {
+//read() will return the ascii value of the character
+String reader;
+r.readLine();
+for(int i =0; i < rows;i++) {//rows
+reader=r.readLine();
+for (int j = 2; j < reader.length();j+=2)//columns
+{
+char ha = reader.charAt(j);
+if(ha == ' ')setOpenRight(i,(j/2)-1,true);
+}
+if(i!=rows-1) {//rows
+reader = r.readLine();
+for (int j = 1; j < reader.length(); j+=2)
+{
+char ha =reader.charAt(j);
+if(ha == ' ')setOpenDown(i,j/2,true);
+}
+}
+
+}
+}",read,BufferedReader r,void,"the ascii value of the character
+String reader","['readLine', 'length', 'charAt', 'setOpenRight', 'setOpenDown']","['reader', 'i', 'reader', 'j', 'ha', 'reader', 'j', 'ha']",[],
+"/*** Write out the maze in a specific textual and human readable form.
+* For example:
+* <pre>
+* +-+-+-+ +
+* |   |   |
+* + + + +-+
+* | |     |
+* + +---+ +
+*       | |
+* +-----+-+
+* </pre>
+*
+* @param pw print writer to write to, must not be null
+*/","public void write(PrintWriter pw) {
+int copenCount =0;
+int ropenCount=0;
+StringBuilder table = new StringBuilder();
+
+for(int i =0; i < rows()*2+1; i++)//change second condition
+{
+//special cases
+if(i ==0)//first line
+{
+for(int a=0;a < columns()*2+1;a++)
+{
+if(a == columns()*2-1) table.append("" "");
+else if(a%2==0) table.append(""+"");
+else table.append(""-"");
+}
+}
+else if(i == rows()*2-1)//second to last line
+{
+for(int b =0;b < columns()*2+1;b++)
+{
+if(b==0 || b%2==1)table.append("" "");
+else{
+if(isOpenRight(ropenCount,copenCount))table.append("" "");
+else table.append(""|"");
+copenCount++;
+}
+}
+copenCount=0;
+}
+
+//Main cases
+else if(i%2==1)//copen
+{
+for(int d=0; d <columns()*2+1;d++)
+{
+if(d == 0 || d == columns()*2) table.append(""|"");
+else if(d%2==0)
+{
+if(isOpenRight(ropenCount,copenCount)) table.append("" "");
+else table.append(""|"");
+copenCount++;
+}
+else table.append("" "");
+}
+copenCount=0;
+}
+else if(i%2==0)//ropen
+{
+for (int e = 0; e < columns() * 2 + 1; e++) {
+if (e % 2 == 1) {
+if (isOpenDown(ropenCount, copenCount)) table.append("" "");
+else table.append(""-"");
+copenCount++;
+} else table.append(""+"");
+}
+ropenCount++;
+copenCount = 0;
+if(i == rows()*2)
+{
+table.append(""\n"");
+String finalMaze = table.toString();
+pw.write(finalMaze);
+}
+}
+table.append(""\n"");
+}
+}",write,PrintWriter pw,void,,"['StringBuilder', 'rows', 'columns', 'append', 'isOpenRight', 'isOpenDown', 'toString']","['copenCount', 'ropenCount', 'table', 'i', 'a', 'b', 'd', 'e', 'finalMaze']",[],
+"/*** Clear maze (everything is the same open/closed).
+* @param open whether everything should be open (or closed)
+*/","public void clear(boolean open) {
+for (int i = 0; i < rows; ++i) {
+for (int j=0; j < columns; ++j) {
+if (i+1 != rows) ropen[i][j] = open;
+if (j+1 != columns) copen[i][j] = open;
+}
+}
+}",clear,boolean open,void,,[],"['i', 'j']",[],
+"/*** Exception thrown by {@link #read} if it notices a problem.
+*
+*/",public static class ParseException extends IOException {,unknown,,unknown,,[],[],[],
+"/*** Keep Eclipse happy
+*/","private static final long serialVersionUID = 1L;
+
+public ParseException(String s) { super(s); }
+}",ParseException,String s,public,,[],['serialVersionUID'],[],
+"/**Create a cell for row i and column j.
+* This is a convenience method for creating new cells,
+* since the Java syntax for doing so in a different class is tricky.
+* You don't need to use this method.
+* @param i row
+* @param j column
+* @return new Cell(i,j)
+*/","public Cell makeCell(int i, int j) {
+return new Cell(i,j);
+}",makeCell,"int i, int j",Cell,"new Cell(i,j)",['Cell'],[],[],
+"/*** Set the displayed solution to the argument
+* @param sd (may be null -- show no solution)
+*/","public void setSolution(SolutionDisplay sd) {
+solution = sd;
+}",setSolution,SolutionDisplay sd,void,,[],[],[],
+"/*** Create a maze solver for this maze.
+*
+* @param m maze to solve, must not be null
+*/","public MazeSolver(Maze m) {
+maze = m;
+visited = new Cell[maze.rows()][maze.columns()];
+}",MazeSolver,Maze m,public,,"['rows', 'columns']",[],[],
+"/*** Try to find a path, and return a solution display:
+* either a path solution display, if a path was found,
+* or a visited solution display if no path was found.
+*
+* @return solution display (must not be null)
+*/","public SolutionDisplay findPath() {
+int rows = maze.rows();
+int columns = maze.columns();
+Stack<Maze.Cell> prev = new Stack<Cell>();
+
+Cell cur = maze.makeCell(rows - 1, 0);
+prev.push(cur);
+visited[rows-1][0] = cur;
+
+Cell look = null;
+boolean winner = false;
+ArrayList<Cell> path = new ArrayList<>(rows * columns);
+
+int saveSize=pending.size();
+
+boolean noAdded=false;
+
+while (!winner) {
+//Special case for if solution is reached
+if (cur.row == 0 && cur.column == columns - 1) {
+winner = true;
+break;
+}
+noAdded = doPending(cur);
+if(pending.isEmpty())break;
+
+look = pending.peek();
+if(!noAdded) {
+prev = doPrev(prev, cur, look);
+}
+
+// If the cell has not been visited then we jump there
+if (visited[look.row][look.column] == null) {
+cur = pending.pop();
+prev.push(cur);
+visited[cur.row][cur.column] = cur;
+} else pending.pop();
+
+}
+
+if (winner) {
+
+for(int i = prev.search(visited[rows-1][0])-1; i > -1; i--)
+{
+path.add(0,prev.pop());
+}
+return new PathSolutionDisplay(maze, path);
+} else {
+boolean[][] marked = new boolean[rows][columns];
+for (int i = 0; i < visited.length; i++) {
+for (int j = 0; j < visited[i].length; j++) {
+if (visited[i][j] == null) marked[i][j] = false;
+else marked[i][j] = true;
+}
+}
+return new VisitedSolutionDisplay(maze, marked);
+}
+}",findPath,,SolutionDisplay,"new PathSolutionDisplay(maze, path)","['rows', 'columns', 'makeCell', 'push', 'size', 'doPending', 'isEmpty', 'peek', 'doPrev', 'pop', 'search', 'add', 'PathSolutionDisplay', 'VisitedSolutionDisplay']","['rows', 'columns', 'prev', 'cur', 'look', 'winner', 'path', 'saveSize', 'noAdded', 'i', 'marked', 'i', 'j']",[],
 "/*** Takes the dot product of this vector and the parameter vector.
 *
 * @param v the other vector
 * @return the dot product
 */","public double dot(Vector v){
 return this.dx() * v.dx() + this.dy() * v.dy();
-}",dot,Vector v,double,this.dx() * v.dx() + this.dy() * v.dy(),"['dx', 'dy']",[],[]
+}",dot,Vector v,double,this.dx() * v.dx() + this.dy() * v.dy(),"['dx', 'dy']",[],[],Vector
 "/*** Scales this vector by the parameter.
 *
 * @param s the constant to scale by
 * @return the scaled vector
 */","public Vector scale(double s){
 return new Vector(s * this.dx(), s * this.dy());
-}",scale,double s,Vector,"new Vector(s * this.dx(), s * this.dy())","['Vector', 'dx', 'dy']",[],[]
+}",scale,double s,Vector,"new Vector(s * this.dx(), s * this.dy())","['Vector', 'dx', 'dy']",[],[],Vector
 "/*** Finds the magnitude of this vector.
 *
 * @return how long this vector is (never negative).
 */","public double magnitude(){
 double temp = this.dx() * this.dx() + this.dy() * this.dy();
 return Math.sqrt(temp);
-}",magnitude,,double,Math.sqrt(temp),"['dx', 'dy', 'sqrt']",['temp'],[]
+}",magnitude,,double,Math.sqrt(temp),"['dx', 'dy', 'sqrt']",['temp'],[],Vector
 "/*** Normalizes this vector.
 *
 * @return a vector with the same angle but magnitude of one.
 */","public Vector normalize(){
 double magnitude = this.magnitude();
 return new Vector(this.dx() / magnitude, this.dy() / magnitude);
-}",normalize,,Vector,"new Vector(this.dx() / magnitude, this.dy() / magnitude)","['magnitude', 'Vector', 'dx', 'dy']",['magnitude'],[]
+}",normalize,,Vector,"new Vector(this.dx() / magnitude, this.dy() / magnitude)","['magnitude', 'Vector', 'dx', 'dy']",['magnitude'],[],Vector
 "/*** gets angle theta
 *
 * @return angle of vector off x axis
@@ -1260,7 +2447,7 @@ double theta = Math.atan(this.dy() / this.dx());
 if(this.dx() < 0)
 theta += Math.PI;
 return theta;
-}",theta,,double,Math.PI/2,"['dx', 'dy', 'atan']","['theta', 'theta']",[]
+}",theta,,double,Math.PI/2,"['dx', 'dy', 'atan']","['theta', 'theta']",[],Vector
 "/*** Rotates this vector clockwise by the parameter angle (in radians).
 *
 * @param theta the angle to rotate (in radians)
@@ -1269,7 +2456,7 @@ return theta;
 double angle = this.theta() + theta;
 Vector v = new Vector(angle);
 return v.scale(this.magnitude());
-}",rotate,double theta,Vector,v.scale(this.magnitude()),"['theta', 'Vector', 'scale', 'magnitude']","['angle', 'v']",[]
+}",rotate,double theta,Vector,v.scale(this.magnitude()),"['theta', 'Vector', 'scale', 'magnitude']","['angle', 'v']",[],Vector
 "/*** Compute the angle of this vector, in radians,
 * clockwise from the x-axis.
 *
@@ -1280,11 +2467,11 @@ if (magn == 0.0) return 0;
 double alpha = Math.acos(dx()/magn);
 if(dy() < 0) alpha = 2*Math.PI-alpha;
 return alpha;
-}",angle,,double,0,"['magnitude', 'acos', 'dx', 'dy']","['magn', 'alpha', 'alpha']",[]
+}",angle,,double,0,"['magnitude', 'acos', 'dx', 'dy']","['magn', 'alpha', 'alpha']",[],Vector
 "/*** Return the current movement of the ball.
 *
 * @return the current movement
-*/",public Vector getMove(){return move;},getMove,,Vector,move,[],['move'],[]
+*/",public Vector getMove(){return move;},getMove,,Vector,move,[],['move'],[],Ball
 "/*** Initialize an empty sequence with an initial capacity of INITIAL_CAPACITY.
 * The append method works
 * efficiently (without needing more memory) until this capacity is reached.
@@ -1297,7 +2484,7 @@ return alpha;
 {
 this(INITIAL_CAPACITY);
 assert wellFormed() : ""Invariant false at end of constructor"";
-}",BallSeq,,public,,['wellFormed'],[],[]
+}",BallSeq,,public,,['wellFormed'],[],[],BallSeq
 "/*** Initialize an empty sequence with a specified initial capacity. Note that
 * the append method works
 * efficiently (without needing more memory) until this capacity is reached.
@@ -1320,7 +2507,7 @@ data = new Ball[initialCapacity];
 manyItems = 0;
 currentIndex = 0;
 assert wellFormed() : ""Invariant false at end of constructor"";
-}",BallSeq,int initialCapacity,public,,"['IllegalArgumentException', 'wellFormed']",[],['IllegalArgumentException']
+}",BallSeq,int initialCapacity,public,,"['IllegalArgumentException', 'wellFormed']",[],['IllegalArgumentException'],BallSeq
 "/*** Determine the number of elements in this sequence.
 * @param - none
 * @return
@@ -1330,7 +2517,7 @@ assert wellFormed() : ""Invariant false at end of constructor"";
 assert wellFormed() : ""invariant failed at start of size"";
 
 return manyItems;
-}",size,,int,manyItems,['wellFormed'],['manyItems'],[]
+}",size,,int,manyItems,['wellFormed'],['manyItems'],[],BallSeq
 "/*** The first element (if any) of this sequence is now current.
 * @param - none
 * @postcondition
@@ -1343,7 +2530,7 @@ assert wellFormed() : ""invariant failed at start of start"";
 
 currentIndex = 0;
 assert wellFormed() : ""invariant failed at end of start"";
-}",start,,void,,['wellFormed'],[],[]
+}",start,,void,,['wellFormed'],[],[],BallSeq
 "/*** Accessor method to determine whether this sequence has a specified
 * current element (a Ball or null) that can be retrieved with the
 * getCurrent method. This depends on the status of the cursor.
@@ -1355,7 +2542,7 @@ assert wellFormed() : ""invariant failed at end of start"";
 assert wellFormed() : ""invariant failed at start of isCurrent"";
 
 return currentIndex < manyItems;
-}",isCurrent,,boolean,currentIndex < manyItems,['wellFormed'],[],[]
+}",isCurrent,,boolean,currentIndex < manyItems,['wellFormed'],[],[],BallSeq
 "/*** Accessor method to get the current element of this sequence.
 * @param - none
 * @precondition
@@ -1373,7 +2560,7 @@ if(!isCurrent()) throw new IllegalStateException(""No current element found"");
 
 return data[currentIndex];
 
-}",getCurrent,,Ball,data[currentIndex],"['wellFormed', 'isCurrent', 'IllegalStateException']",[],['IllegalStateException']
+}",getCurrent,,Ball,data[currentIndex],"['wellFormed', 'isCurrent', 'IllegalStateException']",[],['IllegalStateException'],BallSeq
 "/*** Move forward, so that the next element is now the current element in
 * this sequence.
 * @param - none
@@ -1396,7 +2583,7 @@ if(data.length > currentIndex)
 currentIndex++;
 
 assert wellFormed() : ""invariant failed at end of advance"";
-}",advance,,void,,"['wellFormed', 'isCurrent', 'IllegalStateException']",[],['IllegalStateException']
+}",advance,,void,,"['wellFormed', 'isCurrent', 'IllegalStateException']",[],['IllegalStateException'],BallSeq
 "/*** Remove the current element from this sequence.
 * @param - none
 * @precondition
@@ -1422,7 +2609,7 @@ data[i] = data[i+1];
 data[manyItems-1] = null;
 manyItems--;
 assert wellFormed() : ""invariant failed at end of removeCurrent"";
-}",removeCurrent,,void,,"['wellFormed', 'isCurrent', 'IllegalStateException']",['i'],['IllegalStateException']
+}",removeCurrent,,void,,"['wellFormed', 'isCurrent', 'IllegalStateException']",['i'],['IllegalStateException'],BallSeq
 "/*** Change the current capacity of this sequence if needed.
 * @param minimumCapacity
 *   the new capacity for this sequence
@@ -1445,7 +2632,7 @@ for(int i = 0; i < data.length; i++) {
 newArray[i] = data[i];
 }
 data = newArray;
-}",ensureCapacity,int minimumCapacity,void,,[],"['newSize', 'newArray', 'i']",[]
+}",ensureCapacity,int minimumCapacity,void,,[],"['newSize', 'newArray', 'i']",[],BallSeq
 "/*** Add a new element to this sequence, before the current element (if any).
 * If the new element would take this sequence beyond its current capacity,
 * then the capacity is increased before adding the new element.
@@ -1473,13 +2660,13 @@ data[currentIndex] = element;
 manyItems++;
 
 assert wellFormed() : ""invariant failed at end of insert"";
-}",insert,Ball element,void,,"['wellFormed', 'ensureCapacity']",['i'],[]
+}",insert,Ball element,void,,"['wellFormed', 'ensureCapacity']",['i'],[],BallSeq
 "/*** Set the radius of this ball.
 * @param r new radius, must be positive.
 */","public void setRadius(int r) {
 if (r <= 0) throw new IllegalArgumentException(""radius must be positive, not "" + r);
 radius = r;
-}",setRadius,int r,void,,['IllegalArgumentException'],[],['IllegalArgumentException']
+}",setRadius,int r,void,,['IllegalArgumentException'],[],['IllegalArgumentException'],Ball
 "/*** Place the contents of another sequence (which may be the
 * same one as this!) into this sequence before the current element (if any).
 * @param addend
@@ -1510,7 +2697,7 @@ currentIndex += indexInc;
 
 
 assert wellFormed() : ""invariant failed at end of addAll"";
-}",insertAll,BallSeq addend,void,,"['wellFormed', 'NullPointerException', 'clone', 'ensureCapacity', 'insert']","['clone', 'indexInc', 'i']",['NullPointerException']
+}",insertAll,BallSeq addend,void,,"['wellFormed', 'NullPointerException', 'clone', 'ensureCapacity', 'insert']","['clone', 'indexInc', 'i']",['NullPointerException'],BallSeq
 "/*** Generate a copy of this sequence.
 * @param - none
 * @return
@@ -1534,11 +2721,11 @@ assert wellFormed() : ""invariant failed at end of clone"";
 assert answer.wellFormed() : ""invariant failed for clone"";
 
 return answer;
-}",clone,,BallSeq,answer,"['wellFormed', 'BallSeq']","['answer', 'i', 'answer']",[]
+}",clone,,BallSeq,answer,"['wellFormed', 'BallSeq']","['answer', 'i', 'answer']",[],BallSeq
 "/*** default constructor for default capacity of zero
 */","public BallCollection() {
 this(INITIAL_CAPACITY);
-}",BallCollection,,public,,[],[],[]
+}",BallCollection,,public,,[],[],[],BallCollection
 "/*** constructor
 * @param manyItems: number of items
 */","public BallCollection(int manyItems) {
@@ -1547,25 +2734,25 @@ this.manyItems = manyItems;
 version = 0;
 
 assert wellFormed() : ""invariant failed at end of constructor"";
-}",BallCollection,int manyItems,public,,['wellFormed'],[],[]
+}",BallCollection,int manyItems,public,,['wellFormed'],[],[],BallCollection
 "/*** Instantiates a new player.
 *
 * @param loc the initial location
-*/",public Player(Point loc){location=loc;radius = DodgeBall.PLAYER_RADIUS;},Player,Point loc,public,,[],[],[]
+*/",public Player(Point loc){location=loc;radius = DodgeBall.PLAYER_RADIUS;},Player,Point loc,public,,[],[],[],Player
 "/*** Sets the current image.
 *
 * @param img the new player image
-*/",public void setImg(BufferedImage img){playerImg = img;},setImg,BufferedImage img,void,,[],[],[]
+*/",public void setImg(BufferedImage img){playerImg = img;},setImg,BufferedImage img,void,,[],[],[],Player
 "/*** Increases the player's radius.
 *
 * @see DodgeBall.makeHarder()
-*/",public void grow(){radius += 2;},grow,,void,,[],[],[]
+*/",public void grow(){radius += 2;},grow,,void,,[],[],[],Player
 "/*** Checks if colliding with parameter ball.
 *
 * @param b the ball
 * @return true if colliding
 */","public boolean isColliding(Ball b){
-return DodgeBall.MORTAL && location.distance(b.getLoc()) <= (radius + b.getRadius());}",isColliding,Ball b,boolean,DodgeBall.MORTAL && location.distance(b.getLoc()) <= (radius + b.getRadius()),"['distance', 'getLoc', 'getRadius']",[],[]
+return DodgeBall.MORTAL && location.distance(b.getLoc()) <= (radius + b.getRadius());}",isColliding,Ball b,boolean,DodgeBall.MORTAL && location.distance(b.getLoc()) <= (radius + b.getRadius()),"['distance', 'getLoc', 'getRadius']",[],[],Player
 "/*** Update the player's location.
 *
 * @param mouseLoc the current [adjusted] mouse location
@@ -1575,7 +2762,7 @@ int new_y = Math.max(radius, mouseLoc.intY());
 new_x = Math.min(new_x, DodgeBall.BOUNDS.width -radius);
 new_y = Math.min(new_y, DodgeBall.BOUNDS.height - radius);
 location = new Point(new_x, new_y);
-}",update,Point mouseLoc,void,,"['max', 'intX', 'intY', 'min', 'Point']","['new_x', 'new_y']",[]
+}",update,Point mouseLoc,void,,"['max', 'intX', 'intY', 'min', 'Point']","['new_x', 'new_y']",[],Player
 "/*** Draws the player.
 *
 * @param g the Graphics context on which to draw
@@ -1583,9 +2770,9 @@ location = new Point(new_x, new_y);
 g.drawImage(playerImg,
 location.intX() - radius, location.intY() - radius,
 radius*2, radius*2, null);
-}",draw,Graphics g,void,,"['drawImage', 'intX', 'intY']",[],[]
+}",draw,Graphics g,void,,"['drawImage', 'intX', 'intY']",[],[],Player
 "/*** Launches the ball by setting active to true.
-*/",public void launch(){active=true;},launch,,void,,[],[],[]
+*/",public void launch(){active=true;},launch,,void,,[],[],[],Ball
 "/*** Create an empty sequence
 * @param - none
 * @postcondition
@@ -1599,7 +2786,7 @@ cursor = null;
 precursor = null;
 
 assert wellFormed() : ""invariant failed in constructor"";
-}",BallSeq,,public,,['wellFormed'],[],[]
+}",BallSeq,,public,,['wellFormed'],[],[],BallSeq
 "/*** Determine the number of elements in this sequence.
 * @param - none
 * @return
@@ -1609,7 +2796,7 @@ assert wellFormed() : ""invariant failed in constructor"";
 assert wellFormed() : ""invariant wrong at start of size()"";
 
 return manyNodes;
-}",size,,int,manyNodes,['wellFormed'],['manyNodes'],[]
+}",size,,int,manyNodes,['wellFormed'],['manyNodes'],[],BallSeq
 "/*** Set the current element at the front of this sequence.
 * @param - none
 * @postcondition
@@ -1624,7 +2811,7 @@ cursor = head;
 precursor = null;
 
 assert wellFormed() : ""invariant wrong at end of start()"";
-}",start,,void,,['wellFormed'],[],[]
+}",start,,void,,['wellFormed'],[],[],BallSeq
 "/*** Accessor method to determine whether this sequence has a specified
 * current element that can be retrieved with the
 * getCurrent method.
@@ -1637,7 +2824,7 @@ assert wellFormed() : ""invariant wrong at start of getCurrent()"";
 // TODO: Implemented by student.
 // This method shouldn't modify any fields, hence no assertion at end
 return cursor != null;
-}",isCurrent,,boolean,cursor != null,"['wellFormed', 'getCurrent']",[],[]
+}",isCurrent,,boolean,cursor != null,"['wellFormed', 'getCurrent']",[],[],BallSeq
 "/*** Accessor method to get the current element of this sequence.
 * @param - none
 * @precondition
@@ -1653,7 +2840,7 @@ assert wellFormed() : ""invariant wrong at start of getCurrent()"";
 if(!isCurrent()) throw new IllegalStateException(""no current element"");
 
 return cursor.data;
-}",getCurrent,,Ball,cursor.data,"['wellFormed', 'isCurrent', 'IllegalStateException']",[],['IllegalStateException']
+}",getCurrent,,Ball,cursor.data,"['wellFormed', 'isCurrent', 'IllegalStateException']",[],['IllegalStateException'],BallSeq
 "/*** Move forward, so that the current element is now the next element in
 * this sequence.
 * @param - none
@@ -1681,7 +2868,7 @@ cursor = null;
 precursor = null;
 }
 assert wellFormed() : ""invariant wrong at end of advance()"";
-}",advance,,void,,"['wellFormed', 'isCurrent', 'IllegalStateException']",[],['IllegalStateException']
+}",advance,,void,,"['wellFormed', 'isCurrent', 'IllegalStateException']",[],['IllegalStateException'],BallSeq
 "/*** Remove the current element from this sequence.
 * @param - none
 * @precondition
@@ -1723,7 +2910,7 @@ precursor.next = cursor;
 manyNodes--;
 
 assert wellFormed() : ""invariant wrong at end of removeCurrent()"";
-}",removeCurrent,,void,,"['wellFormed', 'isCurrent', 'IllegalStateException']",[],['IllegalStateException']
+}",removeCurrent,,void,,"['wellFormed', 'isCurrent', 'IllegalStateException']",[],['IllegalStateException'],BallSeq
 "/*** Add a new element to this sequence, before the current element (if any).
 * If the new element would take this sequence beyond its current capacity,
 * then the capacity is increased before adding the new element.
@@ -1763,7 +2950,7 @@ precursor.next = cursor;
 manyNodes++;
 
 assert wellFormed() : ""invariant failed at end of insert"";
-}",insert,Ball element,void,,"['wellFormed', 'Node']",[],[]
+}",insert,Ball element,void,,"['wellFormed', 'Node']",[],[],BallSeq
 "/*** Place the contents of another sequence (which may be the
 * same one as this!) into this sequence before the current element (if any).
 * @param addend
@@ -1806,7 +2993,7 @@ clone.tail.next = cursor;
 manyNodes += clone.manyNodes;
 
 assert wellFormed() : ""invariant failed at end of addAll"";
-}",insertAll,BallSeq addend,void,,"['wellFormed', 'NullPointerException', 'clone']",['clone'],['NullPointerException']
+}",insertAll,BallSeq addend,void,,"['wellFormed', 'NullPointerException', 'clone']",['clone'],['NullPointerException'],BallSeq
 "/*** Generate a copy of this sequence.
 * @param - none
 * @return
@@ -1863,7 +3050,7 @@ if(source == tail) result.tail = copyTail;
 assert wellFormed() : ""invariant wrong at end of clone() for this"";
 assert result.wellFormed() : ""invariant wrong for result of clone() for copy"";
 return result;
-}",clone,,BallSeq,result,"['wellFormed', 'RuntimeException', 'Node']","['result', 'result', 'source', 'copyHead', 'copyTail', 'result']",['RuntimeException']
+}",clone,,BallSeq,result,"['wellFormed', 'RuntimeException', 'Node']","['result', 'result', 'source', 'copyHead', 'copyTail', 'result']",['RuntimeException'],BallSeq
 "/*** If ball is active: moves location by the current movement.
 * If ball is not active: rotates vector by Math.PI/24.
 */","public void step(){
@@ -1874,13 +3061,13 @@ this.location = new Point(x, y);
 }
 else
 this.move = this.getMove().rotate(Math.PI/24);
-}",step,,void,,"['getLoc', 'x', 'getMove', 'dx', 'y', 'dy', 'Point', 'rotate']","['x', 'y']",[]
+}",step,,void,,"['getLoc', 'x', 'getMove', 'dx', 'y', 'dy', 'Point', 'rotate']","['x', 'y']",[],Ball
 "/*** Gets a single instance of the comparator.
 * @return a single instance of the comparator
-*/",public static Comparator<Player> getInstance() { return instance; },getInstance,,Comparator<Player>,instance,[],['instance'],[]
+*/",public static Comparator<Player> getInstance() { return instance; },getInstance,,Comparator<Player>,instance,[],['instance'],[],Alphabetical
 "/*** Gets a single instance of Nondiscrimination comparator.
 * @return a single instance of Nondiscrimination comparator
-*/",public static Comparator<Player> getInstance() { return instance; },getInstance,,Comparator<Player>,instance,[],['instance'],[]
+*/",public static Comparator<Player> getInstance() { return instance; },getInstance,,Comparator<Player>,instance,[],['instance'],[],ByPosition
 "/*** Instantiates a new Player.
 * @param name the name of the player, must not be null
 * @param score how many points this player has scored
@@ -1891,19 +3078,19 @@ this.name = name;
 this.position = position;
 checkParameter(""score"",score);
 this.score = score;
-}",Player,"String name, int score, Position position",public,,"['NullPointerException', 'checkParameter']",[],['NullPointerException']
+}",Player,"String name, int score, Position position",public,,"['NullPointerException', 'checkParameter']",[],['NullPointerException'],Player
 "/**Gets the name.
-* @return the name */",public String getName() {return name;},getName,,String,name,[],['name'],[]
+* @return the name */",public String getName() {return name;},getName,,String,name,[],['name'],[],Player
 "/**Gets this player's score.
-* @return the score */",public int getScore() {return score;},getScore,,int,score,[],['score'],[]
+* @return the score */",public int getScore() {return score;},getScore,,int,score,[],['score'],[],Player
 "/**Sets the score.
-* @param the score */",public void setScore(int score) {this.score = score;},setScore,int score,void,,[],[],[]
+* @param the score */",public void setScore(int score) {this.score = score;},setScore,int score,void,,[],[],[],Player
 "/**Gets this player's position.
-* @return the position */",public Position getPosition() {return position;},getPosition,,Position,position,[],['position'],[]
+* @return the position */",public Position getPosition() {return position;},getPosition,,Position,position,[],['position'],[],Player
 "/**Gets the previous player.
-* @return the previous player */",public Player getPrevious() {return prev;},getPrevious,,Player,prev,[],['prev'],[]
+* @return the previous player */",public Player getPrevious() {return prev;},getPrevious,,Player,prev,[],['prev'],[],Player
 "/**Gets the next player.
-* @return the next player */",public Player getNext() {return next;},getNext,,Player,next,[],['next'],[]
+* @return the next player */",public Player getNext() {return next;},getNext,,Player,next,[],['next'],[],Player
 "/*** Add another player into this player's team by priority order.
 * <ul>
 * <li> If the other player has higher priority, place it somewhere before this player.
@@ -1958,7 +3145,7 @@ next.prev = p;
 next = p;
 }
 }
-}",addInPriority,"Player p, Comparator<Player> priority",void,,['compare'],[],[]
+}",addInPriority,"Player p, Comparator<Player> priority",void,,['compare'],[],[],Player
 "/*** Checks if ball is at or outside BOUNDS dimension and moving further out,
 * and reflects movement if so.  If the ball isn't moving further out, the
 * movement isn't reflected.
@@ -1973,7 +3160,7 @@ this.move = new Vector(-1*this.getMove().dx(), this.getMove().dy());
 if((this.getLoc().y() - this.getRadius() <= 0) && this.getMove().dy() < 0)
 this.move = new Vector(this.getMove().dx(), -1*this.getMove().dy());
 
-}",bounceWalls,Dimension bounds,void,,"['getLoc', 'x', 'getRadius', 'getWidth', 'getMove', 'dx', 'Vector', 'dy', 'y', 'getHeight']",[],[]
+}",bounceWalls,Dimension bounds,void,,"['getLoc', 'x', 'getRadius', 'getWidth', 'getMove', 'dx', 'Vector', 'dy', 'y', 'getHeight']",[],[],Ball
 "/*** Assuming all the players before this one are sorted correctly
 * according to the priority and come before this one,
 * ensure that the ones coming after are also sorted correctly.
@@ -1990,7 +3177,7 @@ addInPriority(unsorted, c);
 if(next == unsorted) next.sortByPriority(c);
 else sortByPriority(c);
 
-}",sortByPriority,Comparator<Player> c,void,,"['remove', 'addInPriority']",['unsorted'],[]
+}",sortByPriority,Comparator<Player> c,void,,"['remove', 'addInPriority']",['unsorted'],[],Player
 "/*** Remove this item from its list.
 * This player will be completely disconnected from any other players.
 */","public void remove() {
@@ -2005,7 +3192,7 @@ next.prev = null;
 }
 next = null;
 prev = null;
-}",remove,,void,,[],[],[]
+}",remove,,void,,[],[],[],Player
 "/*** Instantiates a new Team with the given priority comparator.
 * @param c the priority comparator this Team will use
 * @param n the name of the team.
@@ -2014,7 +3201,7 @@ priority = c;
 dummy = new Player("""", Integer.MAX_VALUE, null);
 teamName = n;
 
-assert wellFormed() : ""invariant fails at end of constructor"";}",Team,"Comparator<Player> c, String n",public,,"['Player', 'wellFormed']",[],[]
+assert wellFormed() : ""invariant fails at end of constructor"";}",Team,"Comparator<Player> c, String n",public,,"['Player', 'wellFormed']",[],[],Team
 "/*** Adds a Player to this Team.
 * It should be added according to the priority of the team.
 * @param t the Player to add, must not be null and must not be in another team.
@@ -2027,7 +3214,7 @@ if(t.getNext() != null || t.getPrevious() != null) throw new IllegalArgumentExce
 dummy.addInPriority(t, priority);
 
 assert wellFormed() : ""invariant fails at end of add"";
-}",add,Player t,void,,"['wellFormed', 'getNext', 'getPrevious', 'IllegalArgumentException', 'addInPriority']",[],['IllegalArgumentException']
+}",add,Player t,void,,"['wellFormed', 'getNext', 'getPrevious', 'IllegalArgumentException', 'addInPriority']",[],['IllegalArgumentException'],Team
 "/*** Change the priority for this list of players,
 * and then make sure the order reflects the new priority.
 * @param p priority to use, must not be null.
@@ -2037,7 +3224,7 @@ if (p == null) throw new NullPointerException(""need a priority!"");
 priority = p;
 refreshPriority();
 assert wellFormed() : ""invariant failed during set priority"";
-}",setPriority,Comparator<Player> p,void,,"['wellFormed', 'NullPointerException', 'refreshPriority']",[],['NullPointerException']
+}",setPriority,Comparator<Player> p,void,,"['wellFormed', 'NullPointerException', 'refreshPriority']",[],['NullPointerException'],Team
 "/*** Some elements of the players may have changed the
 * way the players are ordered.  This method
 * reorders the list to fix things up.
@@ -2055,7 +3242,7 @@ if (dummy.getPrevious() != null) {
 dummy.remove(); // actually removes everyone else.
 }
 assert wellFormed() : ""invariant failed during refresh priority"";
-}",refreshPriority,,void,,"['wellFormed', 'sortByPriority', 'getPrevious', 'remove']",[],[]
+}",refreshPriority,,void,,"['wellFormed', 'sortByPriority', 'getPrevious', 'remove']",[],[],Team
 "/*** Compute the number of players.
 * @return number of players
 */","public int size() {
@@ -2066,7 +3253,7 @@ for(Player source = dummy.getNext(); source != null; source = source.getNext()) 
 count++;
 }
 return count;
-}",size,,int,count,"['wellFormed', 'getNext']","['count', 'source', 'count']",[]
+}",size,,int,count,"['wellFormed', 'getNext']","['count', 'source', 'count']",[],Team
 "/*** Return the n'th player (0-based).
 * @param index index of the element to return
 * @return the player at the specified position in this list
@@ -2082,7 +3269,7 @@ if(count == index) return source;
 count++;
 }
 return null; // TODO
-}",get,int index,Player,source,"['wellFormed', 'size', 'IndexOutOfBoundsException', 'getNext']","['count', 'source', 'source', 'null']",['IndexOutOfBoundsException']
+}",get,int index,Player,source,"['wellFormed', 'size', 'IndexOutOfBoundsException', 'getNext']","['count', 'source', 'source', 'null']",['IndexOutOfBoundsException'],Team
 "/*** Returns team's total score
 * @return the sum of all player's scores on this team
 */","public int totalScore() {
@@ -2093,20 +3280,20 @@ for(Player source = dummy.getNext(); source != null; source = source.getNext()) 
 score += source.getScore();
 }
 return score;
-}",totalScore,,int,score,"['wellFormed', 'getNext', 'getScore']","['score', 'source', 'score']",[]
+}",totalScore,,int,score,"['wellFormed', 'getNext', 'getScore']","['score', 'source', 'score']",[],Team
 "/*** prints this team's players
 */","public void printPlayers() {
 for(Player i = dummy.getNext(); i != null; i = i.getNext()) {
 System.out.println(i);
 }
-}",printPlayers,,void,,"['getNext', 'println']",['i'],[]
+}",printPlayers,,void,,"['getNext', 'println']",['i'],[],Team
 "/*** Checks if colliding with the parameter ball.
 *
 * @param other the other ball
 * @return true if colliding
 */","public boolean isColliding(Ball other){
 return this.getLoc().distance(other.getLoc()) <= this.getRadius() + other.getRadius();
-}",isColliding,Ball other,boolean,this.getLoc().distance(other.getLoc()) <= this.getRadius() + other.getRadius(),"['getLoc', 'distance', 'getRadius']",[],[]
+}",isColliding,Ball other,boolean,this.getLoc().distance(other.getLoc()) <= this.getRadius() + other.getRadius(),"['getLoc', 'distance', 'getRadius']",[],[],Ball
 "/*** Used to report an error found when checking the invariant.
 * By providing a string, this will help debugging the class if the invariant should fail.
 * @param error string to print to report the exact error found
@@ -2114,16 +3301,16 @@ return this.getLoc().distance(other.getLoc()) <= this.getRadius() + other.getRad
 */","private boolean report(String error) {
 reporter.accept(error);
 return false;
-}",report,String error,boolean,false,['accept'],['false'],[]
+}",report,String error,boolean,false,['accept'],['false'],[],LinkedSequence
 /**Return the head node from the data structure since we do not have a head field. */,"private Node<E> getHead() {
 return tail.next.next;
-}",getHead,,Node<E>,tail.next.next,[],[],[]
+}",getHead,,Node<E>,tail.next.next,[],[],[],LinkedSequence
 /**Return the dummy node from the data structure since we do not have a dummy field. */,"private Node<E> getDummy() {
 return tail.next; // TODO
-}",getDummy,,Node<E>,tail.next,[],[],[]
+}",getDummy,,Node<E>,tail.next,[],[],[],LinkedSequence
 /**Return the cursor from the data structure since we do not have a cursor field. */,"private Node<E> getCursor() {
 return precursor.next; // TODO
-}",getCursor,,Node<E>,precursor.next,[],[],[]
+}",getCursor,,Node<E>,precursor.next,[],[],[],LinkedSequence
 "/*** Create an empty sequence.
 * @param - none
 * @postcondition
@@ -2133,7 +3320,7 @@ return precursor.next; // TODO
 tail = precursor = new Node<E>();
 size = 0;
 assert wellFormed() : ""invariant failed in constructor"";
-}",LinkedSequence,,public,,['wellFormed'],[],[]
+}",LinkedSequence,,public,,['wellFormed'],[],[],LinkedSequence
 "/*** Determine the number of elements in this sequence.
 * @param - none
 * @return
@@ -2144,7 +3331,7 @@ assert wellFormed() : ""invariant wrong at start of size()"";
 // TODO: Implemented by student.
 // This method shouldn't modify any fields, hence no assertion at end
 return size;
-}",size,,int,size,['wellFormed'],['size'],[]
+}",size,,int,size,['wellFormed'],['size'],[],LinkedSequence
 "/*** Set the current element at the front of this sequence.
 * @param - none
 * @postcondition
@@ -2158,7 +3345,7 @@ assert wellFormed() : ""invariant wrong at start of start()"";
 precursor = getDummy();
 
 assert wellFormed() : ""invariant wrong at end of start()"";
-}",start,,void,,"['wellFormed', 'getDummy']",[],[]
+}",start,,void,,"['wellFormed', 'getDummy']",[],[],LinkedSequence
 "/*** Accessor method to determine whether this sequence has a specified
 * current element that can be retrieved with the
 * getCurrent method.
@@ -2171,7 +3358,7 @@ assert wellFormed() : ""invariant wrong at start of getCurrent()"";
 // TODO: Implemented by student.
 // This method shouldn't modify any fields, hence no assertion at end
 return precursor != tail;
-}",isCurrent,,boolean,precursor != tail,"['wellFormed', 'getCurrent']",[],[]
+}",isCurrent,,boolean,precursor != tail,"['wellFormed', 'getCurrent']",[],[],LinkedSequence
 "/*** Accessor method to get the current element of this sequence.
 * @param - none
 * @precondition
@@ -2187,7 +3374,7 @@ assert wellFormed() : ""invariant wrong at start of getCurrent()"";
 if(!isCurrent()) throw new IllegalStateException(""no current element"");
 
 return precursor.next.data;
-}",getCurrent,,E,precursor.next.data,"['wellFormed', 'isCurrent', 'IllegalStateException']",[],['IllegalStateException']
+}",getCurrent,,E,precursor.next.data,"['wellFormed', 'isCurrent', 'IllegalStateException']",[],['IllegalStateException'],LinkedSequence
 "/*** Move forward, so that the current element is now the next element in
 * this sequence.
 * @param - none
@@ -2207,7 +3394,7 @@ assert wellFormed() : ""invariant wrong at start of advance()"";
 if(!isCurrent()) throw new IllegalStateException(""no current element"");
 precursor = precursor.next;
 assert wellFormed() : ""invariant wrong at end of advance()"";
-}",advance,,void,,"['wellFormed', 'isCurrent', 'IllegalStateException']",[],['IllegalStateException']
+}",advance,,void,,"['wellFormed', 'isCurrent', 'IllegalStateException']",[],['IllegalStateException'],LinkedSequence
 "/*** Calculates new vectors for this and the parameter ball using normal and
 * tangent vectors, then calls step() on both until no longer colliding.
 *
@@ -2226,7 +3413,7 @@ other.move = other_tangent.add(my_normal);
 while (isColliding(other)){
 step();
 other.step();}
-}",bounce,Ball other,void,,"['Vector', 'getLoc', 'normalize', 'scale', 'dot', 'add', 'isColliding', 'step']","['my_unit_normal', 'other_unit_normal', 'my_normal', 'other_normal', 'my_tangent', 'other_tangent']",[]
+}",bounce,Ball other,void,,"['Vector', 'getLoc', 'normalize', 'scale', 'dot', 'add', 'isColliding', 'step']","['my_unit_normal', 'other_unit_normal', 'my_normal', 'other_normal', 'my_tangent', 'other_tangent']",[],Ball
 "/*** Remove the current element from this sequence.
 * @param - none
 * @precondition
@@ -2259,7 +3446,7 @@ size--;
 // TODO: Implemented by student.
 // See textbook pp.176-78, 181-184
 assert wellFormed() : ""invariant wrong at end of removeCurrent()"";
-}",removeCurrent,,void,,"['wellFormed', 'isCurrent', 'IllegalStateException']",[],['IllegalStateException']
+}",removeCurrent,,void,,"['wellFormed', 'isCurrent', 'IllegalStateException']",[],['IllegalStateException'],LinkedSequence
 "/*** Add a new element to this sequence, before the current element (if any).
 * @param element
 *   the new element that is being added
@@ -2288,7 +3475,7 @@ precursor.next = node;
 }
 size++;
 assert wellFormed() : ""invariant failed at end of insert"";
-}",insert,E element,void,,['wellFormed'],['node'],[]
+}",insert,E element,void,,['wellFormed'],['node'],[],LinkedSequence
 "/*** Place the contents of another sequence (which may be the
 * same one as this!) into this sequence before the current element (if any).
 * @param addend
@@ -2334,7 +3521,7 @@ precursor = clone.tail;
 size += clone.size;
 
 assert wellFormed() : ""invariant failed at end of addAll"";
-}",insertAll,LinkedSequence<E> addend,void,,"['wellFormed', 'NullPointerException', 'clone', 'getHead']","['clone', 'cloneHead', 'cloneHead', 'cloneHead']",['NullPointerException']
+}",insertAll,LinkedSequence<E> addend,void,,"['wellFormed', 'NullPointerException', 'clone', 'getHead']","['clone', 'cloneHead', 'cloneHead', 'cloneHead']",['NullPointerException'],LinkedSequence
 "/*** Generate a copy of this sequence.
 * @param - none
 * @return
@@ -2386,7 +3573,7 @@ if(source == precursor) result.precursor = cursor.next;
 assert wellFormed() : ""invariant wrong at end of clone()"";
 assert result.wellFormed() : ""invariant wrong for result of clone()"";
 return result;
-}",clone,,LinkedSequence<E>,result,"['SuppressWarnings', 'wellFormed', 'RuntimeException']","['result', 'cursor', 'source', 'result']",['RuntimeException']
+}",clone,,LinkedSequence<E>,result,"['SuppressWarnings', 'wellFormed', 'RuntimeException']","['result', 'cursor', 'source', 'result']",['RuntimeException'],LinkedSequence
 "/*** Instantiates a new process.
 *
 * @param name the name of the process, must not be null
@@ -2395,21 +3582,21 @@ return result;
 if (name == null) throw new NullPointerException(""name must not be null"");
 this.name = name;
 this.totalInstructions = totalIns;
-}",Process,"String name, int totalIns",public,,['NullPointerException'],[],['NullPointerException']
+}",Process,"String name, int totalIns",public,,['NullPointerException'],[],['NullPointerException'],Process
 "/*** Create an internal process to be used as a dummy node.
 */","private Process() {
 name = null;
 totalInstructions = 0;
-}",Process,,private,,[],[],[]
+}",Process,,private,,[],[],[],Process
 "/**Gets the name.
-* @return the name */",public String getName(){return name;},getName,,String,name,[],['name'],[]
+* @return the name */",public String getName(){return name;},getName,,String,name,[],['name'],[],Process
 "/**Gets the progress bar.
 * Creates and initializes it if necessary.
 * @return the progress bar */","public JProgressBar getBar(){
 if (bar == null) createProgressBar();
 return bar;
-}",getBar,,JProgressBar,bar,['createProgressBar'],['bar'],[]
+}",getBar,,JProgressBar,bar,['createProgressBar'],['bar'],[],Process
 "/**Gets the total amount of instructions in the process.
-* @return the total instructions */",public int getTotal(){return totalInstructions;},getTotal,,int,totalInstructions,[],['totalInstructions'],[]
+* @return the total instructions */",public int getTotal(){return totalInstructions;},getTotal,,int,totalInstructions,[],['totalInstructions'],[],Process
 "/*** Gets the amount of finished instructions.
-* @return the finished instructions */",public int getFinished(){return finishedInstructions;},getFinished,,int,finishedInstructions,[],['finishedInstructions'],[]
+* @return the finished instructions */",public int getFinished(){return finishedInstructions;},getFinished,,int,finishedInstructions,[],['finishedInstructions'],[],Process
