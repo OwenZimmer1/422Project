@@ -1,3 +1,12 @@
+"""
+TODO
+1. find semantic score for qwen 2.5 coder 
+2. find semantic score for qwen 2.5 coder fine tuned
+3. find semanctic score for code llama 
+4. find semanctic score for code llama fine tuned
+"""
+
+
 from transformers import AutoTokenizer, AutoModelForCausalLM
 from langchain.prompts import PromptTemplate
 import torch
