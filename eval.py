@@ -14,7 +14,7 @@ from sklearn.metrics.pairwise import cosine_similarity
 import numpy as np
 
 # Load the Qwen 2.5 Coder 0.5B model and tokenizer
-model_name = "Qwen/Qwen2.5-Coder-0.5B-Instruct"  # Ensure you are using the correct model identifier
+model_name = "Eyas1/fine_tuned_qwen_java_docs"  # Ensure you are using the correct model identifier
 tokenizer = AutoTokenizer.from_pretrained(model_name)
 model = AutoModelForCausalLM.from_pretrained(model_name)
 
@@ -67,24 +67,16 @@ Method:
 
 # Function to generate the embeddings for each method using the provided prompt
 def get_method_embedding(method_code):
-    # Format the method using the LangChain template
-    formatted_prompt = multiShot.format(method_code=method_code)
+    inputs = tokenizer(method_code, return_tensors="pt", truncation=True, padding=True)
+    inputs = {key: value.to(device) for key, value in inputs.items()}
     
-    # Tokenize and move inputs to GPU
-    inputs = tokenizer(formatted_prompt, return_tensors="pt", truncation=True, padding=True)
-    inputs = {key: value.to(device) for key, value in inputs.items()}  # Move tensors to GPU
-
-    # Generate outputs and return hidden states by enabling output_hidden_states
     with torch.no_grad():
         outputs = model(**inputs, output_hidden_states=True)
     
-    # The hidden states are in the 'hidden_states' field of the output
-    # We take the last hidden state and perform mean pooling over the tokens (dim=1)
-    last_hidden_state = outputs.hidden_states[-1]  # Get the last layer's hidden states
-    return last_hidden_state.mean(dim=1).detach().cpu().numpy()  # Move back to CPU for similarity calculation
+    last_hidden_state = outputs.hidden_states[-1]
+    return last_hidden_state.mean(dim=1).detach().cpu().numpy()
 
-# Load methods from the uploaded `allMethods.txt` file
-with open(r"C:\Users\eyas1\OneDrive\Desktop\CS 422 Project\422Project\data\allMethodsCombined.json", "r") as file:
+with open(r"C:\Users\dongr\422Project\data\allMethodsCombined.json", "r") as file:# Load methods from the uploaded `allMethods.txt` file
     methods = file.read().splitlines()
 
 # Example method from the uploaded file
